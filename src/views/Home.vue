@@ -374,7 +374,7 @@
 	</section>
 	<!-- Fin Seccion Comites -->
 	
-	<!-- Fluid Section One -->
+	<!-- Seccion Distribucion de Cuotas -->
     <section class="fluid-section-one">
 		<div class="logo-icon" style="background-image:url(assets/images/icons/logo-icon.png)"></div>
 		<!-- Icons Box -->
@@ -387,8 +387,8 @@
         	<!-- Content Column -->
             <div class="content-column">
             	<div class="inner-column">
-					<h2>The Only Personalized Service From TEKNIK Security System Experts</h2>
-					<div class="text">Ulamco aliquip ex ea commodo da consequat duis aute irure dolor reprehen derit voluptate cillum afugiat nula pariatur vita sagittis diam facilisis convallis dictumst sed ipsum.</div>
+					<h2>Distribución de las Cuotas Mensaules</h2>
+					<div class="text">¿Quieres saber en qué se ha utilizado las cuotas mensuales? <br> Aquí te lo mostramos</div>
 					
 					<!-- Skills -->
 					<div class="skills">
@@ -399,8 +399,8 @@
 								<div class="skill-title">Frontpoint System</div>
 							</div>
 							<div class="skill-bar">
-								<div class="skill-percentage"><div class="count-box"><span class="count-text" data-speed="2000" data-stop="83">0</span>%</div></div>
-								<div class="bar-inner"><div class="bar progress-line" data-width="83"></div></div>
+								<div class="skill-percentage"><div class="count-box"><span class="count-text" data-speed="2000" data-stop="83">90</span>%</div></div>
+								<div class="bar-inner"><div class="bar progress-line" width="83"></div></div>
 							</div>
 						</div>
 
@@ -438,7 +438,7 @@
 			
 		</div>
 	</section>
-	<!-- End Fluid Section One -->
+	<!-- Fin Seccion Distribucion de Cuotas -->
 	
 	<!-- Team Section -->
 	<section class="team-section">
