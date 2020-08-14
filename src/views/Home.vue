@@ -609,26 +609,23 @@
 	
 	<!-- Clients Section -->
     <section class="clients-section">
-		<button class="carousel-button btn btn-danger previuos" id="previous"></button>
-		<button class="carousel-button btn btn-danger next" @click="carouselMoveLeft" id="next"></button>
-
-		<div class="clients-carousel">
-			<div class="clients-items-container">
-				<div class="item" id="uno"><h2>UNO</h2></div>
-				<div class="item" id="dos"><h2>DOS</h2></div>
-				<div class="item" id="tres"><h2>TRES</h2></div>
-				<div class="item" id="cuatro"><h2>CUATRO</h2></div>
-				<div class="item" id="cinco"><h2>CINCO</h2></div>
-				<div class="item" id="seis" style="display:none"><h2>SEIS</h2></div>
-				<div class="item" id="siete" style="display:none"><h2>SIETE</h2></div>
-				<div class="item" id="ocoh" style="display:none"><h2>OCHO</h2></div>
-				<div class="item" id="nueve" style="display:none"><h2>NUEVE</h2></div>
-				<div class="item" id="diez" style="display:none"><h2>DIEZ</h2></div>
-				<div class="item" id="once" style="display:none"><h2>ONCE</h2></div>
-				<div class="item" id="doce" style="display:none"><h2>DOCE</h2></div>
-				<div class="item" id="doce" style="display:none"><h2>Trece</h2></div>
-			</div>
+		<button class="slider-button previuos" id="previous"></button>
+		<div class="clients-slider-container">
+			<div class="item">UNO</div>
+			<div class="item">DOS</div>
+			<div class="item" >TRES</div>
+			<div class="item">CUATRO</div>
+			<div class="item">CINCO</div>
+			<div class="item">SEIS</div>
+			<div class="item">SIETE</div>
+			<div class="item">OCHO</div>
+			<div class="item">NUEVE</div>
+			<div class="item">DIEZ</div>
+			<div class="item">ONCE</div>
+			<div class="item">DOCE</div>
+			<div class="item">TRECE</div>
 		</div>
+		<button class="slider-button next" @click="carouselMoveLeft" id="next"></button>
     </section>
     <!-- End Clients Section -->
 	
@@ -819,33 +816,38 @@
 import $ from 'jquery'
 
 export default {
-  name: 'Home',
-  components: {
-  },
-  data(){
-	  return{
-		  itemIndex: 0,
-	  }
-  },
-  methods: {
+  	name: 'Home',
+  	components: {
+  	},
+  	data(){
+	  	return{
+		  	itemIndex: 0,
+	  	}
+  	},
+  	methods: {
 	  /* Debo crear un selector de items para quitar el estilo display: none y mover los cuadros a la izquierda o a la derecha dependiendo al boton que toque. Tengo en la laptop en proyecto-csp un ejemplo del cual me puedo guiar. Tengo que ver si puedo ponerlo automatico el movimiento */
-	  /* Puedo tratar de crear una animacion para que se muevan los cuadros que necesito y que luego desaparezcan de izquierda a derecha. O busco un video de youtube en el que hagan algo como lo que quiero hacer. Puedo ver el ultimo video de la derehca a ver que hacen */
-	  carouselMoveLeft(){
-		const carouselItemsContainer = document.querySelector('.clients-items-container');
-		const carouselItems = document.querySelectorAll('.clients-carousel .item');
-		const numberOfItems = document.querySelectorAll('.clients-carousel .item').length;
-		if(this.itemIndex !== numberOfItems - 4){
-
-
-			
-			carouselItems[this.itemIndex].style.display = 'none';
-			carouselItems[this.itemIndex + 1].style.display = 'none';
-			carouselItems[this.itemIndex + 5].style.display = 'inherit';
-			carouselItems[this.itemIndex + 6].style.display = 'inherit';
-			this.itemIndex ++;
-		}
-	  },
-	  
-  },
+	  /* Puedo tratar de crear una animacion para que se muevan los cuadros que necesito y que luego desaparezcan de izquierda a derecha. O busco un video de youtube en el que hagan algo como lo que quiero hacer. Puedo ver el ultimo video de la derehca a ver que hacen. Los videos son:
+	  https://www.youtube.com/watch?v=Gi4CTYOs7J4 MAS IMPORTANTE
+	  https://www.youtube.com/watch?v=eywZbJ5PVjg OTRO
+	  https://www.youtube.com/watch?v=CMjRLsTtdxs&t=173s PARA JQUERY */
+	  	carouselMoveLeft(){
+			const carouselItemsContainer = document.querySelector('.clients-items-container');
+			const carouselItems = document.querySelectorAll('.clients-carousel .item');
+			const numberOfItems = document.querySelectorAll('.clients-carousel .item').length;
+			if(this.itemIndex !== numberOfItems - 4){
+				carouselItems[this.itemIndex].style.display = 'none';
+				carouselItems[this.itemIndex + 1].style.display = 'none';
+				carouselItems[this.itemIndex + 5].style.display = 'inherit';
+				carouselItems[this.itemIndex + 6].style.display = 'inherit';
+				this.itemIndex ++;
+			}
+	  	},
+	},
+	mounted() {
+		const container = document.querySelector('.clients-slider-container')
+		const allItems = container.children
+		const items = 0
+		console.log(allItems)
+	},
 }
 </script>

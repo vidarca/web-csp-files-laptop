@@ -3651,52 +3651,24 @@ img{
 ***/
 
 .clients-section{
-	padding: 50px;
-	width:100%;
-	min-height: 200px;
-	position: relative;
-}
-
-.clients-section .clients-carousel{
-	position: relative;
 	width: 100%;
-	
+	overflow: hidden;
+	padding: 20px;
 }
 
-.clients-section .clients-items-container{
-	display: flex;
-	margin-left: 70px;
-	margin-right: 70px;
-	justify-content: space-between;
-	transform: translateX(0);
-	transition: transform 0.25s;
+.clients-section .clients-slider-container{
+	width: 100%;
+	float: left;
 }
 
-.clients-section .clients-carousel .item {
-	height: 200px;
-	min-width: 200px;
-	align-self: center;
+.clients-slider-container .item{
+	height: 20vh;
 	background-color: #09197d;
-	margin: 0 30px 0 30px;
-	opacity: 1;
-	transition: opacity 0.25s;
-}
-
-.clients-section .carousel-button{
-	height: 50px;
-	min-width: 70px;
-	z-index: 1;
-	position: absolute;
-}
-
-.clients-section .carousel-button.previuos{
-	left: 15px;
-	top: 125px;
-}
-
-.clients-section .carousel-button.next{
-	right: 15px;
-	top: 125px;
+	line-height: 20vh;
+	text-align: center;
+	font-size: 50px;
+	color: #ffffff;
+	float: left;
 }
 
 /***
