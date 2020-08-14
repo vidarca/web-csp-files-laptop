@@ -375,72 +375,81 @@
 	<!-- Fin Seccion Comites -->
 	
 	<!-- Seccion Distribucion de Cuotas -->
-    <section class="fluid-section-one">
-		<div class="logo-icon" style="background-image:url(assets/images/icons/logo-icon.png)"></div>
+    <section class="cuot-section">
+		<div class="logo-icon"></div>
+		
 		<!-- Icons Box -->
-		<div class="icons-box">
+		<div class="cuot-icon-box">
 			<div class="icon flaticon-radio"></div>
 			<div class="icon flaticon-pass"></div>
 			<div class="icon flaticon-key-lock"></div>
 		</div>
-    	<div class="outer-container clearfix">
-        	<!-- Content Column -->
-            <div class="content-column">
-            	<div class="inner-column">
-					<h2>Distribución de las Cuotas Mensaules</h2>
-					<div class="text">¿Quieres saber en qué se ha utilizado las cuotas mensuales? <br> Aquí te lo mostramos</div>
-					
-					<!-- Skills -->
-					<div class="skills">
 
-						<!-- Skill Item -->
-						<div class="skill-item">
-							<div class="skill-header clearfix">
-								<div class="skill-title">Frontpoint System</div>
-							</div>
-							<div class="skill-bar">
-								<div class="skill-percentage"><div class="count-box"><span class="count-text" data-speed="2000" data-stop="83">90</span>%</div></div>
-								<div class="bar-inner"><div class="bar progress-line" width="83"></div></div>
-							</div>
+		<!-- Left box -->
+		<div class="cuot-left-container">
+			<div class="cuot-inner-column row row-cols-1 m-0">
+				<h2>Distribución de las Cuotas Mensaules</h2>
+				<div class="text">¿Quieres saber en qué se ha utilizado las cuotas mensuales? <br> Aquí te lo mostramos</div>
+				<!-- Barras % -->
+				<!-- Barra 1 -->
+				<div class="cuot-porc">
+					<div class="row row-cols-1 m-0">
+						<div class="cuot-porc-text d-flex">
+							<div class="flex-grow-1">Eventos internos</div>
+							<div>50%</div>
 						</div>
-
-						<!-- Skill Item -->
-						<div class="skill-item">
-							<div class="skill-header clearfix">
-								<div class="skill-title">CCTV Cameras</div>
-							</div>
-							<div class="skill-bar">
-								<div class="skill-percentage"><div class="count-box"><span class="count-text" data-speed="2000" data-stop="75">0</span>%</div></div>
-								<div class="bar-inner"><div class="bar progress-line" data-width="75"></div></div>
-							</div>
+						<div class="progress" style="background-color: rgba(255,255,255,0.25); height: 15px;">
+							<div class="progress-bar" role="progressbar" style="width: 50%; background-color: rgba(255,255,255,0.8)" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
 						</div>
-
-						<!-- Skill Item -->
-						<div class="skill-item">
-							<div class="skill-header clearfix">
-								<div class="skill-title">Home Automation</div>
-							</div>
-							<div class="skill-bar">
-								<div class="skill-percentage"><div class="count-box"><span class="count-text" data-speed="2000" data-stop="95">0</span>%</div></div>
-								<div class="bar-inner"><div class="bar progress-line" data-width="95"></div></div>
-							</div>
-						</div>
-
 					</div>
-					
+				</div>
+				<!-- Barra 2 -->
+				<div class="cuot-porc">
+					<div class="row row-cols-1 m-0">
+						<div class="cuot-porc-text d-flex">
+							<div class="flex-grow-1">Remodelación de los Baños</div>
+							<div>20%</div>
+						</div>
+						<div class="progress" style="background-color: rgba(255,255,255,0.25); height: 15px;">
+							<div class="progress-bar" role="progressbar" style="width: 20%; background-color: rgba(255,255,255,0.8)" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+						</div>
+					</div>
+				</div>
+				<!-- Barra 3 -->
+				<div class="cuot-porc">
+					<div class="row row-cols-1 m-0">
+						<div class="cuot-porc-text d-flex">
+							<div class="flex-grow-1">Arreglo del Parque Infantil</div>
+							<div>20%</div>
+						</div>
+						<div class="progress" style="background-color: rgba(255,255,255,0.25); height: 15px;">
+							<div class="progress-bar" role="progressbar" style="width: 20%; background-color: rgba(255,255,255,0.8)" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+						</div>
+					</div>
+				</div>
+				<!-- Barra 4 -->
+				<div class="cuot-porc">
+					<div class="row row-cols-1 m-0">
+						<div class="cuot-porc-text d-flex">
+							<div class="flex-grow-1">Otros</div>
+							<div>10%</div>
+						</div>
+						<div class="progress" style="background-color: rgba(255,255,255,0.25); height: 15px;">
+							<div class="progress-bar" role="progressbar" style="width: 10%; background-color: rgba(255,255,255,0.8)" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+						</div>
+					</div>
 				</div>
 			</div>
-			
-			<!-- Image Column -->
-            <div class="image-column" style="background-image:url(https://via.placeholder.com/750x616)">
-            	<figure class="image-box"><img src="https://via.placeholder.com/750x616" alt=""></figure>
-            </div>
-			
+		</div>
+		<div class="cout-image-container">
+
 		</div>
 	</section>
 	<!-- Fin Seccion Distribucion de Cuotas -->
 	
-	<!-- Team Section -->
+	
+	
+	<!-- Equipo Administrativo -->
 	<section class="team-section">
 		<div class="auto-container">
 			<!-- Sec Title -->
@@ -448,7 +457,7 @@
 				<div class="icon">
 					<img src="assets/images/icons/separater.png" alt="" />
 				</div>
-				<h2>Our Executive Team</h2>
+				<h2>Nuestro Equipo</h2>
 				<div class="text">Ipsum dolor sit amet consect asetur adipisicing elit sedunas eiusmod <br> temporas incididunt ut labore dolore magna aliqua. </div>
 			</div>
 			
@@ -456,7 +465,7 @@
 				
 				<!-- Team Member -->
                 <div class="team-member col-lg-3 col-md-6 col-sm-12">
-                    <div class="inner-box wow fadeInLeft" data-wow-delay="0ms" data-wow-duration="1500ms">
+                    <div class="inner-box fadeInLeft">
                         <!--Image Box-->
                         <div class="image-box">
                             <!--Image-->
@@ -577,7 +586,7 @@
 			</div>
 		</div>
 	</section>
-	<!-- End Team Section -->
+	<!-- Fin Equipo Administrativo -->
 	
 	<!-- Call To Action Section Two -->
 	<section class="call-to-action-section-two" style="background-image: url(https://via.placeholder.com/1920x575)">
@@ -600,23 +609,26 @@
 	
 	<!-- Clients Section -->
     <section class="clients-section">
-        <div class="auto-container">
-            
-            <div class="sponsors-outer">
-                <!--Sponsors Carousel-->
-                <ul class="sponsors-carousel owl-carousel owl-theme">
-                    <li class="slide-item"><figure class="image-box"><a href="#"><img src="https://via.placeholder.com/240x115" alt=""></a></figure></li>
-                    <li class="slide-item"><figure class="image-box"><a href="#"><img src="https://via.placeholder.com/240x115" alt=""></a></figure></li>
-                    <li class="slide-item"><figure class="image-box"><a href="#"><img src="https://via.placeholder.com/240x115" alt=""></a></figure></li>
-                    <li class="slide-item"><figure class="image-box"><a href="#"><img src="https://via.placeholder.com/240x115" alt=""></a></figure></li>
-                    <li class="slide-item"><figure class="image-box"><a href="#"><img src="https://via.placeholder.com/240x115" alt=""></a></figure></li>
-					<li class="slide-item"><figure class="image-box"><a href="#"><img src="https://via.placeholder.com/240x115" alt=""></a></figure></li>
-					<li class="slide-item"><figure class="image-box"><a href="#"><img src="https://via.placeholder.com/240x115" alt=""></a></figure></li>
-					<li class="slide-item"><figure class="image-box"><a href="#"><img src="https://via.placeholder.com/240x115" alt=""></a></figure></li>
-                </ul>
-            </div>
-            
-        </div>
+		<button class="carousel-button btn btn-danger previuos" id="previous"></button>
+		<button class="carousel-button btn btn-danger next" @click="carouselMoveLeft" id="next"></button>
+
+		<div class="clients-carousel">
+			<div class="clients-items-container">
+				<div class="item" id="uno"><h2>UNO</h2></div>
+				<div class="item" id="dos"><h2>DOS</h2></div>
+				<div class="item" id="tres"><h2>TRES</h2></div>
+				<div class="item" id="cuatro"><h2>CUATRO</h2></div>
+				<div class="item" id="cinco"><h2>CINCO</h2></div>
+				<div class="item" id="seis" style="display:none"><h2>SEIS</h2></div>
+				<div class="item" id="siete" style="display:none"><h2>SIETE</h2></div>
+				<div class="item" id="ocoh" style="display:none"><h2>OCHO</h2></div>
+				<div class="item" id="nueve" style="display:none"><h2>NUEVE</h2></div>
+				<div class="item" id="diez" style="display:none"><h2>DIEZ</h2></div>
+				<div class="item" id="once" style="display:none"><h2>ONCE</h2></div>
+				<div class="item" id="doce" style="display:none"><h2>DOCE</h2></div>
+				<div class="item" id="doce" style="display:none"><h2>Trece</h2></div>
+			</div>
+		</div>
     </section>
     <!-- End Clients Section -->
 	
@@ -804,15 +816,36 @@
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import $ from 'jquery'
 
 export default {
   name: 'Home',
   components: {
-    HelloWorld
-  }
+  },
+  data(){
+	  return{
+		  itemIndex: 0,
+	  }
+  },
+  methods: {
+	  /* Debo crear un selector de items para quitar el estilo display: none y mover los cuadros a la izquierda o a la derecha dependiendo al boton que toque. Tengo en la laptop en proyecto-csp un ejemplo del cual me puedo guiar. Tengo que ver si puedo ponerlo automatico el movimiento */
+	  /* Puedo tratar de crear una animacion para que se muevan los cuadros que necesito y que luego desaparezcan de izquierda a derecha. O busco un video de youtube en el que hagan algo como lo que quiero hacer. Puedo ver el ultimo video de la derehca a ver que hacen */
+	  carouselMoveLeft(){
+		const carouselItemsContainer = document.querySelector('.clients-items-container');
+		const carouselItems = document.querySelectorAll('.clients-carousel .item');
+		const numberOfItems = document.querySelectorAll('.clients-carousel .item').length;
+		if(this.itemIndex !== numberOfItems - 4){
+
+
+			
+			carouselItems[this.itemIndex].style.display = 'none';
+			carouselItems[this.itemIndex + 1].style.display = 'none';
+			carouselItems[this.itemIndex + 5].style.display = 'inherit';
+			carouselItems[this.itemIndex + 6].style.display = 'inherit';
+			this.itemIndex ++;
+		}
+	  },
+	  
+  },
 }
 </script>
-
-<style scoped>
-</style>

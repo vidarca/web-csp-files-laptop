@@ -2859,6 +2859,113 @@ img{
 /*** 
 
 ====================================================================
+	Seccion de Distribucion de Cuotas
+====================================================================
+
+***/
+
+.cuot-section{
+	position: relative;
+	height: 70vh;
+}
+
+.cuot-section .logo-icon{
+	position:absolute;
+	left:-50px;
+	bottom:-50px;
+	z-index:1;
+	width:330px;
+	height:325px;
+	background-repeat:no-repeat;
+	background-image:url("../images/icons/logo-icon.png");
+}
+
+.cuot-section .cuot-icon-box{
+	position: absolute;
+	z-index: 1;
+	left: 65%;
+	top: 20%;
+	min-height: 70vh;
+	height: 100%;
+}
+
+.cuot-section .cuot-icon-box .icon{
+	position: relative;
+	width:80px;
+	height:80px;
+	color:#222222;
+	font-size:44px;
+	line-height:82px;
+	text-align:center;
+	border-radius:50%;
+	margin-left:-40px;
+	margin-bottom:70px;
+	background-color:#ffffff;
+}
+
+.cuot-section .cuot-icon-box .icon:after{
+	position:absolute;
+	content:'';
+	left:-10px;
+	top:-10px;
+	right:-10px;
+	bottom:-10px;
+	border-radius:50px;
+	background-color:rgba(255, 255, 255, 0);
+}
+
+.cuot-section .cuot-left-container{
+	width: 65%;
+	min-height: 70vh;
+	height: 100%;
+	background-color: #f89429;
+	padding: 7% 12% 15% 3%;
+}
+
+.cuot-section .cuot-left-container h2{
+	color:#ffffff;
+	font-size:38px;
+	font-weight:500;
+	line-height:1.3em;
+}
+
+.cuot-section .cuot-left-container .text{
+	position:relative;
+	color:#ffffff;
+	font-size:15px;
+	font-weight:300;
+	line-height:1.9em;
+	margin-top:14px;
+	margin-bottom:32px;
+}
+
+.cuot-section .cuot-left-container .cuot-porc{
+	margin-bottom: 30px;
+}
+
+.cuot-section .cuot-left-container .cuot-porc .cuot-porc-text{
+	color:#ffffff;
+	font-size:16px;
+	font-weight:500;
+	line-height:1.4em;
+}
+
+.cuot-section .cout-image-container{
+	position:absolute;
+	right:0px;
+	top:0px;
+	width:35%;
+	min-height: 70vh;
+	height:100%;
+	background-repeat:no-repeat;
+	background-position:center center;
+	background-size:cover;
+	background-color: rgba(0,0,0,0.05);
+}
+
+/*** 
+
+====================================================================
 	Fluid Section One
 ====================================================================
 
@@ -2866,6 +2973,7 @@ img{
 
 .fluid-section-one{
 	position:relative;
+	z-index: 1;
 	overflow:hidden;
 	padding:0px 0px 0px;
 }
@@ -2910,6 +3018,7 @@ img{
 	width:330px;
 	height:325px;
 	background-repeat:no-repeat;
+	background-image:url("../images/icons/logo-icon.png");
 }
 
 .fluid-section-one .outer-container{
@@ -3542,41 +3651,52 @@ img{
 ***/
 
 .clients-section{
-	position:relative;
-	padding:105px 0px;
+	padding: 50px;
+	width:100%;
+	min-height: 200px;
+	position: relative;
 }
 
-.clients-section.style-two{
-	padding-top:50px;
+.clients-section .clients-carousel{
+	position: relative;
+	width: 100%;
+	
 }
 
-.clients-section .sponsors-outer .owl-dots,
-.clients-section .sponsors-outer .owl-nav{
-	position:relative;
-	display:none;
+.clients-section .clients-items-container{
+	display: flex;
+	margin-left: 70px;
+	margin-right: 70px;
+	justify-content: space-between;
+	transform: translateX(0);
+	transition: transform 0.25s;
 }
 
-.clients-section .sponsors-outer .image-box{
-	position:relative;
-	text-align:center;
-	margin:0px;
+.clients-section .clients-carousel .item {
+	height: 200px;
+	min-width: 200px;
+	align-self: center;
+	background-color: #09197d;
+	margin: 0 30px 0 30px;
+	opacity: 1;
+	transition: opacity 0.25s;
 }
 
-.clients-section .sponsors-outer .image-box img{
-	max-width:100%;
-	width:auto;
-	display:inline-block;
-	-webkit-transition:all 300ms ease;
-	-ms-transition:all 300ms ease;
-	-o-transition:all 300ms ease;
-	-moz-transition:all 300ms ease;
-	transition:all 300ms ease;
+.clients-section .carousel-button{
+	height: 50px;
+	min-width: 70px;
+	z-index: 1;
+	position: absolute;
 }
 
-.clients-section .sponsors-outer .image-box img:hover{
-	opacity:0.5;
-	-webkit-filter: grayscale(100%);
-	filter: grayscale(100%);
+.clients-section .carousel-button.previuos{
+	left: 15px;
+	top: 125px;
+}
+
+.clients-section .carousel-button.next{
+	right: 15px;
+	top: 125px;
 }
 
 /***

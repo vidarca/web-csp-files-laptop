@@ -1276,6 +1276,7 @@ Copyright (c) 2015 Daniel Eden
 .fadeInLeft {
   -webkit-animation-name: fadeInLeft;
   animation-name: fadeInLeft;
+  animation-duration: 0.8s;
 }
 
 @-webkit-keyframes fadeInLeftBig {
@@ -1346,6 +1347,7 @@ Copyright (c) 2015 Daniel Eden
 .fadeInRight {
   -webkit-animation-name: fadeInRight;
   animation-name: fadeInRight;
+  animation-duration: 0.8s;
 }
 
 @-webkit-keyframes fadeInRightBig {
@@ -1416,6 +1418,7 @@ Copyright (c) 2015 Daniel Eden
 .fadeInUp {
   -webkit-animation-name: fadeInUp;
   animation-name: fadeInUp;
+  animation-duration: 0.8s;
 }
 
 @-webkit-keyframes fadeInUpBig {
