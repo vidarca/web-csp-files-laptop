@@ -29,7 +29,7 @@
 		<!-- Fin del banner -->
 	
 	
-	<!-- Featured Section -->
+	<!-- Seccion Destacados -->
 	<section class="featured-section">
 		<div class="auto-container">
 			<div class="inner-container">
@@ -77,42 +77,7 @@
 			</div>
 		</div>
 	</section>
-	<!-- End Featured Section -->
-	
-	<!-- Security Section -->
-	<section class="security-section">
-		<div class="auto-container">
-			<div class="row clearfix">
-				
-				<!-- Content Column -->
-				<div class="content-column col-lg-6 col-md-12 col-sm-12">
-					<div class="inner-column">
-						<h2>Tailored to your needs, with alarm monitoring & smart-home features</h2>
-						<div class="bold-text">Eipsum dolor sit amet consectetur adipisicing elit sed eiusmod incididunt ut labore dolore magna aliqua. </div>
-						<div class="text">At dolore magna aliqua ut enim ad minim veniam, quis nostrud exercitation ulamco aliquip ex ea commodo da consequat duis aute irure dolor reprehen derit voluptate cillum dolore afugiat nula pariatur vitae sagittis diam facilisis convallis dictumst sed ipsum tempore. Excepteur sint occaecat aidatat non proident qu officia deserunt mollit anim.</div>
-						<a href="#" class="read-more">Read More about ISCO <span class="fa fa-angle-right"></span></a>
-					</div>
-				</div>
-				
-				<!-- Images Column -->
-				<div class="images-column col-lg-6 col-md-12 col-sm-12">
-					<div class="inner-column">
-						<div class="image">
-							<img src="https://via.placeholder.com/555x250" alt="" />
-						</div>
-						<div class="image">
-							<img src="https://via.placeholder.com/345x230" alt="" />
-						</div>
-						<div class="image">
-							<img src="https://via.placeholder.com/190x170" alt="" />
-						</div>
-					</div>
-				</div>
-				
-			</div>
-		</div>
-	</section>
-	<!-- End Security Section -->
+	<!-- Seccion Destacados -->
 	
 	<!-- Seccion de Actualidad -->
 	<section class="premium-section">
