@@ -609,23 +609,25 @@
 	
 	<!-- Clients Section -->
     <section class="clients-section">
-		<button class="slider-button previuos" id="previous"></button>
-		<div class="clients-slider-container">
-			<div class="item">UNO</div>
-			<div class="item">DOS</div>
-			<div class="item" >TRES</div>
-			<div class="item">CUATRO</div>
-			<div class="item">CINCO</div>
-			<div class="item">SEIS</div>
-			<div class="item">SIETE</div>
-			<div class="item">OCHO</div>
-			<div class="item">NUEVE</div>
-			<div class="item">DIEZ</div>
-			<div class="item">ONCE</div>
-			<div class="item">DOCE</div>
-			<div class="item">TRECE</div>
+		<!-- <button class="slider-button previous"></button>
+		<button class="slider-button next" @click="carouselMoveLeft" id="next"></button> -->
+		<div class="slider">
+			<div class="clients-slider-container">
+				<div class="cleints-slider-items">UNO</div>
+				<div class="cleints-slider-items">DOS</div>
+				<div class="cleints-slider-items">TRES</div>
+				<div class="cleints-slider-items">CUATRO</div>
+				<div class="cleints-slider-items">CINCO</div>
+				<div class="cleints-slider-items">SEIS</div>
+				<div class="cleints-slider-items">SIETE</div>
+				<div class="cleints-slider-items">OCHO</div>
+				<div class="cleints-slider-items">NUEVE</div>
+				<div class="cleints-slider-items">DIEZ</div>
+				<div class="cleints-slider-items">ONCE</div>
+				<div class="cleints-slider-items">DOCE</div>
+				<div class="cleints-slider-items">TRECE</div>
+			</div>
 		</div>
-		<button class="slider-button next" @click="carouselMoveLeft" id="next"></button>
     </section>
     <!-- End Clients Section -->
 	
@@ -822,6 +824,11 @@ export default {
   	data(){
 	  	return{
 		  	itemIndex: 0,
+			responsive:[
+				{breakpoint:{width:0, items:1}},
+				{breakpoint:{width:600, items:2}},
+				{breakpoint:{width:1000, items:4}},
+			]
 	  	}
   	},
   	methods: {
@@ -841,13 +848,116 @@ export default {
 				carouselItems[this.itemIndex + 6].style.display = 'inherit';
 				this.itemIndex ++;
 			}
-	  	},
+		},
+	    clientSliderItems(responsive, items){
+		    for(let i=0; i < responsive.length; i++){
+			    if(window.innerWidth>responsive[i].breakpoint.width){
+				  items=responsive[i].breakpoint.items
+		  		}	
+			}
+			return items
+		},
+		clientSliderItemsWidth(items, boxes, containerWidth, marginItems){
+			let allBoxes = 0;
+			for(let i=0; i<boxes.length; i++){
+				allBoxes = containerWidth/items - 2*marginItems;
+			}
+			return allBoxes
+		}
 	},
 	mounted() {
-		const container = document.querySelector('.clients-slider-container')
-		const allItems = container.children
-		const items = 0
-		console.log(allItems)
+		const allContainer = document.querySelector('.clients-section');
+		const container = document.querySelector('.clients-slider-container');
+		const containerWidth = container.offsetWidth;
+		let allItems = document.querySelectorAll('.cleints-slider-items');
+
+		/* Numero de items mostrados en el slider de clientes "Responsive" */
+		let items = 0;
+		items = this.clientSliderItems(this.responsive, items);
+
+		/* Colocando el tamaño de las cajas de los clientes */
+		const marginItems = 10;
+		const allItemsWidth = this.clientSliderItemsWidth(items, allItems, containerWidth, marginItems);
+		for(let i=0; i < allItems.length; i++){
+			allItems[i].style.minWidth = allItemsWidth  + "px";
+			allItems[i].style.margin = `0px ${marginItems}px`;
+		}
+
+		/* Movimiento automatico slider clientes */
+		let index = 1;
+		let itemId;
+		const interval = 3000;
+		let firstClone = [];
+
+		if(items === 4){
+			for(let i=0; i<items; i++){
+				firstClone[i] = allItems[i].cloneNode(true);
+			}
+			firstClone[3].id = 'last-first-clone';
+			for(let i=0; i<items; i++){
+				container.append(firstClone[i]);
+			}
+		}else if(items === 2){
+			for(let i=0; i<items; i++){
+				firstClone[i] = allItems[i].cloneNode(true);
+			}
+			firstClone[1].id = 'last-first-clone';
+			for(let i=0; i<items; i++){
+				container.append(firstClone[i]);
+			}
+		}else {
+			firstClone = allItems[0].cloneNode(true);
+			firstClone.id = 'last-first-clone';
+			container.append(firstClone);
+		}
+		
+		const lastClone = allItems[allItems.length - 1].cloneNode(true);
+
+		
+		lastClone.id = 'last-clone';
+
+		container.prepend(lastClone);
+
+		container.style.transform = `translateX(${-(allItemsWidth + marginItems * 2) * index}px)`
+
+		const startSlide = () => {
+		itemId = setInterval(() => {
+			index++;
+			container.style.transform = `translateX(${-(allItemsWidth + marginItems * 2) * index}px)`;
+			container.style.transition = '1s ease-out'
+		}, interval);
+		};
+
+		container.addEventListener('transitionend', ()=>{
+			allItems = document.querySelectorAll('.cleints-slider-items');
+			if(items === 4){
+				if (allItems[index+3].id === firstClone[3].id) {
+					container.style.transition = 'none';
+					index = 1;
+					container.style.transform = `translateX(${-(allItemsWidth + marginItems * 2) * index}px)`;
+  				}
+			}else if(items === 2){
+				if (allItems[index+1].id === firstClone[1].id) {
+					container.style.transition = 'none';
+					index = 1;
+					container.style.transform = `translateX(${-(allItemsWidth + marginItems * 2) * index}px)`;
+  				}
+			}else {
+				if (allItems[index].id === firstClone.id) {
+					container.style.transition = 'none';
+					index = 1;
+					container.style.transform = `translateX(${-(allItemsWidth + marginItems * 2) * index}px)`;
+  				}	
+			}
+		})
+
+		allContainer.addEventListener('mouseenter', ()=>{
+			clearInterval(itemId)
+		})
+
+		allContainer.addEventListener('mouseleave', startSlide)
+
+		startSlide()
 	},
 }
 </script>
