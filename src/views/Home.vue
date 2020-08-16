@@ -802,18 +802,6 @@ export default {
 	  https://www.youtube.com/watch?v=Gi4CTYOs7J4 MAS IMPORTANTE
 	  https://www.youtube.com/watch?v=eywZbJ5PVjg OTRO
 	  https://www.youtube.com/watch?v=CMjRLsTtdxs&t=173s PARA JQUERY */
-	  	carouselMoveLeft(){
-			const carouselItemsContainer = document.querySelector('.clients-items-container');
-			const carouselItems = document.querySelectorAll('.clients-carousel .item');
-			const numberOfItems = document.querySelectorAll('.clients-carousel .item').length;
-			if(this.itemIndex !== numberOfItems - 4){
-				carouselItems[this.itemIndex].style.display = 'none';
-				carouselItems[this.itemIndex + 1].style.display = 'none';
-				carouselItems[this.itemIndex + 5].style.display = 'inherit';
-				carouselItems[this.itemIndex + 6].style.display = 'inherit';
-				this.itemIndex ++;
-			}
-		},
 	    clientSliderItems(responsive, items){
 		    for(let i=0; i < responsive.length; i++){
 			    if(window.innerWidth>responsive[i].breakpoint.width){
@@ -887,6 +875,10 @@ export default {
 
 		const startSlide = () => {
 		itemId = setInterval(() => {
+			if(index >= allItems.length -1){
+				allItems = document.querySelectorAll('.cleints-slider-items');
+				index=1;
+			}
 			index++;
 			container.style.transform = `translateX(${-(allItemsWidth + marginItems * 2) * index}px)`;
 			container.style.transition = '1s ease-out'
@@ -895,6 +887,9 @@ export default {
 
 		container.addEventListener('transitionend', ()=>{
 			allItems = document.querySelectorAll('.cleints-slider-items');
+			if(index >= allItems.length -1){
+				index=1;
+			}
 			if(items === 4){
 				if (allItems[index+3].id === firstClone[3].id) {
 					container.style.transition = 'none';

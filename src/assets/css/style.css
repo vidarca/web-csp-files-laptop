@@ -2866,7 +2866,7 @@ img{
 
 .cuot-section{
 	position: relative;
-	height: 70vh;
+	height: 600px;
 }
 
 .cuot-section .logo-icon{
@@ -2884,8 +2884,9 @@ img{
 	position: absolute;
 	z-index: 1;
 	left: 65%;
-	top: 20%;
-	min-height: 70vh;
+	top: 100px;
+	bottom: 100px;
+	min-height: 600px;
 	height: 100%;
 }
 
@@ -2916,7 +2917,7 @@ img{
 
 .cuot-section .cuot-left-container{
 	width: 65%;
-	min-height: 70vh;
+	min-height: 300px;
 	height: 100%;
 	background-color: #f89429;
 	padding: 7% 12% 15% 3%;
@@ -2955,205 +2956,12 @@ img{
 	right:0px;
 	top:0px;
 	width:35%;
-	min-height: 70vh;
+	min-height: 600px;
 	height:100%;
 	background-repeat:no-repeat;
 	background-position:center center;
 	background-size:cover;
 	background-color: rgba(0,0,0,0.05);
-}
-
-/*** 
-
-====================================================================
-	Fluid Section One
-====================================================================
-
-***/
-
-.fluid-section-one{
-	position:relative;
-	z-index: 1;
-	overflow:hidden;
-	padding:0px 0px 0px;
-}
-
-.fluid-section-one .icons-box{
-	position:absolute;
-	left:65%;
-	top:120px;
-	z-index:1;
-}
-
-.fluid-section-one .icons-box .icon{
-	position:relative;
-	width:80px;
-	height:80px;
-	color:#222222;
-	font-size:44px;
-	line-height:82px;
-	text-align:center;
-	border-radius:50%;
-	margin-left:-40px;
-	margin-bottom:70px;
-	background-color:#ffffff;
-}
-
-.fluid-section-one .icons-box .icon:after{
-	position:absolute;
-	content:'';
-	left:-10px;
-	top:-10px;
-	right:-10px;
-	bottom:-10px;
-	border-radius:50px;
-	background-color:rgba(255,255,255,0.25);
-}
-
-.fluid-section-one .logo-icon{
-	position:absolute;
-	left:-50px;
-	bottom:-50px;
-	z-index:1;
-	width:330px;
-	height:325px;
-	background-repeat:no-repeat;
-	background-image:url("../images/icons/logo-icon.png");
-}
-
-.fluid-section-one .outer-container{
-	position:relative;
-	min-height:250px;
-	background-color:#f89429;
-	background-position:right top;
-	background-repeat:no-repeat;
-}
-
-.fluid-section-one .image-column{
-	position:absolute;
-	right:0px;
-	top:0px;
-	width:35%;
-	height:100%;
-	background-repeat:no-repeat;
-	background-position:center center;
-	background-size:cover;	
-}
-
-.fluid-section-one .image-column .image-box{
-	position:relative;
-	display:none;	
-}
-
-.fluid-section-one .image-column .image-box img{
-	position:relative;
-	display:block;
-	width:100%;
-}
-
-.fluid-section-one .content-column{
-	position:relative;
-	float:left;
-	width:65%;
-}
-
-.fluid-section-one .content-column .inner-column{
-	position:relative;
-	max-width:910px;
-	width:100%;
-	float:right;
-	padding:105px 150px 110px 15px;
-}
-
-.fluid-section-one .content-column h2{
-	position:relative;
-	color:#ffffff;
-	font-size:38px;
-	font-weight:500;
-	line-height:1.3em;
-}
-
-.fluid-section-one .content-column .text{
-	position:relative;
-	color:#ffffff;
-	font-size:15px;
-	font-weight:300;
-	line-height:1.9em;
-	margin-top:14px;
-	margin-bottom:32px;
-}
-
-/* Skills Section */
-
-.skills .skill-item{
-	position:relative;
-	margin-bottom:35px;
-	z-index:1;
-}
-
-.skills .skill-item:last-child{
-	margin-bottom:0px;
-}
-
-.skills .skill-item .skill-bar{
-	position:relative;
-	width:100%;
-	height:10px;
-}
-
-.skills .skill-item .skill-bar .bar-inner{
-	position:relative;
-	width:100%;
-	overflow:hidden;
-	height:10px;
-	border-radius:10px;
-	background-color:rgba(255,255,255,0.20);
-}
-
-.skills.style-two .skill-item .skill-bar .bar-inner{
-	background-color:#eeeeee;
-}
-
-.skills .skill-item .skill-bar .bar-inner .bar{
-	position:absolute;
-	left:0px;
-	top:0px;
-	height:10px;
-	width:0px;
-	-webkit-transition:all 2000ms ease;
-	-ms-transition:all 2000ms ease;
-	-o-transition:all 2000ms ease;
-	-moz-transition:all 2000ms ease;
-	transition:all 2000ms ease;
-	background-color:#ffffff;
-}
-
-.skills .skill-item .skill-header{
-	position:relative;
-	margin-bottom:14px;
-}
-
-.skills .skill-item .skill-header .skill-title{
-	position:relative;
-}
-
-.skills .skill-item .skill-header .skill-title{
-	float:left;
-	color:#ffffff;
-	font-size:16px;
-	font-weight:500;
-	line-height:1.4em;
-	text-transform:capitalize;
-}
-
-.skills .skill-item .skill-percentage{
-	position:absolute;
-	right:0;
-	top:-35px;
-	float:right;
-	font-weight:400;
-	color:#ffffff;
-	font-size:16px;
 }
 
 /*** 
