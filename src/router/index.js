@@ -6,6 +6,7 @@ import Servicios from '../views/Servicios.vue'
 import Socios from '../views/Socios.vue'
 import Contacto from '../views/Contacto.vue'
 import Comites from '../views/Comites.vue'
+import Actualidad from '../views/Actualidad.vue'
 
 Vue.use(VueRouter)
 
@@ -29,6 +30,11 @@ Vue.use(VueRouter)
     path: '/socios',
     name: 'Socios',
     component: Socios
+  },
+  {
+    path: '/actualidad',
+    name: 'Actualidad',
+    component: Actualidad
   },
   {
     path: '/contacto',

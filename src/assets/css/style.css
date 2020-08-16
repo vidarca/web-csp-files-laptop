@@ -689,6 +689,175 @@ img{
 /*** 
 
 ====================================================================
+	Header Navbar y Social Media
+====================================================================
+
+***/
+
+.v-social-header{
+	width: 100%;
+	height: 60px;
+	background-color: rgba(114,121,168,0.20);
+}
+
+.v-social-header .v-social-container{
+	width: 90%;
+	height: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-content: center;
+	margin: auto;
+}
+
+.v-social-header .v-social-leftbox{
+	width: 70%;
+	display: flex;
+}
+
+.v-social-leftbox .icon{
+	height: 25px;
+	width: 25px;
+	font-size: 20px;
+	line-height: 25px;
+	text-align: center;
+	color: black;
+	background-color: rgba(255, 255, 255, 0.6);
+	border-radius: 30%;
+	align-self: center;
+	padding-right:1px;
+}
+
+.v-social-header .item{
+	display: flex;
+	height: 100%;
+	margin-left: 10px;
+}
+
+.v-social-header a{
+	font-size: 15px;
+	line-height: 60px;
+	margin-left: 5px;
+	font-weight: bolder;
+	color: black;
+	transition: all 0.2s;
+}
+
+.v-social-header a:hover{
+	color: #09197d;
+	cursor: pointer;
+}
+
+.v-social-header .v-social-rightbox{
+	width: 30%;
+	display: flex;
+	justify-content: end;
+}
+
+.v-social-rightbox .v-social-right-container{
+	width: auto;
+	display: flex;
+	margin-left: auto;
+}
+
+.v-social-rightbox .icon{
+	height: 50px;
+	width: 50px;
+	font-size: 35px;
+	line-height: 50px;
+	text-align: center;
+	color: black;
+	background-color: rgba(255, 255, 255, 0.6);
+	border-radius: 50%;
+	align-self: center;
+	transition: all 0.5s;
+	padding-right:1px;
+}
+
+.v-social-rightbox .icon:hover{
+	color: white;
+	background-color: rgba(0, 0, 0);
+}
+
+.v-social-rightbox p{
+	font-size: 15px;
+	line-height: 60px;
+	color: black;
+	font-weight: bolder;
+}
+
+/* NavBar */
+
+.navbar{
+	height:120px;
+	width:100%;
+	padding-left:5%; 
+	padding-right:5%; 
+	background-color: #B8BCD3;
+	transition: all 0.2s;
+}
+
+.nav-item{
+	text-align: center;
+	width: 100px;
+	font-size: 17px;
+}
+
+.navbar a{
+	color:black;
+	font-weight: bold;
+}
+
+.navbar .v-nav-item{
+	margin: 0 5px;
+	line-height:120px;
+}
+
+.nav-item:hover .v-nav-item{
+	color: #0036FF;
+}
+
+.nav-item .v-nav-item.router-link-active{
+	color:#0036FF;
+}
+
+.v-dropdown-menu{
+	height: 0px;
+	overflow: hidden;
+	position: absolute;
+	background-color: #B8BCD3;
+	z-index: 3;
+	bottom: -1;
+	transform: translateX(-100%);
+	transition: transform 0.6s ease-out, opacity 0.6s ease-in, height 1.5s ease-out;
+	opacity: 0;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+}
+
+.v-dropdown-menu .v-dropdown-item{
+	max-height: 50px;
+	line-height:50px;
+	padding: 0 15px;
+	text-align: left;
+}
+
+.v-dropdown-menu .v-dropdown-item:hover{
+	background-color: #0036FF;
+}
+
+.v-dropdown-item:hover a{
+	color: #ffffff;
+}
+
+.v-dropdown-menu-on{
+	opacity: 1;
+	transform: translateX(0%);
+	height: auto;
+}
+
+/*** 
+
+====================================================================
 	Main Header style
 ====================================================================
 
@@ -905,7 +1074,7 @@ img{
 	transform: translate3d(0px, 0px, 0px) !important;
 }
 
-.main-header .sticky-header .navbar-header{
+.main-header .sticky-header .r-header{
 	display:none;
 }
 
@@ -996,7 +1165,7 @@ img{
 	transition:all 300ms ease;
 }
 
-.main-menu .navbar-collapse{
+.main-menu .r-collapse{
 	padding:0px;
 	float: left;
 	display:block !important;
@@ -1047,7 +1216,7 @@ img{
 	width:100%;
 	padding:0px 0px;
 	background:#ffffff;
-	z-index:0;
+	z-index:1;
 	border-bottom:1px solid #e8f1f7;
 	transition:all 500ms ease;
 	-moz-transition:all 500ms ease;
@@ -1308,7 +1477,7 @@ img{
 	-o-transition:all 300ms ease;	
 }
 
-.main-menu .navbar-collapse > ul li.dropdown .dropdown-btn{
+.main-menu .r-collapse > ul li.dropdown .dropdown-btn{
 	position:absolute;
 	right:10px;
 	top:6px;
@@ -1773,6 +1942,7 @@ img{
 .banner-section{
 	position: relative;
 	overflow:hidden;
+	z-index: 1;
 }
 
 .banner-section .slide:before{
@@ -2131,6 +2301,7 @@ img{
 
 .featured-section{
 	position:relative;
+	background-color:#f0f2f5;
 }
 
 .featured-section .inner-container{
@@ -2912,7 +3083,7 @@ img{
 	right:-10px;
 	bottom:-10px;
 	border-radius:50px;
-	background-color:rgba(255, 255, 255, 0);
+	background-color:rgba(255, 255, 255, 0.2);
 }
 
 .cuot-section .cuot-left-container{
