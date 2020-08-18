@@ -7,7 +7,7 @@
 			<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
 			<div class="carousel-inner">
 				<div class="carousel-item active">
-				<img src="https://via.placeholder.com/1920x780" class="d-block w-100" alt="...">
+				<img src="https://trello-attachments.s3.amazonaws.com/5f3056605b2f1383eb1964a7/5f3056b3d9640283e52e2acc/c7019c7831c3e34ec8b5e42531fcb250/banner1_principal.png" style="min-height: 100vh" class="d-block w-100" alt="...">
 				</div>
 				<div class="carousel-item">
 				<img src="https://via.placeholder.com/1920x780" class="d-block w-100" alt="...">
@@ -764,7 +764,6 @@
 
 <script>
 
-  import $ from 'jquery'
 
   export default {
   	name: 'HomePage',
