@@ -221,12 +221,12 @@ export default {
     const stickyOn = navbar.offsetTop
     window.addEventListener('scroll',  () =>{
       if(window.pageYOffset >= stickyOn){
-        navbar.style.opacity = "0.8"
+        navbar.style.backgroundColor = "rgba(255,255,255,1)"
         navbar.style.zIndex ="2" 
         navbar.style.top = "0" 
         navbar.style.position = "fixed"
       }else {
-        navbar.style.opacity = null
+        navbar.style.backgroundColor = "rgba(255,255,255,0.85)"
         navbar.style.zindex = null
         navbar.style.top = null
         navbar.style.position = null

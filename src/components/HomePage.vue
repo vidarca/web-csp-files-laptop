@@ -559,12 +559,12 @@
 		<button class="slider-button next" @click="carouselMoveLeft" id="next"></button> -->
 		<div class="slider">
 			<div class="clients-slider-container">
-				<img src="./assets/logos/client01.png"  class="cleints-slider-items">
-				<img src="./assets/logos/client02.png"  class="cleints-slider-items">
-				<img src="./assets/logos/client03.png"  class="cleints-slider-items">
-				<img src="./assets/logos/client04.png"  class="cleints-slider-items">
-				<img src="./assets/logos/client05.png"  class="cleints-slider-items">
-				<img src="./assets/logos/client06.png"  class="cleints-slider-items">
+				<img id="client01" src="@/assets/images/logos/client01.png" @click="sendTo('https://www.yonex.com')" class="cleints-slider-items" alt="" loading="lazy">
+				<img id="client02" src="@/assets/images/logos/client02.png" @click="sendTo('https://www.youtube.com')" class="cleints-slider-items" alt="" loading="lazy">
+				<img id="client03" src="@/assets/images/logos/client03.png" @click="sendTo('https://www.avelina.com')" class="cleints-slider-items" alt="" loading="lazy">
+				<img id="client04" src="@/assets/images/logos/client04.png" @click="sendTo('https://www.nike.com')" class="cleints-slider-items" alt="" loading="lazy">
+				<img id="client05" src="@/assets/images/logos/client05.png" @click="sendTo('https://www.addidas.com')" class="cleints-slider-items" alt="" loading="lazy">
+				<img id="client06" src="@/assets/images/logos/client06.png" @click="sendTo('https://www.gatorade.com.mx')" class="cleints-slider-items" alt="" loading="lazy">
 			</div>
 		</div>
     </section>
@@ -767,21 +767,31 @@
 	  			allBoxes = containerWidth/items - 2*marginItems;
 	  		}
 	  		return allBoxes
-	  	}
+		},
+		sendTo(url){
+			window.open(`${url}`, '_blank');
+		}
 	  },
-	  mounted() {
+	mounted() {
 	  	const allContainer = document.querySelector('.clients-section');
 	  	const container = document.querySelector('.clients-slider-container');
-	  	const containerWidth = container.offsetWidth;
-	  	let allItems = document.querySelectorAll('.cleints-slider-items');
+	  	let containerWidth = container.offsetWidth;
+		let allItems = document.querySelectorAll('.cleints-slider-items');
+		/* Para el responsive */
+		let items = 0;
+		/* Para el movimiento */
+		let index = 1;
+		const interval = 3000;
+		let itemId;
+		/* Para el tamaño */
+		const marginItems = 10;
 
-	  	/* Numero de items mostrados en el slider de clientes "Responsive" */
-	  	let items = 0;
-	  	items = this.clientSliderItems(this.responsive, items);
+		/* Numero de items mostrados en el slider de clientes "Responsive" */
+		items = this.clientSliderItems(this.responsive, items);
+	  	
 
 	  	/* Colocando el tamaño de las cajas de los clientes */
-	  	const marginItems = 10;
-	  	const allItemsWidth = this.clientSliderItemsWidth(items, allItems, containerWidth, marginItems);
+	  	let allItemsWidth = this.clientSliderItemsWidth(items, allItems, containerWidth, marginItems);
 	  	for(let i=0; i < allItems.length; i++){
 	  		allItems[i].style.minWidth = allItemsWidth  + "px";
 			allItems[i].style.maxWidth = allItemsWidth  + "px";
@@ -789,10 +799,9 @@
 	  	}
 
 	  	/* Movimiento automatico slider clientes */
-	  	let index = 1;
-	  	let itemId;
-	  	const interval = 3000;
 	  	let firstClone = [];
+
+		/* Clonando el primer y ultimo slider */
 
 	  	if(items === 4){
 	  		for(let i=0; i<items; i++){
@@ -816,8 +825,7 @@
 	  		container.append(firstClone);
 	  	}
   
-	  	const lastClone = allItems[allItems.length - 1].cloneNode(true);
-
+	  	let lastClone = allItems[allItems.length - 1].cloneNode(true);
   
 	  	lastClone.id = 'last-clone';
 
@@ -825,43 +833,102 @@
 
 	  	container.style.transform = `translateX(${-(allItemsWidth + marginItems * 2) * index}px)`
 
-	  	const startSlide = () => {
+		/* Comenzando el movimiento */
+
+		container.addEventListener('transitionend', ()=>{
+			allItems = document.querySelectorAll('.cleints-slider-items');
+			if(index >= allItems.length -1){
+				index = 1;
+			}
+			if(items === 4){
+				if (allItems[index+3].id === firstClone[3].id) {
+					container.style.transition = 'none';
+					index = 1;
+					container.style.transform = `translateX(${-(allItemsWidth + marginItems * 2) * index}px)`;
+					}
+			}else if(items === 2){
+				if (allItems[index+1].id === firstClone[1].id) {
+					container.style.transition = 'none';
+					index = 1;
+					container.style.transform = `translateX(${-(allItemsWidth + marginItems * 2) * index}px)`;
+					}
+			}else {
+				if (allItems[index].id === firstClone.id) {
+					container.style.transition = 'none';
+					index = 1;
+					container.style.transform = `translateX(${-(allItemsWidth + marginItems * 2) * index}px)`;
+					}	
+			}
+		})
+
+		const startSlide = () => {
 	  	itemId = setInterval(() => {
+			allItems = document.querySelectorAll('.cleints-slider-items');
 	  		if(index >= allItems.length -1){
-	  			allItems = document.querySelectorAll('.cleints-slider-items');
-	  			index=1;
+	  			index = 1;
 	  		}
 	  		index++;
 	  		container.style.transform = `translateX(${-(allItemsWidth + marginItems * 2) * index}px)`;
 	  		container.style.transition = '1s ease-out'
 	  	}, interval);
-	  	};
+		};
 
-	  	container.addEventListener('transitionend', ()=>{
-	  		allItems = document.querySelectorAll('.cleints-slider-items');
-	  		if(index >= allItems.length -1){
-	  			index=1;
-	  		}
-	  		if(items === 4){
-	  			if (allItems[index+3].id === firstClone[3].id) {
-	  				container.style.transition = 'none';
-	  				index = 1;
-	  				container.style.transform = `translateX(${-(allItemsWidth + marginItems * 2) * index}px)`;
-    				}
-	  		}else if(items === 2){
-	  			if (allItems[index+1].id === firstClone[1].id) {
-	  				container.style.transition = 'none';
-	  				index = 1;
-	  				container.style.transform = `translateX(${-(allItemsWidth + marginItems * 2) * index}px)`;
-    				}
-	  		}else {
-	  			if (allItems[index].id === firstClone.id) {
-	  				container.style.transition = 'none';
-	  				index = 1;
-	  				container.style.transform = `translateX(${-(allItemsWidth + marginItems * 2) * index}px)`;
-    				}	
-	  		}
-	  	})
+		window.addEventListener('resize', ()=>{
+			containerWidth = container.offsetWidth;
+			items = this.clientSliderItems(this.responsive, items);
+			index = 0;
+
+			allItemsWidth = this.clientSliderItemsWidth(items, allItems, containerWidth, marginItems);
+				for(let i=0; i < allItems.length; i++){
+					allItems[i].style.minWidth = allItemsWidth  + "px";
+					allItems[i].style.maxWidth = allItemsWidth  + "px";
+					allItems[i].style.margin = `0px ${marginItems}px`;
+				}
+			
+			firstClone = [];
+
+			if(items === 4){
+				for(let i=0; i<items; i++){
+					firstClone[i] = allItems[i].cloneNode(true);
+				}
+				firstClone[3].id = 'last-first-clone';
+				container.removeChild(container.firstChild)
+				for(let i = 0; i < items; i++){
+					container.removeChild(container.lastChild)
+				}
+				for(let i=0; i<items; i++){
+					container.append(firstClone[i]);
+				}
+			}else if(items === 2){
+				for(let i=0; i<items; i++){
+					firstClone[i] = allItems[i].cloneNode(true);
+				}
+				firstClone[1].id = 'last-first-clone';
+				container.removeChild(container.firstChild)
+				for(let i = 0; i < items; i++){
+					container.removeChild(container.lastChild)
+				}
+				for(let i=0; i<items; i++){
+					container.append(firstClone[i]);
+				}
+			}else {
+				firstClone = allItems[0].cloneNode(true);
+				firstClone.id = 'last-first-clone';
+				container.removeChild(container.firstChild)
+				for(let i = 0; i < items; i++){
+					container.removeChild(container.lastChild)
+				}
+				container.append(firstClone);
+			}
+
+			lastClone = ['']
+
+			lastClone = allItems[allItems.length - 1].cloneNode(true);
+  
+			lastClone.id = 'last-clone';
+
+			container.prepend(lastClone);
+		})
 
 	  	allContainer.addEventListener('mouseenter', ()=>{
 	  		clearInterval(itemId)
