@@ -345,9 +345,9 @@
 		
 		<!-- Icons Box -->
 		<div class="cuot-icon-box">
-			<div class="icon flaticon-radio"></div>
-			<div class="icon flaticon-pass"></div>
-			<div class="icon flaticon-key-lock"></div>
+			<div class="icon fas fa-balance-scale"></div>
+			<div class="icon fas fa-coins"></div>
+			<div class="icon fas fa-lock"></div>
 		</div>
 
 		<!-- Left box -->
@@ -553,44 +553,18 @@
 	</section>
 	<!-- Fin Equipo Administrativo -->
 	
-	<!-- Call To Action Section Two -->
-	<section class="call-to-action-section-two" style="background-image: url(https://via.placeholder.com/1920x575)">
-		<div class="auto-container">
-			<!-- Content Boxed -->
-			<div class="content-boxed">
-				<div class="inner-boxed">
-					<div class="title">protecting what matters for you!</div>
-					<h1>Introducing The Most <br> Easiest Security Systems</h1>
-					<div class="text">Aorem ipsum dolor sit amet consectetur adipisicing anim elit <br> dolore magna aliqua veniam quis nostrud.</div>
-					<div class="btns-box clearfix">
-						<a href="contact.html" class="theme-btn btn-style-one"><span class="txt"><i class="flaticon-shield-1"></i> Request a Free Quote</span></a>
-						<a href="contact.html" class="talk">Talk With Us <span>1.700.231.0025</span></a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- End Call To Action Section Two -->
-	
 	<!-- Clients Section -->
     <section class="clients-section">
 		<!-- <button class="slider-button previous"></button>
 		<button class="slider-button next" @click="carouselMoveLeft" id="next"></button> -->
 		<div class="slider">
 			<div class="clients-slider-container">
-				<div class="cleints-slider-items">UNO</div>
-				<div class="cleints-slider-items">DOS</div>
-				<div class="cleints-slider-items">TRES</div>
-				<div class="cleints-slider-items">CUATRO</div>
-				<div class="cleints-slider-items">CINCO</div>
-				<div class="cleints-slider-items">SEIS</div>
-				<div class="cleints-slider-items">SIETE</div>
-				<div class="cleints-slider-items">OCHO</div>
-				<div class="cleints-slider-items">NUEVE</div>
-				<div class="cleints-slider-items">DIEZ</div>
-				<div class="cleints-slider-items">ONCE</div>
-				<div class="cleints-slider-items">DOCE</div>
-				<div class="cleints-slider-items">TRECE</div>
+				<img src="./assets/logos/client01.png"  class="cleints-slider-items">
+				<img src="./assets/logos/client02.png"  class="cleints-slider-items">
+				<img src="./assets/logos/client03.png"  class="cleints-slider-items">
+				<img src="./assets/logos/client04.png"  class="cleints-slider-items">
+				<img src="./assets/logos/client05.png"  class="cleints-slider-items">
+				<img src="./assets/logos/client06.png"  class="cleints-slider-items">
 			</div>
 		</div>
     </section>
@@ -810,6 +784,7 @@
 	  	const allItemsWidth = this.clientSliderItemsWidth(items, allItems, containerWidth, marginItems);
 	  	for(let i=0; i < allItems.length; i++){
 	  		allItems[i].style.minWidth = allItemsWidth  + "px";
+			allItems[i].style.maxWidth = allItemsWidth  + "px";
 	  		allItems[i].style.margin = `0px ${marginItems}px`;
 	  	}
 

@@ -415,7 +415,7 @@ img{
     bottom: 0px;
     left: 0px;
 	right: -50px;
-    border-bottom: 64px solid #f89429;
+    border-bottom: 64px solid #FE5D25;
 	border-right: 30px solid transparent;
 	-webkit-transition:all 600ms ease;
 	-moz-transition:all 600ms ease;
@@ -434,7 +434,7 @@ img{
     bottom: 0px;
     left: -50px;
 	border-left: 30px solid transparent;
-    border-bottom: 64px solid #f89429;
+    border-bottom: 64px solid #FE5D25;
 	-webkit-transition:all 600ms ease;
 	-moz-transition:all 600ms ease;
 	-ms-transition:all 600ms ease;
@@ -456,7 +456,7 @@ img{
 
 .btn-style-two:hover{
 	color: #ffffff;
-	border-color:#f89429;
+	border-color:#FE5D25;
 }
 
 /* Btn Style Three */
@@ -2069,7 +2069,7 @@ img{
 
 .featured-block .inner-box:hover::before{
 	width:100%;
-	background-color:#f8952c;
+	background-color:#FE5D25;
 }
 
 .featured-block .inner-box .content{
@@ -2082,7 +2082,7 @@ img{
 	content: "\f170";
 	right:-20px;
 	top:20px;
-	color:#f89429;
+	color:#FE5D25;
 	font-size:18px;
 	line-height:1em;
 	font-family: "Flaticon";
@@ -2383,7 +2383,7 @@ img{
 	width:0%;
 	top:0px;
 	height:50%;
-	background-color:#f89429;
+	background-color:#FE5D25;
 	transition:all 900ms ease;
 	-moz-transition:all 900ms ease;
 	-webkit-transition:all 900ms ease;
@@ -2398,7 +2398,7 @@ img{
 	bottom:0px;
 	width:0%;
 	height:50%;
-	background-color:#f89429;
+	background-color:#FE5D25;
 	transition:all 900ms ease;
 	-moz-transition:all 900ms ease;
 	-webkit-transition:all 900ms ease;
@@ -2499,7 +2499,7 @@ img{
 	font-size:28px;
 	line-height:60px;
 	text-align:center;
-	background-color:#d37e23;
+	background-color:#FE5D25;
 	border-radius:0px 7px 7px 0px;
 }
 
@@ -2526,11 +2526,11 @@ img{
 }
 
 .call-to-action-section.style-two{
-	background-color:#f89429;
+	background-color:#FE5D25;
 }
 
 .call-to-action-section.style-two .title-column .phone{
-	background-color:#d37e23;
+	background-color:#FE5D25;
 }
 
 .call-to-action-section.style-two .btn-style-two:hover{
@@ -2775,10 +2775,13 @@ img{
 
 .cuot-section .cuot-icon-box{
 	position: absolute;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 	z-index: 1;
 	left: 65%;
-	top: 100px;
-	bottom: 100px;
+	top: 0;
 	min-height: 600px;
 	height: 100%;
 }
@@ -2792,8 +2795,7 @@ img{
 	line-height:82px;
 	text-align:center;
 	border-radius:50%;
-	margin-left:-40px;
-	margin-bottom:70px;
+	margin: 35px 0 35px -40px;
 	background-color:#ffffff;
 }
 
@@ -2812,7 +2814,7 @@ img{
 	width: 65%;
 	min-height: 300px;
 	height: 100%;
-	background-color: #f89429;
+	background-color: #FB9334;
 	padding: 7% 12% 15% 3%;
 }
 
@@ -3373,11 +3375,7 @@ img{
 
 .clients-slider-container .cleints-slider-items{
 	height: 20vh;
-	background-color: #09197d;
 	line-height: 20vh;
-	text-align: center;
-	font-size: 50px;
-	color: #ffffff;
 }
 
 .clients-section .slider-button{
