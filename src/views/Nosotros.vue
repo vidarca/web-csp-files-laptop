@@ -1,5 +1,20 @@
 <template>
-  <div class="nosotros">
-    <h1>This is an about page</h1>
+  <div class="secP">
+	  	<UsPage></UsPage>
+		<Footer></Footer>
   </div>
 </template>
+
+
+<script>
+import UsPage from '@/components/UsPage.vue'
+import Footer from '@/components/Footer.vue'
+
+export default {
+	name: 'Nosotros',
+  	components: {
+		UsPage,
+		Footer,
+  	},
+}
+</script>

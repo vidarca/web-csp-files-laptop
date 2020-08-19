@@ -559,176 +559,16 @@
 		<button class="slider-button next" @click="carouselMoveLeft" id="next"></button> -->
 		<div class="slider">
 			<div class="clients-slider-container">
-				<img id="client01" src="@/assets/images/logos/client01.png" @click="sendTo('https://www.yonex.com')" class="cleints-slider-items" alt="" loading="lazy">
-				<img id="client02" src="@/assets/images/logos/client02.png" @click="sendTo('https://www.youtube.com')" class="cleints-slider-items" alt="" loading="lazy">
-				<img id="client03" src="@/assets/images/logos/client03.png" @click="sendTo('https://www.avelina.com')" class="cleints-slider-items" alt="" loading="lazy">
-				<img id="client04" src="@/assets/images/logos/client04.png" @click="sendTo('https://www.nike.com')" class="cleints-slider-items" alt="" loading="lazy">
-				<img id="client05" src="@/assets/images/logos/client05.png" @click="sendTo('https://www.addidas.com')" class="cleints-slider-items" alt="" loading="lazy">
-				<img id="client06" src="@/assets/images/logos/client06.png" @click="sendTo('https://www.gatorade.com.mx')" class="cleints-slider-items" alt="" loading="lazy">
+				<img id="client01" src="@/assets/images/logos/client01.png" @click="sendTo('https://www.yonex.com')" class="clients-slider-items" alt="" loading="lazy">
+				<img id="client02" src="@/assets/images/logos/client02.png" @click="sendTo('https://www.youtube.com')" class="clients-slider-items" alt="" loading="lazy">
+				<img id="client03" src="@/assets/images/logos/client03.png" @click="sendTo('https://www.avelina.com')" class="clients-slider-items" alt="" loading="lazy">
+				<img id="client04" src="@/assets/images/logos/client04.png" @click="sendTo('https://www.nike.com')" class="clients-slider-items" alt="" loading="lazy">
+				<img id="client05" src="@/assets/images/logos/client05.png" @click="sendTo('https://www.addidas.com')" class="clients-slider-items" alt="" loading="lazy">
+				<img id="client06" src="@/assets/images/logos/client06.png" @click="sendTo('https://www.gatorade.com.mx')" class="clients-slider-items" alt="" loading="lazy">
 			</div>
 		</div>
     </section>
     <!-- End Clients Section -->
-	
-	<!-- Main Footer -->
-    <footer class="main-footer">
-		<div class="auto-container">
-			<!-- Upper Box -->
-			<div class="upper-box">
-				<div class="row clearfix">
-					<!-- Column -->
-					<div class="text-column col-lg-4 col-md-12 col-sm-12">
-						<div class="text">Visit Our Office : 68 Kings Street, North <br> Avenue California 33089 USA</div>
-					</div>
-					<!-- Column -->
-					<div class="info-column col-lg-8 col-md-12 col-sm-12">
-						<div class="row clearfix">
-							
-							<!-- Contact Info Box -->
-							<div class="column col-lg-4 col-md-4 col-sm-12">
-								<ul class="contact-info-box">
-									<li>
-										<span class="icon flaticon-call-3"></span>
-										Any Questions?
-										<strong>700.231.0025</strong>
-									</li>
-								</ul>
-							</div>
-							
-							<!-- Contact Info Box -->
-							<div class="column col-lg-4 col-md-4 col-sm-12">
-								<ul class="contact-info-box">
-									<li>
-										<span class="icon flaticon-email-5"></span>
-										Send Email
-										<strong>info@teknik.net</strong>
-									</li>
-								</ul>
-							</div>
-							
-							<!-- Contact Info Box -->
-							<div class="column col-lg-4 col-md-4 col-sm-12">
-								<ul class="contact-info-box">
-									<li>
-										<span class="icon flaticon-in-time"></span>
-										info@teknik.net
-										<strong>9:00am - 6:00pm</strong>
-									</li>
-								</ul>
-							</div>
-							
-						</div>
-					</div>
-				</div>
-			</div>
-			
-        	<!-- Widgets Section -->
-            <div class="widgets-section">
-            	<div class="row clearfix">
-                	
-                    <!-- Big Column -->
-                    <div class="big-column col-lg-6 col-md-12 col-sm-12">
-                        <div class="row clearfix">
-							
-							<!--Footer Column-->
-                            <div class="footer-column col-lg-6 col-md-6 col-sm-12">
-                                <div class="footer-widget logo-widget">
-									<div class="logo">
-                                    	<a href="index.html"><img src="https://via.placeholder.com/215x60" alt="" /></a>
-                                    </div>
-									<div class="text">At dolore magna aliqua ut enim ad minim veniam, quis nostrud exercitation ulamco aliquip ex ea commodo da consequat sed duis aut irure dolor reprehens.</div>
-									<div class="social-links">
-										<a href="#" class="fa fa-facebook"></a>
-										<a href="#" class="fa fa-twitter"></a>
-										<a href="#" class="fa fa-google"></a>
-										<a href="#" class="fa fa-linkedin"></a>
-									</div>
-									<div class="copyright">
-									© 2020 TEKNIK Home Security.<br>
-									<a href="#">Terms</a>  |  <a href="#">Privacy Policy</a></div>
-								</div>
-							</div>
-							
-							<!-- Footer Column -->
-                            <div class="footer-column col-lg-6 col-md-6 col-sm-12">
-                                <div class="footer-widget links-widget">
-									<h5>Features & Benefits</h5>
-									<ul class="list-link">
-										<li><a href="">Professional Monitoring</a></li>
-										<li><a href="">Simple to Setup</a></li>
-										<li><a href="">Many Customizations</a></li>
-										<li><a href="">Best Mobile App</a></li>
-										<li><a href="">Technical Staff</a></li>
-										<li><a href="">Free Support Center</a></li>
-										<li><a href="">Theft Protection</a></li>
-										<li><a href="">SmartHome Services</a></li>
-									</ul>
-								</div>
-							</div>
-							
-						</div>
-					</div>
-					
-					<!-- Big Column -->
-                    <div class="big-column col-lg-6 col-md-12 col-sm-12">
-                        <div class="row clearfix">
-							
-							<!-- Footer Column -->
-                            <div class="footer-column col-lg-6 col-md-6 col-sm-12">
-                                <div class="footer-widget links-widget">
-									<h5>About TEKNIK</h5>
-									<ul class="list-link">
-										<li><a href="">About Teknik Security</a></li>
-										<li><a href="">Work With Us</a></li>
-										<li><a href="">Security Services</a></li>
-										<li><a href="">Installation Packages</a></li>
-										<li><a href="">CCTV Cameras</a></li>
-										<li><a href="">Mission & Vision</a></li>
-										<li><a href="">Clients Reviews</a></li>
-									</ul>
-								</div>
-							</div>
-							
-							<!-- Footer Column -->
-                            <div class="footer-column col-lg-6 col-md-6 col-sm-12">
-                                <div class="footer-widget location-widget">
-									<h5>Our Locations</h5>
-									<div class="form-group">
-										<select class="custom-select-box">
-											<option>California, USA</option>
-											<option>Chicago, USA</option>
-											<option>New York, USA</option>
-										</select>
-									</div>
-									
-									<!-- Map Boxed -->
-									<div class="map-boxed">
-										<!--Map Outer-->
-										<div class="map-outer">
-											<div class="map-canvas"
-												data-zoom="12"
-												data-lat="-37.817085"
-												data-lng="144.955631"
-												data-type="roadmap"
-												data-hue="#ffc400"
-												data-title="Envato"
-												data-icon-path="assets/images/icons/map-marker.png"
-												data-content="Melbourne VIC 3000, Australia<br><a href='mailto:info@youremail.com'>info@youremail.com</a>">
-											</div>
-										</div>
-									</div>
-									
-								</div>
-							</div>
-							
-						</div>
-					</div>
-					
-				</div>
-			</div>
-		</div>
-	</footer>
-	<!-- End Main Footer -->
 	
 </div>
 <!--End pagewrapper-->
@@ -740,7 +580,8 @@
 
 
   export default {
-  	name: 'HomePage',
+	  name: 'HomePage',
+	  
   	data(){
 	  	return{
 		  	itemIndex: 0,
@@ -776,7 +617,7 @@
 	  	const allContainer = document.querySelector('.clients-section');
 	  	const container = document.querySelector('.clients-slider-container');
 	  	let containerWidth = container.offsetWidth;
-		let allItems = document.querySelectorAll('.cleints-slider-items');
+		let allItems = document.querySelectorAll('.clients-slider-items');
 		/* Para el responsive */
 		let items = 0;
 		/* Para el movimiento */
@@ -836,7 +677,7 @@
 		/* Comenzando el movimiento */
 
 		container.addEventListener('transitionend', ()=>{
-			allItems = document.querySelectorAll('.cleints-slider-items');
+			allItems = document.querySelectorAll('.clients-slider-items');
 			if(index >= allItems.length -1){
 				index = 1;
 			}
@@ -863,7 +704,7 @@
 
 		const startSlide = () => {
 	  	itemId = setInterval(() => {
-			allItems = document.querySelectorAll('.cleints-slider-items');
+			allItems = document.querySelectorAll('.clients-slider-items');
 	  		if(index >= allItems.length -1){
 	  			index = 1;
 	  		}
@@ -874,60 +715,65 @@
 		};
 
 		window.addEventListener('resize', ()=>{
-			containerWidth = container.offsetWidth;
-			items = this.clientSliderItems(this.responsive, items);
-			index = 0;
+	
+			let href = window.location.href;
+			if(href === "http://localhost:8080/#/"){
+				containerWidth = container.offsetWidth;
+				items = this.clientSliderItems(this.responsive, items);
+				index = 0;
 
-			allItemsWidth = this.clientSliderItemsWidth(items, allItems, containerWidth, marginItems);
-				for(let i=0; i < allItems.length; i++){
-					allItems[i].style.minWidth = allItemsWidth  + "px";
-					allItems[i].style.maxWidth = allItemsWidth  + "px";
-					allItems[i].style.margin = `0px ${marginItems}px`;
-				}
-			
-			firstClone = [];
+				allItemsWidth = this.clientSliderItemsWidth(items, allItems, containerWidth, marginItems);
+					for(let i=0; i < allItems.length; i++){
+						allItems[i].style.minWidth = allItemsWidth  + "px";
+						allItems[i].style.maxWidth = allItemsWidth  + "px";
+						allItems[i].style.margin = `0px ${marginItems}px`;
+					}
 
-			if(items === 4){
-				for(let i=0; i<items; i++){
-					firstClone[i] = allItems[i].cloneNode(true);
+				firstClone = [];
+
+				if(items === 4){
+					for(let i=0; i<items; i++){
+						firstClone[i] = allItems[i].cloneNode(true);
+					}
+					firstClone[3].id = 'last-first-clone';
+					container.removeChild(container.firstChild)
+					for(let i = 0; i < items; i++){
+						container.removeChild(container.lastChild)
+					}
+					for(let i=0; i<items; i++){
+						container.append(firstClone[i]);
+					}
+				}else if(items === 2){
+					for(let i=0; i<items; i++){
+						firstClone[i] = allItems[i].cloneNode(true);
+					}
+					firstClone[1].id = 'last-first-clone';
+					container.removeChild(container.firstChild)
+					for(let i = 0; i < items; i++){
+						container.removeChild(container.lastChild)
+					}
+					for(let i=0; i<items; i++){
+						container.append(firstClone[i]);
+					}
+				}else {
+					firstClone = allItems[0].cloneNode(true);
+					firstClone.id = 'last-first-clone';
+					container.removeChild(container.firstChild)
+					for(let i = 0; i < items; i++){
+						container.removeChild(container.lastChild)
+					}
+					container.append(firstClone);
 				}
-				firstClone[3].id = 'last-first-clone';
-				container.removeChild(container.firstChild)
-				for(let i = 0; i < items; i++){
-					container.removeChild(container.lastChild)
-				}
-				for(let i=0; i<items; i++){
-					container.append(firstClone[i]);
-				}
-			}else if(items === 2){
-				for(let i=0; i<items; i++){
-					firstClone[i] = allItems[i].cloneNode(true);
-				}
-				firstClone[1].id = 'last-first-clone';
-				container.removeChild(container.firstChild)
-				for(let i = 0; i < items; i++){
-					container.removeChild(container.lastChild)
-				}
-				for(let i=0; i<items; i++){
-					container.append(firstClone[i]);
-				}
+
+				lastClone = ['']
+
+				lastClone = allItems[allItems.length - 1].cloneNode(true);
+	
+				lastClone.id = 'last-clone';
+
+				container.prepend(lastClone);
 			}else {
-				firstClone = allItems[0].cloneNode(true);
-				firstClone.id = 'last-first-clone';
-				container.removeChild(container.firstChild)
-				for(let i = 0; i < items; i++){
-					container.removeChild(container.lastChild)
-				}
-				container.append(firstClone);
 			}
-
-			lastClone = ['']
-
-			lastClone = allItems[allItems.length - 1].cloneNode(true);
-  
-			lastClone.id = 'last-clone';
-
-			container.prepend(lastClone);
 		})
 
 	  	allContainer.addEventListener('mouseenter', ()=>{
