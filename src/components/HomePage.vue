@@ -618,11 +618,12 @@
 	  	const container = document.querySelector('.clients-slider-container');
 	  	let containerWidth = container.offsetWidth;
 		let allItems = document.querySelectorAll('.clients-slider-items');
+		let allItemsRef = document.querySelectorAll('.clients-slider-items');
 		/* Para el responsive */
 		let items = 0;
 		/* Para el movimiento */
 		let index = 1;
-		const interval = 3000;
+		const interval = 2000;
 		let itemId;
 		/* Para el tamaño */
 		const marginItems = 10;
@@ -677,24 +678,24 @@
 		/* Comenzando el movimiento */
 
 		container.addEventListener('transitionend', ()=>{
-			allItems = document.querySelectorAll('.clients-slider-items');
-			if(index >= allItems.length -1){
+			allItemsRef = document.querySelectorAll('.clients-slider-items');
+			if(index >= allItemsRef.length -1){
 				index = 1;
 			}
 			if(items === 4){
-				if (allItems[index+3].id === firstClone[3].id) {
+				if (allItemsRef[index+3].id === firstClone[3].id) {
 					container.style.transition = 'none';
 					index = 1;
 					container.style.transform = `translateX(${-(allItemsWidth + marginItems * 2) * index}px)`;
 					}
 			}else if(items === 2){
-				if (allItems[index+1].id === firstClone[1].id) {
+				if (allItemsRef[index+1].id === firstClone[1].id) {
 					container.style.transition = 'none';
 					index = 1;
 					container.style.transform = `translateX(${-(allItemsWidth + marginItems * 2) * index}px)`;
 					}
 			}else {
-				if (allItems[index].id === firstClone.id) {
+				if (allItemsRef[index].id === firstClone.id) {
 					container.style.transition = 'none';
 					index = 1;
 					container.style.transform = `translateX(${-(allItemsWidth + marginItems * 2) * index}px)`;
@@ -704,8 +705,8 @@
 
 		const startSlide = () => {
 	  	itemId = setInterval(() => {
-			allItems = document.querySelectorAll('.clients-slider-items');
-	  		if(index >= allItems.length -1){
+			allItemsRef = document.querySelectorAll('.clients-slider-items');
+	  		if(index >= allItemsRef.length -1){
 	  			index = 1;
 	  		}
 	  		index++;
@@ -729,7 +730,7 @@
 						allItems[i].style.margin = `0px ${marginItems}px`;
 					}
 
-				firstClone = [];
+				let firstClone = [''];
 
 				if(items === 4){
 					for(let i=0; i<items; i++){
@@ -775,7 +776,6 @@
 			}else {
 			}
 		})
-
 	  	allContainer.addEventListener('mouseenter', ()=>{
 	  		clearInterval(itemId)
 	  	})

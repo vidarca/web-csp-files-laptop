@@ -4253,37 +4253,160 @@ img{
 /*** 
 
 ====================================================================
-	About Us Page
+	About Us Page: Seccion Mision y Vision
 ====================================================================
 
 ***/
 
-.v-misvis{
+.v-misvis-section{
 	position: relative;
 	display: flex;
 	flex-direction: row;
 	align-items: center;
 	justify-content: center;
 	margin: auto;
-	width: 90%;
-	height: 200px;
+	width: 100vw;
+	height: 75vh;
 	overflow: hidden;
+	background-image: url(../images/background/Social-Club.jpg);
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: cover;
 }
 
-.v-misvis .v-misvis-item{
+.v-misvis-leftbox{
+	height: 75vh;
+	width: 45%;
+	display: flex;
+	align-items: center;
+}
+
+.v-leftbox-pattern1{
+	height: 55vh;
+	margin-left: -1px;
+	border-left: calc(100vw*.1) solid #FB9334;
+	border-bottom: 30vh solid transparent;
+	border-top: 30vh solid transparent;
+}
+
+.v-leftbox-pattern2{
+	height: 150vh;
+	width: 100%;
+	border-left: calc(100vw*.35) solid transparent;
+	border-bottom: 100vh solid #FB9334;
+	border-top: 100vh solid #FB9334;
+}
+
+/* .prueba-int{
+	height: 80vh;
+	width: 90%;
+	margin: 30px auto;
+	background-image: url(../images/background/Social-Club.jpg);
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: cover;
+	display: flex;
+	align-items: center;
+} */
+
+.v-misvis-section .v-icon-box{
+	position: absolute;
+	display: flex;
+	flex-direction: column;
+	z-index: 1;
+	left: 47vw;
+	top: 0;
+	height: 100%;
+}
+
+.v-icon-box .v-icon-cont{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	height: 100%;
+}
+
+.v-icon-cont p{
+	color: white;
+	font-weight: bold;
+	font-size: 20px;
+	margin: 0;
+	padding: 0 20px;
+}
+
+.v-icon-box .v-icon{
+	background-color: rgba(12,99,146);
+	transform: rotate(45deg);
+	height: 55px;
+	width: 55px;
+	text-align: center;
+	border-radius: 8px;
+}
+
+.v-icon i{
+	color: white;
+	font-size: 40px;
+	transform: rotate(-45deg);
+	padding-right: 1px;
+	height: 55px;
+	width: 55px;
+	line-height: 55px;
+	text-align: center;
+}
+
+.v-misvis-rightbox{
+	width: 55%;
+	margin-left: -1px;
+	height: 100%;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	background-color: #FB9334;
+}
+
+.v-rightbox-title{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	padding-right: 20%;
+	width: 100%;
+	height: 100%;
+	justify-content: flex-end;
+	text-transform: uppercase;
+	text-orientation: upright;
+}
+
+.v-rightbox-title span{
+	display: block;
+	color: white;
+	font-size: 5vh;
+	font-weight: bold;
+	text-align: center;
+	padding: 2.5vh;
+}
+
+.v-misvis-section .v-rightbox-txt{
+	position: absolute;
+	z-index: -1;
 	background-color: #5CABA1;
 	width: 50%;
-	margin: 10px;
 	border-radius: 20px;
 	height: auto;
-}
-
-.v-misvis-item p{
 	color: black;
 	font-size: 15px;
 	text-align: center;
 	margin: 0;
 }
+
+/*** 
+
+====================================================================
+	About Us Page: Seccion Historia
+====================================================================
+
+***/
 
 .v-history{
 	position: relative;
@@ -4314,3 +4437,15 @@ img{
 	font-size: 18px;
 	width: calc(100%/3);
 }
+
+/* .prueba:after{
+	position: absolute;
+	content: '';
+	top: -10px;
+	bottom: -10px;
+	right: -10px;
+	left: -10px;
+	background-color: rgba(0,0,0,0.5);
+	border-left:300px;
+	border-radius: 30px
+} */

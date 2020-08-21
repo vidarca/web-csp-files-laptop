@@ -1,25 +1,48 @@
 <template>
   <div id="nosotros">
 	<Header></Header>
-    <div style="background-image: url(https://trello-attachments.s3.amazonaws.com/5f3056605b2f1383eb1964a7/5f3056b3d9640283e52e2acc/c7019c7831c3e34ec8b5e42531fcb250/banner1_principal.png)">
 
-    <div style="height: 0; width: 0; border-left:100px solid transparent; border-right: 100px solid white; border-bottom: 100px solid white; border-top: 100px solid white;">
+    <section class="v-misvis-section">
 
+        <div class="v-misvis-leftbox">
+            <div class="v-leftbox-pattern1"></div>
+            <div class="v-leftbox-pattern2"></div>
         </div>
-    </div>
-    <div class="v-misvis">
         
-        <div class="v-misvis-item">
-            <p>
+        <div class="v-icon-box">
+                <div class="v-icon-cont">
+                    <div class="v-icon"><i class="fas fa-bullseye"></i></div>
+                    <p>Misión</p>
+                </div>
+                <div class="v-icon-cont">
+                    <div class="v-icon"><i class="fab fa-tripadvisor"></i></div>
+                    <p>Visión</p>
+                </div>
+                <div class="v-icon-cont">
+                    <div class="v-icon"><i class="fas fa-heart" style="padding-top: 2px"></i></div>
+                    <p>Valores</p>
+                </div>
+        </div>
+
+        <div class="v-misvis-rightbox">
+            <div class="v-rightbox-title">
+                <div class="title-cont">
+                    <span>n</span><span>u</span><span>e</span><span>s</span><span>t</span><span>r</span><span>o</span><span>s</span>
+                </div>
+                <div class="title-cont">
+                    <span>o</span><span>b</span><span>j</span><span>e</span><span>t</span><span>i</span><span>v</span><span>o</span><span>s</span>
+                </div>
+            </div>
+            <div class="v-rightbox-txt">
                 El objetivo primordial del Club Santa Paula es proporcionar a sus socios actividades sociales, culturales, deportivas, de recreación y esparcimiento. Es, en sus fines, una manera de contribuir al ejercicio de la vida en sociedad y a procurar un espacio donde prive la humanización y la unidad familiar.
-            </p>
-        </div>
-        <div class="v-misvis-item">
-            <p>
+            </div>
+            
+            <div class="v-rightbox-txt">
                 Ser una institución líder en recreación y deportes, tanto en Caracas como en el resto del país, donde participaremos mediante torneos y competencias deportivas que aseguren la generación de valor para nuestros accionistas. Estaremos orientados a destacarnos en las diversas disciplinas deportivas y sociales dentro de la Asociación de Clubes del país. Seleccionaremos y capacitaremos a nuestro personal con el fin de alcanzar los perfiles requeridos, lograremos su pleno compromiso con los valores del Club Santa Paula y le ofreceremos las mejores oportunidades de desarrollo.
-            </p>
+            </div>
         </div>
-    </div>
+    </section>
+        
     <div class="v-history">
         <div class="v-history-imgbox" id="leftbox">
             <img src="https://via.placeholder.com/360x260" alt="History" width="100%" height="50%" loading="lazy" style="align-self:start">

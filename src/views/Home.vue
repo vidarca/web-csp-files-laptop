@@ -18,6 +18,9 @@ export default {
 		HomePage,
 		Header,
 		Footer,
-  	},
+	},
+	mounted() {
+		window.scrollTo(0, 0);
+	},
 }
 </script>
