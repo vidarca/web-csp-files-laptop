@@ -5,21 +5,17 @@
         <div class="v-social-leftbox">
           <div class="item">
             <div class="icon flaticon-telephone"></div>
-            <a href="tel: +582129851038" style="color: black; font-size: 15px; line-height: 40px; margin-left: 5px; font-weight: bolder; ">Telf: +58.212.985.1038 </a>
+            <a href="tel: +582129851038">Telf: +58.212.985.1038 </a>
           </div>
           <div class="item">
             <div class="icon flaticon-email"></div>
-            <a href="mailto: info@clubsantapaula.net" style="color: black; font-size: 15px; line-height: 40px; margin-left: 5px; font-weight: bolder; ">Correo: info@clubsantapaula.net</a>
+            <a href="mailto: info@clubsantapaula.net">Correo: info@clubsantapaula.net</a>
           </div>
         </div>
-      <div class="v-social-midbox">
-          <img src="@/assets/logo_215x60.png" width="115" height="115" alt="" loading="lazy" style="align-self: center">
-          <div style="color:#09197d; text-align:center"> <p style="line-height: 100%; font-size: 30px; margin: 0;">Club Santa Paula</p> <i style="height: 100%; line-height: 0px; font-size:20px; margin: 0;"> 40 años </i> </div>
-      </div>
       <div class="v-social-rightbox">
           <div class="v-social-right-container">
             <p>Síguenos en </p>
-            <div style="width: 50%; display: flex; flex-direction: row; justify-content: space-between">
+            <div style="display: flex; flex-direction: row; justify-content: flex-start">
               <div class="item">
                 <a title="Facebook" href="https://www.facebook.com/Club-Santa-Paula-298392530588034/?__xts__[0]=68.ARDBzo-RGGkBG2HPpJxccWxgxlyL6km99x7__SBWkgUw8LixjgDI87BzXrBlfzzPwketujNaMOOtnJ_LcI6IsbeBNexdENGbC22NGo_9Ga5Qh46R-LDTetq0ZQ76yXYJL2-Rk5nqGzKbdvsUZCvUYTa79WuvOCBENAGa8yRQrn3RVDM4GLNdYNFzXYW4mYt-nKcvYiijMYcbZ6crFI31Ik_xFwi4ZOinlQ-WEP5Nn9rj33YIFlr3J7SMPomlPCqtnVeLlMGMwSiS65efXlg6vFsszdJG5Ul2m-L5xsSwb7snaCKYkna9_7puGa91icoJW_xgigl55rjRp4kM8CRDRRI" target="blank" class="icon fa fa-facebook"></a>
               </div>
@@ -34,7 +30,14 @@
         </div>
     </div>
 
-    <nav class="v-navbar d-flex col-auto">
+    <nav class="v-navbar">
+      <div class="v-social-brand">
+          <img src="@/assets/logo_215x60.png" alt="CSP Logo" loading="lazy" style="height: auto; width: 80px; align-self: center">
+          <div style="color:#09197d; text-align:center;"> 
+            <p style="font-size: 25px; margin: 0; white-space: nowrap">Club Santa Paula</p> 
+            <i style="font-size:20px; margin: 0; line-height: 0px;"> 40 años </i> 
+          </div>
+      </div>
         <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button> -->
@@ -152,7 +155,8 @@
             </li>
             <div class="v-vr"></div>
             <li class="v-nav-item">
-              <button  class="v-btn v-btn-menu" id="menu-btn" data-url="http://clubsantapaula.dyndns.org:1081/user/auth/login#no-back-button" @click="buttonUrlRedirect('menu-btn')" @mousedown="addGlowClassButton('menu-btn')" @mouseup="removeGlowClassButton('menu-btn')"  @mouseleave="removeGlowClassButton('menu-btn')">Iniciar Seción</button>
+              <a class="v-menu-txt" href="http://clubsantapaula.dyndns.org:1081/user/auth/login#no-back-button" target="blank">Autogestión</a>
+              <!-- <button  class="v-btn v-btn-menu" id="menu-btn" data-url="http://clubsantapaula.dyndns.org:1081/user/auth/login#no-back-button" @click="buttonUrlRedirect('menu-btn')" @mousedown="addGlowClassButton('menu-btn')" @mouseup="removeGlowClassButton('menu-btn')"  @mouseleave="removeGlowClassButton('menu-btn')">Iniciar Seción</button> -->
             </li>
             <div class="v-vr"></div>
             
