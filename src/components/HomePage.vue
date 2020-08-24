@@ -526,33 +526,36 @@ import {mapState} from 'vuex'
 	========================================
 	**/
 
-	setTimeout(() => {
-		const teamMembers = this.$refs.team
-		console.log(this.$refs);
+	var waiting = setInterval(() => {
+		if(this.$refs.team !== undefined ){
+			const teamMembers = this.$refs.team
+			console.log(this.$refs);
+			
+			const options = { 
+				root: null,
+				threshold: 0,
+				rootMargin: "100px",
+			};
 		
-		const options = { 
-			root: null,
-			threshold: 0,
-			rootMargin: "100px",
-		 };
-	
-		const observer = new IntersectionObserver(function(entries,observer) {
-			entries.forEach(entry =>{
-				setTimeout(() => {
-					if(!entry.isIntersecting){
-						return;
-					}
-					entry.target.style.zIndex = 1;
-					entry.target.style.opacity = 1;
-					entry.target.classList.add("fadeInLeft");
-				}, 500);
+			const observer = new IntersectionObserver(function(entries,observer) {
+				entries.forEach(entry =>{
+					setTimeout(() => {
+						if(!entry.isIntersecting){
+							return;
+						}
+						entry.target.style.zIndex = 1;
+						entry.target.style.opacity = 1;
+						entry.target.classList.add("fadeInLeft");
+					}, 500);
+				})
+			}, options)
+		
+			teamMembers.forEach(item =>{
+				observer.observe(item)
 			})
-		}, options)
-	
-		teamMembers.forEach(item =>{
-			observer.observe(item)
-		})
-	}, 1000);
+			clearInterval(waiting)
+		}
+	}, 100);
 
 	/** 
 	========================================
