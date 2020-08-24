@@ -113,10 +113,6 @@ h1,h2,h3,h4,h5,h6 {
 	font-family: 'Rubik', sans-serif;
 }
 
-input,button,select,textarea{
-	
-}
-
 textarea{
 	overflow:hidden;
 }
@@ -680,10 +676,6 @@ img{
 
 .sec-title.centered{
 	text-align: center;
-}
-
-.sec-title.centered .icon{
-	
 }
 
 /*** 
@@ -3430,10 +3422,6 @@ img{
 .clients-section .slider-button.next{
 	top: 0;
 	right: 0;
-}
-
-.clients-section .clients-slider-items{
-
 }
 
 /***
