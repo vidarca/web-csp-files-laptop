@@ -29,7 +29,7 @@
           </div>          
         </div>
     </div>
-
+    
     <nav class="v-navbar">
       <div class="v-social-brand">
           <img src="@/assets/logo_215x60.png" alt="CSP Logo" loading="lazy" style="height: auto; width: 80px; align-self: center">
@@ -38,131 +38,130 @@
             <i style="font-size:20px; margin: 0; line-height: 0px;"> 40 años </i> 
           </div>
       </div>
-        <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button> -->
 
-        <div class="v-collapse v-navbar-collapse">
-          <ul class="v-navbar-nav">
-            <div class="v-vr"></div>
-            <li class="v-nav-item" id="home">
+      <div class="v-collapse v-navbar-collapse" ref="vCollapse">
+        <ul class="v-navbar-nav">
+          <div class="v-vr"></div>
+          <li class="v-nav-item" id="home">
+          <div class="v-nav-menu">
+            <router-link class="v-main-item" :to="{name:'Home'}" exact>
+              <div class="v-menu-txt">Home</div>
+            </router-link>
+          </div>
+          </li>
+          <div class="v-vr"></div>
+          <li class="v-nav-item" id="us">
             <div class="v-nav-menu">
-              <router-link class="v-main-item" :to="{name:'Home'}" exact>
-                <div class="v-menu-txt">Home</div>
+              <router-link class="v-main-item" :to="{name:'Nosotros'}">
+                <div class="v-menu-txt">Nosotros</div> 
               </router-link>
+                <div class="v-dropdown-menu" id="us">
+                          <li class="v-dropdown-item">
+                            <router-link :to="{name:'Nosotros'}"> Historia </router-link> 
+                          </li>
+                          <li class="v-dropdown-item">
+                            <router-link :to="{name:'Nosotros'}"> Juntas Directivas </router-link>
+                          </li>
+                          <li class="v-dropdown-item">
+                            <router-link :to="{name:'Nosotros'}"> Reglamentos </router-link>
+                          </li>
+                          <li class="v-dropdown-item">
+                            <router-link :to="{name:'Nosotros'}"> Normativas </router-link>  
+                          </li>
+                          <li class="v-dropdown-item">
+                            <router-link :to="{name:'Nosotros'}"> Instalaciones </router-link>        
+                          </li>                                                   
+                </div>
             </div>
-            </li>
-            <div class="v-vr"></div>
-            <li class="v-nav-item" id="us">
-              <div class="v-nav-menu">
-                <router-link class="v-main-item" :to="{name:'Nosotros'}">
-                  <div class="v-menu-txt">Nosotros</div> 
-                </router-link>
-                  <div class="v-dropdown-menu" id="us">
-                            <li class="v-dropdown-item">
-                              <router-link :to="{name:'Nosotros'}"> Historia </router-link> 
-                            </li>
-                            <li class="v-dropdown-item">
-                              <router-link :to="{name:'Nosotros'}"> Juntas Directivas </router-link>
-                            </li>
-                            <li class="v-dropdown-item">
-                              <router-link :to="{name:'Nosotros'}"> Reglamentos </router-link>
-                            </li>
-                            <li class="v-dropdown-item">
-                              <router-link :to="{name:'Nosotros'}"> Normativas </router-link>  
-                            </li>
-                            <li class="v-dropdown-item">
-                              <router-link :to="{name:'Nosotros'}"> Instalaciones </router-link>        
-                            </li>                                                   
-                  </div>
+          </li>
+          <div class="v-vr"></div>
+          <li class="v-nav-item" id="serv">
+          <div lass="v-nav-menu" >
+            <router-link class="v-main-item" :to="{name:'Servicios'}">
+              <div class="v-menu-txt">Servicios</div> 
+            </router-link>
+              <div class="v-dropdown-menu" id="serv">
+                <li class="v-dropdown-item">
+                  <router-link :to="{name:'Servicios'}"> Salón de Belleza </router-link>
+                </li>
+                <li class="v-dropdown-item"> 
+                  <router-link :to="{name:'Servicios'}"> Consecionario </router-link>
+                </li>
+                <li class="v-dropdown-item">
+                  <router-link :to="{name:'Servicios'}"> Alquiler de Salones </router-link>
+                </li>
+                <li class="v-dropdown-item">
+                  <router-link :to="{name:'Servicios'}"> Enfermería </router-link>
+                </li>
+                <li class="v-dropdown-item">
+                  <router-link :to="{name:'Servicios'}"> Sauna </router-link>
+                </li>
+                <li class="v-dropdown-item">
+                  <router-link :to="{name:'Servicios'}"> GYM </router-link>
+                </li>
+                <li class="v-dropdown-item">
+                  <router-link :to="{name:'Servicios'}"> Tienda de Conveniencias </router-link>
+                </li>
+                <li class="v-dropdown-item">
+                  <router-link :to="{name:'Servicios'}"> Tienda Deportiva </router-link>
+                </li>
               </div>
-            </li>
-            <div class="v-vr"></div>
-            <li class="v-nav-item" id="serv">
-            <div lass="v-nav-menu" >
-              <router-link class="v-main-item" :to="{name:'Servicios'}">
-                <div class="v-menu-txt">Servicios</div> 
-              </router-link>
-                <div class="v-dropdown-menu" id="serv">
-                  <li class="v-dropdown-item">
-                    <router-link :to="{name:'Servicios'}"> Salón de Belleza </router-link>
-                  </li>
-                  <li class="v-dropdown-item"> 
-                    <router-link :to="{name:'Servicios'}"> Consecionario </router-link>
-                  </li>
-                  <li class="v-dropdown-item">
-                    <router-link :to="{name:'Servicios'}"> Alquiler de Salones </router-link>
-                  </li>
-                  <li class="v-dropdown-item">
-                    <router-link :to="{name:'Servicios'}"> Enfermería </router-link>
-                  </li>
-                  <li class="v-dropdown-item">
-                    <router-link :to="{name:'Servicios'}"> Sauna </router-link>
-                  </li>
-                  <li class="v-dropdown-item">
-                    <router-link :to="{name:'Servicios'}"> GYM </router-link>
-                  </li>
-                  <li class="v-dropdown-item">
-                    <router-link :to="{name:'Servicios'}"> Tienda de Conveniencias </router-link>
-                  </li>
-                  <li class="v-dropdown-item">
-                    <router-link :to="{name:'Servicios'}"> Tienda Deportiva </router-link>
-                  </li>
-                </div>
-
-            </div>
-            </li>
-            <div class="v-vr"></div>
-            <li class="v-nav-item" id="com">
-            <div lass="v-nav-menu" >
-              <router-link class="v-main-item" :to="{name:'Comites'}">
-                <div class="v-menu-txt">Comités</div> 
-              </router-link>
-                <div class="v-dropdown-menu" id="com">
-                  <li class="v-dropdown-item">
-                    <router-link :to="{name:'Comites'}"> Comités </router-link>
-                  </li>
-                  <li class="v-dropdown-item"> 
-                    <router-link :to="{name:'Comites'}"> Instructores </router-link>
-                  </li>
-                  <li class="v-dropdown-item">
-                    <router-link :to="{name:'Comites'}"> Reglamentos </router-link>
-                  </li>
-                  <li class="v-dropdown-item">
-                    <router-link :to="{name:'Comites'}"> Normativas y Costos </router-link>
-                  </li>
-                  <li class="v-dropdown-item">
-                    <router-link :to="{name:'Comites'}"> Gelería </router-link>
-                  </li>
-                </div>
-            </div>
-            </li>
-            <div class="v-vr"></div>
-            <li class="v-nav-item" id="act">
-            <div class="v-nav-menu">
-              <router-link class="v-main-item" :to="{name:'Actualidad'}">
-                <div class="v-menu-txt">Actualidad</div> 
-              </router-link>
-            </div>
-            </li>
-            <div class="v-vr"></div>
-            <li class="v-nav-item" id="cont">
-            <div class="v-nav-menu">
-              <router-link class="v-main-item" :to="{name:'Contacto'}">
-                <div class="v-menu-txt">Contacto</div> 
-              </router-link>
-            </div>
-            </li>
-            <div class="v-vr"></div>
-            <li class="v-nav-item">
-              <a class="v-menu-txt" href="http://clubsantapaula.dyndns.org:1081/user/auth/login#no-back-button" target="blank">Autogestión</a>
-              <!-- <button  class="v-btn v-btn-menu" id="menu-btn" data-url="http://clubsantapaula.dyndns.org:1081/user/auth/login#no-back-button" @click="buttonUrlRedirect('menu-btn')" @mousedown="addGlowClassButton('menu-btn')" @mouseup="removeGlowClassButton('menu-btn')"  @mouseleave="removeGlowClassButton('menu-btn')">Iniciar Seción</button> -->
-            </li>
-            <div class="v-vr"></div>
-            
-          </ul>
-        </div>
-      </nav>
+          </div>
+          </li>
+          <div class="v-vr"></div>
+          <li class="v-nav-item" id="com">
+          <div lass="v-nav-menu" >
+            <router-link class="v-main-item" :to="{name:'Comites'}">
+              <div class="v-menu-txt">Comités</div> 
+            </router-link>
+              <div class="v-dropdown-menu" id="com">
+                <li class="v-dropdown-item">
+                  <router-link :to="{name:'Comites'}"> Comités </router-link>
+                </li>
+                <li class="v-dropdown-item"> 
+                  <router-link :to="{name:'Comites'}"> Instructores </router-link>
+                </li>
+                <li class="v-dropdown-item">
+                  <router-link :to="{name:'Comites'}"> Reglamentos </router-link>
+                </li>
+                <li class="v-dropdown-item">
+                  <router-link :to="{name:'Comites'}"> Normativas y Costos </router-link>
+                </li>
+                <li class="v-dropdown-item">
+                  <router-link :to="{name:'Comites'}"> Gelería </router-link>
+                </li>
+              </div>
+          </div>
+          </li>
+          <div class="v-vr"></div>
+          <li class="v-nav-item" id="act">
+          <div class="v-nav-menu">
+            <router-link class="v-main-item" :to="{name:'Actualidad'}">
+              <div class="v-menu-txt">Actualidad</div> 
+            </router-link>
+          </div>
+          </li>
+          <div class="v-vr"></div>
+          <li class="v-nav-item" id="cont">
+          <div class="v-nav-menu">
+            <router-link class="v-main-item" :to="{name:'Contacto'}">
+              <div class="v-menu-txt">Contacto</div> 
+            </router-link>
+          </div>
+          </li>
+          <div class="v-vr"></div>
+          <li class="v-nav-item">
+            <a class="v-menu-txt" href="http://clubsantapaula.dyndns.org:1081/user/auth/login#no-back-button" target="blank">Autogestión</a>
+            <!-- <button  class="v-btn v-btn-menu" id="menu-btn" data-url="http://clubsantapaula.dyndns.org:1081/user/auth/login#no-back-button" @click="buttonUrlRedirect('menu-btn')" @mousedown="addGlowClassButton('menu-btn')" @mouseup="removeGlowClassButton('menu-btn')"  @mouseleave="removeGlowClassButton('menu-btn')">Iniciar Seción</button> -->
+          </li>
+          <div class="v-vr"></div>
+          
+        </ul>
+      </div>
+      <div class="toggle-menu" ref="toggleMenu">
+        <i class="fa fa-bars"></i>
+      </div>
+    </nav>
   </div>
 </template>
 
@@ -256,6 +255,26 @@ export default {
         navItems[i].style.width = `${menuWidth}px`
       }
       })
+
+    /**
+    ====================================
+    Menu Toggle
+    ====================================
+    **/
+    let menuToggle = this.$refs.toggleMenu;
+    let toggleIcon = this.$refs.toggleMenu.children[0];
+    let menuCollapse = this.$refs.vCollapse;
+
+    window.addEventListener('resize', ()=>{
+      if(window.innerWidth > 900){
+        menuCollapse.classList.remove("show");
+      }
+      })
+    console.log(window.innerWidth);
+    menuToggle.addEventListener('click', e=>{
+        menuCollapse.classList.toggle("show");
+      
+    })
   }
 }
 </script>

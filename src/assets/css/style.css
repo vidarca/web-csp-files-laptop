@@ -792,7 +792,7 @@ img{
 	background-color: rgba(255,255,255,0.85);
 	transition: opacity 0.2s;
 	list-style: none;
-	padding: auto;
+	padding: 10px 40px;
 	top: 30px;
 	z-index: 2;
 	display: flex;
@@ -809,7 +809,7 @@ img{
 }
 
 .v-collapse{	
-	width: 80vw;
+	max-width: 80vw;
 	padding-left: 10px;
 	margin-bottom: 5px;
 }
@@ -905,6 +905,76 @@ img{
 	opacity: 0.85 !important;
 	transform: translateX(-5px) !important;
 	height: auto !important;
+}
+
+/**
+=============================================
+Menu Responsive
+============================================= 
+**/
+
+.toggle-menu{
+	display: none;
+	margin-left: auto;
+	line-height: 100px;
+	cursor: pointer;
+	font-size: 40px;
+	color: black;
+}
+
+.show{
+	height: auto!important;
+}
+
+@media screen and (max-width:900px){
+	.toggle-menu{
+		display:block;
+	}
+
+	.v-social-header{
+		background-color: rgba(255,255,255);
+	}
+
+	.v-navbar{
+		background-color: rgba(255,255,255);
+	}
+
+	.v-dropdown-menu{
+		display: block;
+		height: 0;
+		color: #000000;
+		margin-top: 1px;
+		width: auto;
+		position: relative;
+		background-color: #ffffff;
+		z-index: 2;
+		bottom: -1;
+		transition: transform 0.4s ease-out, opacity 0.4s ease-in;
+		border-radius: 10px;
+		overflow: hidden;
+	}
+
+	.v-collapse{
+		height: 0px;
+		position: absolute;
+		top: 100px;
+		right: 0;
+		width: 100%;
+		overflow: hidden;
+		transition: height 0.5s ease-out;
+	}
+	.v-collapse .v-navbar-nav{
+		flex-direction: column;
+		align-items: center;
+		justify-items: center;
+		background-color: rgba(255,255,255);
+		height: auto;
+	}
+	.v-vr{
+		display:none;
+	}
+
+
 }
 
 .v-btn{

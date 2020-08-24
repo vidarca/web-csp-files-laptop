@@ -529,12 +529,11 @@ import {mapState} from 'vuex'
 	var waiting = setInterval(() => {
 		if(this.$refs.team !== undefined ){
 			const teamMembers = this.$refs.team
-			console.log(this.$refs);
 			
 			const options = { 
 				root: null,
 				threshold: 0,
-				rootMargin: "100px",
+				rootMargin: "150px",
 			};
 		
 			const observer = new IntersectionObserver(function(entries,observer) {
