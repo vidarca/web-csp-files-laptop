@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="home" id="home">
     <div class="page-wrapper">
 
       	<!-- Banner con bootstrap -->
@@ -429,121 +429,28 @@
 			<div class="row clearfix">
 				
 				<!-- Team Member -->
-                <div class="team-member col-lg-3 col-md-6 col-sm-12">
-                    <div class="inner-box fadeInLeft">
+                <div class="team-member col-lg-3 col-md-6 col-sm-12" v-for="(item,index) in dbWeb.Gerencia" :key="index">
+                    <div class="inner-box team-inner-box" ref="team">
                         <!--Image Box-->
                         <div class="image-box">
                             <!--Image-->
                             <figure class="image">
-                                <img src="https://via.placeholder.com/263x300" alt="" />
+                                <img :src="item.gr_img" :alt="item.gr_id" />
                             </figure>
                             <!--Overlay Box-->
                             <div class="overlay-box">
                                 <div class="inner">
                                     <!--Social Icon One-->
                                     <ul class="social-icon-one">
-                                        <li><a class="fa fa-facebook" href="#"></a></li>
-                                        <li><a class="fa fa-twitter" href="#"></a></li>
-                                        <li><a class="fa fa-linkedin" href="#"></a></li>
-                                        <li><a class="fa fa-instagram" href="#"></a></li>
+                                        <li><a class="fas fa-envelope" :href="`mailto: ${item.gr_mail}`"></a></li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
                         <!--Lower Content-->
                         <div class="lower-content">
-                            <h5><a href="#">Mark Dennis</a></h5>
-                            <div class="designation">Chief Executive Officer</div>
-                        </div>
-                    </div>
-                </div>
-				
-				<!-- Team Member -->
-                <div class="team-member col-lg-3 col-md-6 col-sm-12">
-                    <div class="inner-box wow fadeInUp" data-wow-delay="150ms" data-wow-duration="1500ms">
-                        <!--Image Box-->
-                        <div class="image-box">
-                            <!--Image-->
-                            <figure class="image">
-                                <img src="https://via.placeholder.com/263x300" alt="" />
-                            </figure>
-                            <!--Overlay Box-->
-                            <div class="overlay-box">
-                                <div class="inner">
-                                    <!--Social Icon One-->
-                                    <ul class="social-icon-one">
-                                        <li><a class="fa fa-facebook" href="#"></a></li>
-                                        <li><a class="fa fa-twitter" href="#"></a></li>
-                                        <li><a class="fa fa-linkedin" href="#"></a></li>
-                                        <li><a class="fa fa-instagram" href="#"></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <!--Lower Content-->
-                        <div class="lower-content">
-                            <h5><a href="#">William Benson</a></h5>
-                            <div class="designation">Company Manager</div>
-                        </div>
-                    </div>
-                </div>
-				
-				<!-- Team Member -->
-                <div class="team-member col-lg-3 col-md-6 col-sm-12">
-                    <div class="inner-box wow fadeInUp" data-wow-delay="150ms" data-wow-duration="1500ms">
-                        <!--Image Box-->
-                        <div class="image-box">
-                            <!--Image-->
-                            <figure class="image">
-                                <img src="https://via.placeholder.com/263x300" alt="" />
-                            </figure>
-                            <!--Overlay Box-->
-                            <div class="overlay-box">
-                                <div class="inner">
-                                    <!--Social Icon One-->
-                                    <ul class="social-icon-one">
-                                        <li><a class="fa fa-facebook" href="#"></a></li>
-                                        <li><a class="fa fa-twitter" href="#"></a></li>
-                                        <li><a class="fa fa-linkedin" href="#"></a></li>
-                                        <li><a class="fa fa-instagram" href="#"></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <!--Lower Content-->
-                        <div class="lower-content">
-                            <h5><a href="#">James Anderson</a></h5>
-                            <div class="designation">Security Agent</div>
-                        </div>
-                    </div>
-                </div>
-				
-				<!-- Team Member -->
-                <div class="team-member col-lg-3 col-md-6 col-sm-12">
-                    <div class="inner-box wow fadeInRight" data-wow-delay="0ms" data-wow-duration="1500ms">
-                        <!--Image Box-->
-                        <div class="image-box">
-                            <!--Image-->
-                            <figure class="image">
-                                <img src="https://via.placeholder.com/263x300" alt="" />
-                            </figure>
-                            <!--Overlay Box-->
-                            <div class="overlay-box">
-                                <div class="inner">
-                                    <!--Social Icon One-->
-                                    <ul class="social-icon-one">
-                                        <li><a class="fa fa-facebook" href="#"></a></li>
-                                        <li><a class="fa fa-twitter" href="#"></a></li>
-                                        <li><a class="fa fa-linkedin" href="#"></a></li>
-                                        <li><a class="fa fa-instagram" href="#"></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <!--Lower Content-->
-                        <div class="lower-content">
-                            <h5><a href="#">Amelia Grace</a></h5>
-                            <div class="designation">Senior Security Agent</div>
+                            <h5>{{item.gr_name}}</h5>
+                            <div class="designation">{{item.gr_id}}</div>
                         </div>
                     </div>
                 </div>
@@ -569,19 +476,16 @@
 		</div>
     </section>
     <!-- End Clients Section -->
-	
-</div>
+	</div>
 <!--End pagewrapper-->
-
-  </div>
+</div>
 </template>
 
 <script>
-
+import {mapState} from 'vuex'
 
   export default {
 	  name: 'HomePage',
-	  
   	data(){
 	  	return{
 		  	itemIndex: 0,
@@ -589,11 +493,13 @@
 				{breakpoint:{width:0, items:1}},
 				{breakpoint:{width:600, items:2}},
 				{breakpoint:{width:1000, items:4}},
-			]
+			],
 	  	}
-  	},
+	  },
+	computed:{
+		...mapState(['dbWeb'])
+	},
   	methods: {
-
 	    clientSliderItems(responsive, items){
 	  	    for(let i=0; i < responsive.length; i++){
 	  		    if(window.innerWidth>responsive[i].breakpoint.width){
@@ -611,9 +517,48 @@
 		},
 		sendTo(url){
 			window.open(`${url}`, '_blank');
-		}
+		},
 	  },
 	mounted() {
+	/** 
+	========================================
+	Observers 
+	========================================
+	**/
+
+	setTimeout(() => {
+		const teamMembers = this.$refs.team
+		console.log(this.$refs);
+		
+		const options = { 
+			root: null,
+			threshold: 0,
+			rootMargin: "100px",
+		 };
+	
+		const observer = new IntersectionObserver(function(entries,observer) {
+			entries.forEach(entry =>{
+				setTimeout(() => {
+					if(!entry.isIntersecting){
+						return;
+					}
+					entry.target.style.zIndex = 1;
+					entry.target.style.opacity = 1;
+					entry.target.classList.add("fadeInLeft");
+				}, 500);
+			})
+		}, options)
+	
+		teamMembers.forEach(item =>{
+			observer.observe(item)
+		})
+	}, 1000);
+
+	/** 
+	========================================
+	Banner Clientes 
+	========================================
+	**/
 	  	const allContainer = document.querySelector('.clients-section');
 	  	const container = document.querySelector('.clients-slider-container');
 	  	let containerWidth = container.offsetWidth;
@@ -783,6 +728,6 @@
 	  	allContainer.addEventListener('mouseleave', startSlide)
 
 	  	startSlide()
-	    },
+		},
   }
 </script>
