@@ -31,19 +31,19 @@
 	
 	<!-- Seccion Destacados -->
 	<section class="featured-section">
-		<div class="auto-container">
-			<div class="inner-container">
+		<div class="auto-container ">
+			<div class="inner-container ">
 				
-				<div class="clearfix">
+				<div class="clearfix row m-auto" style="width:100%">
 					
 					<!-- Featured Block -->
-					<div class="featured-block col-lg-4 col-md-6 col-sm-12">
+					<div class="featured-block col-lg-4	col-md-6 col-sm-12">
 						<div class="inner-box">
 							<div class="content">
 								<div class="icon-box">
 									<span class="icon flaticon-security-camera"></span>
 								</div>
-								<h5><a href="#">Premium Indoor <br> Cameras</a></h5>
+								<h5><a href="#">Premium Indoor <br> Actualidad</a></h5>
 							</div>
 						</div>
 					</div>
@@ -55,7 +55,7 @@
 								<div class="icon-box">
 									<span class="icon flaticon-alarm-1"></span>
 								</div>
-								<h5><a href="#">24/7 Quick Alarm <br> Response</a></h5>
+								<h5><a href="#">24/7 Quick Alarm <br> Autogestión</a></h5>
 							</div>
 						</div>
 					</div>
@@ -95,7 +95,7 @@
 			<div class="row clearfix">
 				
 				<!-- Bloque de Notica -->
-				<div class="security-block col-lg-4 col-md-6 col-sm-12">
+				<div class="security-block col-lg-4 col-md-6 col-sm-6">
 					<div class="inner-box">
 						<div class="image">
 							<a href="service-detail"><img src="https://via.placeholder.com/360x260" alt="" /></a>
@@ -235,14 +235,14 @@
 					<div class="inner-box">
 						<div class="image">
 							<div class="gallery-content-box">
-								<p class="gallery-content-title">Comité de Adimisión</p>									
+								<p class="gallery-content-title"> {{dataAdmis.comi_name}} </p>									
 							</div>
-							<img src="https://via.placeholder.com/750x285" alt="" />
+							<img src="https://via.placeholder.com/750x285" style="min-height: 285px" alt="" />
 							<!-- Overlay Box -->
 							<div class="overlay-box">
 								<div class="overlay-inner">
 									<div class="content">
-										<h4><a href="gallery.html">Comité de Admisión</a></h4>
+										<h4><a href="gallery.html">{{dataAdmis.comi_name}}</a></h4>
 									</div>
 								</div>
 							</div>
@@ -251,88 +251,26 @@
 				</div>
 				
 				<!-- Bloque de comite -->
-				<div class="gallery-block col-lg-4 col-md-6 col-sm-12">
+				<div  v-for="element in this.dbWeb.Comites" :key="element.id" v-show="element.comi_int === true" class="gallery-block col-lg-4 col-md-6 col-sm-12">
 					<div class="inner-box">
 						<div class="image">
 							<div class="gallery-content-box">
-								<p class="gallery-content-title">Comité de Tenis</p>									
+								<p class="gallery-content-title"> {{element.comi_name}} </p>								
 							</div>
 							<img src="https://via.placeholder.com/360x285" alt="" />
 							<!-- Overlay Box -->
 							<div class="overlay-box">
 								<div class="overlay-inner">
 									<div class="content">
-										<h4><a href="gallery.html">Automation System</a></h4>
-										<div class="category">Commercial</div>
+										<h4><a href="gallery.html">{{element.comi_name}}</a></h4>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
+
 				
-				<!-- Bloque de comite -->
-				<div class="gallery-block col-lg-4 col-md-6 col-sm-12">
-					<div class="inner-box">
-						<div class="image">
-							<div class="gallery-content-box">
-								<p class="gallery-content-title">Comité de TRX</p>									
-							</div>
-							<img src="https://via.placeholder.com/360x285" alt="" />
-							<!-- Overlay Box -->
-							<div class="overlay-box">
-								<div class="overlay-inner">
-									<div class="content">
-										<h4><a href="gallery.html">Automation System</a></h4>
-										<div class="category">Commercial</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				
-				<!-- Bloque de comite -->
-				<div class="gallery-block col-lg-4 col-md-6 col-sm-12">
-					<div class="inner-box">
-						<div class="image">
-							<div class="gallery-content-box">
-								<p class="gallery-content-title">Comité de Gimnasio</p>									
-							</div>
-							<img src="https://via.placeholder.com/360x285" alt="" />
-							<!-- Overlay Box -->
-							<div class="overlay-box">
-								<div class="overlay-inner">
-									<div class="content">
-										<h4><a href="gallery.html">Automation System</a></h4>
-										<div class="category">Commercial</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				
-				<!-- Bloque de comite -->
-				<div class="gallery-block col-lg-4 col-md-6 col-sm-12">
-					<div class="inner-box">
-						<div class="image">
-							<div class="gallery-content-box">
-								<p class="gallery-content-title">Comité de Natación</p>									
-							</div>
-							<img src="https://via.placeholder.com/360x285" alt="" />
-							<!-- Overlay Box -->
-							<div class="overlay-box">
-								<div class="overlay-inner">
-									<div class="content">
-										<h4><a href="gallery.html">Automation System</a></h4>
-										<div class="category">Commercial</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
 				
 			</div>
 		</div>
@@ -429,7 +367,7 @@
 			<div class="row clearfix">
 				
 				<!-- Team Member -->
-                <div class="team-member col-lg-3 col-md-6 col-sm-12" v-for="(item,index) in dbWeb.Gerencia" :key="index">
+                <div class="team-member col-lg-3 col-md-6 col-sm-6" v-for="(item,index) in dbWeb.Gerencia" :key="index">
                     <div class="inner-box team-inner-box" ref="team">
                         <!--Image Box-->
                         <div class="image-box">
@@ -488,7 +426,7 @@ import {mapState} from 'vuex'
 	  name: 'HomePage',
   	data(){
 	  	return{
-		  	itemIndex: 0,
+			dataAdmis: [],
 			responsive:[
 				{breakpoint:{width:0, items:1}},
 				{breakpoint:{width:600, items:2}},
@@ -518,16 +456,29 @@ import {mapState} from 'vuex'
 		sendTo(url){
 			window.open(`${url}`, '_blank');
 		},
+		getIdInfo(area, val, rel, dataAl){
+			for(let i = 0; i < this.dbWeb[area].length; i++){
+				if(this.dbWeb[area][i][`${val}_name`] === rel){
+					return this.dbWeb[area][i];
+				}
+			}
+		}
 	  },
 	mounted() {
+	
 	/** 
 	========================================
-	Observers 
+	Data y Observers
 	========================================
 	**/
 
 	var waiting = setInterval(() => {
 		if(this.$refs.team !== undefined ){
+			/* Data */
+			this.dataAdmis = this.getIdInfo('Comites', 'comi', 'Comité de Admisión')
+
+
+			/* Observers */
 			const teamMembers = this.$refs.team
 			
 			const options = { 
@@ -562,10 +513,11 @@ import {mapState} from 'vuex'
 	========================================
 	**/
 	  	const allContainer = document.querySelector('.clients-section');
-	  	const container = document.querySelector('.clients-slider-container');
+		let container = document.querySelector('.clients-slider-container');
 	  	let containerWidth = container.offsetWidth;
 		let allItems = document.querySelectorAll('.clients-slider-items');
 		let allItemsRef = document.querySelectorAll('.clients-slider-items');
+
 		/* Para el responsive */
 		let items = 0;
 		/* Para el movimiento */
@@ -594,7 +546,7 @@ import {mapState} from 'vuex'
 
 	  	if(items === 4){
 	  		for(let i=0; i<items; i++){
-	  			firstClone[i] = allItems[i].cloneNode(true);
+				  firstClone[i] = allItems[i].cloneNode(true);
 	  		}
 	  		firstClone[3].id = 'last-first-clone';
 	  		for(let i=0; i<items; i++){
@@ -602,14 +554,14 @@ import {mapState} from 'vuex'
 	  		}
 	  	}else if(items === 2){
 	  		for(let i=0; i<items; i++){
-	  			firstClone[i] = allItems[i].cloneNode(true);
+				  firstClone[i] = allItems[i].cloneNode(true);
 	  		}
 	  		firstClone[1].id = 'last-first-clone';
 	  		for(let i=0; i<items; i++){
 	  			container.append(firstClone[i]);
 	  		}
 	  	}else {
-	  		firstClone = allItems[0].cloneNode(true);
+			firstClone = allItems[0].cloneNode(true);
 	  		firstClone.id = 'last-first-clone';
 	  		container.append(firstClone);
 	  	}
@@ -620,29 +572,30 @@ import {mapState} from 'vuex'
 
 	  	container.prepend(lastClone);
 
-	  	container.style.transform = `translateX(${-(allItemsWidth + marginItems * 2) * index}px)`
+		container.style.transform = `translateX(${-(allItemsWidth + marginItems * 2) * index}px)`
+		
 
 		/* Comenzando el movimiento */
 
 		container.addEventListener('transitionend', ()=>{
 			allItemsRef = document.querySelectorAll('.clients-slider-items');
-			if(index >= allItemsRef.length -1){
+			if(index > allItemsRef.length -1){
 				index = 1;
 			}
 			if(items === 4){
-				if (allItemsRef[index+3].id === firstClone[3].id) {
+				if (allItemsRef[index+3].id === 'last-first-clone') {
 					container.style.transition = 'none';
 					index = 1;
 					container.style.transform = `translateX(${-(allItemsWidth + marginItems * 2) * index}px)`;
 					}
 			}else if(items === 2){
-				if (allItemsRef[index+1].id === firstClone[1].id) {
+				if (allItemsRef[index+1].id === 'last-first-clone') {
 					container.style.transition = 'none';
 					index = 1;
 					container.style.transform = `translateX(${-(allItemsWidth + marginItems * 2) * index}px)`;
 					}
 			}else {
-				if (allItemsRef[index].id === firstClone.id) {
+				if (allItemsRef[index].id === 'last-first-clone') {
 					container.style.transition = 'none';
 					index = 1;
 					container.style.transform = `translateX(${-(allItemsWidth + marginItems * 2) * index}px)`;
@@ -663,12 +616,29 @@ import {mapState} from 'vuex'
 		};
 
 		window.addEventListener('resize', ()=>{
-	
+
+			if(container.children.length === allItems.length + 5){
+				container.removeChild(container.firstChild)
+				for(let i = 0; i < 4; i++){
+					container.removeChild(container.lastChild)
+				}
+			}else if(container.children.length === allItems.length + 3){
+				container.removeChild(container.firstChild)
+				for(let i = 0; i < 2; i++){
+					container.removeChild(container.lastChild)
+				}
+			}else {
+				container.removeChild(container.firstChild)
+				for(let i = 0; i < 1; i++){
+					container.removeChild(container.lastChild)
+				}
+			}
+
 			let href = window.location.href;
 			if(href === "http://localhost:8080/#/"){
 				containerWidth = container.offsetWidth;
 				items = this.clientSliderItems(this.responsive, items);
-				index = 0;
+				index = 1;
 
 				allItemsWidth = this.clientSliderItemsWidth(items, allItems, containerWidth, marginItems);
 					for(let i=0; i < allItems.length; i++){
@@ -684,10 +654,6 @@ import {mapState} from 'vuex'
 						firstClone[i] = allItems[i].cloneNode(true);
 					}
 					firstClone[3].id = 'last-first-clone';
-					container.removeChild(container.firstChild)
-					for(let i = 0; i < items; i++){
-						container.removeChild(container.lastChild)
-					}
 					for(let i=0; i<items; i++){
 						container.append(firstClone[i]);
 					}
@@ -696,20 +662,12 @@ import {mapState} from 'vuex'
 						firstClone[i] = allItems[i].cloneNode(true);
 					}
 					firstClone[1].id = 'last-first-clone';
-					container.removeChild(container.firstChild)
-					for(let i = 0; i < items; i++){
-						container.removeChild(container.lastChild)
-					}
 					for(let i=0; i<items; i++){
 						container.append(firstClone[i]);
 					}
 				}else {
 					firstClone = allItems[0].cloneNode(true);
 					firstClone.id = 'last-first-clone';
-					container.removeChild(container.firstChild)
-					for(let i = 0; i < items; i++){
-						container.removeChild(container.lastChild)
-					}
 					container.append(firstClone);
 				}
 
@@ -720,7 +678,6 @@ import {mapState} from 'vuex'
 				lastClone.id = 'last-clone';
 
 				container.prepend(lastClone);
-			}else {
 			}
 		})
 	  	allContainer.addEventListener('mouseenter', ()=>{

@@ -4,12 +4,15 @@
     <div class="v-social-header">
         <div class="v-social-leftbox">
           <div class="item">
-            <div class="icon flaticon-telephone"></div>
-            <a href="tel: +582129851038">Telf: +58.212.985.1038 </a>
+            <p>Contáctanos</p>
           </div>
           <div class="item">
-            <div class="icon flaticon-email"></div>
-            <a href="mailto: info@clubsantapaula.net">Correo: info@clubsantapaula.net</a>
+            <a class="icon flaticon-telephone" href="tel: +582129851038"></a>
+            <a class="v-social-leftTxt" href="tel: +582129851038"> +58.212.985.1038 </a>
+          </div>
+          <div class="item">
+            <a class="icon flaticon-email" href="mailto: info@clubsantapaula.net"></a>
+            <a class="v-social-leftTxt" href="mailto: info@clubsantapaula.net"> info@clubsantapaula.net</a>
           </div>
         </div>
       <div class="v-social-rightbox">
@@ -32,55 +35,43 @@
     
     <nav class="v-navbar">
       <div class="v-social-brand">
-          <img src="@/assets/logo_215x60.png" alt="CSP Logo" loading="lazy" style="height: auto; width: 80px; align-self: center">
-          <div style="color:#09197d; text-align:center;"> 
-            <p style="font-size: 25px; margin: 0; white-space: nowrap">Club Santa Paula</p> 
-            <i style="font-size:20px; margin: 0; line-height: 0px;"> 40 años </i> 
-          </div>
+          <img src="@/assets/images/logos/logo_220x115.png" alt="CSP Logo" loading="lazy" style="height: auto; width: 160px;">
       </div>
 
       <div class="v-collapse v-navbar-collapse" ref="vCollapse">
         <ul class="v-navbar-nav">
-          <div class="v-vr"></div>
+          
           <li class="v-nav-item" id="home">
-          <div class="v-nav-menu">
-            <router-link class="v-main-item" :to="{name:'Home'}" exact>
-              <div class="v-menu-txt">Home</div>
-            </router-link>
-          </div>
-          </li>
-          <div class="v-vr"></div>
-          <li class="v-nav-item" id="us">
             <div class="v-nav-menu">
-              <router-link class="v-main-item" :to="{name:'Nosotros'}">
-                <div class="v-menu-txt">Nosotros</div> 
-              </router-link>
-                <div class="v-dropdown-menu" id="us">
-                          <li class="v-dropdown-item">
-                            <router-link :to="{name:'Nosotros'}"> Historia </router-link> 
-                          </li>
-                          <li class="v-dropdown-item">
-                            <router-link :to="{name:'Nosotros'}"> Juntas Directivas </router-link>
-                          </li>
-                          <li class="v-dropdown-item">
-                            <router-link :to="{name:'Nosotros'}"> Reglamentos </router-link>
-                          </li>
-                          <li class="v-dropdown-item">
-                            <router-link :to="{name:'Nosotros'}"> Normativas </router-link>  
-                          </li>
-                          <li class="v-dropdown-item">
-                            <router-link :to="{name:'Nosotros'}"> Instalaciones </router-link>        
-                          </li>                                                   
-                </div>
+              <router-link class="v-menu-txt" :to="{name:'Home'}" exact>Home</router-link>
             </div>
           </li>
-          <div class="v-vr"></div>
-          <li class="v-nav-item" id="serv">
-          <div lass="v-nav-menu" >
-            <router-link class="v-main-item" :to="{name:'Servicios'}">
-              <div class="v-menu-txt">Servicios</div> 
-            </router-link>
-              <div class="v-dropdown-menu" id="serv">
+          
+          <li class="v-nav-item" id="us" @mouseover="dropDownMenuOn('us')" @mouseout="dropDownMenuOff('us')">
+            <router-link  class="v-menu-txt" :to="{name:'Nosotros'}">Nosotros</router-link>
+            <ul class="v-dropdown-menu" ref="us">
+              <li class="v-dropdown-item">
+                <router-link :to="{name:'Nosotros'}"> Historia </router-link> 
+              </li>
+              <li class="v-dropdown-item">
+                <router-link :to="{name:'Nosotros'}"> Juntas Directivas </router-link>
+              </li>
+              <li class="v-dropdown-item">
+                <router-link :to="{name:'Nosotros'}"> Reglamentos </router-link>
+              </li>
+              <li class="v-dropdown-item">
+                <router-link :to="{name:'Nosotros'}"> Normativas </router-link>  
+              </li>
+              <li class="v-dropdown-item">
+                <router-link :to="{name:'Nosotros'}"> Instalaciones </router-link>        
+              </li>                                                   
+            </ul>
+          <i @click="toggleDrop('us')" ref="usIcon" class="fa fa-caret-down"></i>
+          </li>
+
+          <li class="v-nav-item" id="serv" @mouseover="dropDownMenuOn('serv')" @mouseout="dropDownMenuOff('serv')">
+            <router-link class="v-menu-txt" :to="{name:'Servicios'}">Servicios</router-link>
+              <ul class="v-dropdown-menu" ref="serv">
                 <li class="v-dropdown-item">
                   <router-link :to="{name:'Servicios'}"> Salón de Belleza </router-link>
                 </li>
@@ -104,17 +95,14 @@
                 </li>
                 <li class="v-dropdown-item">
                   <router-link :to="{name:'Servicios'}"> Tienda Deportiva </router-link>
-                </li>
-              </div>
-          </div>
+                </li>                                                   
+              </ul>
+            <i @click="toggleDrop('serv')" ref="servIcon" class="fa fa-caret-down"></i>
           </li>
-          <div class="v-vr"></div>
-          <li class="v-nav-item" id="com">
-          <div lass="v-nav-menu" >
-            <router-link class="v-main-item" :to="{name:'Comites'}">
-              <div class="v-menu-txt">Comités</div> 
-            </router-link>
-              <div class="v-dropdown-menu" id="com">
+          
+          <li class="v-nav-item" id="com" @mouseover="dropDownMenuOn('com')" @mouseout="dropDownMenuOff('com')">
+            <router-link class="v-menu-txt" :to="{name:'Servicios'}">Comités</router-link>
+              <ul class="v-dropdown-menu" ref="com">
                 <li class="v-dropdown-item">
                   <router-link :to="{name:'Comites'}"> Comités </router-link>
                 </li>
@@ -129,37 +117,26 @@
                 </li>
                 <li class="v-dropdown-item">
                   <router-link :to="{name:'Comites'}"> Gelería </router-link>
-                </li>
-              </div>
-          </div>
+                </li>                                                   
+              </ul>
+            <i @click="toggleDrop('com')" ref="comIcon" class="fa fa-caret-down"></i>
           </li>
-          <div class="v-vr"></div>
-          <li class="v-nav-item" id="act">
-          <div class="v-nav-menu">
-            <router-link class="v-main-item" :to="{name:'Actualidad'}">
-              <div class="v-menu-txt">Actualidad</div> 
-            </router-link>
-          </div>
-          </li>
-          <div class="v-vr"></div>
+          
           <li class="v-nav-item" id="cont">
-          <div class="v-nav-menu">
-            <router-link class="v-main-item" :to="{name:'Contacto'}">
-              <div class="v-menu-txt">Contacto</div> 
-            </router-link>
-          </div>
+            <div class="v-nav-menu">
+              <router-link class="v-menu-txt" :to="{name:'Contacto'}">Contacto</router-link>
+            </div>
           </li>
-          <div class="v-vr"></div>
-          <li class="v-nav-item">
+         
+          <!-- <li class="v-nav-item">
             <a class="v-menu-txt" href="http://clubsantapaula.dyndns.org:1081/user/auth/login#no-back-button" target="blank">Autogestión</a>
-            <!-- <button  class="v-btn v-btn-menu" id="menu-btn" data-url="http://clubsantapaula.dyndns.org:1081/user/auth/login#no-back-button" @click="buttonUrlRedirect('menu-btn')" @mousedown="addGlowClassButton('menu-btn')" @mouseup="removeGlowClassButton('menu-btn')"  @mouseleave="removeGlowClassButton('menu-btn')">Iniciar Seción</button> -->
-          </li>
-          <div class="v-vr"></div>
+          </li> -->
+          
           
         </ul>
       </div>
-      <div class="toggle-menu" ref="toggleMenu">
-        <i class="fa fa-bars"></i>
+      <div class="toggle-menu" @click="toggleMenu()" ref="toggleMenu">
+        <i ref="toggleMenuIcon" class="fa fa-bars"></i>
       </div>
     </nav>
   </div>
@@ -170,6 +147,11 @@ import $ from 'jquery'
 
 export default {
   name: 'Header',
+  data(){
+    return {
+      toggleValues: ['com', 'serv', 'us']
+    }
+  },
   methods:{
     addGlowClassButton(id){
       $(`#${id}`)[0].classList.add('v-btn-menu-on');
@@ -182,8 +164,47 @@ export default {
     buttonUrlRedirect(){
       const url = event.target.dataset.url
       window.open(`${url}`, '_blank')
-  }
-
+    },
+    dropDownMenuOn(target){
+      if(window.innerWidth > 600){
+        this.$refs[`${target}`].classList.add('v-dropdown-menu-on')
+      }
+    },
+    dropDownMenuOff(target){
+      if(window.innerWidth > 600){
+        this.$refs[`${target}`].classList.remove('v-dropdown-menu-on')
+      }
+    },
+    toggleMenu(){
+      this.$refs.vCollapse.classList.toggle("show");
+      if(this.$refs.vCollapse.classList.contains('show')){
+        this.$refs.toggleMenuIcon.setAttribute('class', 'fa fa-times')
+      }else{
+        this.toggleValues.forEach(element =>{
+        this.$refs[`${element}`].classList.remove('v-dropdown-menu-on');
+        this.$refs[`${element}Icon`].setAttribute('class', 'fa fa-caret-down')
+        })
+        this.$refs.toggleMenuIcon.setAttribute('class', 'fa fa-bars')
+      }
+    },
+    toggleDrop(target){
+      this.toggleValues.forEach(element =>{
+        if(target !== element){
+          this.$refs[`${element}`].classList.remove('v-dropdown-menu-on');
+          this.$refs[`${element}Icon`].setAttribute('class', 'fa fa-caret-down')
+        }
+      })
+      this.$refs[`${target}`].classList.toggle('v-dropdown-menu-on')
+      if(this.$refs[`${target}`].classList.contains('v-dropdown-menu-on')){
+        this.$refs[`${target}Icon`].setAttribute('class', 'fa fa-caret-right')
+      }else{
+        this.$refs[`${target}Icon`].setAttribute('class', 'fa fa-caret-down')
+      }
+    },
+    toggleHide(target){
+      this.$refs[`${target}`].classList.remove('v-dropdown-menu-on')
+      this.$refs[`${target}Icon`].setAttribute('class', 'fa fa-caret-down')
+    }
   },
   mounted(){
 
@@ -191,15 +212,18 @@ export default {
     const navbar = document.querySelector('.v-navbar')
     const vnavItem = document.querySelectorAll('.v-nav-item')
     const stickyOn = navbar.offsetTop
+
     window.addEventListener('scroll',  () =>{
-      if(window.pageYOffset >= stickyOn){
-        navbar.style.backgroundColor = "rgba(255,255,255,1)"
-        navbar.style.top = "0" 
-        navbar.style.position = "fixed"
-      }else {
-        navbar.style.backgroundColor = "rgba(255,255,255,0.85)"
-        navbar.style.top = null
-        navbar.style.position = null
+      if(window.innerWidth > 600){
+        if(window.pageYOffset >= stickyOn){
+          navbar.style.backgroundColor = "rgba(255,255,255,1)"
+          navbar.style.top = "0" 
+          navbar.style.position = "fixed"
+        }else {
+          navbar.style.backgroundColor = "rgba(255,255,255,0.85)"
+          navbar.style.top = null
+          navbar.style.position = null
+        }
       }
     })
 
@@ -210,70 +234,54 @@ export default {
     let dropIds = []
     let navIds = []
 
-    dropItems.forEach(element =>{
-      dropIds.push(element.id)
-    })
-
-    navItems.forEach(element =>{
-      navIds.push(element.id)
-    })
-    
-    for(let i = 0; i < navIds.length; i++){
-        for(let j = 0; j < dropIds.length; j++){
-          if(navIds[i] === dropIds[j]){
-            navItems[i].addEventListener('mouseover', ()=>{
-              dropItems[j].classList.add('v-dropdown-menu-on')
-            })
-            navItems[i].addEventListener('mouseout', ()=>{
-              dropItems[j].classList.remove('v-dropdown-menu-on')
-            })
-          }
-        }
-    }
-
     /* Width de los iconos del menu */
 
-    const menuTxt = document.querySelectorAll('.v-menu-txt')
     let menuWidth = (window.innerWidth*0.65-10*navItems.length)/navItems.length
     
-    for(let i = 0; i < menuTxt.length; i++){
-      menuTxt[i].style.width = `${menuWidth}px`
-    }
-
-    for(let i = 0; i < navItems.length; i++){
-      navItems[i].style.width = `${menuWidth}px`
+    if(window.innerWidth > 600){
+      for(let i = 0; i < navItems.length; i++){
+        navItems[i].style.width = `${menuWidth}px`
+      }
+    }else{
+      for(let i = 0; i < navItems.length; i++){
+        navItems[i].style.width = `100%`
+      }
     }
 
     window.addEventListener('resize', ()=>{
       menuWidth = (window.innerWidth*0.65-10*navItems.length)/navItems.length
 
-      for(let i = 0; i < menuTxt.length; i++){
-        menuTxt[i].style.width = `${menuWidth}px`
+      if(window.innerWidth > 600){
+        for(let i = 0; i < navItems.length; i++){
+          navItems[i].style.width = `${menuWidth}px`
+        }
+      }else{
+        for(let i = 0; i < navItems.length; i++){
+          navItems[i].style.width = `100%`
+        }
       }
-
-      for(let i = 0; i < navItems.length; i++){
-        navItems[i].style.width = `${menuWidth}px`
-      }
-      })
+    })
 
     /**
     ====================================
     Menu Toggle
     ====================================
     **/
-    let menuToggle = this.$refs.toggleMenu;
-    let toggleIcon = this.$refs.toggleMenu.children[0];
-    let menuCollapse = this.$refs.vCollapse;
+    const collapseMenu = document.querySelector('.v-collapse')
+    const dropDownMenu = document.querySelectorAll('.v-dropdown-menu')
 
     window.addEventListener('resize', ()=>{
-      if(window.innerWidth > 900){
-        menuCollapse.classList.remove("show");
+      if(window.innerWidth > 600){
+        collapseMenu.classList.remove("show");
+        this.$refs.toggleMenuIcon.setAttribute('class', "fa fa-bars");
+        this.$refs.usIcon.setAttribute('class', "fa fa-caret-down");
+        this.$refs.comIcon.setAttribute('class', "fa fa-caret-down");
+        this.$refs.servIcon.setAttribute('class', "fa fa-caret-down");
+        
+        for(let i = 0; i < dropDownMenu.length; i++){
+          dropDownMenu[i].classList.remove("v-dropdown-menu-on");
+        }
       }
-      })
-    console.log(window.innerWidth);
-    menuToggle.addEventListener('click', e=>{
-        menuCollapse.classList.toggle("show");
-      
     })
   }
 }
