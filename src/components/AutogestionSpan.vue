@@ -1,0 +1,32 @@
+<template>
+  <div id="autogestionspan">
+    <!-- Seccion de Autogestion -->
+        <section class="call-to-action-section">
+            <div class="auto-container">
+                <div class="row clearfix">
+                    <!-- Columna de titulo -->
+                    <div class="title-column col-lg-8 col-md-12 col-sm-12">
+                        <div class="inner-column">
+                            <div class="phone flaticon-avatar"></div>
+                            <div class="text"><span>Área de Autogestión Adiministrativa</span> <br> Visítala Ya </div>
+                        </div>
+                    </div>
+                    <!-- Columna de boton -->
+                    <div class="button-column col-lg-4 col-md-12 col-sm-12">
+                        <div class="inner-column">
+                            <a href="http://clubsantapaula.dyndns.org:1081/user/auth/login" target="blank" class="theme-btn btn-style-two"><span class="txt"><i class="flaticon-shield-1"></i> Haciendo clic Aquí</span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    <!-- Fin Seccion Autogestion -->
+  </div>
+</template>
+
+<script>
+
+export default {
+  name: 'AutogestionSpan',
+  }
+</script>

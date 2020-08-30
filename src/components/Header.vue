@@ -1,9 +1,9 @@
 <template>
-  <div id="header">
+  <div id="header" style="max-height: 135px">
 
     <div class="v-social-header">
         <div class="v-social-leftbox">
-          <div class="item">
+          <div class="item contP">
             <p>Contáctanos</p>
           </div>
           <div class="item">
@@ -101,7 +101,7 @@
           </li>
           
           <li class="v-nav-item" id="com" @mouseover="dropDownMenuOn('com')" @mouseout="dropDownMenuOff('com')">
-            <router-link class="v-menu-txt" :to="{name:'Servicios'}">Comités</router-link>
+            <router-link class="v-menu-txt" :to="{name:'Comites'}">Comités</router-link>
               <ul class="v-dropdown-menu" ref="com">
                 <li class="v-dropdown-item">
                   <router-link :to="{name:'Comites'}"> Comités </router-link>
@@ -273,11 +273,12 @@ export default {
     window.addEventListener('resize', ()=>{
       if(window.innerWidth > 600){
         collapseMenu.classList.remove("show");
-        this.$refs.toggleMenuIcon.setAttribute('class', "fa fa-bars");
-        this.$refs.usIcon.setAttribute('class', "fa fa-caret-down");
-        this.$refs.comIcon.setAttribute('class', "fa fa-caret-down");
-        this.$refs.servIcon.setAttribute('class', "fa fa-caret-down");
-        
+        if(this.$refs.toggleMenuIcon !== undefined){
+          this.$refs.toggleMenuIcon.setAttribute('class', "fa fa-bars");
+          this.$refs.usIcon.setAttribute('class', "fa fa-caret-down");
+          this.$refs.comIcon.setAttribute('class', "fa fa-caret-down");
+          this.$refs.servIcon.setAttribute('class', "fa fa-caret-down");
+        }
         for(let i = 0; i < dropDownMenu.length; i++){
           dropDownMenu[i].classList.remove("v-dropdown-menu-on");
         }

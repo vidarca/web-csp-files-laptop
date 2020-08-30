@@ -7,13 +7,13 @@
 			<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
 			<div class="carousel-inner">
 				<div class="carousel-item active">
-				<img src="https://trello-attachments.s3.amazonaws.com/5f3056605b2f1383eb1964a7/5f3056b3d9640283e52e2acc/c7019c7831c3e34ec8b5e42531fcb250/banner1_principal.png" style="min-height: 100vh" class="d-block w-100" alt="...">
+					<img src="@/assets/images/background/BannerSlide01.jpg" alt="...">
 				</div>
 				<div class="carousel-item">
-				<img src="https://via.placeholder.com/1920x780" class="d-block w-100" alt="...">
+					<img src="@/assets/images/background/BannerSlide01.jpg" class="d-block w-100" alt="...">
 				</div>
 				<div class="carousel-item">
-				<img src="https://via.placeholder.com/1920x780" class="d-block w-100" alt="...">
+					<img src="@/assets/images/background/BannerSlide01.jpg" class="d-block w-100" alt="...">
 				</div>
 			</div>
 			<a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
@@ -201,27 +201,9 @@
 		</div>
 	</section>
 	<!-- Fin Seccion Actualidad -->
-	
+
 	<!-- Seccion de Autogestion -->
-	<section class="call-to-action-section">
-		<div class="auto-container">
-			<div class="row clearfix">
-				<!-- Columna de titulo -->
-				<div class="title-column col-lg-8 col-md-12 col-sm-12">
-					<div class="inner-column">
-						<div class="phone flaticon-avatar"></div>
-						<div class="text"><span>Área de Autogestión Adiministrativa</span> <br> Visítala Ya </div>
-					</div>
-				</div>
-				<!-- Columna de boton -->
-				<div class="button-column col-lg-4 col-md-12 col-sm-12">
-					<div class="inner-column">
-						<a href="http://clubsantapaula.dyndns.org:1081/user/auth/login" target="blank" class="theme-btn btn-style-two"><span class="txt"><i class="flaticon-shield-1"></i> Haciendo clic Aquí</span></a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+		<AutogestionSpan></AutogestionSpan>
 	<!-- Fin Seccion Autogestion -->
 	
 	<!-- Seccion de Comites -->
@@ -421,9 +403,13 @@
 
 <script>
 import {mapState} from 'vuex'
+import AutogestionSpan from '@/components/AutogestionSpan.vue'
 
   export default {
 	  name: 'HomePage',
+	  components: {
+		AutogestionSpan,
+	  },
   	data(){
 	  	return{
 			dataAdmis: [],

@@ -133,7 +133,6 @@ export default {
 .secP .v-dropdown-menu{
     height: 0;
 	color: #000000;
-	margin-top: 1px;
 	width: auto;
 	position: absolute;
 	background-color: #ffffff;
