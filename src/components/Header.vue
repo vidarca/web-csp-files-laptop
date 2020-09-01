@@ -1,5 +1,5 @@
 <template>
-  <div id="header" style="max-height: 135px">
+  <div id="header" style="max-height: 130px">
 
     <div class="v-social-header">
         <div class="v-social-leftbox">
@@ -35,7 +35,9 @@
     
     <nav class="v-navbar">
       <div class="v-social-brand">
-          <img src="@/assets/images/logos/logo_220x115.png" alt="CSP Logo" loading="lazy" style="height: auto; width: 160px;">
+        <router-link class="v-brand-info" :to="{name: 'Home'}">
+            <img src="@/assets/images/logos/logo_220x115.png" alt="CSP Logo" loading="lazy" style="height: auto; width: 160px;">
+        </router-link>
       </div>
 
       <div class="v-collapse v-navbar-collapse" ref="vCollapse">

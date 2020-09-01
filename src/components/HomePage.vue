@@ -30,7 +30,7 @@
 	
 	
 	<!-- Seccion Destacados -->
-	<section class="featured-section">
+	<section class="featured-section" v-if="dpResponsive === false">
 		<div class="auto-container ">
 			<div class="inner-container ">
 				
@@ -41,9 +41,9 @@
 						<div class="inner-box">
 							<div class="content">
 								<div class="icon-box">
-									<span class="icon flaticon-security-camera"></span>
+									<span class="icon fa fa-newspaper"></span>
 								</div>
-								<h5><a href="#">Premium Indoor <br> Actualidad</a></h5>
+								<h5><router-link :to="{name: 'Actualidad'}">Actualidad</router-link></h5>
 							</div>
 						</div>
 					</div>
@@ -53,9 +53,9 @@
 						<div class="inner-box">
 							<div class="content">
 								<div class="icon-box">
-									<span class="icon flaticon-alarm-1"></span>
+									<span class="icon fas fa-key"></span>
 								</div>
-								<h5><a href="#">24/7 Quick Alarm <br> Autogestión</a></h5>
+								<h5><a href="http://clubsantapaula.dyndns.org:1081/user/auth/login">Autogestión</a></h5>
 							</div>
 						</div>
 					</div>
@@ -67,7 +67,63 @@
 								<div class="icon-box">
 									<span class="icon flaticon-calculator"></span>
 								</div>
-								<h5><a href="#">Amazing Security <br> Systems</a></h5>
+								<h5><a href="#">Systems</a></h5>
+							</div>
+						</div>
+					</div>
+					
+				</div>
+				
+			</div>
+		</div>
+	</section>
+	<!-- Seccion Destacados -->
+
+	<!-- Seccion Destacados -->
+	<section class="featured-section" v-if="dpResponsive === true">
+		<div class="auto-container ">
+			<div class="inner-container">
+				
+				<div class="clearfix row m-auto" style="width:100%">
+					
+					<!-- Featured Block -->
+					<div class="featured-block">
+						<div class="inner-box">
+							<div class="content">
+								<div class="icon-box">
+									<span class="icon fa fa-newspaper"></span>
+								</div>
+								<div class="text-box">
+									<h5><router-link :to="{name: 'Actualidad'}">Actualidad</router-link></h5>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<!-- Featured Block -->
+					<div class="featured-block" id="second-featured">
+						<div class="inner-box">
+							<div class="content">
+								<div class="icon-box">
+									<span class="icon fas fa-mouse"></span>
+								</div>
+								<div class="text-box">
+									<h5><a href="http://clubsantapaula.dyndns.org:1081/user/auth/login" target="blank">Autogestión</a></h5>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<!-- Featured Block -->
+					<div class="featured-block">
+						<div class="inner-box">
+							<div class="content">
+								<div class="icon-box">
+									<span class="icon flaticon-calculator"></span>
+								</div>
+								<div class="text-box">
+									<h5><a href="#">System</a></h5>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -396,6 +452,9 @@
 		</div>
     </section>
     <!-- End Clients Section -->
+	<div class="back-btn" v-if="dpResponsive === true">
+		<button @click="goToTop()" class="icon"><i class="fa fa-angle-up"></i></button>
+	</div>
 	</div>
 <!--End pagewrapper-->
 </div>
@@ -421,9 +480,12 @@ import AutogestionSpan from '@/components/AutogestionSpan.vue'
 	  	}
 	  },
 	computed:{
-		...mapState(['dbWeb'])
+		...mapState(['dbWeb', 'dpResponsive'])
 	},
   	methods: {
+		goToTop(){
+			window.scrollTo(0, 0);
+		},
 	    clientSliderItems(responsive, items){
 	  	    for(let i=0; i < responsive.length; i++){
 	  		    if(window.innerWidth>responsive[i].breakpoint.width){
@@ -451,7 +513,6 @@ import AutogestionSpan from '@/components/AutogestionSpan.vue'
 		}
 	  },
 	mounted() {
-	
 	/** 
 	========================================
 	Data y Observers
@@ -603,25 +664,24 @@ import AutogestionSpan from '@/components/AutogestionSpan.vue'
 
 		window.addEventListener('resize', ()=>{
 
-			if(container.children.length === allItems.length + 5){
-				container.removeChild(container.firstChild)
-				for(let i = 0; i < 4; i++){
-					container.removeChild(container.lastChild)
-				}
-			}else if(container.children.length === allItems.length + 3){
-				container.removeChild(container.firstChild)
-				for(let i = 0; i < 2; i++){
-					container.removeChild(container.lastChild)
-				}
-			}else {
-				container.removeChild(container.firstChild)
-				for(let i = 0; i < 1; i++){
-					container.removeChild(container.lastChild)
-				}
-			}
-
 			let href = window.location.href;
 			if(href === "http://localhost:8080/#/"){
+				if(container.children.length === allItems.length + 5){
+					container.removeChild(container.firstChild)
+					for(let i = 0; i < 4; i++){
+						container.removeChild(container.lastChild)
+					}
+				}else if(container.children.length === allItems.length + 3){
+					container.removeChild(container.firstChild)
+					for(let i = 0; i < 2; i++){
+						container.removeChild(container.lastChild)
+					}
+				}else {
+					container.removeChild(container.firstChild)
+					for(let i = 0; i < 1; i++){
+						container.removeChild(container.lastChild)
+					}
+				}
 				containerWidth = container.offsetWidth;
 				items = this.clientSliderItems(this.responsive, items);
 				index = 1;

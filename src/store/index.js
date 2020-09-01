@@ -5,11 +5,19 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    dbWeb:[]
+    dbWeb:[],
+    dpResponsive: false,
   },
   mutations: {
     dataWeb(state, baseDatos){
       state.dbWeb = baseDatos
+    },
+    isResponsive(state){
+      if(window.innerWidth >= 768){
+        state.dpResponsive = false
+      }else if(window.innerWidth < 768){
+        state.dpResponsive = true
+      }
     }
   },
   actions: {

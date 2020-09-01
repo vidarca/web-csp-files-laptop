@@ -5,10 +5,17 @@
 </template>
 
 <script>
-import {mapActions} from 'vuex'
+import {mapActions, mapMutations} from 'vuex'
 export default {
   methods:{
-    ...mapActions(['getData'])
+    ...mapMutations(['isResponsive']),
+    ...mapActions(['getData']),
+  },
+  created(){
+    this.isResponsive()
+    window.addEventListener('resize', ()=>{
+      this.isResponsive()
+    })
   },
   mounted() {
     this.getData()

@@ -48,6 +48,7 @@
 @import './flaticon.css';
 @import './animate.css';
 @import './owl.css';
+@import './responsive.css';
 @import './animation.css';
 @import './jquery-ui.css';
 @import './custom-animate.css';
@@ -828,7 +829,7 @@ img{
 
 @media screen and (max-width:380px){
 	.v-social-header p{
-		font-size: 10px;	
+		font-size: 9.5px;	
 	}
 }
 
@@ -850,6 +851,14 @@ img{
 
 .v-social-brand{
 	float: left;
+	height: 100%;
+}
+
+.v-social-brand .v-brand-info{
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .v-collapse{
@@ -2188,7 +2197,9 @@ Menu Responsive
 }
 
 @media screen and (max-width: 650px){
-
+	.carousel-item img{
+		min-height: 360px;
+	}
 }
 
 /*** 
@@ -2227,7 +2238,7 @@ Menu Responsive
 
 .featured-block .inner-box{
 	position:relative;
-	padding:54px 45px;
+	padding:40px;
 	background-color: rgba(255,255,255);
 	height: 100%;
 	max-height: 158px;
@@ -2254,8 +2265,13 @@ Menu Responsive
 }
 
 .featured-block .inner-box .content{
+	width: 100%;
+	height: 100%;
 	position:relative;
-	padding-left:85px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
 }
 
 .featured-block .inner-box .content:before{
@@ -2270,9 +2286,8 @@ Menu Responsive
 }
 
 .featured-block .inner-box .icon-box{
-	position:absolute;
-	left:0px;
-	top:0px;
+	position:relative;
+	padding-right: 10px;
 	color:#09197d;
 	font-size:60px;
 	line-height:1em;
@@ -2280,6 +2295,8 @@ Menu Responsive
 
 .featured-block .inner-box .content h5{
 	position:relative;
+	white-space: nowrap;
+	text-align: left;
 	line-height:1.4em;
 	font-weight:500;
 	font-size:18px;
