@@ -7,8 +7,8 @@
                     <!-- Columna de titulo -->
                     <div class="title-column col-lg-8 col-md-12 col-sm-12">
                         <div class="inner-column">
-                            <div class="phone flaticon-avatar"></div>
-                            <div class="text"><span>Área de Autogestión Adiministrativa</span> <br> Visítala Ya </div>
+                            <div class="phone flaticon-user"></div>
+                            <div class="text"><span>Visita ya nuestra</span> <br> Área de Autogestión Administrativa </div>
                         </div>
                     </div>
                     <!-- Columna de boton -->

@@ -1,5 +1,8 @@
 <template>
   <div class="home" id="home">
+	
+	<Header></Header>
+
     <div class="page-wrapper">
 
       	<!-- Banner con bootstrap -->
@@ -41,7 +44,7 @@
 						<div class="inner-box">
 							<div class="content">
 								<div class="icon-box">
-									<span class="icon fa fa-newspaper"></span>
+									<span class="icon flaticon-newspaper"></span>
 								</div>
 								<h5><router-link :to="{name: 'Actualidad'}">Actualidad</router-link></h5>
 							</div>
@@ -53,7 +56,7 @@
 						<div class="inner-box">
 							<div class="content">
 								<div class="icon-box">
-									<span class="icon fas fa-key"></span>
+									<span class="icon flaticon-key"></span>
 								</div>
 								<h5><a href="http://clubsantapaula.dyndns.org:1081/user/auth/login">Autogestión</a></h5>
 							</div>
@@ -65,7 +68,7 @@
 						<div class="inner-box">
 							<div class="content">
 								<div class="icon-box">
-									<span class="icon flaticon-calculator"></span>
+									<span class="icon flaticon-newspaper"></span>
 								</div>
 								<h5><a href="#">Systems</a></h5>
 							</div>
@@ -321,15 +324,15 @@
 		
 		<!-- Icons Box -->
 		<div class="cuot-icon-box">
-			<div class="icon fas fa-balance-scale"></div>
-			<div class="icon fas fa-coins"></div>
-			<div class="icon fas fa-lock"></div>
+			<div class="icon flaticon-balance"></div>
+			<div class="icon flaticon-coin-stack"></div>
+			<div class="icon flaticon-padlock"></div>
 		</div>
 
 		<!-- Left box -->
 		<div class="cuot-left-container">
-			<div class="cuot-inner-column row row-cols-1 m-0">
-				<h2>Distribución de las Cuotas Mensaules</h2>
+			<div class="cuot-inner-column">
+				<h2>Distribución de las Cuotas Mensuales</h2>
 				<div class="text">¿Quieres saber en qué se ha utilizado las cuotas mensuales? <br> Aquí te lo mostramos</div>
 				<!-- Barras % -->
 				<!-- Barra 1 -->
@@ -463,11 +466,13 @@
 <script>
 import {mapState} from 'vuex'
 import AutogestionSpan from '@/components/AutogestionSpan.vue'
+import Header from '@/components/Header.vue'
 
   export default {
 	  name: 'HomePage',
 	  components: {
 		AutogestionSpan,
+		Header,
 	  },
   	data(){
 	  	return{
@@ -662,10 +667,83 @@ import AutogestionSpan from '@/components/AutogestionSpan.vue'
 	  	}, interval);
 		};
 
+		/**
+		=================================================
+		Change layout if Resizing or Changing Orientation
+		=================================================  
+		**/
+
+		window.addEventListener('orientationchange', ()=>{
+
+			let homeLink = document.getElementById('home-page')
+
+			if(homeLink.classList.contains('router-link-active')){
+				if(container.children.length === allItems.length + 5){
+					container.removeChild(container.firstChild)
+					for(let i = 0; i < 4; i++){
+						container.removeChild(container.lastChild)
+					}
+				}else if(container.children.length === allItems.length + 3){
+					container.removeChild(container.firstChild)
+					for(let i = 0; i < 2; i++){
+						container.removeChild(container.lastChild)
+					}
+				}else {
+					container.removeChild(container.firstChild)
+					for(let i = 0; i < 1; i++){
+						container.removeChild(container.lastChild)
+					}
+				}
+				containerWidth = container.offsetWidth;
+				items = this.clientSliderItems(this.responsive, items);
+				index = 1;
+
+				allItemsWidth = this.clientSliderItemsWidth(items, allItems, containerWidth, marginItems);
+					for(let i=0; i < allItems.length; i++){
+						allItems[i].style.minWidth = allItemsWidth  + "px";
+						allItems[i].style.maxWidth = allItemsWidth  + "px";
+						allItems[i].style.margin = `0px ${marginItems}px`;
+					}
+
+				let firstClone = [''];
+
+				if(items === 4){
+					for(let i=0; i<items; i++){
+						firstClone[i] = allItems[i].cloneNode(true);
+					}
+					firstClone[3].id = 'last-first-clone';
+					for(let i=0; i<items; i++){
+						container.append(firstClone[i]);
+					}
+				}else if(items === 2){
+					for(let i=0; i<items; i++){
+						firstClone[i] = allItems[i].cloneNode(true);
+					}
+					firstClone[1].id = 'last-first-clone';
+					for(let i=0; i<items; i++){
+						container.append(firstClone[i]);
+					}
+				}else {
+					firstClone = allItems[0].cloneNode(true);
+					firstClone.id = 'last-first-clone';
+					container.append(firstClone);
+				}
+
+				lastClone = ['']
+
+				lastClone = allItems[allItems.length - 1].cloneNode(true);
+	
+				lastClone.id = 'last-clone';
+
+				container.prepend(lastClone);
+			}
+		})
+		
 		window.addEventListener('resize', ()=>{
 
-			let href = window.location.href;
-			if(href === "http://localhost:8080/#/"){
+			let homeLink = document.getElementById('home-page')
+
+			if(homeLink.classList.contains('router-link-active')){
 				if(container.children.length === allItems.length + 5){
 					container.removeChild(container.firstChild)
 					for(let i = 0; i < 4; i++){

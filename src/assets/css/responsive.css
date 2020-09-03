@@ -75,11 +75,6 @@
 	}
 }
 
-@media screen and (max-width: 425px){
-	.featured-block .inner-box .icon-box{
-	}
-}
-
 @media screen and (max-width: 767px){
 	
 	.featured-block .inner-box .content:before{
@@ -89,11 +84,16 @@
 	.featured-section .inner-container .featured-block{
 		position: relative;
 		border-radius: 5px;
-		width: calc(100%/3);
-		margin: 0!important;
+		width: calc(100%/3 - 6px);
+		margin: 0 3px!important;
 		box-shadow: 0px 0px 25px rgba(0,0,0, 0.2)!important;
 		background-color: rgba(255,255,255)!important;
 		height: 130px;
+	}
+
+	.featured-section .inner-container .featured-block:nth-child(2){
+		box-shadow: none !important;
+		z-index: 0 !important;
 	}
 
 	.featured-section .inner-container .featured-block#second-featured:before{
@@ -127,5 +127,162 @@
 	
 	.featured-block .inner-box .content h5{
 		font-size: min(4.5vw,18px)!important;
+	}
+
+	/* Seccion de Cuotas */
+
+	.cuot-section{
+		height: 600px!important;
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.cuot-section .logo-icon{
+		display: none;
+	}
+
+	.cuot-section .cuot-icon-box{
+		flex-direction: row !important;
+		left: 0 !important;
+		top: 50% !important;
+		min-height: 0 !important;
+		height: 0!important;
+		width: 100% !important;
+		justify-content: space-between!important;
+		padding: 0 35px;
+	}
+
+	.cuot-section .cuot-icon-box .icon{
+		width:40px !important;
+		height:40px !important;
+		font-size: 25px !important;
+		line-height:40px !important;
+		margin: 0 !important;
+	}
+
+	.cuot-section .cuot-icon-box .icon:after{
+		left:-5px !important;
+		top:-5px !important;
+		right:-5px !important;
+		bottom:-5px !important;
+	}
+
+	.cuot-section .cuot-left-container{
+		height: 300px!important;
+		min-height: 0px!important;
+		width: 100% !important;
+		padding: 15px!important;
+		display: flex;
+		align-items: center;
+	}
+
+	.cuot-section .cuot-left-container h2{
+		font-size:20px!important;
+	}
+	
+	.cuot-section .cuot-left-container .text{
+		font-size:12px!important;
+		margin-bottom:10px!important;
+		margin-top: 5px!important;
+	}
+
+	.cuot-section .cuot-left-container .cuot-porc{
+		margin-bottom: 8px!important;
+	}
+	
+	.cuot-section .cuot-left-container .cuot-porc .cuot-porc-text{
+		font-size:12px!important;
+	}
+
+	.cuot-section .cout-image-container{
+		position: relative!important;
+		width: 100%!important;
+		height: 300px!important;
+		min-height: 0px!important;
+	}
+
+	.cuot-section .cuot-left-container .progress{
+		height: 7px!important;
+	}
+
+	/** 
+	============================================
+	Autogestion Administrativa
+	============================================
+	**/
+
+	.call-to-action-section{
+		padding:25px 0px 25px !important;
+	}
+
+	.call-to-action-section .title-column .inner-column{
+		position:relative;
+		padding-left: 0 !important;
+	}
+	
+	.call-to-action-section .title-column .phone{
+		position:absolute;
+		left:0px;
+		top:5px;
+		width:87.5px !important;
+		height:50px !important;
+		color:#ffffff;
+		font-size:26px !important;
+		line-height:50px !important;
+		text-align:center;
+		background-color:#FE5D25;
+		border-radius:0px 7px 7px 0px;
+	}
+	
+	.call-to-action-section .title-column .text{
+		position:relative;
+		color:#ffffff;
+		font-size:20px!important;
+		text-align: center;
+		font-weight:400;
+		line-height:1.3em;
+		margin-left: auto;
+		max-width: 190px;
+	}
+	
+	.call-to-action-section .title-column .text span{
+		position:relative;
+		font-weight:500;
+	}
+	
+	.call-to-action-section .button-column{
+		position:relative;
+		margin-top: 18px;
+	}
+	
+	.call-to-action-section .button-column .inner-column{
+		position:relative;
+		text-align:center !important;
+		font-size: 20px !important;
+		white-space: nowrap;
+	}
+	
+	.call-to-action-section.style-two{
+		background-color:#FE5D25;
+	}
+	
+	.call-to-action-section.style-two .title-column .phone{
+		background-color:#FE5D25;
+	}
+	
+	.call-to-action-section.style-two .btn-style-two:hover{
+		border-color:#7cb434;
+		
+	}
+	
+	.call-to-action-section.style-two .btn-style-two:before{
+		border-bottom-color:#7cb434;
+	}
+	
+	.call-to-action-section.style-two .btn-style-two:after{
+		border-bottom-color:#7cb434;
 	}
 }

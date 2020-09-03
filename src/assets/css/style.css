@@ -44,8 +44,7 @@
 	
 */
 
-@import './font-awesome.css';
-@import './flaticon.css';
+@import '../font/flaticon.css';
 @import './animate.css';
 @import './owl.css';
 @import './responsive.css';
@@ -722,6 +721,7 @@ img{
 }
 
 .v-social-leftbox .icon{
+	position: relative;
 	height: 25px;
 	width: 25px;
 	font-size: 15px;
@@ -767,20 +767,21 @@ img{
 	align-items: center;
 }
 
-.v-social-rightbox .icon{
-	height: 25px;
-	width: 25px;
+.v-social-rightbox .icon:before{
+	height: 25px !important;
+	width: 25px !important;
 	font-size: 15px;
 	line-height: 25px;
 	text-align: center;
+	padding: 5px;
 	color: black;
 	background-color: rgba(255, 255, 255, 0.6);
-	border-radius: 50%;
+	border-radius: 15px;
 	align-self: center;
 	transition: all 0.5s;
 }
 
-.v-social-rightbox .icon:hover{
+.v-social-rightbox .icon:hover:before{
 	color: white;
 	background-color: rgba(0, 0, 0);
 }
@@ -2276,7 +2277,7 @@ Menu Responsive
 
 .featured-block .inner-box .content:before{
 	position:absolute;
-	content: "\f170";
+	content: "\f116";
 	right:-20px;
 	top:20px;
 	color:#FE5D25;
@@ -2319,7 +2320,7 @@ Menu Responsive
 /*** 
 
 ====================================================================
-	Security Section
+	Seccion de Actualidad
 ====================================================================
 
 ***/
@@ -2667,7 +2668,7 @@ Menu Responsive
 /*** 
 
 ====================================================================
-	Call To Action Section
+	Autogestión Adimistrativa
 ====================================================================
 
 ***/
@@ -4634,3 +4635,181 @@ Menu Responsive
 	border-left:300px;
 	border-radius: 30px
 } */
+
+/*** 
+
+====================================================================
+	Pagina de Servicios
+====================================================================
+
+***/
+
+#services .premium-section{
+	position:relative;
+	padding: 5% 0px;
+	background-color:#f0f2f5;
+}
+
+#services .premium-section .pattern-layer{
+	display: none;
+}
+
+#services .security-block{
+	position:relative;
+	margin-bottom:30px;
+}
+
+#services .security-block .inner-box{
+	position:relative;
+	background-color:#ffffff;
+	border-radius: 15px;
+}
+
+#services .security-block .inner-box .image{
+	position:relative;
+	overflow:hidden;
+}
+
+#services .security-block .inner-box .image:before{
+    display: none;
+}
+
+#services .security-block .inner-box .image img{
+	position:relative;
+	width:100%;
+	display:block;
+	border-top-right-radius: 15px;
+	border-top-left-radius: 15px;
+	transition:all 900ms ease;
+	-moz-transition:all 900ms ease;
+	-webkit-transition:all 900ms ease;
+	-ms-transition:all 900ms ease;
+	-o-transition:all 900ms ease;
+}
+
+#services .security-block .inner-box:hover .image img{
+	transform:none;
+}
+
+#services .security-block .inner-box .lower-content{
+	position:relative;
+	padding:20px 30px;
+}
+
+#services .security-block .inner-box .lower-content .hover-bg-color{
+	position:absolute;
+	left:0px;
+	top:0px;
+	right:0px;
+	bottom:0px;
+}
+
+#services .security-block .inner-box .lower-content .hover-bg-color:before{
+	position:absolute;
+	content:'';
+	left:0%;
+	width:0%;
+	top:0px;
+	height:50%;
+	background-color:#FE5D25;
+	transition:all 900ms ease;
+	-moz-transition:all 900ms ease;
+	-webkit-transition:all 900ms ease;
+	-ms-transition:all 900ms ease;
+	-o-transition:all 900ms ease;
+}
+
+#services .security-block .inner-box .lower-content .hover-bg-color:after{
+	position:absolute;
+	border-bottom-left-radius: 0px;
+	border-bottom-right-radius: 15px;
+	content:'';
+	right:0%;
+	bottom:0px;
+	width:0%;
+	height:50%;
+	background-color:#FE5D25;
+	transition:all 900ms ease;
+	-moz-transition:all 900ms ease;
+	-webkit-transition:all 900ms ease;
+	-ms-transition:all 900ms ease;
+	-o-transition:all 900ms ease;
+}
+
+#services .security-block .inner-box:hover .lower-content .hover-bg-color:before,
+#services .security-block .inner-box:hover .lower-content .hover-bg-color:after{
+	width:100%;
+}
+
+#services .security-block .inner-box:hover .lower-content .hover-bg-color:after{
+	border-bottom-left-radius: 15px;
+}
+
+#services .security-block .inner-box .lower-content .upper-box{
+	position:relative;
+	padding-left:44px;
+}
+
+#services .security-block .inner-box .lower-content .upper-box .icon{
+	position:absolute;
+	left:0px;
+	top:0px;
+	color:#09197d;
+	font-size:30px;
+	line-height:1em;
+	transition:all 900ms ease;
+	-moz-transition:all 900ms ease;
+	-webkit-transition:all 900ms ease;
+	-ms-transition:all 900ms ease;
+	-o-transition:all 900ms ease;
+}
+
+#services .security-block .inner-box .lower-content .upper-box h5{
+	position:relative;
+	font-size: 23px;
+	font-weight:500;
+	line-height:1.3em;
+	color:#222222;
+	transition:all 900ms ease;
+	-moz-transition:all 900ms ease;
+	-webkit-transition:all 900ms ease;
+	-ms-transition:all 900ms ease;
+	-o-transition:all 900ms ease;
+}
+
+#services .security-block .inner-box .lower-content .text{
+	position:relative;
+	color:#000000;
+	font-size:15px;
+	line-height:1.8em;
+	margin-top:25px;
+	font-weight:300;
+	transition:all 900ms ease;
+	-moz-transition:all 900ms ease;
+	-webkit-transition:all 900ms ease;
+	-ms-transition:all 900ms ease;
+	-o-transition:all 900ms ease;
+}
+
+#services .security-block .inner-box:hover .lower-content .text,
+#services .security-block .inner-box:hover .lower-content .upper-box h5,
+#services .security-block .inner-box:hover .lower-content .upper-box .icon{
+	color:#ffffff;
+}
+
+#services .security-block .inner-box .lower-content .open-box{
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	align-items: center;
+}
+
+#services .security-block .inner-box .lower-content .open-box .icon{
+	color: green;
+}
+
+#services .security-block .inner-box .lower-content .open-box .icon .text{
+	display: inline;
+	margin: 0px;
+	padding-left: 5px;
+}
