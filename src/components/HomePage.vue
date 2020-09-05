@@ -1,7 +1,5 @@
 <template>
   <div class="home" id="home">
-	
-	<Header></Header>
 
     <div class="page-wrapper">
 
@@ -33,8 +31,8 @@
 	
 	
 	<!-- Seccion Destacados -->
-	<section class="featured-section" v-if="dpResponsive === false">
-		<div class="auto-container ">
+	<section class="featured-section">
+		<div class="auto-wrapper ">
 			<div class="inner-container ">
 				
 				<div class="clearfix row m-auto" style="width:100%">
@@ -52,7 +50,7 @@
 					</div>
 					
 					<!-- Featured Block -->
-					<div class="featured-block col-lg-4 col-md-6 col-sm-12">
+					<div class="featured-block col-lg-4 col-md-6 col-sm-12" id="second-featured">
 						<div class="inner-box">
 							<div class="content">
 								<div class="icon-box">
@@ -81,67 +79,11 @@
 		</div>
 	</section>
 	<!-- Seccion Destacados -->
-
-	<!-- Seccion Destacados -->
-	<section class="featured-section" v-if="dpResponsive === true">
-		<div class="auto-container ">
-			<div class="inner-container">
-				
-				<div class="clearfix row m-auto" style="width:100%">
-					
-					<!-- Featured Block -->
-					<div class="featured-block">
-						<div class="inner-box">
-							<div class="content">
-								<div class="icon-box">
-									<span class="icon fa fa-newspaper"></span>
-								</div>
-								<div class="text-box">
-									<h5><router-link :to="{name: 'Actualidad'}">Actualidad</router-link></h5>
-								</div>
-							</div>
-						</div>
-					</div>
-					
-					<!-- Featured Block -->
-					<div class="featured-block" id="second-featured">
-						<div class="inner-box">
-							<div class="content">
-								<div class="icon-box">
-									<span class="icon fas fa-mouse"></span>
-								</div>
-								<div class="text-box">
-									<h5><a href="http://clubsantapaula.dyndns.org:1081/user/auth/login" target="blank">Autogestión</a></h5>
-								</div>
-							</div>
-						</div>
-					</div>
-					
-					<!-- Featured Block -->
-					<div class="featured-block">
-						<div class="inner-box">
-							<div class="content">
-								<div class="icon-box">
-									<span class="icon flaticon-calculator"></span>
-								</div>
-								<div class="text-box">
-									<h5><a href="#">System</a></h5>
-								</div>
-							</div>
-						</div>
-					</div>
-					
-				</div>
-				
-			</div>
-		</div>
-	</section>
-	<!-- Seccion Destacados -->
 	
 	<!-- Seccion de Actualidad -->
 	<section class="premium-section">
 		<div class="pattern-layer"></div>
-		<div class="auto-container">
+		<div class="auto-wrapper">
 			<!-- Titulo de seccion -->
 			<div class="sec-title centered">
 				<div class="icon">
@@ -154,7 +96,7 @@
 			<div class="row clearfix">
 				
 				<!-- Bloque de Notica -->
-				<div class="security-block col-lg-4 col-md-6 col-sm-6">
+				<div class="security-block col-lg-4 col-md-6 col-sm-12">
 					<div class="inner-box">
 						<div class="image">
 							<a href="service-detail"><img src="https://via.placeholder.com/360x260" alt="" /></a>
@@ -267,7 +209,7 @@
 	
 	<!-- Seccion de Comites -->
 	<section class="gallery-section">
-		<div class="auto-container">
+		<div class="auto-wrapper">
 			
 			<div class="row clearfix">
 				
@@ -391,11 +333,9 @@
 	</section>
 	<!-- Fin Seccion Distribucion de Cuotas -->
 	
-	
-	
 	<!-- Equipo Administrativo -->
 	<section class="team-section">
-		<div class="auto-container">
+		<div class="auto-wrapper">
 			<!-- Sec Title -->
 			<div class="sec-title centered">
 				<div class="icon">
@@ -421,7 +361,7 @@
                                 <div class="inner">
                                     <!--Social Icon One-->
                                     <ul class="social-icon-one">
-                                        <li><a class="fas fa-envelope" :href="`mailto: ${item.gr_mail}`"></a></li>
+                                        <li><a class="flaticon-email" :href="`mailto: ${item.gr_mail}`"></a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -455,8 +395,8 @@
 		</div>
     </section>
     <!-- End Clients Section -->
-	<div class="back-btn" v-if="dpResponsive === true">
-		<button @click="goToTop()" class="icon"><i class="fa fa-angle-up"></i></button>
+	<div class="back-btn">
+		<button @click="goToTop()" class="icon"><i class="flaticon-up-chevron"></i></button>
 	</div>
 	</div>
 <!--End pagewrapper-->
@@ -466,13 +406,11 @@
 <script>
 import {mapState} from 'vuex'
 import AutogestionSpan from '@/components/AutogestionSpan.vue'
-import Header from '@/components/Header.vue'
 
   export default {
 	  name: 'HomePage',
 	  components: {
 		AutogestionSpan,
-		Header,
 	  },
   	data(){
 	  	return{
@@ -485,7 +423,7 @@ import Header from '@/components/Header.vue'
 	  	}
 	  },
 	computed:{
-		...mapState(['dbWeb', 'dpResponsive'])
+		...mapState(['dbWeb'])
 	},
   	methods: {
 		goToTop(){
@@ -584,7 +522,7 @@ import Header from '@/components/Header.vue'
 	  	
 
 	  	/* Colocando el tamaño de las cajas de los clientes */
-	  	let allItemsWidth = this.clientSliderItemsWidth(items, allItems, containerWidth, marginItems);
+		  let allItemsWidth = this.clientSliderItemsWidth(items, allItems, containerWidth, marginItems);
 	  	for(let i=0; i < allItems.length; i++){
 	  		allItems[i].style.minWidth = allItemsWidth  + "px";
 			allItems[i].style.maxWidth = allItemsWidth  + "px";
@@ -671,7 +609,7 @@ import Header from '@/components/Header.vue'
 		=================================================
 		Change layout if Resizing or Changing Orientation
 		=================================================  
-		**/
+		**//* 
 
 		window.addEventListener('orientationchange', ()=>{
 
@@ -737,7 +675,7 @@ import Header from '@/components/Header.vue'
 
 				container.prepend(lastClone);
 			}
-		})
+		}) */
 		
 		window.addEventListener('resize', ()=>{
 

@@ -1,7 +1,7 @@
 <template>
   <div id="header" style="max-height: 130px">
 
-    <div class="v-social-header">
+    <div class="v-social-header" ref="socialHeader">
         <div class="v-social-leftbox">
           <div class="item contP">
             <p>Contáctanos</p>
@@ -33,9 +33,9 @@
         </div>
     </div>
     
-    <nav class="v-navbar">
+    <nav class="v-navbar" ref="navBar">
       <div class="v-social-brand">
-        <router-link id="home-page" class="v-brand-info" :to="{name: 'Home'}">
+        <router-link class="v-brand-info" :to="{name: 'Home'}">
             <img src="@/assets/images/logos/logo_220x115.png" alt="CSP Logo" loading="lazy" style="height: auto; width: 160px;">
         </router-link>
       </div>
@@ -45,12 +45,12 @@
           
           <li class="v-nav-item" id="home">
             <div class="v-nav-menu">
-              <router-link class="v-menu-txt" :to="{name:'Home'}" exact>Home</router-link>
+              <router-link  id="home-page"  class="v-menu-txt" :to="{name:'Home'}" exact>Home</router-link>
             </div>
           </li>
           
           <li class="v-nav-item" id="us" @mouseover="dropDownMenuOn('us')" @mouseout="dropDownMenuOff('us')">
-            <router-link  class="v-menu-txt" :to="{name:'Nosotros'}">Nosotros</router-link>
+            <router-link class="v-menu-txt" :to="{name:'Nosotros'}">Nosotros</router-link>
             <ul class="v-dropdown-menu" ref="us">
               <li class="v-dropdown-item">
                 <router-link :to="{name:'Nosotros'}"> Historia </router-link> 
@@ -68,7 +68,7 @@
                 <router-link :to="{name:'Nosotros'}"> Instalaciones </router-link>        
               </li>                                                   
             </ul>
-          <i @click="toggleDrop('us')" ref="usIcon" class="fa fa-caret-down"></i>
+          <i @click="toggleDrop('us')" ref="usIcon" class="flaticon-sort-down"></i>
           </li>
 
           <li class="v-nav-item" id="serv" @mouseover="dropDownMenuOn('serv')" @mouseout="dropDownMenuOff('serv')">
@@ -99,7 +99,7 @@
                   <router-link :to="{name:'Servicios'}"> Tienda Deportiva </router-link>
                 </li>                                                   
               </ul>
-            <i @click="toggleDrop('serv')" ref="servIcon" class="fa fa-caret-down"></i>
+            <i @click="toggleDrop('serv')" ref="servIcon" class="flaticon-sort-down"></i>
           </li>
           
           <li class="v-nav-item" id="com" @mouseover="dropDownMenuOn('com')" @mouseout="dropDownMenuOff('com')">
@@ -121,7 +121,7 @@
                   <router-link :to="{name:'Comites'}"> Gelería </router-link>
                 </li>                                                   
               </ul>
-            <i @click="toggleDrop('com')" ref="comIcon" class="fa fa-caret-down"></i>
+            <i @click="toggleDrop('com')" ref="comIcon" class="flaticon-sort-down"></i>
           </li>
           
           <li class="v-nav-item" id="cont">
@@ -138,7 +138,7 @@
         </ul>
       </div>
       <div class="toggle-menu" @click="toggleMenu()" ref="toggleMenu">
-        <i ref="toggleMenuIcon" class="fa fa-bars"></i>
+        <i ref="toggleMenuIcon" class="flaticon-menu"></i>
       </div>
     </nav>
   </div>
@@ -180,32 +180,32 @@ export default {
     toggleMenu(){
       this.$refs.vCollapse.classList.toggle("show");
       if(this.$refs.vCollapse.classList.contains('show')){
-        this.$refs.toggleMenuIcon.setAttribute('class', 'fa fa-times')
+        this.$refs.toggleMenuIcon.setAttribute('class', 'flaticon-close')
       }else{
         this.toggleValues.forEach(element =>{
         this.$refs[`${element}`].classList.remove('v-dropdown-menu-on');
-        this.$refs[`${element}Icon`].setAttribute('class', 'fa fa-caret-down')
+        this.$refs[`${element}Icon`].setAttribute('class', 'flaticon-sort-down')
         })
-        this.$refs.toggleMenuIcon.setAttribute('class', 'fa fa-bars')
+        this.$refs.toggleMenuIcon.setAttribute('class', 'flaticon-menu')
       }
     },
     toggleDrop(target){
       this.toggleValues.forEach(element =>{
         if(target !== element){
           this.$refs[`${element}`].classList.remove('v-dropdown-menu-on');
-          this.$refs[`${element}Icon`].setAttribute('class', 'fa fa-caret-down')
+          this.$refs[`${element}Icon`].setAttribute('class', 'flaticon-sort-down')
         }
       })
       this.$refs[`${target}`].classList.toggle('v-dropdown-menu-on')
       if(this.$refs[`${target}`].classList.contains('v-dropdown-menu-on')){
-        this.$refs[`${target}Icon`].setAttribute('class', 'fa fa-caret-right')
+        this.$refs[`${target}Icon`].setAttribute('class', 'flaticon-arrowhead-pointing-to-the-right')
       }else{
-        this.$refs[`${target}Icon`].setAttribute('class', 'fa fa-caret-down')
+        this.$refs[`${target}Icon`].setAttribute('class', 'flaticon-sort-down')
       }
     },
     toggleHide(target){
       this.$refs[`${target}`].classList.remove('v-dropdown-menu-on')
-      this.$refs[`${target}Icon`].setAttribute('class', 'fa fa-caret-down')
+      this.$refs[`${target}Icon`].setAttribute('class', 'flaticon-sort-down')
     }
   },
   mounted(){
@@ -214,6 +214,7 @@ export default {
     const navbar = document.querySelector('.v-navbar')
     const vnavItem = document.querySelectorAll('.v-nav-item')
     const stickyOn = navbar.offsetTop
+    let homeLink = document.getElementById('home-page')
 
     window.addEventListener('scroll',  () =>{
       if(window.innerWidth > 600){
@@ -222,9 +223,15 @@ export default {
           navbar.style.top = "0" 
           navbar.style.position = "fixed"
         }else {
-          navbar.style.backgroundColor = "rgba(255,255,255,0.85)"
-          navbar.style.top = null
-          navbar.style.position = null
+          if(homeLink.classList.contains('router-link-active')){
+            navbar.style.backgroundColor = "rgba(255,255,255,0.85)"
+            navbar.style.top = null
+            navbar.style.position = "absolute"
+          }else{
+            navbar.style.backgroundColor = "rgba(255,255,255)"
+            navbar.style.top = '0px'
+            navbar.style.position = "relative"
+          }
         }
       }
     })
@@ -276,10 +283,10 @@ export default {
       if(window.innerWidth > 600){
         collapseMenu.classList.remove("show");
         if(this.$refs.toggleMenuIcon !== undefined){
-          this.$refs.toggleMenuIcon.setAttribute('class', "fa fa-bars");
-          this.$refs.usIcon.setAttribute('class', "fa fa-caret-down");
-          this.$refs.comIcon.setAttribute('class', "fa fa-caret-down");
-          this.$refs.servIcon.setAttribute('class', "fa fa-caret-down");
+          this.$refs.toggleMenuIcon.setAttribute('class', "flaticon-menu");
+          this.$refs.usIcon.setAttribute('class', "flaticon-sort-down");
+          this.$refs.comIcon.setAttribute('class', "flaticon-sort-down");
+          this.$refs.servIcon.setAttribute('class', "flaticon-sort-down");
         }
         for(let i = 0; i < dropDownMenu.length; i++){
           dropDownMenu[i].classList.remove("v-dropdown-menu-on");

@@ -1,8 +1,7 @@
 <template>
   <div id="nosotros">
-	<Header></Header>
 
-    <section class="v-misvis-section">
+    <!-- <section class="v-misvis-section">
 
         <div class="v-misvis-leftbox">
             <div class="v-leftbox-pattern1"></div>
@@ -64,48 +63,14 @@
         </div>
         <div class="v-history-imgbox">
 
-        </div>
-    </div>
+        </div> 
+    </div>-->
   </div>
 </template>
 
 <script>
-import Header from '@/components/Header.vue'
 
 export default {
     name: 'UsPage',
-    components: {
-		Header,
-  	},
 }
 </script>
-
-<style>
-.secP .v-social-header{
-    display: flex;
-	justify-content: center;
-	align-items: center;
-	padding: 0 5vw;
-	position: relative;
-	z-index: 2;
-	background-color: rgba(255, 255, 255);
-	width: 100%;
-	height: 30px;
-    overflow: hidden;
-}
-
-
-.secP .v-navbar{
-	position: relative;
-	height:100px;
-	width:100%;
-	background-color: rgba(255,255,255);
-	transition: opacity 0.2s;
-	list-style: none;
-	padding: 0 5vw;
-	top: 0;
-	z-index: 2;
-    display: inline-block;
-}
-
-</style>

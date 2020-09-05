@@ -1,5 +1,23 @@
 <template>
-  <div class="comites">
-    <h1>Esto es una pagina de comites</h1>
+  <div class="secP">
+    <Comites></Comites>
+    <Footer></Footer>
   </div>
 </template>
+
+<script>
+
+import Comites from '@/components/Comites.vue'
+import Footer from '@/components/Footer.vue'
+
+export default {
+	name: 'Home',
+  components: {
+		Comites,
+		Footer,
+	},
+	mounted() {
+		window.scrollTo(0, 0);
+	},
+}
+</script>

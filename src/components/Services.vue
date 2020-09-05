@@ -1,6 +1,6 @@
 <template>
   <div id="services">
-    <Header></Header>
+    
       <!-- Seccion de Actualidad -->
         <section class="premium-section">
           <div class="pattern-layer"></div>
@@ -126,14 +126,12 @@
 </template>
 
 <script>
-import Header from '@/components/Header.vue'
 import AutogestionSpan from '@/components/AutogestionSpan.vue'
 import {mapState} from 'vuex'
 
 export default {
     name: 'Services',
     components: {
-        Header,
         AutogestionSpan,
     },
     computed:{
@@ -175,7 +173,3 @@ export default {
     }
 }
 </script>
-
-<style>
-
-</style>
