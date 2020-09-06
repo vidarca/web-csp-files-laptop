@@ -1,6 +1,6 @@
 	/*
   	Flaticon icon font: Flaticon
-  	Creation date: 04/09/2020 13:39
+  	Creation date: 05/09/2020 23:58
   	*/
 
 @font-face {
@@ -56,3 +56,4 @@
 .flaticon-arrowhead-pointing-to-the-right:before { content: "\f119"; }
 .flaticon-sort-down:before { content: "\f11a"; }
 .flaticon-up-chevron:before { content: "\f11b"; }
+.flaticon-user-1:before { content: "\f11c"; }

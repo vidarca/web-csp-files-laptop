@@ -11,6 +11,7 @@ import Comites from '../views/Comites.vue'
 import Actualidad from '../views/Actualidad.vue'
 import Admin from '../views/Admin.vue'
 import AdminDashboard from '../views/AdminDashboard.vue'
+import errPage from '../views/errPage.vue'
 
 Vue.use(VueRouter)
 
@@ -51,18 +52,23 @@ Vue.use(VueRouter)
     component: Comites
   },
   {
-    path: '/v-admin',
+    path: '/v-admin/',
+    component: Admin,
     name: 'Admin',
-    component: Admin
   },
   {
-    path: '/admin-dashboard',
-    name: 'AdminDashboard',
+    path: '/v-admin/admin-dashboard/',
     component: AdminDashboard,
-    meta: {
+    name: 'AdminDashboard',
+    meta:{
       requiresAuth: true,
     }
   },
+  {
+    path: "*",
+    component: errPage
+  }
+  
 ];
 
 const router = new VueRouter({
@@ -76,8 +82,8 @@ router.beforeEach((to, from, next) =>{
       next();
     }else{
       next({
-        name: 'Admin'
-      })
+        name: 'Admin',
+      });
     }
   }else{
     next();
@@ -85,3 +91,4 @@ router.beforeEach((to, from, next) =>{
 })
 
 export default router
+

@@ -37,15 +37,11 @@
             }
         },
 
-        created(){
-        },
-
-        mounted(){
-            let header = document.getElementById('header')
-            let footer = document.getElementById('footer')
-            
-            header.style.display = "none"
-            footer.style.display = "none"
+        beforeCreate(){
+            const user = firebase.auth().currentUser;
+            if(user){
+                this.$router.push({name: 'AdminDashboard', params:{id: 'admin-dashboard'} })
+            }
         },
 
         methods:{
@@ -53,7 +49,7 @@
                 if(this.validType()){
                     firebase.auth().signInWithEmailAndPassword(this.form.email, this.form.pass)
                         .then(user => {
-                            this.$router.push({name: 'AdminDashboard'})
+                            this.$router.push({name: 'AdminDashboard', params:{id: 'admin-dashboard'} })
                         }).catch(
                             this.form.error = 'Ha ocurrido un error con el usuario o la contraseña'
                         )

@@ -1,13 +1,14 @@
 <template>
-  <div id="admin-dasboard-page">
+  <div id="admin-dasboard-page" v-if="loaded">
     <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-      <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="#">Company name</a>
+      <a class="navbar-brand col-md-3 col-lg-2 mr-0 w-auto"> 
+      <p> <i class="icon flaticon-user-1"></i> {{user.displayName?user.displayName:user.email}}</p></a>
       <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" ta-toggle="collapse" data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" ia-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
-          <a class="nav-link" href="#">Cerrar sesión</a>
+          <a class="nav-link" @click="logOut()">Cerrar sesión</a>
         </li>
       </ul>
     </nav>
@@ -17,39 +18,27 @@
           <div class="sidebar-sticky pt-3">
             <ul class="nav flex-column">
               <li class="nav-item">
-                <a class="nav-link active" href="#">
+                <a class="nav-link active" href="#" @click.prevent="selectComponent('0')">
                   <span data-feather="home"></span>
-                  Dashboard <span class="sr-only">(current)</span>
+                  DASHBOARD <span class="sr-only" >(current)</span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="#" @click.prevent="selectComponent('1')">
                   <span data-feather="file"></span>
-                  Orders
+                  CREAR CONTENIDO
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="#" @click.prevent="selectComponent('2')">
                   <span data-feather="shopping-cart"></span>
-                  Products
+                  EDITAR CONTENIDO
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="#" @click.prevent="selectComponent('3')">
                   <span data-feather="users"></span>
-                  Customers
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <span data-feather="bar-chart-2"></span>
-                  Reports
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <span data-feather="layers"></span>
-                  Integrations
+                  EDITAR USUARIO
                 </a>
               </li>
             </ul>
@@ -59,7 +48,11 @@
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 -3 border-bottom">
             <h1 class="h2">Dashboard</h1>
           </div>
-          <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
+          
+          <transition name="fade-down" mode="out-in">
+            <component :is="currentCompon"></component>
+          </transition>
+          
           
         </main>
       </div>
@@ -68,18 +61,65 @@
 </template>
 
 <script>
+import firebase from 'firebase'
+import AdminCreateContent from './AdminCreateContent'
+import AdminEditUser from './AdminEditUser'
+import AdminEditContent from './AdminEditContent'
+import AdminDashboard from './AdminDashboard'
 
 export default {
   name: 'AdminDashboardPage',
+  props:[
+      'AdminCreateContent',
+      'AdminEditUser',
+      'AdminDashboard',
+      'AdminEditContent',
+  ],
+  components:{
+    AdminCreateContent,
+    AdminEditUser,
+    AdminDashboard,
+    AdminEditContent,
+  },
+  data(){
+    return {
+      user: null,
+      loaded: false,
+      allCompon: [
+        'AdminDashboard',
+        'AdminCreateContent',
+        'AdminEditContent',
+        'AdminEditUser',
+      ],
+      currentCompon: 'AdminDashboard'
+    }
+  },
+  methods:{
+    logOut(){
+      firebase.auth().signOut().then(()=>{
+        this.$router.push({name: 'Admin'})
+      })
+    },
+    selectComponent(val){
+      this.currentCompon = this.allCompon[val]
+    }
+  },
+
+  computed:{
+  },
   
-  mounted(){
-      let header = document.getElementById('header')
-      let footer = document.getElementById('footer')
-      
-      header.style.display = "none"
-      footer.style.display = "none"
+  created(){
+    firebase.auth().onAuthStateChanged(user => {
+      if(user){
+        this.user = user;
+        this.loaded = true;
+      }else{
+        this.user = null;
+      }
+    })
   },
 }
+
 </script>
 
 <style scoped>
@@ -101,5 +141,26 @@ export default {
     .bd-placeholder-img-lg {
       font-size: 3.5rem;
     }
+    .sidebar{
+      height: auto;
+      position: initial;
+    }
+  }
+
+  .sidebar{
+    height: 100vh;
+    position: fixed;
+  }
+
+  p{
+    height: 50px;
+    margin: 0;
+    color: white;
+    line-height: 50px;
+  }
+
+  .icon:before{
+    font-size: 50px;
+    line-height: 50px;
   }
 </style>

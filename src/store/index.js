@@ -7,6 +7,7 @@ export default new Vuex.Store({
   state: {
     dbWeb:[],
     dpResponsive: false,
+    headerView: 0,
   },
   mutations: {
     dataWeb(state, baseDatos){

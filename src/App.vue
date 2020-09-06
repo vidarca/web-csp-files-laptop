@@ -12,6 +12,7 @@
 import {mapActions, mapMutations} from 'vuex'
 import Header from '@/components/Header.vue'
 import Footer from '@/components/Footer.vue'
+import firebase from 'firebase'
 
 export default {
   components:{
@@ -28,10 +29,12 @@ export default {
     ...mapMutations(['isResponsive']),
     ...mapActions(['getData']),
   },
+
   created(){
     this.getData().then(() => {
       this.loaded = true
     })
+  
 
     /* this.isResponsive()
     window.addEventListener('resize', ()=>{
@@ -59,6 +62,18 @@ export default {
         socialHeader.style.backgroundColor = "rgba(255,255,255)"
       }
     }, 800);
+
+    const href = window.location.href
+    const hrefSplice = href.split('/')
+    for(let i = 0; i < hrefSplice.length; i++){
+      if(hrefSplice[i] === 'v-admin'){
+        let header = document.getElementById('header')
+        let footer = document.getElementById('footer')
+        
+        header.style.display = "none"
+        footer.style.display = "none"
+      }
+    }
 
   },
 }
