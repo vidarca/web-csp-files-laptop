@@ -1,12 +1,11 @@
 <template>
-  <div id="admin-dasboard-page" v-if="loaded">
-    <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-      <a class="navbar-brand col-md-3 col-lg-2 mr-0 w-auto"> 
-      <p> <i class="icon flaticon-user-1"></i> {{user.displayName?user.displayName:user.email}}</p></a>
-      <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" ta-toggle="collapse" data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" ia-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+  <div id="admin-dashboard-page" class="admin-dashboard-page" v-if="loaded">
+    <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-3 shadow">
+      <a class="navbar-brand mr-0 d-flex justify-content-center align-items-center"> 
+      <i class="icon flaticon-user-1"></i> <p class="ml-3"> {{user.displayName.split('|')[0]}} {{user.displayName.split('|')[1]}} <br> {{user.displayName.split('|')[2]}} </p></a>
+      <button class="navbar-toggler position-absolute d-md-none collapsed flaticon-menu" type="button" ta-toggle="collapse" data-target="sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" ia-label="Toggle navigation" @click="expandMenu($event)">
       </button>
-      <ul class="navbar-nav px-3">
+      <ul class="navbar-nav px-3 v-logOut">
         <li class="nav-item text-nowrap">
           <a class="nav-link" @click="logOut()">Cerrar sesión</a>
         </li>
@@ -14,7 +13,7 @@
     </nav>
     <div class="container-fluid">
       <div class="row">
-        <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+        <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light v-sidebar" ref="sidebarMenu">
           <div class="sidebar-sticky pt-3">
             <ul class="nav flex-column">
               <li class="nav-item">
@@ -66,6 +65,7 @@ import AdminCreateContent from './AdminCreateContent'
 import AdminEditUser from './AdminEditUser'
 import AdminEditContent from './AdminEditContent'
 import AdminDashboard from './AdminDashboard'
+import {mapState, mapMutations, mapGetters} from 'vuex'
 
 export default {
   name: 'AdminDashboardPage',
@@ -83,7 +83,6 @@ export default {
   },
   data(){
     return {
-      user: null,
       loaded: false,
       allCompon: [
         'AdminDashboard',
@@ -91,10 +90,12 @@ export default {
         'AdminEditContent',
         'AdminEditUser',
       ],
-      currentCompon: 'AdminDashboard'
+      currentCompon: 'AdminDashboard',
+      dataName: [],
     }
   },
   methods:{
+    ...mapMutations(['setUser', 'updateUser']),
     logOut(){
       firebase.auth().signOut().then(()=>{
         this.$router.push({name: 'Admin'})
@@ -102,22 +103,84 @@ export default {
     },
     selectComponent(val){
       this.currentCompon = this.allCompon[val]
+    },
+    expandMenu(event){
+      const refVal = event.target.getAttribute('data-target')
+
+      if(event.target.getAttribute('data-collapsed') === null){
+        event.target.setAttribute('data-collapsed', 'true')
+      }
+      
+      let isCollapse = event.target.getAttribute('data-collapsed')
+
+      if(isCollapse === 'true'){
+        this.$refs[`${refVal}`].style.maxHeight = '400px'
+        event.target.setAttribute('data-collapsed', 'false')
+      }else{
+        this.$refs[`${refVal}`].style.maxHeight = '0px'
+        event.target.setAttribute('data-collapsed', 'true')
+      }
     }
   },
 
   computed:{
+    ...mapState(['user']),
+    ...mapGetters(['userUpdate'])
+
   },
   
   created(){
-    firebase.auth().onAuthStateChanged(user => {
-      if(user){
-        this.user = user;
-        this.loaded = true;
-      }else{
-        this.user = null;
-      }
-    })
+    const data = setInterval(() => {
+      const user = firebase.auth().currentUser
+        if(user){
+          this.setUser(user);
+          this.dataName = user.displayName?user.displayName.split('|'):user.email
+          this.loaded = true;
+          clearTimeout(data)
+        }
+    }, 500);
   },
+
+  mounted(){
+
+    const waiting = setInterval(() => { 
+      if(this.loaded === true){
+        if(window.innerWidth >= 768){
+          this.$refs.sidebarMenu.classList.remove('v-collapsed')
+        }else{
+          this.$refs.sidebarMenu.classList.add('v-collapsed')
+        }
+        
+        clearTimeout(waiting)
+      }else {
+        console.log('Aun no carga');
+      }
+    }, 500);
+
+    window.addEventListener('resize', ()=>{
+      if(window.innerWidth >= 768){
+        try {
+          this.$refs.sidebarMenu.classList.remove('v-collapsed')
+          this.$refs.sidebarMenu.style.maxHeight = 'none'
+        }
+        catch(e){}
+      }else{
+        try {
+          this.$refs.sidebarMenu.classList.add('v-collapsed')
+          if(this.$refs.sidebarMenu.style.maxHeight === 'none'){
+            this.$refs.sidebarMenu.style.maxHeight = '0'
+          }
+        }
+        catch(e){}
+      }
+    })   
+  },
+
+  watch:{
+    userUpdate(){
+      this.dataName = this.user.displayName.split('|')
+    }
+  }
 }
 
 </script>
@@ -126,9 +189,7 @@ export default {
   .navbar{
     min-height: 100px;
   }
-  .navbar-toggler{
-    right: 10px;
-  }
+  
   .bd-placeholder-img {
     font-size: 1.125rem;
     text-anchor: middle;
@@ -137,30 +198,49 @@ export default {
     -ms-user-select: none;
     user-select: none;
   }
-  @media (min-width: 768px) {
-    .bd-placeholder-img-lg {
-      font-size: 3.5rem;
-    }
-    .sidebar{
-      height: auto;
-      position: initial;
-    }
+
+  .v-sidebar{
+    height: 760px;
+    position: relative;
   }
 
-  .sidebar{
-    height: 100vh;
-    position: fixed;
+  .navbar-toggler{
+    height: 50px;
+    width: 50px;
+    font-size: 30px;
+    padding: 5px;
+    right: 10px;
+  }
+
+  .navbar-brand{
+    width: auto;
+    white-space: normal;
   }
 
   p{
-    height: 50px;
     margin: 0;
     color: white;
-    line-height: 50px;
   }
 
   .icon:before{
     font-size: 50px;
-    line-height: 50px;
+  }
+
+  @media screen and (max-width: 768px) {
+    .bd-placeholder-img-lg {
+      font-size: 3.5rem;
+    }
+    
+    .v-logOut{
+      margin-right: 70px !important;
+    }
+
+    .v-collapsed{
+      max-height: 0 ;
+      height: auto !important;
+      position: relative !important;
+      transition: all 1s ease;
+      overflow: hidden;
+    }
   }
 </style>

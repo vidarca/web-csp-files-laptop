@@ -53,7 +53,6 @@
                         }).catch(
                             this.form.error = 'Ha ocurrido un error con el usuario o la contraseña'
                         )
-                    console.log(this.form);
                 }else{
                     if(this.form.type === 0){
                         this.form.error = 'Alguno de los campos es incorrecto'

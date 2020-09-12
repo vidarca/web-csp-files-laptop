@@ -130,11 +130,16 @@ textarea{
 	overflow:hidden;
 }
 
+label{
+	margin: 0;
+}
+
 p{
 	position:relative;
 	color: black;
 	line-height:1.8em;
 	font-family: 'Rubik', sans-serif;
+	margin: 0;
 }
 
 /* Typography */
@@ -5074,4 +5079,16 @@ Menu Responsive
 
 .v-btn-blue:active{
 	box-shadow: 0 0 2px 2.5px #0C6392;
+}
+
+/*** 
+
+====================================================================
+	Extra 2
+====================================================================
+
+***/
+
+.w-85{
+	width: 85%;
 }
