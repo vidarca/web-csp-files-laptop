@@ -5,7 +5,7 @@
           <p class="title-text">NOMBRE DE USUARIO</p>
           <div class="v-admin-namevalues w-100">
             <input class="v-input-text" id="name" type="text" v-model="userVal.name[0]" :placeholder="userVal.name[0]?userVal.name[0]:'Nombre'"> 
-            <input class="v-input-text" id="name" type="text" v-model="userVal.name[1]" :placeholder="userVal.name[1]?userVal.name[1]:'Apellido'">
+            <input class="v-input-text" id="last-name" type="text" v-model="userVal.name[1]" :placeholder="userVal.name[1]?userVal.name[1]:'Apellido'">
           </div>
         </div>
         <div class="v-admin-userrank">
@@ -59,7 +59,6 @@ export default {
         if(this.user.displayName && splittedName[0]){
           this.userVal.name[0] = splittedName[0]
           this.userVal.name[1] = splittedName[1]
-          console.log(this.userVal.name[0]);
         }else if(this.user.displayName){
           this.userVal.name = this.user.displayName.split(' ');
         }
@@ -92,7 +91,7 @@ export default {
   margin: 2px;
 }
 
-.v-input-text#name{
+.v-input-text#name, .v-input-text#last-name{
   width: calc(100%/2 - 2*2px);
 }
 

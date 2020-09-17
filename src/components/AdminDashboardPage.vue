@@ -65,7 +65,7 @@ import AdminCreateContent from './AdminCreateContent'
 import AdminEditUser from './AdminEditUser'
 import AdminEditContent from './AdminEditContent'
 import AdminDashboard from './AdminDashboard'
-import {mapState, mapMutations, mapGetters} from 'vuex'
+import {mapState, mapMutations, mapGetters, mapActions} from 'vuex'
 
 export default {
   name: 'AdminDashboardPage',
@@ -96,6 +96,8 @@ export default {
   },
   methods:{
     ...mapMutations(['setUser', 'updateUser']),
+    ...mapActions(['getData']),
+    
     logOut(){
       firebase.auth().signOut().then(()=>{
         this.$router.push({name: 'Admin'})
@@ -125,7 +127,7 @@ export default {
 
   computed:{
     ...mapState(['user']),
-    ...mapGetters(['userUpdate'])
+    ...mapGetters(['userUpdate']),
 
   },
   
@@ -210,6 +212,17 @@ export default {
     font-size: 30px;
     padding: 5px;
     right: 10px;
+  }
+
+  .nav-item{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .nav-link{
+    padding: 8px 0;
   }
 
   .navbar-brand{

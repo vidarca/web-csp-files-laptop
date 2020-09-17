@@ -1,15 +1,18 @@
 <template>
     <div id="admin-page">
+    <div class="alert-box position-fixed" ref="alertBox">
+      <i class="icon-err flaticon-close"></i> <p>{{error}}</p>
+    </div>
         <div class="v-wrapper">
             <div class="v-container">
                 <h4>{{ title }}</h4>
-                <form @submit.prevent="sendForm()">
-                    <input type="email" :class="{'error': validEmail}"  placeholder="Correo" v-model="form.email">
-                    <input type="password" v-if="this.form.type == 0" :class="{'error': validPass}" placeholder="Contraseña" v-model="form.pass">
+                <form>
+                    <input type="email" :class="!validEmail?'error':' '" placeholder="Correo" v-model="form.email">
+                    <input type="password" v-if="this.form.type == 0" :class="!validPass?'error':' '" placeholder="Contraseña" v-model="form.pass">
                     <div class="button-box">
                         <a href="javascript:void(0)" @click="form.type = 1" v-if="form.type == 0">Recuperar contraseña</a>
                         <a href="javascript:void(0)" @click="form.type = 0" v-if="form.type == 1">Iniciar sesión</a>
-                        <button class="v-btn v-btn-blue" v-if="form.type == 0">Iniciar sesión</button>
+                        <button class="v-btn v-btn-blue" v-if="form.type == 0" @click.prevent="sendForm()">Iniciar sesión</button>
                         <button class="v-btn v-btn-blue" v-if="form.type == 1">Recuperar contraseña</button>
                     </div>
                 </form>
@@ -28,11 +31,12 @@
 
         data(){
             return {
+                valid_pass: false,
+                error: '',
                 form:{
                     email: '', // 0: Iniciar sesion 1: Recuperar contraseña
                     pass: '',
                     type: 0,
-                    error: ''
                 }
             }
         },
@@ -50,21 +54,26 @@
                     firebase.auth().signInWithEmailAndPassword(this.form.email, this.form.pass)
                         .then(user => {
                             this.$router.push({name: 'AdminDashboard', params:{id: 'admin-dashboard'} })
-                        }).catch(
-                            this.form.error = 'Ha ocurrido un error con el usuario o la contraseña'
-                        )
-                }else{
+                        }).catch(error => {
+                            console.log('ERROR');
+                            if(error.code === 'auth/wrong-password'){
+                                this.error = 'La contraseña es incorrecta'
+                            }else{
+                                this.error = 'El usuario es incorrecto'
+                            }
+                        })
+                }else if(this.validType()){
                     if(this.form.type === 0){
-                        this.form.error = 'Alguno de los campos es incorrecto'
+                        this.error = 'Alguno de los campos es incorrecto'
                     }else{
-                        this.form.error = 'El correo no está registrado'
+                        this.error = 'El correo no está registrado'
                     }
                 }
             },
             validType(){
-                if(this.form.type == 0 && !this.validEmail && !this.validPass){
+                if(this.form.type == 0 && this.validEmail && this.validPass){
                     return true;
-                }else if(this.form.type == 1 && !this.validEmail){
+                }else if(this.form.type == 1 && this.validEmail){
                     return true;
                 } else{
                     return false;
@@ -76,28 +85,43 @@
             validEmail(){
                 const exp = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
                 if(exp.test(this.form.email)){
-                    return false
-                }else{
                     return true
+                }else{
+                    return false
                 }
             },
             validPass(){
                 const exp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&#.$($)$-$_])[A-Za-z\d$@$!%*?&#.$($)$-$_]{8,15}$/;
                 if(exp.test(this.form.pass)){
-                    return false
-                }else{
                     return true
+                }else{
+                    return false
                 }
             },
             title(){
                 return (this.form.type==0)?'Login':'Recuperar contraseña';
             }
-        }
+        },
+        watch:{
+            error(){
+                if(this.error !== null){
+                this.$refs.alertBox.classList.add('alert-show')
+                setTimeout(() => {
+                    this.$refs.alertBox.classList.remove('alert-show');
+                }, 3000);
+                setTimeout(() => {
+                    this.error = null;
+                }, 3600);
+                }
+            },
+        },
     }
 </script>
 
 <style scoped>
 
-
+.alert-box{
+    top: 50%;
+}
 
 </style>

@@ -3480,3 +3480,70 @@ to {
 }
 
 }
+
+.hideUp {
+  -webkit-animation: hideUp 1s forwards;
+  animation: hideUp 1s forwards;
+}
+
+@-webkit-keyframes hideUp {
+  0% {
+    max-height: auto;
+  }
+
+  100% {
+    max-height: 0px;
+  }
+}
+
+@keyframes hideUp {
+  0% {
+    max-height: auto;
+  }
+
+  100% {
+    max-height: 0px;
+  }
+}
+
+/**
+=====================================================
+  VUEJS TRANSITIONS
+=====================================================
+**/
+
+/* Slide-down */
+  
+.fade-down-enter-active, .fade-down-leave-active{
+  transition: opacity 0.8s ease, transform 0.8s ease-in-out;
+}
+
+.fade-down-enter, .fade-down-leave-to{
+  opacity: 0;
+  transform: translateY(100px);
+}
+
+.fade-down-enter-to, .fade-down-leave{
+  opacity: 1;
+  transform: translateY(0px);
+}
+
+/* Silde-left */
+
+.fade-left-enter-active, .fade-left-leave-active{
+  transition: opacity 0.8s ease, transform 0.8s ease-in-out;
+}
+
+.fade-left-enter-active{
+  transition-delay: 0.8s;
+}
+
+.fade-left-enter, .fade-left-leave-to{
+  opacity: 0;
+  transform: translateX(100px);
+}
+
+.fade-left-enter-to, .fade-left-leave{
+  opacity: 1;
+  transform: translateX(0px);
+}

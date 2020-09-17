@@ -89,20 +89,4 @@ export default {
   ==============================================
   **/
 
-  /* Slide-left */
-  
-  .fade-down-enter-active, .fade-down-leave-active{
-    transition: opacity 0.8s ease, transform 0.8s ease-in-out;
-  }
-  
-  .fade-down-enter, .fade-down-leave-to{
-    opacity: 0;
-    transform: translateY(100px);
-  }
-
-  .fade-down-enter-to, .fade-down-leave{
-    opacity: 1;
-    transform: translateY(0px);
-  }
-
 </style>
