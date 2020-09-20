@@ -2827,7 +2827,7 @@ Menu Responsive
 }
 .gallery-block .gallery-content-box{
 	height: 50px; 
-	width:60%; 
+	width:100%; 
 	position:absolute; 
 	font-size:20px; 
 	z-index:1; 
@@ -2844,8 +2844,12 @@ Menu Responsive
 }
 
 .gallery-block .gallery-content-box .gallery-content-title{
-	line-height:50px;
-	padding-left:10%;
+	width: auto;
+	height: 100%;
+	line-height: 50px;
+	text-align: left;
+	padding-left:15px;
+	white-space: nowrap;
 }
 
 .gallery-block .inner-box{
@@ -4636,6 +4640,10 @@ Menu Responsive
 
 ***/
 
+#services{
+	background-color:#f0f2f5;
+}
+
 #services .premium-section{
 	position:relative;
 	padding: 5% 0px;
@@ -4668,6 +4676,8 @@ Menu Responsive
 
 #services .security-block .inner-box .image img{
 	position:relative;
+	background-color: grey;
+	min-height: 260px;
 	width:100%;
 	display:block;
 	border-top-right-radius: 15px;
@@ -4784,8 +4794,7 @@ Menu Responsive
 }
 
 #services .security-block .inner-box:hover .lower-content .text,
-#services .security-block .inner-box:hover .lower-content .upper-box h5,
-#services .security-block .inner-box:hover .lower-content .upper-box .icon{
+#services .security-block .inner-box:hover .lower-content .upper-box h5{
 	color:#ffffff;
 }
 
@@ -4796,11 +4805,18 @@ Menu Responsive
 	align-items: center;
 }
 
-#services .security-block .inner-box .lower-content .open-box .icon{
+#services .security-block .inner-box .lower-content .open-box .icon-open{
 	color: green;
+	z-index: 1;
 }
 
-#services .security-block .inner-box .lower-content .open-box .icon .text{
+#services .security-block .inner-box .lower-content .open-box .icon-close{
+	color: red;
+	z-index: 1;
+}
+
+#services .security-block .inner-box .lower-content .open-box .icon-open .text,
+#services .security-block .inner-box .lower-content .open-box .icon-close .text{
 	display: inline;
 	margin: 0px;
 	padding-left: 5px;
@@ -4823,6 +4839,10 @@ Menu Responsive
 	transform: translateX(100vw);
 }
 
+#actualidad .translate-left{
+	transform: translateX(-100vw);
+}
+
 #actualidad{
 	background-color:#f0f2f5;
 }
@@ -4841,6 +4861,8 @@ Menu Responsive
 	position:relative;
 	margin-bottom:50px;
 	padding: 0;
+	min-height: 300px;
+	transition: transform 0.7s ease-out;
 }
 
 #actualidad .security-block .inner-box{
@@ -5173,10 +5195,14 @@ Menu Responsive
 /*** 
 
 ====================================================================
-	Pagina de Servicios
+	Pagina de Comites
 ====================================================================
 
 ***/
+
+#comites{
+	background-color:#f0f2f5;
+}
 
 #comites .premium-section{
 	position:relative;
@@ -5212,6 +5238,8 @@ Menu Responsive
 	position:relative;
 	width:100%;
 	display:block;
+	min-height: 260px;
+	background-color: grey;
 	border-top-right-radius: 15px;
 	border-top-left-radius: 15px;
 	transition:all 900ms ease;
@@ -5227,7 +5255,8 @@ Menu Responsive
 
 #comites .security-block .inner-box .lower-content{
 	position:relative;
-	padding:20px 30px;
+	padding:15px 30px;
+	height: 95px;
 }
 
 #comites .security-block .inner-box .lower-content .hover-bg-color{
@@ -5281,13 +5310,19 @@ Menu Responsive
 
 #comites .security-block .inner-box .lower-content .upper-box{
 	position:relative;
-	padding-left:44px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	padding-left:0;
+	width: 100%;
+	height: 100%;
 }
 
 #comites .security-block .inner-box .lower-content .upper-box .icon{
-	position:absolute;
-	left:0px;
-	top:0px;
+	position:relative;
+	left:none;
+	top:none;
 	color:#09197d;
 	font-size:30px;
 	line-height:1em;
@@ -5300,7 +5335,9 @@ Menu Responsive
 
 #comites .security-block .inner-box .lower-content .upper-box h5{
 	position:relative;
-	font-size: 23px;
+	text-align: center;
+	width: 100%;
+	font-size: 20px;
 	font-weight:500;
 	line-height:1.3em;
 	color:#222222;
@@ -5329,23 +5366,6 @@ Menu Responsive
 #comites .security-block .inner-box:hover .lower-content .upper-box h5,
 #comites .security-block .inner-box:hover .lower-content .upper-box .icon{
 	color:#ffffff;
-}
-
-#comites .security-block .inner-box .lower-content .open-box{
-	display: flex;
-	flex-direction: row;
-	justify-content: flex-end;
-	align-items: center;
-}
-
-#comites .security-block .inner-box .lower-content .open-box .icon{
-	color: green;
-}
-
-#comites .security-block .inner-box .lower-content .open-box .icon .text{
-	display: inline;
-	margin: 0px;
-	padding-left: 5px;
 }
 
 /*** 

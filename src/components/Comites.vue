@@ -1,116 +1,26 @@
 <template>
   <div id="comites">
+    <div class="w-95 m-auto">
       <!-- Seccion de Actualidad -->
         <section class="premium-section">
           <div class="pattern-layer"></div>
           <div class="auto-container">
             <!-- Titulo de seccion -->
             
-            <div class="row clearfix">
+            <div class="row clearfix justify-content-center">
               
               <!-- Bloque de Notica -->
-              <div class="security-block col-lg-4 col-md-6 col-sm-6">
+              <div class="security-block col-lg-4 col-md-6 col-sm-6" v-for="(comite, index) in dbWeb.Comites" :key="comite.comi_name" v-if="comite.comi_comiPage === true">
                 <div class="inner-box">
                   <div class="image">
-                    <img src="https://via.placeholder.com/360x260" alt="" />
+                    <img :src="comite.comi_fotoUrl" />
                   </div>
                   <div class="lower-content">
                     <div class="hover-bg-color"></div>
                     <div class="upper-box">
-                      <div class="icon flaticon-racquet"></div>
-                      <h5>{{dbWeb.Servicios[0].serv_nombre}}</h5>
+                      <div :class="['icon mr-1', iconSelect(index)]"></div>
+                      <h5 class="ml-1">{{comite.comi_name}}</h5>
                     </div>
-                    <div class="text">
-                      Horario de atención: {{dbWeb.Servicios[0].serv_inicio}}am - {{dbWeb.Servicios[0].serv_cierre}}pm
-                    </div>
-                      <div class="open-box">
-                        <div class="icon fa fa-circle"><div class="text">Abierto</div></div>
-                      </div>
-                  </div>
-                </div>
-              </div>
-              
-              <!-- Bloque de Notica -->
-              <div class="security-block col-lg-4 col-md-6 col-sm-12">
-                <div class="inner-box">
-                  <div class="image">
-                    <a href="service-detail"><img src="https://via.placeholder.com/360x260" alt="" /></a>
-                  </div>
-                  <div class="lower-content">
-                    <div class="hover-bg-color"></div>
-                    <div class="upper-box">
-                      <div class="icon flaticon-lcd"></div>
-                      <h5><a href="service-detail">Theft Protection</a></h5>
-                    </div>
-                    <div class="text">Corem ipsum dolor sit amet consec exea dolore fugiatmagna exerd coas</div>
-                  </div>
-                </div>
-              </div>
-              
-              <!-- Bloque de Notica -->
-              <div class="security-block col-lg-4 col-md-6 col-sm-12">
-                <div class="inner-box">
-                  <div class="image">
-                    <a href="service-detail"><img src="https://via.placeholder.com/360x260" alt="" /></a>
-                  </div>
-                  <div class="lower-content">
-                    <div class="hover-bg-color"></div>
-                    <div class="upper-box">
-                      <div class="icon flaticon-alarm-1"></div>
-                      <h5><a href="service-detail">Fire Alarm Systems</a></h5>
-                    </div>
-                    <div class="text">Corem ipsum dolor sit amet consec exea dolore fugiatmagna exerd coas</div>
-                  </div>
-                </div>
-              </div>
-              
-              <!-- Bloque de Notica -->
-              <div class="security-block col-lg-4 col-md-6 col-sm-12">
-                <div class="inner-box">
-                  <div class="image">
-                    <a href="service-detail"><img src="https://via.placeholder.com/360x260" alt="" /></a>
-                  </div>
-                  <div class="lower-content">
-                    <div class="hover-bg-color"></div>
-                    <div class="upper-box">
-                      <div class="icon flaticon-keyboard"></div>
-                      <h5><a href="service-detail">Touchscreen Keypads</a></h5>
-                    </div>
-                    <div class="text">Corem ipsum dolor sit amet consec exea dolore fugiatmagna exerd coas</div>
-                  </div>
-                </div>
-              </div>
-              
-              <!-- Bloque de Notica -->
-              <div class="security-block col-lg-4 col-md-6 col-sm-12">
-                <div class="inner-box">
-                  <div class="image">
-                    <a href="service-detail"><img src="https://via.placeholder.com/360x260" alt="" /></a>
-                  </div>
-                  <div class="lower-content">
-                    <div class="hover-bg-color"></div>
-                    <div class="upper-box">
-                      <div class="icon flaticon-bell"></div>
-                      <h5><a href="service-detail">Doorbell Cameras</a></h5>
-                    </div>
-                    <div class="text">Corem ipsum dolor sit amet consec exea dolore fugiatmagna exerd coas</div>
-                  </div>
-                </div>
-              </div>
-              
-              <!-- Bloque de Notica -->
-              <div class="security-block col-lg-4 col-md-6 col-sm-12">
-                <div class="inner-box">
-                  <div class="image">
-                    <a href="service-detail"><img src="https://via.placeholder.com/360x260" alt="" /></a>
-                  </div>
-                  <div class="lower-content">
-                    <div class="hover-bg-color"></div>
-                    <div class="upper-box">
-                      <div class="icon flaticon-telephone-1"></div>
-                      <h5><a href="service-detail">Home Automation</a></h5>
-                    </div>
-                    <div class="text">Corem ipsum dolor sit amet consec exea dolore fugiatmagna exerd coas</div>
                   </div>
                 </div>
               </div>
@@ -120,6 +30,7 @@
           </div>
         </section>
         <!-- Fin Seccion Actualidad -->
+    </div>
     <AutogestionSpan></AutogestionSpan>
   </div>
 </template>
@@ -137,38 +48,49 @@ export default {
 		  ...mapState(['dbWeb'])
 	  },
     methods:{
-      calcTime(start,end){
-
-        let d = new Date();
-        let dString = d.toString()
-        const splittedDate = dString.split(' ');
-        let splittedToStart = splittedDate;
-        let splittedToEnd = splittedDate;
-
-        let timeStartString = `${start}:00`;
-        splittedToStart[4] = timeStartString;
-        let joinedStartDate = splittedToStart.join(' ')
-        
-        let endTime = end.split(':')
-        endTime[0] = parseInt(endTime[0]) + 12
-        endTime[0] = endTime[0].toString()
-        let joinedEndTime = endTime.join(':')
-        let timeEndString =  `${joinedEndTime}:00`;
-        splittedToEnd[4] = timeEndString;
-        let joinedEndDate = splittedToEnd.join(' ')
-
-        let miliEnd = Date.parse(joinedEndDate);
-        let miliStart = Date.parse(joinedStartDate);
-        let miliCurrent = Date.parse(dString);
-        let miliDif = miliEnd-miliStart
-
-        if (miliEnd >= miliStart && miliEnd <= miliEnd){
-          return true
-        }else {
-          return false
+      iconSelect(index){
+        if(this.dbWeb.Comites[index].comi_name === 'Comité de Tenis'){
+          return 'flaticon-racket-and-tennis-ball'
+        }else if(this.dbWeb.Comites[index].comi_name === 'Comité de Alimentos y Bebidas'){
+          return 'flaticon-restaurant'
+        }else if(this.dbWeb.Comites[index].comi_name === 'Comité de Gimnasio'){
+          return 'flaticon-barbell'
+        }else if(this.dbWeb.Comites[index].comi_name === 'Comité de Admisión'){
+          return 'flaticon-shop'
+        }else if(this.dbWeb.Comites[index].comi_name === 'Comité de Artes Marciales'){
+          return 'flaticon-store'
+        }else if(this.dbWeb.Comites[index].comi_name === 'Comité de Comunicaciones'){
+          return 'flaticon-shop'
+        }else if(this.dbWeb.Comites[index].comi_name === 'Comité de Cultura'){
+          return 'flaticon-store'
+        }else if(this.dbWeb.Comites[index].comi_name === 'Comité de Dominó'){
+          return 'flaticon-shop'
+        }else if(this.dbWeb.Comites[index].comi_name === 'Comité Juvenil'){
+          return 'flaticon-store'
+        }else if(this.dbWeb.Comites[index].comi_name === 'Comité de Bailoterapia'){
+          return 'flaticon-shop'
+        }else if(this.dbWeb.Comites[index].comi_name === 'Comité de Natación'){
+          return 'flaticon-store'
+        }else if(this.dbWeb.Comites[index].comi_name === 'Comité de Squash'){
+          return 'flaticon-shop'
+        }else if(this.dbWeb.Comites[index].comi_name === 'Comité de Guardería'){
+          return 'flaticon-store'
+        }else if(this.dbWeb.Comites[index].comi_name === 'Comité Social'){
+          return 'flaticon-shop'
+        }else if(this.dbWeb.Comites[index].comi_name === 'Comité de TRX'){
+          return 'flaticon-store'
+        }else if(this.dbWeb.Comites[index].comi_name === 'Comité de Infraestructura'){
+          return 'flaticon-shop'
+        }else if(this.dbWeb.Comites[index].comi_name === 'Comité de Finanzas'){
+          return 'flaticon-store'
+        }else if(this.dbWeb.Comites[index].comi_name === 'Comité de Reforma de Estatutos'){
+          return 'flaticon-shop'
+        }else if(this.dbWeb.Comites[index].comi_name === 'Comité de Tribunal Disciplinario'){
+          return 'flaticon-store'
+        }else{
+          return ''
         }
-        
-      }
+      },
     }
 }
 </script>

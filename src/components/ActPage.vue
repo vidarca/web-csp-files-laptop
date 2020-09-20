@@ -6,7 +6,7 @@
             <!-- Titulo de seccion -->
             <div class="row clearfix">
             <!-- Bloque de Notica -->
-                <div class="security-block col-lg-12 col-sm-12" v-for="(anuncio, index) in reverseArray" :key="anuncio.noti_id" :id="anuncio.noti_seccion" data-transitioned="false" v-if="index < 5">
+                <div class="security-block col-lg-12 col-sm-12" ref="anuncios" v-for="(anuncio, index) in reverseArray" :key="anuncio.noti_id" :id="anuncio.noti_seccion" data-transitioned="false" :data-index="index" v-show="index < 5 + showIndex && index >= showIndex">
                     <div :class="['inner-box d-flex justify-content-between align-items-center', (index % 2 === 0)?'flex-row':'flex-row-reverse right']" :data-src="anuncio.noti_imagenes[1].url"  ref="elLazy" >
                       <div class="image w-50 d-flex align-items-center justify-content-center">
                           <img  src=" " :alt="anuncio.noti_imagenes[1].name" :ref="`foto${index}`"/>
@@ -17,7 +17,7 @@
                             <div class="text">{{anuncio.noti_prev}}</div>
                             <div :class="['d-flex justify-content-between align-items-center w-100', (index % 2 === 0)?'flex-row':'flex-row-reverse']">
                               <div class="d-inline-block">
-                                <div :class="['icon d-inline-block', (anuncio.noti_seccion === 'Tenis')?'flaticon-racket-and-tennis-ball': (anuncio.noti_seccion === 'Squash')?'flaticon-squash-rackets':(anuncio.noti_seccion === 'Natacion')?'flaticon-swimming':'']"></div>
+                                <div :class="['icon d-inline-block', iconAnun(index)]"></div>
                                 <div class="ml-2 mr-1 d-inline-block">
                                   Hace ~ {{calcTime(anuncio.noti_id)}}
                                 </div>
@@ -35,8 +35,8 @@
           </div>
           <div class="bot-container">
             <div class="inner-container d-flex flex-row justify-content-center align-items-center" ref="innerContainer">
-              <div v-for="index in number" :key="index" active>
-                <div :class="['circle', (index === 1)?'active':'']" :ref="`bot${index}`">
+              <div v-for="index in number" :key="index">
+                <div :class="['circle', (index === 1)?'active':'']" :ref="`bot${index}`" :id="index">
                   <div class="text" @click="changeIndex(index)">{{index}}</div>
                 </div>
               </div>
@@ -94,6 +94,7 @@ export default {
         showMin: true,
         showSelect: false,
         number: 0,
+        showIndex: 0,
         currentIndex: 1,
         anunSelecIndex: 0,
       }
@@ -114,6 +115,23 @@ export default {
         },
   },
   methods:{
+    iconAnun(index){
+      if(this.reverseArray[index].noti_seccion === 'Tenis'){
+        return 'flaticon-racket-and-tennis-ball'
+      }else if(this.reverseArray[index].noti_seccion === 'Squash'){
+        return 'flaticon-squash-rackets'
+      }else if(this.reverseArray[index].noti_seccion === 'Natacion'){
+        return 'flaticon-swimming'
+      }else if(this.reverseArray[index].noti_seccion === 'Domino'){
+        return 'flaticon-domino'
+      }else if(this.reverseArray[index].noti_seccion === 'TRX'){
+        return 'flaticon-suspension'
+      }else if(this.reverseArray[index].noti_seccion === 'Artes Marciales'){
+        return 'flaticon-martial-arts'
+      }else{
+        return ''
+      }
+    },
     calcTime(val){
       const d = new Date()
       const miliSec = Date.parse(d)
@@ -166,6 +184,36 @@ export default {
         this.$refs.innerContainer.style.transform = `translateX(${parseFloat(this.$refs.innerContainer.style.transform.split('(')[1].split(')')[0]) + 45}px)`
         this.currentIndex --;
       }
+    },
+    changeIndex(val){
+      this.$refs.anuncios.forEach(element => {
+        element.dataset.transitioned = 'true';
+        if(element.dataset.index % 2 === 0){
+          element.classList.toggle('translate');
+        }else{
+          element.classList.toggle('translate-left');
+        }
+      })
+      setTimeout(() => {
+        this.showIndex = 5*(val-1);
+      }, 700);
+      setTimeout(() => {
+        this.$refs.anuncios.forEach(element => {
+          element.dataset.transitioned = 'false';
+          if(element.dataset.index % 2 === 0){
+            element.classList.toggle('translate');
+          }else{
+            element.classList.toggle('translate-left');
+          }
+        })
+      }, 800);
+      this.$refs.innerContainer.children.forEach(element => {
+        if(parseInt(element.children[0].id) !== val){
+          element.children[0].classList.remove('active');
+        }else if(parseInt(element.children[0].id) === val){
+          element.children[0].classList.add('active');
+        }
+      })
     },
     anunSelected(val){
       this.anunSelecIndex = val;
@@ -239,8 +287,8 @@ export default {
     **/
 
     if(this.reverseArray.length/5 > 1){
-      this.number = math.ceil(this.reverseArray.length/5);
-      this.showSelc = true;
+      this.number = Math.ceil(this.reverseArray.length/5);
+      this.showSelect = true;
     }
     
     try{

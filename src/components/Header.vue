@@ -1,5 +1,5 @@
 <template>
-  <div id="header" style="max-height: 130px">
+  <div id="header" style="max-height: 130px; main-height: 130px; position: relative">
 
     <div class="v-social-header" ref="socialHeader">
         <div class="v-social-leftbox">
