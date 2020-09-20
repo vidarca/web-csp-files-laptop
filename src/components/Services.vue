@@ -1,5 +1,5 @@
 <template>
-  <div id="services">
+  <div id="services" class="container">
     
       <!-- Seccion de Actualidad -->
         <section class="premium-section">

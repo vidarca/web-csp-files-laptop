@@ -1,5 +1,5 @@
 <template>
-  <div class="secP">
+  <div class="secP mih">
     <Services></Services>
   </div>
 </template>

@@ -1,6 +1,6 @@
     /*
     Flaticon icon font: Flaticon
-    Creation date: 12/09/2020 22:15
+    Creation date: 20/09/2020 00:27
     */
 
     @font-face {
@@ -68,6 +68,11 @@
 .flaticon-folder:before { content: "\f11c"; }
 .flaticon-checked:before { content: "\f11d"; }
 .flaticon-check:before { content: "\f11e"; }
+.flaticon-trapeze:before { content: "\f11f"; }
+.flaticon-octagon-outline-shape:before { content: "\f120"; }
+.flaticon-swimming:before { content: "\f121"; }
+.flaticon-squash-rackets:before { content: "\f122"; }
+.flaticon-back-arrow:before { content: "\f123"; }
     
     $font-Flaticon-racket-and-tennis-ball: "\f100";
     $font-Flaticon-facebook: "\f101";
@@ -100,3 +105,8 @@
     $font-Flaticon-folder: "\f11c";
     $font-Flaticon-checked: "\f11d";
     $font-Flaticon-check: "\f11e";
+    $font-Flaticon-trapeze: "\f11f";
+    $font-Flaticon-octagon-outline-shape: "\f120";
+    $font-Flaticon-swimming: "\f121";
+    $font-Flaticon-squash-rackets: "\f122";
+    $font-Flaticon-back-arrow: "\f123";

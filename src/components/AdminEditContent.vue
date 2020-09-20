@@ -19,11 +19,11 @@
           <option value="Actualidad">TRX</option>
         </select>
     </div>
-    <div ref="anuncios" class="position-relative w-100">
-      <div class="anun-container d-flex flex-row align-items-center justify-content-center w-100" v-for="(anuncio, index) in reverseArray" v-if="anuncio !== undefined" :key="anuncio.noti_id" :id="anuncio.noti_seccion" data-transitioned="false">
+    <div ref="anuncios" class="position-relative w-100" v-if="reverseArray[0] !== undefined">
+      <div class="anun-container d-flex flex-row align-items-center justify-content-center w-100" v-for="(anuncio, index) in reverseArray" :key="anuncio.noti_id" :id="anuncio.noti_seccion" data-transitioned="false">
         <div :key="index"  :class="['transitioned d-flex flex-row align-items-center justify-content-between mt-1 mb-1 mr-1', (showPrev === false)?'col-10':'col-9']" :ref="anuncio.noti_seccion" style="height: 55px;" :id="`anun${index}`" @click="anunSelected($event, index)">
-          <span class="text-uppercase text-center col-3" id="val1">{{anuncio.noti_seccion}}</span>
-          <span class="text-uppercase text-center col-4" id="val2">{{anuncio.noti_titulo}}</span>
+          <span class="text-uppercase text-center col-2" id="val1">{{anuncio.noti_seccion}}</span>
+          <span class="text-uppercase text-center col-5" id="val2">{{anuncio.noti_titulo}}</span>
           <span class="text-center col-4" id="val3">{{fechaAnuncio[index]}}</span>
         </div>
         <button class="btn btn-danger p-2 ml-3" @click="deleteElement(index)">
@@ -92,6 +92,7 @@
           </select>
         </div>
         <input type="text" placeholder="Título" v-model="titulo">
+        <textarea type="text" class="info-form-c" placeholder="Información corta" v-model="info"></textarea>
         <textarea type="text" class="info-form" placeholder="Información" v-model="info"></textarea>
         <div class="d-flex flex-row justify-content-between align-items-center m-3">
           <button class="btn btn-success mr-2 ml-2" @click.prevent="submitCollection()">Crear noticia</button>
@@ -117,6 +118,7 @@ export default {
         seccion: '',
         titulo: '',
         info: '',
+        prev: '',
         dbVal: [],
         imagesData: {
           0: [],
@@ -177,16 +179,18 @@ export default {
     methods:{
       ...mapMutations(['filesUpload', 'resetContentValues', 'deleteFileState', 'successAdvise', 'deletedEl']),
       filterChangeHandler(){
-        const waiting = setInterval(() => {
-          for(let i = 0; i < this.$refs.anuncios.children.length; i++) {
-            if(this.$refs.anuncios.children[i].dataset.transitioned === 'true'){
-              return false
-            }else{
-              this.filterChange()
-              clearInterval(waiting)
+        if(this.$refs.anuncios !== undefined){
+          const waiting = setInterval(() => {
+            for(let i = 0; i < this.$refs.anuncios.children.length; i++) {
+              if(this.$refs.anuncios.children[i].dataset.transitioned === 'true'){
+                return false
+              }else{
+                this.filterChange()
+                clearInterval(waiting)
+              }
             }
-          }
-        }, 100);
+          }, 100);
+        }
       },
       filterChange(){
         this.showPrev = false
@@ -254,6 +258,7 @@ export default {
                   this.seccion = this.reverseArray[index].noti_seccion;
                   this.info = this.reverseArray[index].noti_info;
                   this.titulo = this.reverseArray[index].noti_titulo;
+                  this.prev = this.reverseArray[index].noti_prev;
               }
               this.showPrev = true
             }, 900 + 50*j + 300);
@@ -328,6 +333,7 @@ export default {
           this.dataTransfer[0].info = this.info;
           this.dataTransfer[0].fecha = this.dbVal.noti_fecha;
           this.dataTransfer[0].seccion = this.seccion;
+          this.dataTransfer[0].prev = this.prev;
           this.dataTransfer[1] = archivos;
           this.dataTransfer[2] = tipoSol;
           this.dataTransfer[3] = this.changePics;
@@ -428,7 +434,6 @@ export default {
           this.deletedEl(n)
         }else if(this.deletingVal === null){
           this.$refs.anuncios.children[`${this.deletingIndex}`].classList.add('slide-list');
-          this.$refs.anuncios.children[`${this.deletingIndex}`].dataset.transitioned = 'true'
           setTimeout(() => {
             let m = {
               0: 1,
@@ -486,6 +491,12 @@ export default {
 
   .form-class textarea{
     min-height: 150px;
+    resize: none;
+    overflow: auto;
+  }
+
+  .form-class textarea.info-form-c{
+    min-height: 75px;
     resize: none;
     overflow: auto;
   }

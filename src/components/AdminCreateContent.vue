@@ -61,6 +61,7 @@
             </select>
           </div>
           <input type="text" placeholder="Título" v-model="createContent.formUpload.titulo">
+          <textarea type="text" class="info-form-c" placeholder="Información corta" v-model="createContent.formUpload.prev"></textarea>
           <textarea type="text" class="info-form" placeholder="Información" v-model="createContent.formUpload.info"></textarea>
           <div class="d-flex flex-row justify-content-between align-items-center m-3">
             <button class="btn btn-success mr-2 ml-2" @click.prevent="submitCollection()">Crear noticia</button>
@@ -119,7 +120,7 @@ export default {
         this.resetContentValues(0)
       },
       validacion(){
-        if(this.createContent.formUpload.titulo !== '' && this.createContent.formUpload.info !== '' && this.createContent.formUpload.seccion !== 'Seleccione una opción' && this.imagesData[0].length !== 0){
+        if(this.createContent.formUpload.titulo !== '' && this.createContent.formUpload.info !== '' && this.createContent.formUpload.seccion !== 'Seleccione una opción' && this.imagesData[0].length !== 0 && this.imagesData[1].length !== 0){
           return true
         }
       },
@@ -254,6 +255,12 @@ export default {
 
   .form-class textarea{
     min-height: 150px;
+    resize: none;
+    overflow: auto;
+  }
+
+  .form-class textarea.info-form-c{
+    min-height: 75px;
     resize: none;
     overflow: auto;
   }

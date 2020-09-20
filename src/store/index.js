@@ -24,6 +24,7 @@ export default new Vuex.Store({
       formUpload: {
         titulo: '',
         info: '',
+        prev: '',
         fecha: '',
         id: '',
         seccion: 'Seleccione una opción',
@@ -35,6 +36,7 @@ export default new Vuex.Store({
       formUpload: {
         titulo: '',
         info: '',
+        prev: '',
         fecha: '',
         id: '',
         seccion: '',
@@ -99,6 +101,7 @@ export default new Vuex.Store({
       if(val === 0){
         state.createContent.formUpload.titulo = '';
         state.createContent.formUpload.info = '';
+        state.createContent.formUpload.prev = '';
         state.createContent.formUpload.images = [];
         state.createContent.formUpload.fecha = '';
         state.createContent.formUpload.id = '';
@@ -106,6 +109,7 @@ export default new Vuex.Store({
       }else if(val === 1){
         state.editContent.formUpload.titulo = '';
         state.editContent.formUpload.info = '';
+        state.editContent.formUpload.prev = '';
         state.editContent.formUpload.images = [];
         state.editContent.formUpload.fecha = '';
         state.editContent.formUpload.id = '';
@@ -128,7 +132,7 @@ export default new Vuex.Store({
 
       if(state.createContent.formUpload.tipo === true){
         files.forEach(element => {
-          storageRef= firebase.storage().ref(`/imagenes/actualidad/${state.createContent.formUpload.id}/foto${element.id}`);
+          storageRef= firebase.storage().ref(`/imagenes/noticias/${state.createContent.formUpload.id}/foto${element.id}`);
           task[i] = storageRef.put(element);
           i++;
         })
@@ -149,11 +153,12 @@ export default new Vuex.Store({
               noti_info: state.createContent.formUpload.info,
               noti_fecha: state.createContent.formUpload.fecha,
               noti_id: state.createContent.formUpload.id,
+              noti_prev: state.createContent.formUpload.prev,
               noti_publicar: true,
               noti_seccion: state.createContent.formUpload.seccion,
               noti_imagenes: [],
             }
-            let storageRef = firebase.storage().ref(`/imagenes/actualidad/${state.createContent.formUpload.id}/foto${order[j]}`);
+            let storageRef = firebase.storage().ref(`/imagenes/noticias/${state.createContent.formUpload.id}/foto${order[j]}`);
             storageRef.getDownloadURL().then(url => {
               let val = order[n];
               state.createContent.formUpload.images[val].url = url;
@@ -186,7 +191,7 @@ export default new Vuex.Store({
 
         if(state.editContent.formUpload.uploadImages === true){
           files.forEach(element => {
-            storageRef= firebase.storage().ref(`/imagenes/actualidad/${state.editContent.formUpload.id}/foto${element.id}`);
+            storageRef= firebase.storage().ref(`/imagenes/noticias/${state.editContent.formUpload.id}/foto${element.id}`);
             task[i] = storageRef.put(element);
             i++;
           })
@@ -207,11 +212,12 @@ export default new Vuex.Store({
                 noti_info: state.editContent.formUpload.info,
                 noti_fecha: state.editContent.formUpload.fecha,
                 noti_id: state.editContent.formUpload.id,
+                noti_prev: state.editContent.formUpload.prev,
                 noti_publicar: true,
                 noti_seccion: state.editContent.formUpload.seccion,
                 noti_imagenes: [],
               }
-              let storageRef = firebase.storage().ref(`/imagenes/actualidad/${state.editContent.formUpload.id}/foto${order[j]}`);
+              let storageRef = firebase.storage().ref(`/imagenes/noticias/${state.editContent.formUpload.id}/foto${order[j]}`);
               storageRef.getDownloadURL().then(url => {
                 let val = order[n];
                 state.editContent.formUpload.images[val].url = url;
@@ -246,6 +252,7 @@ export default new Vuex.Store({
             noti_info: state.editContent.formUpload.info,
             noti_fecha: state.editContent.formUpload.fecha,
             noti_id: state.editContent.formUpload.id,
+            noti_prev: state.editContent.formUpload.prev,
             noti_publicar: true,
             noti_seccion: state.editContent.formUpload.seccion,
             noti_imagenes: state.editContent.formUpload.images,
@@ -261,7 +268,7 @@ export default new Vuex.Store({
         }
       }else if(state.deleteContent.formUpload.tipo === true){
         try{
-          let storageRef = firebase.storage().ref(`/imagenes/actualidad/${state.deleteContent.formUpload.id}`)
+          let storageRef = firebase.storage().ref(`/imagenes/noticias/${state.deleteContent.formUpload.id}`)
           storageRef.listAll().then(prom => {
             prom.items.forEach(element => {
               storageRef.child(element.name).delete().then( err => {
@@ -313,6 +320,7 @@ export default new Vuex.Store({
         state.editContent.formUpload.id = data[0].id;
         state.editContent.formUpload.titulo = data[0].titulo;
         state.editContent.formUpload.info = data[0].info;
+        state.editContent.formUpload.prev = data[0].prev;
         state.editContent.formUpload.seccion = data[0].seccion;
         state.editContent.formUpload.uploadImages = data[3];
         state.editContent.formUpload.uploadDataBase = data[4];

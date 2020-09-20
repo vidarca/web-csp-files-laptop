@@ -3651,7 +3651,6 @@ Menu Responsive
 	color:#ffffff;
 	font-size:16px;
 	line-height:1.8em;
-	padding-left:50px;
 }
 
 .main-footer .upper-box .contact-info-box li .icon{
@@ -4810,6 +4809,370 @@ Menu Responsive
 /*** 
 
 ====================================================================
+	Pagina de Actualidad
+====================================================================
+
+***/
+
+#actualidad section{
+	transition: all 0.7s ease-in-out;
+	transform: translateX(0vw);
+}
+
+#actualidad .translate{
+	transform: translateX(100vw);
+}
+
+#actualidad{
+	background-color:#f0f2f5;
+}
+
+#actualidad .premium-section{
+	position:relative;
+	padding: 5% 0px;
+	background-color:#f0f2f5;
+}
+
+#actualidad .premium-section .pattern-layer{
+	display: none;
+}
+
+#actualidad .security-block{
+	position:relative;
+	margin-bottom:50px;
+	padding: 0;
+}
+
+#actualidad .security-block .inner-box{
+	position:relative;
+	background-color:transparent;
+	border-radius: none;
+	color: black;
+}
+
+.inner-box.right::after{
+	right: 0 !important;
+	left: 50% !important;
+}
+
+.inner-box.right::before{
+	right: 0 !important;
+	left: 50% !important;
+}
+
+#actualidad .security-block .inner-box::after{
+	position: absolute;
+	top: -5%;
+	left: 0;
+	display: initial;
+	content: '';
+	min-width: 50%;
+	min-height: 110%;
+	background: black;
+	clip-path: polygon(50% 0%,
+	/* Esquina superior externa derecha */
+	89% 0%, 95% 8%,
+	/* Esquina inferior externa derecha */
+	95% 92%, 89% 100%, 
+	50% 100%, 50% 99.3%,
+	/* Esquina inferior interna derecha */
+	88.7% 99.3%, 94.5% 91.5%,
+	/* Esquina superior interna derecha */
+	94.5% 8.7%, 88.7% .7%, 
+	50% .7%);
+	transition: .7s ease all;
+}
+
+#actualidad .security-block .inner-box:hover:after{
+	position: absolute;
+	background-color: #FE5D25 !important;
+	display: initial;
+	content: '';
+	min-width: 50%;
+	min-height: 110%;
+	background: black;
+	clip-path: polygon(50% 0%, 
+	/* Esquina superior externa derecha */
+	97% 0%, 97% 0%, 
+	/* Esquina inferior externa derecha */
+	97% 100%, 97% 100%,
+	50% 100%, 50% 99.3%, 
+	/* Esquina inferior interna derecha*/
+	96.5% 99.3%, 96.5% 99.3%,
+	/* Esquina superior interna derecha */
+	96.5% .7%, 96.5% .7%, 
+	50% .7%);
+}
+
+#actualidad .security-block .inner-box::before{
+	position: absolute;
+	top: -5%;
+	left: 0;
+	display: initial;
+	content: '';
+	min-width: 50%;
+	max-width: 100%;
+	min-height: 110%;
+	background: black;
+	clip-path: polygon(50% 0%,
+	/* Esquina superior externa izquierda */
+	11% 0%, 5% 8%,
+	/* Esquina inferior externa izquierda */
+	5% 92%, 11% 100%,
+	50% 100%, 50% 99.3%,
+	/* Esquina inferior interna izquierda */
+	11.3% 99.3%, 5.5% 91.5%,
+	/* Esquina superior interna izquierda */
+	5.5% 8.7%, 11.3% .7%,
+	50% .7%);
+	transition: .7s ease all;
+}
+
+#actualidad .security-block .inner-box:hover:before{
+	position: absolute;
+	background-color: #FE5D25 !important;
+	display: initial;
+	content: '';
+	min-width: 50%;
+	max-width: 100%;
+	min-height: 110%;
+	background: black;
+	clip-path: polygon(50% 0%,
+	/* Esquina superior externa izquierda */
+	2% 0%, 2% 0%,
+	/* Esquina inferior externa izquierda */
+	2% 100%, 2% 100%,
+	50% 100%, 50% 99.3%,
+	/* Esquina inferior interna izquierda */
+	2.5% 99.3%, 2.5% 99.3%,
+	/* Esquina superior interna izquierda */
+	2.5% .7%, 2.5% .7%,
+	50% .7%);
+}
+
+#actualidad .security-block .inner-box .image{
+	position:relative;
+	overflow: hidden;
+	border-top-right-radius: none;
+	border-top-left-radius: none;
+	min-height: 250px;
+	border-radius: 10px;
+}
+
+#actualidad .security-block .inner-box .image:before{
+	display: none;
+}
+
+#actualidad .security-block .inner-box .image img{
+	position:relative;
+	min-height: 250px;
+	max-height: 250px;
+	transform: translateX(500px);
+	opacity: 0;
+	min-width: 100%;
+	display:block;
+	border-radius: 10px;
+	transition:all 900ms ease, opacity 800ms ease-in;
+	-moz-transition:all 900ms ease, opacity 800ms ease-in;
+	-webkit-transition:all 900ms ease, opacity 800ms ease-in;
+	-ms-transition:all 900ms ease, opacity 800ms ease-in;
+	-o-transition:all 900ms ease, opacity 800ms ease-in;
+}
+
+#actualidad .security-block .inner-box:hover .image img{
+	transform: scale(1.1);
+}
+
+.lazy-show{
+	transform: translateX(0) !important;
+	opacity: 1 !important;
+}
+
+#actualidad .security-block .inner-box .lower-content{
+	position:relative;
+	padding:20px 30px;
+}
+
+#actualidad .security-block .inner-box .lower-content .hover-bg-color{
+	position:absolute;
+	left:0px;
+	top:0px;
+	right:0px;
+	bottom:0px;
+}
+
+#actualidad .security-block .inner-box .lower-content .upper-box{
+	position:relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding-left:0;
+}
+
+#actualidad .security-block .inner-box .lower-content .upper-box .icon{
+	position: relative;
+	color:black;
+	font-size:30px;
+	line-height:1em;
+	transition:all 900ms ease;
+	-moz-transition:all 900ms ease;
+	-webkit-transition:all 900ms ease;
+	-ms-transition:all 900ms ease;
+	-o-transition:all 900ms ease;
+}
+
+#actualidad .security-block .inner-box .lower-content .upper-box h5{
+	position:relative;
+	font-size: 20px;
+	text-align: center;
+	font-weight:bolder;
+	line-height: auto;
+	margin-bottom: 5px;
+	color:#222222;
+	transition:all 900ms ease;
+	-moz-transition:all 900ms ease;
+	-webkit-transition:all 900ms ease;
+	-ms-transition:all 900ms ease;
+	-o-transition:all 900ms ease;
+}
+
+#actualidad .security-block .inner-box .lower-content .text{
+	position:relative;
+	color:#000000;
+	text-align: justify;
+	font-size:15px;
+	line-height:1.8em;
+	margin-top:5px;
+	font-weight:300;
+	transition:all 900ms ease;
+	-moz-transition:all 900ms ease;
+	-webkit-transition:all 900ms ease;
+	-ms-transition:all 900ms ease;
+	-o-transition:all 900ms ease;
+}
+
+#actualidad .security-block .inner-box .lower-content .upper-box a{
+	position:relative;
+	font-weight:  bold;
+	transition:all 700ms ease;
+	-moz-transition:all 700ms ease;
+	-webkit-transition:all 700ms ease;
+	-ms-transition:all 700ms ease;
+	-o-transition:all 700ms ease;
+}
+
+#actualidad .security-block .inner-box:hover .lower-content .text,
+#actualidad .security-block .inner-box:hover .lower-content .upper-box h5,
+#actualidad .security-block .inner-box:hover .lower-content .upper-box .icon{
+	color: initial;
+}
+
+#actualidad .security-block .inner-box .lower-content .open-box{
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	align-items: center;
+}
+
+#actualidad .security-block .inner-box .lower-content .open-box .icon{
+	color: black !important;
+}
+
+#actualidad .security-block .inner-box .lower-content .open-box .icon .text{
+	display: inline;
+	margin: 0px;
+	padding-left: 5px;
+}
+
+#actualidad .bot-selectors .icon{
+	cursor: pointer;
+	position: absolute;
+	top: 0;
+	font-size: 20px;
+	transition: font-size .3s ease;
+}
+
+#actualidad .bot-selectors .icon.left-arrow{
+ 	right: 0;
+}
+
+#actualidad .bot-selectors .icon.right-arrow{
+	left: 0;
+}
+
+#actualidad .bot-selectors .icon:hover{
+	font-size: 25px;
+}
+
+#actualidad .bot-container{
+	max-width: calc(45px * 5);
+	height: 30px;
+	overflow: hidden;
+}
+
+#actualidad .bot-container .inner-container{
+	height: 100%;
+	transition: all .5s ease-in-out;
+}
+
+#actualidad .bot-container .circle{
+	cursor: pointer;
+	text-align: center;
+	font-weight: bold;
+	height: 25px;
+	width: 25px;
+	line-height: 24.5px;
+	padding-right: 0.5px;
+	margin: 0 10px;
+	background-color: transparent;
+	border: 0.3px solid black;
+	border-radius: 50%;
+	transition: all 0.1s ease;
+}
+
+#actualidad .circle .text{
+	transition: all 0.1s ease;
+}
+
+#actualidad .circle.active{
+	color: white;
+	background-color: black;
+}
+
+#actualidad .circle:hover, #actualidad .circle:hover .text{
+	transform: scale(1.1);
+}
+
+#actualidad #section2 .info-container{
+	margin: 30px auto 15px auto;
+}
+
+#actualidad #section2 .info-container h5{
+	margin-bottom: 20px;
+	font-size: 20px;
+	font-weight: bolder;
+	text-align: end;
+}
+
+#actualidad #section2 .info-container img{
+	border-radius: 10px;
+	height: auto;
+	width: 40vw;
+	max-width: 512px;
+	min-width: 350px;
+}
+
+#actualidad #section2 .info-container .text{
+	text-align: justify;
+}
+
+#actualidad #section2 a{
+}
+
+/*** 
+
+====================================================================
 	Pagina de Servicios
 ====================================================================
 
@@ -5166,6 +5529,14 @@ Menu Responsive
 
 .w-85{
 	width: 85%;
+}
+
+.w-95{
+	width: 95%;
+}
+
+.mih{
+	min-height: 100vh;
 }
 
 .slide-list{

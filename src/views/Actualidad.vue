@@ -1,5 +1,19 @@
 <template>
-  <div class="comites">
-    <h1>Esto es una pagina de comites</h1>
+  <div class="comites mih">
+    <ActPage></ActPage>
   </div>
 </template>
+
+<script>
+import ActPage from '@/components/ActPage.vue'
+
+export default {
+	name: 'Admin',
+    components: {
+		ActPage,
+	},
+	mounted() {
+		window.scrollTo(0, 0);
+	},
+}
+</script>

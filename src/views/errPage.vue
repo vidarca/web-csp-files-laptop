@@ -1,5 +1,5 @@
 <template>
-  <div class="comites">
+  <div class="comites mih">
     <h6>Página no encontrada</h6>
   </div>
 </template>

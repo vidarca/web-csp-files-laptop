@@ -4,7 +4,7 @@
     <footer class="main-footer">
 		<div class="auto-container">
 			<!-- Upper Box -->
-			<div class="upper-box">
+			<div class="upper-box w-95">
 				<div class="row clearfix">
 					<!-- Column -->
 					<div class="text-column col-lg-4 col-md-12 col-sm-12">
@@ -15,7 +15,7 @@
 						<div class="row clearfix">
 							
 							<!-- Contact Info Box -->
-							<div class="column col-lg-4 col-md-4 col-sm-12">
+							<div class="column col-lg-3 col-md-4 col-sm-12">
 								<ul class="contact-info-box">
 									<li>
 										<span class="icon flaticon-call-3"></span>
@@ -26,7 +26,7 @@
 							</div>
 							
 							<!-- Contact Info Box -->
-							<div class="column col-lg-4 col-md-4 col-sm-12">
+							<div class="column col-lg-3 col-md-4 col-sm-12">
 								<ul class="contact-info-box">
 									<li>
 										<span class="icon flaticon-email-5"></span>
@@ -37,7 +37,7 @@
 							</div>
 							
 							<!-- Contact Info Box -->
-							<div class="column col-lg-4 col-md-4 col-sm-12">
+							<div class="column col-lg-3 col-md-4 col-sm-12">
 								<ul class="contact-info-box">
 									<li>
 										<span class="icon flaticon-in-time"></span>
@@ -53,7 +53,7 @@
 			</div>
 			
         	<!-- Widgets Section -->
-            <div class="widgets-section">
+            <div class="widgets-section w-95">
             	<div class="row clearfix">
                 	
                     <!-- Big Column -->

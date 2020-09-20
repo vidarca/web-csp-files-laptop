@@ -1,7 +1,7 @@
 <template>
   <div id="autogestionspan">
     <!-- Seccion de Autogestion -->
-        <section class="call-to-action-section">
+        <section class="call-to-action-section pr-3 pl-3">
             <div class="auto-container">
                 <div class="row clearfix">
                     <!-- Columna de titulo -->
