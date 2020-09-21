@@ -1,6 +1,6 @@
     /*
     Flaticon icon font: Flaticon
-    Creation date: 20/09/2020 18:11
+    Creation date: 20/09/2020 23:48
     */
 
     @font-face {
@@ -44,39 +44,42 @@
 .flaticon-phone-call:before { content: "\f104"; }
 .flaticon-email:before { content: "\f105"; }
 .flaticon-envelope:before { content: "\f106"; }
-.flaticon-newspaper:before { content: "\f107"; }
-.flaticon-key:before { content: "\f108"; }
-.flaticon-user:before { content: "\f109"; }
-.flaticon-shield:before { content: "\f10a"; }
-.flaticon-balance:before { content: "\f10b"; }
-.flaticon-coin-stack:before { content: "\f10c"; }
-.flaticon-padlock:before { content: "\f10d"; }
-.flaticon-hair-cut-tool:before { content: "\f10e"; }
-.flaticon-restaurant:before { content: "\f10f"; }
-.flaticon-cheers:before { content: "\f110"; }
-.flaticon-nurse:before { content: "\f111"; }
-.flaticon-person-silhouette-in-sauna:before { content: "\f112"; }
-.flaticon-barbell:before { content: "\f113"; }
-.flaticon-store:before { content: "\f114"; }
-.flaticon-shop:before { content: "\f115"; }
-.flaticon-menu:before { content: "\f116"; }
-.flaticon-close:before { content: "\f117"; }
-.flaticon-arrowhead-pointing-to-the-right:before { content: "\f118"; }
-.flaticon-sort-down:before { content: "\f119"; }
-.flaticon-up-chevron:before { content: "\f11a"; }
-.flaticon-user-1:before { content: "\f11b"; }
-.flaticon-folder:before { content: "\f11c"; }
-.flaticon-checked:before { content: "\f11d"; }
-.flaticon-check:before { content: "\f11e"; }
-.flaticon-trapeze:before { content: "\f11f"; }
-.flaticon-octagon-outline-shape:before { content: "\f120"; }
-.flaticon-swimming:before { content: "\f121"; }
-.flaticon-squash-rackets:before { content: "\f122"; }
-.flaticon-back-arrow:before { content: "\f123"; }
-.flaticon-suspension:before { content: "\f124"; }
-.flaticon-domino:before { content: "\f125"; }
-.flaticon-martial-arts:before { content: "\f126"; }
-.flaticon-dry-clean:before { content: "\f127"; }
+.flaticon-key:before { content: "\f107"; }
+.flaticon-user:before { content: "\f108"; }
+.flaticon-shield:before { content: "\f109"; }
+.flaticon-balance:before { content: "\f10a"; }
+.flaticon-coin-stack:before { content: "\f10b"; }
+.flaticon-padlock:before { content: "\f10c"; }
+.flaticon-hair-cut-tool:before { content: "\f10d"; }
+.flaticon-restaurant:before { content: "\f10e"; }
+.flaticon-cheers:before { content: "\f10f"; }
+.flaticon-nurse:before { content: "\f110"; }
+.flaticon-person-silhouette-in-sauna:before { content: "\f111"; }
+.flaticon-barbell:before { content: "\f112"; }
+.flaticon-store:before { content: "\f113"; }
+.flaticon-shop:before { content: "\f114"; }
+.flaticon-menu:before { content: "\f115"; }
+.flaticon-close:before { content: "\f116"; }
+.flaticon-arrowhead-pointing-to-the-right:before { content: "\f117"; }
+.flaticon-sort-down:before { content: "\f118"; }
+.flaticon-up-chevron:before { content: "\f119"; }
+.flaticon-user-1:before { content: "\f11a"; }
+.flaticon-folder:before { content: "\f11b"; }
+.flaticon-checked:before { content: "\f11c"; }
+.flaticon-check:before { content: "\f11d"; }
+.flaticon-trapeze:before { content: "\f11e"; }
+.flaticon-octagon-outline-shape:before { content: "\f11f"; }
+.flaticon-swimming:before { content: "\f120"; }
+.flaticon-squash-rackets:before { content: "\f121"; }
+.flaticon-back-arrow:before { content: "\f122"; }
+.flaticon-suspension:before { content: "\f123"; }
+.flaticon-domino:before { content: "\f124"; }
+.flaticon-martial-arts:before { content: "\f125"; }
+.flaticon-dry-clean:before { content: "\f126"; }
+.flaticon-dashboard:before { content: "\f127"; }
+.flaticon-user-2:before { content: "\f128"; }
+.flaticon-group:before { content: "\f129"; }
+.flaticon-newspaper:before { content: "\f12a"; }
     
     $font-Flaticon-racket-and-tennis-ball: "\f100";
     $font-Flaticon-facebook: "\f101";
@@ -85,36 +88,39 @@
     $font-Flaticon-phone-call: "\f104";
     $font-Flaticon-email: "\f105";
     $font-Flaticon-envelope: "\f106";
-    $font-Flaticon-newspaper: "\f107";
-    $font-Flaticon-key: "\f108";
-    $font-Flaticon-user: "\f109";
-    $font-Flaticon-shield: "\f10a";
-    $font-Flaticon-balance: "\f10b";
-    $font-Flaticon-coin-stack: "\f10c";
-    $font-Flaticon-padlock: "\f10d";
-    $font-Flaticon-hair-cut-tool: "\f10e";
-    $font-Flaticon-restaurant: "\f10f";
-    $font-Flaticon-cheers: "\f110";
-    $font-Flaticon-nurse: "\f111";
-    $font-Flaticon-person-silhouette-in-sauna: "\f112";
-    $font-Flaticon-barbell: "\f113";
-    $font-Flaticon-store: "\f114";
-    $font-Flaticon-shop: "\f115";
-    $font-Flaticon-menu: "\f116";
-    $font-Flaticon-close: "\f117";
-    $font-Flaticon-arrowhead-pointing-to-the-right: "\f118";
-    $font-Flaticon-sort-down: "\f119";
-    $font-Flaticon-up-chevron: "\f11a";
-    $font-Flaticon-user-1: "\f11b";
-    $font-Flaticon-folder: "\f11c";
-    $font-Flaticon-checked: "\f11d";
-    $font-Flaticon-check: "\f11e";
-    $font-Flaticon-trapeze: "\f11f";
-    $font-Flaticon-octagon-outline-shape: "\f120";
-    $font-Flaticon-swimming: "\f121";
-    $font-Flaticon-squash-rackets: "\f122";
-    $font-Flaticon-back-arrow: "\f123";
-    $font-Flaticon-suspension: "\f124";
-    $font-Flaticon-domino: "\f125";
-    $font-Flaticon-martial-arts: "\f126";
-    $font-Flaticon-dry-clean: "\f127";
+    $font-Flaticon-key: "\f107";
+    $font-Flaticon-user: "\f108";
+    $font-Flaticon-shield: "\f109";
+    $font-Flaticon-balance: "\f10a";
+    $font-Flaticon-coin-stack: "\f10b";
+    $font-Flaticon-padlock: "\f10c";
+    $font-Flaticon-hair-cut-tool: "\f10d";
+    $font-Flaticon-restaurant: "\f10e";
+    $font-Flaticon-cheers: "\f10f";
+    $font-Flaticon-nurse: "\f110";
+    $font-Flaticon-person-silhouette-in-sauna: "\f111";
+    $font-Flaticon-barbell: "\f112";
+    $font-Flaticon-store: "\f113";
+    $font-Flaticon-shop: "\f114";
+    $font-Flaticon-menu: "\f115";
+    $font-Flaticon-close: "\f116";
+    $font-Flaticon-arrowhead-pointing-to-the-right: "\f117";
+    $font-Flaticon-sort-down: "\f118";
+    $font-Flaticon-up-chevron: "\f119";
+    $font-Flaticon-user-1: "\f11a";
+    $font-Flaticon-folder: "\f11b";
+    $font-Flaticon-checked: "\f11c";
+    $font-Flaticon-check: "\f11d";
+    $font-Flaticon-trapeze: "\f11e";
+    $font-Flaticon-octagon-outline-shape: "\f11f";
+    $font-Flaticon-swimming: "\f120";
+    $font-Flaticon-squash-rackets: "\f121";
+    $font-Flaticon-back-arrow: "\f122";
+    $font-Flaticon-suspension: "\f123";
+    $font-Flaticon-domino: "\f124";
+    $font-Flaticon-martial-arts: "\f125";
+    $font-Flaticon-dry-clean: "\f126";
+    $font-Flaticon-dashboard: "\f127";
+    $font-Flaticon-user-2: "\f128";
+    $font-Flaticon-group: "\f129";
+    $font-Flaticon-newspaper: "\f12a";

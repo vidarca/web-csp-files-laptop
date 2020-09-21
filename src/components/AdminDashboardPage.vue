@@ -13,37 +13,73 @@
     </nav>
     <div class="container-fluid">
       <div class="row">
-        <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light v-sidebar" ref="sidebarMenu">
+        <nav id="sidebarMenu" class="col-md-3 col-lg-3 d-md-block bg-light v-sidebar" ref="sidebarMenu">
           <div class="sidebar-sticky pt-3">
             <ul class="nav flex-column">
               <li class="nav-item">
-                <a class="nav-link active" href="#" @click.prevent="selectComponent('0')">
-                  <span data-feather="home"></span>
-                  DASHBOARD <span class="sr-only" >(current)</span>
-                </a>
+                <div class="nav-link">
+                  <i class="icon-mini flaticon-dashboard col-2 pr-1 pr-md-2"></i>
+                  <a class="nav-link col-8" @click.prevent="selectComponent('0')">
+                    DASHBOARD
+                  </a>
+                  <span class="col-2 pl-md-2"></span>
+                </div>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#" @click.prevent="selectComponent('1')">
-                  <span data-feather="file"></span>
-                  CREAR CONTENIDO
-                </a>
+                <div class="nav-link">
+                  <i class="icon-mini flaticon-user-2 col-2 pr-1 pr-md-2"></i>
+                  <a class="nav-link col-8" @click.prevent="selectComponent('3')">
+                    EDITAR USUARIO
+                  </a>
+                  <div class="col-2 pl-md-2"></div>
+                </div>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#" @click.prevent="selectComponent('2')">
-                  <span data-feather="shopping-cart"></span>
-                  EDITAR CONTENIDO
-                </a>
+                <div class="nav-link-collapse-principal">
+                  <i class="icon-mini flaticon-newspaper col-2 pr-1 pr-md-2"></i>
+                  <a class="nav-link col-8" @click="expandSidebar('listNoticias', 'listNoticiasIcon')">
+                    CONTENIDO DE NOTICIAS
+                  </a>
+                  <span class="icon flaticon-arrowhead-pointing-to-the-right col-2 pl-1 pl-md-2" ref="listNoticiasIcon" @click="expandSidebar('listNoticias', 'listNoticiasIcon')"></span>
+                </div>
+                <ul class="v-collapsed-side v-collapsed-list" ref="listNoticias">
+                  <li class="nav-item">
+                    <a class="nav-link" href="#" @click.prevent="selectComponent('1')">
+                      CREAR NOTICIA
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#" @click.prevent="selectComponent('2')">
+                      EDITAR NOTICIAS
+                    </a>
+                  </li>
+                </ul>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#" @click.prevent="selectComponent('3')">
-                  <span data-feather="users"></span>
-                  EDITAR USUARIO
-                </a>
+                <div class="nav-link-collapse-principal">
+                  <i class="icon-mini flaticon-group col-2 pr-1 pr-md-2"></i>
+                  <a class="nav-link col-8" @click="expandSidebar('listJunta', 'listJuntaIcon')">
+                    JUNTA DIRECTIVA
+                  </a>
+                  <span class="icon flaticon-arrowhead-pointing-to-the-right col-2 pl-1 pl-md-2" ref="listJuntaIcon" @click="expandSidebar('listJunta', 'listJuntaIcon')"></span>
+                </div>
+                <ul class="v-collapsed-side v-collapsed-list" ref="listJunta">
+                  <li class="nav-item">
+                    <a class="nav-link" href="#"> <!-- @click.prevent="selectComponent('')" -->
+                      JUNTA ACTUAL
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#"> <!-- @click.prevent="selectComponent('')" -->
+                      JUNTAS ANTERIORES
+                    </a>
+                  </li>
+                </ul>
               </li>
             </ul>
           </div>
         </nav>
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-9 px-md-4">
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 -3 border-bottom">
             <h1 class="h2">Dashboard</h1>
           </div>
@@ -105,6 +141,11 @@ export default {
     },
     selectComponent(val){
       this.currentCompon = this.allCompon[val]
+    },
+    expandSidebar(val, val2){
+      this.$refs[`${val}`].classList.toggle('v-collapsed-side');
+      this.$refs[`${val2}`].classList.toggle('flaticon-arrowhead-pointing-to-the-right');
+      this.$refs[`${val2}`].classList.toggle('flaticon-sort-down');
     },
     expandMenu(event){
       const refVal = event.target.getAttribute('data-target')
@@ -203,7 +244,8 @@ export default {
 
   .v-sidebar{
     height: 760px;
-    position: relative;
+    position: fixed;
+    padding: 0 10px;
   }
 
   .navbar-toggler{
@@ -216,13 +258,52 @@ export default {
 
   .nav-item{
     display: flex;
+    flex-wrap: wrap;
     flex-direction: column;
     justify-content: center;
     align-items: center;
   }
 
   .nav-link{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: row;
+    width: 100%;
     padding: 8px 0;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  .nav-item .icon-mini{
+    padding: 8px 0;
+    font-size: 24px;
+    color: black;
+    text-align: right;
+  }
+
+  .nav-link-collapse-principal{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: row;
+    width: 100%;
+  }
+
+  .nav-link-collapse-principal .icon{
+    padding: 0;
+  }
+
+  .nav-link-collapse-principal .icon::before{
+    font-size: 15px !important;
+  }
+
+  .nav-item .v-collapsed-list{
+    overflow: hidden;
+    max-height: 400px;
+    height: auto !important;
+    transition: max-height .7s ease;
   }
 
   .navbar-brand{
@@ -239,6 +320,14 @@ export default {
     font-size: 50px;
   }
 
+  .v-collapsed-side{
+    max-height: 0 !important;
+    height: auto !important;
+    position: relative !important;
+    transition: all 1s ease;
+    overflow: hidden;
+  }
+
   @media screen and (max-width: 768px) {
     .bd-placeholder-img-lg {
       font-size: 3.5rem;
@@ -249,7 +338,7 @@ export default {
     }
 
     .v-collapsed{
-      max-height: 0 ;
+      max-height: 0;
       height: auto !important;
       position: relative !important;
       transition: all 1s ease;

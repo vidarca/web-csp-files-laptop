@@ -2269,7 +2269,7 @@ Menu Responsive
 
 .featured-block .inner-box .content:before{
 	position:absolute;
-	content: "\f116";
+	content: "\f115";
 	right:-20px;
 	top:20px;
 	color:#FE5D25;

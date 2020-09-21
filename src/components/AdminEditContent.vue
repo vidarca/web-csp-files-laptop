@@ -23,8 +23,8 @@
       <div class="anun-container d-flex flex-row align-items-center justify-content-center w-100" v-for="(anuncio, index) in reverseArray" :key="anuncio.noti_id" :id="anuncio.noti_seccion" data-transitioned="false">
         <div :key="index"  :class="['transitioned d-flex flex-row align-items-center justify-content-between mt-1 mb-1 mr-1', (showPrev === false)?'col-10':'col-9']" :ref="anuncio.noti_seccion" style="height: 55px;" :id="`anun${index}`" @click="anunSelected($event, index)">
           <span class="text-uppercase text-center col-2" id="val1">{{anuncio.noti_seccion}}</span>
-          <span class="text-uppercase text-center col-5" id="val2">{{anuncio.noti_titulo}}</span>
-          <span class="text-center col-4" id="val3">{{fechaAnuncio[index]}}</span>
+          <span class="text-uppercase text-center col-7" id="val2">{{anuncio.noti_titulo}}</span>
+          <span class="text-center col-2" id="val3">{{fechaAnuncio[index]}}</span>
         </div>
         <button class="btn btn-danger p-2 ml-3" @click="deleteElement(index)">
           <div v-if="deletingVal === true && deletingIndex === index" class="spinner-border text-light" role="status">
@@ -621,6 +621,8 @@ export default {
 
   .transitioned span{
     cursor: pointer;
+    font-size: 12px;
+    padding: 0;
     font-weight: bold;
     transition: color 0.15s ease-in;
   }

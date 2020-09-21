@@ -24,7 +24,7 @@
                         <img :src="!(createContent.formUpload.images[index] === undefined)?createContent.formUpload.images[index].url : ' '" width="200" height="200" style="min-height: 200px; min-width: 200px; ">
                       </div>
                       <div v-else class="w-100 h-100 d-flex flex-row align-items-center justify-content-center">
-                        <p class="align-self-star ml-2">{{image.name}}</p>
+                        <p class="align-self-star ml-2" style="text-overflow: ellipsis;">{{image.name}}</p>
                         <!-- ICONO DE QUITAR -->
                         <div class="veri-box ml-2 mr-2">
                           <a @click.prevent="deleteFile(index)" class="icon flaticon-close mr-1 ml-auto" v-show="createContent.formUpload.images[index] === undefined"></a>
