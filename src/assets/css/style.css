@@ -4847,28 +4847,22 @@ Menu Responsive
 	background-color:#f0f2f5;
 }
 
-#actualidad .premium-section{
+#actualidad .v-act-wrapper{
 	position:relative;
 	padding: 5% 0px;
-	background-color:#f0f2f5;
 }
 
-#actualidad .premium-section .pattern-layer{
-	display: none;
-}
-
-#actualidad .security-block{
-	position:relative;
+#actualidad .noti-block{
 	margin-bottom:50px;
-	padding: 0;
 	min-height: 300px;
-	transition: transform 0.7s ease-out;
+	transition: all 900ms ease;
+	-moz-transition: all 900ms ease;
+	-o-transition: all 900ms ease;
+	-webkit-transition: all 900ms ease;
 }
 
-#actualidad .security-block .inner-box{
-	position:relative;
+#actualidad .noti-block .inner-box{
 	background-color:transparent;
-	border-radius: none;
 	color: black;
 }
 
@@ -4882,13 +4876,18 @@ Menu Responsive
 	left: 50% !important;
 }
 
-#actualidad .security-block .inner-box::after{
+.inner-box.center::before{
+	right: 0 !important;
+	left: 0 !important;
+}
+
+#actualidad .noti-block .inner-box .image::after{
 	position: absolute;
 	top: -5%;
 	left: 0;
 	display: initial;
 	content: '';
-	min-width: 50%;
+	min-width: 100%;
 	min-height: 110%;
 	background: black;
 	clip-path: polygon(50% 0%,
@@ -4905,12 +4904,12 @@ Menu Responsive
 	transition: .7s ease all;
 }
 
-#actualidad .security-block .inner-box:hover:after{
+#actualidad .noti-block .inner-box:hover .image:after{
 	position: absolute;
 	background-color: #FE5D25 !important;
 	display: initial;
 	content: '';
-	min-width: 50%;
+	min-width: 100%;
 	min-height: 110%;
 	background: black;
 	clip-path: polygon(50% 0%, 
@@ -4926,13 +4925,13 @@ Menu Responsive
 	50% .7%);
 }
 
-#actualidad .security-block .inner-box::before{
+#actualidad .noti-block .inner-box .image::before{
 	position: absolute;
 	top: -5%;
 	left: 0;
 	display: initial;
 	content: '';
-	min-width: 50%;
+	min-width: 100%;
 	max-width: 100%;
 	min-height: 110%;
 	background: black;
@@ -4950,12 +4949,12 @@ Menu Responsive
 	transition: .7s ease all;
 }
 
-#actualidad .security-block .inner-box:hover:before{
+#actualidad .noti-block .inner-box:hover .image:before{
 	position: absolute;
 	background-color: #FE5D25 !important;
 	display: initial;
 	content: '';
-	min-width: 50%;
+	min-width: 100%;
 	max-width: 100%;
 	min-height: 110%;
 	background: black;
@@ -4972,22 +4971,21 @@ Menu Responsive
 	50% .7%);
 }
 
-#actualidad .security-block .inner-box .image{
+#actualidad .noti-block .inner-box .image{
 	position:relative;
-	overflow: hidden;
-	border-top-right-radius: none;
-	border-top-left-radius: none;
-	min-height: 250px;
 	border-radius: 10px;
+	height: auto;
 }
 
-#actualidad .security-block .inner-box .image:before{
-	display: none;
+#actualidad .noti-block .inner-box .image .img-container-flow{
+	overflow: hidden;
+	height: auto;
 }
 
-#actualidad .security-block .inner-box .image img{
+#actualidad .noti-block .inner-box .image img{
 	position:relative;
-	min-height: 250px;
+	height: auto;
+	min-height: 160px;
 	max-height: 250px;
 	transform: translateX(500px);
 	opacity: 0;
@@ -5001,7 +4999,7 @@ Menu Responsive
 	-o-transition:all 900ms ease, opacity 800ms ease-in;
 }
 
-#actualidad .security-block .inner-box:hover .image img{
+#actualidad .noti-block .inner-box:hover .image img{
 	transform: scale(1.1);
 }
 
@@ -5010,20 +5008,12 @@ Menu Responsive
 	opacity: 1 !important;
 }
 
-#actualidad .security-block .inner-box .lower-content{
+#actualidad .noti-block .inner-box .lower-content{
 	position:relative;
 	padding:20px 30px;
 }
 
-#actualidad .security-block .inner-box .lower-content .hover-bg-color{
-	position:absolute;
-	left:0px;
-	top:0px;
-	right:0px;
-	bottom:0px;
-}
-
-#actualidad .security-block .inner-box .lower-content .upper-box{
+#actualidad .noti-block .inner-box .lower-content .upper-box{
 	position:relative;
 	display: flex;
 	flex-direction: column;
@@ -5032,79 +5022,37 @@ Menu Responsive
 	padding-left:0;
 }
 
-#actualidad .security-block .inner-box .lower-content .upper-box .icon{
+#actualidad .noti-block .inner-box .lower-content .upper-box .icon{
 	position: relative;
 	color:black;
 	font-size:30px;
 	line-height:1em;
-	transition:all 900ms ease;
-	-moz-transition:all 900ms ease;
-	-webkit-transition:all 900ms ease;
-	-ms-transition:all 900ms ease;
-	-o-transition:all 900ms ease;
 }
 
-#actualidad .security-block .inner-box .lower-content .upper-box h5{
+#actualidad .noti-block .inner-box .lower-content .upper-box h5{
 	position:relative;
-	font-size: 20px;
+	font-size: 2vw;
 	text-align: center;
 	font-weight:bolder;
 	line-height: auto;
 	margin-bottom: 5px;
 	color:#222222;
-	transition:all 900ms ease;
-	-moz-transition:all 900ms ease;
-	-webkit-transition:all 900ms ease;
-	-ms-transition:all 900ms ease;
-	-o-transition:all 900ms ease;
 }
 
-#actualidad .security-block .inner-box .lower-content .text{
+#actualidad .noti-block .inner-box .lower-content .text{
 	position:relative;
 	color:#000000;
 	text-align: justify;
-	font-size:15px;
+	font-size:1.7vw;
 	line-height:1.8em;
 	margin-top:5px;
 	font-weight:300;
-	transition:all 900ms ease;
-	-moz-transition:all 900ms ease;
-	-webkit-transition:all 900ms ease;
-	-ms-transition:all 900ms ease;
-	-o-transition:all 900ms ease;
 }
 
-#actualidad .security-block .inner-box .lower-content .upper-box a{
+#actualidad .noti-block .inner-box .lower-content .upper-box a{
 	position:relative;
+	font-size: 1.7vw;
 	font-weight:  bold;
-	transition:all 700ms ease;
-	-moz-transition:all 700ms ease;
-	-webkit-transition:all 700ms ease;
-	-ms-transition:all 700ms ease;
-	-o-transition:all 700ms ease;
-}
-
-#actualidad .security-block .inner-box:hover .lower-content .text,
-#actualidad .security-block .inner-box:hover .lower-content .upper-box h5,
-#actualidad .security-block .inner-box:hover .lower-content .upper-box .icon{
-	color: initial;
-}
-
-#actualidad .security-block .inner-box .lower-content .open-box{
-	display: flex;
-	flex-direction: row;
-	justify-content: flex-end;
-	align-items: center;
-}
-
-#actualidad .security-block .inner-box .lower-content .open-box .icon{
-	color: black !important;
-}
-
-#actualidad .security-block .inner-box .lower-content .open-box .icon .text{
-	display: inline;
-	margin: 0px;
-	padding-left: 5px;
 }
 
 #actualidad .bot-selectors .icon{
@@ -5165,6 +5113,24 @@ Menu Responsive
 #actualidad .circle:hover, #actualidad .circle:hover .text{
 	transform: scale(1.1);
 }
+
+@media screen and (max-width: 720px){
+	#actualidad .noti-block .inner-box .lower-content .upper-box h5{
+		font-size: 3vw;
+	}
+	#actualidad .noti-block .inner-box .lower-content .text{
+		font-size: 2.5vw;
+	}
+	#actualidad .noti-block .inner-box .lower-content .upper-box a{
+		font-size: 2.5vw;
+	}
+}
+
+/**
+====================================================
+Seccion 2 Pagina de Actualidad
+====================================================
+**/
 
 #actualidad #section2 .info-container{
 	margin: 30px auto 15px auto;

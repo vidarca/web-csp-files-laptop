@@ -1,24 +1,26 @@
 <template>
   <div id="actualidad" class="">
     <!-- Seccion de Actualidad -->
-    <section id="section1" ref="section1" class="premium-section" v-show="reverseArray[0] !== undefined && showMin" style="min-height: 50vh">
-        <div class="auto-container w-85 m-auto">
+    <section id="section1" ref="section1" class="v-act-wrapper" v-show="reverseArray[0] !== undefined && showMin" style="min-height: 50vh">
+        <div class="w-85 m-auto">
             <!-- Titulo de seccion -->
-            <div class="row clearfix">
+            <div class="row">
             <!-- Bloque de Notica -->
-                <div class="security-block col-lg-12 col-sm-12" ref="anuncios" v-for="(anuncio, index) in reverseArray" :key="anuncio.noti_id" :id="anuncio.noti_seccion" data-transitioned="false" :data-index="index" v-show="index < 5 + showIndex && index >= showIndex">
-                    <div :class="['inner-box d-flex justify-content-between align-items-center', (index % 2 === 0)?'flex-row':'flex-row-reverse right']" :data-src="anuncio.noti_imagenes[1].url"  ref="elLazy" >
-                      <div class="image w-50 d-flex align-items-center justify-content-center">
+                <div class="noti-block col-lg-12 col-sm-12" ref="anuncios" v-for="(anuncio, index) in reverseArray" :key="anuncio.noti_id" :id="anuncio.noti_seccion" data-transitioned="false" :data-index="index" v-show="index < 5 + showIndex && index >= showIndex">
+                    <div :class="['inner-box d-flex justify-content-between align-items-center', flexAndCliWidth(index)]" :data-index="index" :data-src="anuncio.noti_imagenes[1].url"  ref="elLazy" >
+                      <div class="image w-100 d-flex align-items-center justify-content-center">
+                        <div class="img-container-flow w-100">
                           <img  src=" " :alt="anuncio.noti_imagenes[1].name" :ref="`foto${index}`"/>
+                        </div>
                       </div>
-                      <div class="lower-content w-50">
+                      <div class="lower-content w-100">
                           <div class="upper-box">
                             <h5>{{anuncio.noti_titulo}}</h5>
                             <div class="text">{{anuncio.noti_prev}}</div>
                             <div :class="['d-flex justify-content-between align-items-center w-100', (index % 2 === 0)?'flex-row':'flex-row-reverse']">
                               <div class="d-inline-block">
                                 <div :class="['icon d-inline-block', iconAnun(index)]"></div>
-                                <div class="ml-2 mr-1 d-inline-block">
+                                <div class="text ml-2 mr-1 d-inline-block">
                                   Hace ~ {{calcTime(anuncio.noti_id)}}
                                 </div>
                               </div>
@@ -238,17 +240,25 @@ export default {
       }, 800);
     },
     parrShow(index, val){
-
       if(val === '0'){
-        console.log(this.reverseArray[this.anunSelecIndex].noti_info.split(/[\r\n]+/).length);
         if(index < this.reverseArray[this.anunSelecIndex].noti_info.split(/[\r\n]+/).length/2){
-          console.log('SI LLEGA');
           return true
         }else{return false}
       }else if( val === '1'){
         if(index >= this.reverseArray[this.anunSelecIndex].noti_info.split(/[\r\n]+/).length/2){
           return true
         }else{return false}
+      }
+    },
+    flexAndCliWidth(index){
+      if(window.innerWidth >= 720){
+        if(index % 2 === 0){
+          return 'flex-row'
+        }else{
+          return 'flex-row-reverse right'
+        }
+      }else{
+        return 'flex-column center'
       }
     },
   },
@@ -272,8 +282,8 @@ export default {
           if(!entry.isIntersecting){
             return;
           }
-          entry.target.children[0].children[0].src = entry.target.dataset.src;
-          entry.target.children[0].children[0].classList.toggle('lazy-show');
+          entry.target.children[0].children[0].children[0].src = entry.target.dataset.src;
+          entry.target.children[0].children[0].children[0].classList.toggle('lazy-show');
           observer.unobserve(entry.target)
         });
       }, ops);
@@ -285,6 +295,32 @@ export default {
     /**
      EXTRAS
     **/
+
+    window.addEventListener('resize', () => {
+      this.$refs.elLazy.forEach(element => {
+        if(window.innerWidth < 720){
+          if(element.dataset.index % 2 === 0){
+            element.classList.remove('flex-row')
+          }else{
+            element.classList.remove('flex-row-reverse')
+            element.classList.remove('right')
+          }
+          element.classList.add('flex-column')
+          element.classList.add('center')
+        }else{
+        if(window.innerWidth >= 720){
+          if(element.dataset.index % 2 === 0){
+            element.classList.add('flex-row')
+          }else{
+            element.classList.add('flex-row-reverse')
+            element.classList.add('right')
+          }
+          element.classList.remove('flex-column')
+          element.classList.remove('center')
+        }
+        }
+      })
+    })
 
     if(this.reverseArray.length/5 > 1){
       this.number = Math.ceil(this.reverseArray.length/5);

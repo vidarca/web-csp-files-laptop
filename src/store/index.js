@@ -60,14 +60,6 @@ export default new Vuex.Store({
         baseDatos[1] = true;
       }
     },
-    deletedEl(state, value){
-      if(value[0] === 0){
-        state.deletingVal = value[1];
-      }
-      if(value[0] === 1){
-        state.deletingIndex = value[1];
-      }
-    },
     isResponsive(state){
       if(window.innerWidth >= 768){
         state.dpResponsive = false
@@ -76,25 +68,85 @@ export default new Vuex.Store({
       }
     },
     setUser(state, user){
-      state.user.email = user.email;
-      state.user.displayName = user.displayName
+      state.user = {
+        name: user[0],
+        apellido: user[1],
+        cargo: user[2],
+        correoVeri: user[3],
+        correo: user[4],
+        autori: user[5],
+        fotoUrl: user[6],
+        telefono: user[7],
+      }
+      state.refUser = {
+        name: user[0],
+        apellido: user[1],
+        cargo: user[2],
+        correoVeri: user[3],
+        correo: user[4],
+        autori: user[5],
+        fotoUrl: user[6],
+        telefono: user[7],
+      }
     },
-    isUserDiff(state, value){
-      state.refUser.email = state.user.email;
-      const splittedName = state.user.displayName.split('|');
-      if(state.user.displayName && splittedName[0]){
-        state.refUser.name = splittedName[0].split(' ')
-      }else if(state.user.displayName){
-        state.refUser.name = state.user.displayName.split(' ');
+    updateUser(state, value){
+      const user = firebase.auth().currentUser;
+      if(user){
+        // Aqui debo poner el activador para el cargador
+        
+        user.updateProfile({
+          displayName: value.name[0] + '|' + value.name[1] + '|' + value.rank,
+          email: value.email
+        }).then(() =>{
+          // Aqui debo poner para quitar el cargador
+          state.user.displayName = user.displayName
+          state.user.email = user.email
+        })
       }
-      if(state.user.displayName && splittedName[1]){
-        state.refUser.rank = splittedName[1]
-      }else {
-        state.refUser.rank = ''
+    },
+    dbUserVal(state, value){
+      if(value[0] === 0){
+        const valuesRef = {
+          uadmin_activo: true,
+          uadmin_correo: value[3],
+          uadmin_correoVeri: value[4],
+          uadmin_id: value[1],
+          uadmin_nombre: value[2],
+          uadmin_apellido: '',
+          uadmin_autori: '',
+          uadmin_fotoUrl: `${value[5]}`,
+          uadmin_telefono: `${value[6]}`,
+          uadmin_cargo: '',
+        }
+        const dbRef = firebase.database().ref('Usuarios_admin');
+        dbRef.child(valuesRef.uadmin_id).set(valuesRef).then(()=>{
+          const setUserRef = {
+            0: valuesRef.uadmin_nombre,
+            1: valuesRef.uadmin_apellido,
+            2: valuesRef.uadmin_cargo,
+            3: valuesRef.uadmin_correoVeri,
+            4: valuesRef.uadmin_correo,
+            5: valuesRef.uadmin_autori,
+            6: valuesRef.uadmin_fotoUrl,
+            7: valuesRef.uadmin_telefono,
+          }
+          this.commit('setUser', setUserRef);
+        })
       }
-
-      if(state.refUser.name[0] !== value.name[0] || state.refUser.name[1] !== value.name[1] || state.refUser.email !== value.email || state.refUser.rank !== value.rank){
-        this.commit('updateUser', value)
+    },
+    isUserDiff(state){
+      for(let i = 0; i < Object.values(state.user).length; i++){
+        if(Object.values(state.user)[i] !== Object.values(state.refUser)[i]){
+          return this.commit('updateUser', value);
+        }
+      }
+    },
+    deletedEl(state, value){
+      if(value[0] === 0){
+        state.deletingVal = value[1];
+      }
+      if(value[0] === 1){
+        state.deletingIndex = value[1];
       }
     },
     resetContentValues(state, val){
@@ -335,22 +387,6 @@ export default new Vuex.Store({
         this.commit('handleUpload', data[1])
       }
       
-    },
-    updateUser(state, value){
-      const user = firebase.auth().currentUser;
-      if(user){
-        // Aqui debo poner el activador para el cargador
-        
-        user.updateProfile({
-          displayName: value.name[0] + '|' + value.name[1] + '|' + value.rank,
-          email: value.email
-        }).then(() =>{
-          // Aqui debo poner para quitar el cargador
-          /* state.user = {...state.user, user} */
-          state.user.displayName = user.displayName
-          state.user.email = user.email
-        })
-      }
     },
   },
   actions: {

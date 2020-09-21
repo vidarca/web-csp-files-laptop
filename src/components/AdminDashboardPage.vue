@@ -2,7 +2,10 @@
   <div id="admin-dashboard-page" class="admin-dashboard-page" v-if="loaded">
     <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-3 shadow">
       <a class="navbar-brand mr-0 d-flex justify-content-center align-items-center"> 
-      <i class="icon flaticon-user-1"></i> <p class="ml-3"> {{user.displayName.split('|')[0]}} {{user.displayName.split('|')[1]}} <br> {{user.displayName.split('|')[2]}} </p></a>
+      <i class="icon flaticon-user-1"></i> 
+        <p class="ml-3" v-if="user.name !== ''"> {{user.name}} {{user.apellido}} <br> {{user.cargo}} </p>
+        <p class="ml-3" v-else>{{user.correo}}</p>
+      </a>
       <button class="navbar-toggler position-absolute d-md-none collapsed flaticon-menu" type="button" ta-toggle="collapse" data-target="sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" ia-label="Toggle navigation" @click="expandMenu($event)">
       </button>
       <ul class="navbar-nav px-3 v-logOut">
@@ -131,7 +134,7 @@ export default {
     }
   },
   methods:{
-    ...mapMutations(['setUser', 'updateUser']),
+    ...mapMutations(['setUser', 'dbUserVal']),
     ...mapActions(['getData']),
     
     logOut(){
@@ -167,20 +170,44 @@ export default {
   },
 
   computed:{
-    ...mapState(['user']),
+    ...mapState(['user', 'dbWeb']),
     ...mapGetters(['userUpdate']),
 
   },
   
   created(){
+    let values = [];
     const data = setInterval(() => {
       const user = firebase.auth().currentUser
-        if(user){
-          this.setUser(user);
-          this.dataName = user.displayName?user.displayName.split('|'):user.email
+      if(user){
+        clearTimeout(data)
+        if(this.dbWeb.Usuarios_admin[`${user.uid}`]){
+          values = {
+            0: this.dbWeb.Usuarios_admin[`${user.uid}`].uadmin_nombre,
+            1: this.dbWeb.Usuarios_admin[`${user.uid}`].uadmin_apellido,
+            2: this.dbWeb.Usuarios_admin[`${user.uid}`].uadmin_cargo,
+            3: this.dbWeb.Usuarios_admin[`${user.uid}`].uadmin_correoVeri,
+            4: this.dbWeb.Usuarios_admin[`${user.uid}`].uadmin_correo,
+            5: this.dbWeb.Usuarios_admin[`${user.uid}`].uadmin_autori,
+            6: this.dbWeb.Usuarios_admin[`${user.uid}`].uadmin_fotoUrl,
+            7: this.dbWeb.Usuarios_admin[`${user.uid}`].uadmin_telefono,
+          }
+          
+          this.setUser(values)
           this.loaded = true;
-          clearTimeout(data)
+        }else{
+          values.push(0);
+          values.push(user.uid);
+          values.push(user.displayName);
+          values.push(user.email);
+          values.push(user.emailVerified);
+          values.push(user.photoURL);
+          values.push(user.phoneNumber);
+
+          this.dbUserVal(values);
+          this.loaded = true;
         }
+      }
     }, 500);
   },
 
@@ -196,7 +223,6 @@ export default {
         
         clearTimeout(waiting)
       }else {
-        console.log('Aun no carga');
       }
     }, 500);
 
@@ -219,11 +245,11 @@ export default {
     })   
   },
 
-  watch:{
+  /* watch:{
     userUpdate(){
       this.dataName = this.user.displayName.split('|')
     }
-  }
+  } */
 }
 
 </script>

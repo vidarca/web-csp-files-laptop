@@ -1,23 +1,23 @@
 <template>
-  <div id="admin-edit" v-if="loader">
+  <div id="admin-edit">
       <form @submit.prevent="isUserDiff(userVal)">
         <div class="v-admin-username w-100">
           <p class="title-text">NOMBRE DE USUARIO</p>
           <div class="v-admin-namevalues w-100">
-            <input class="v-input-text" id="name" type="text" v-model="userVal.name[0]" :placeholder="userVal.name[0]?userVal.name[0]:'Nombre'"> 
-            <input class="v-input-text" id="last-name" type="text" v-model="userVal.name[1]" :placeholder="userVal.name[1]?userVal.name[1]:'Apellido'">
+            <input class="v-input-text" id="name" type="text" v-model="user.name" :placeholder="user.name?user.name:'Nombre'"> 
+            <input class="v-input-text" id="last-name" type="text" v-model="user.apellido" :placeholder="user.apellido?user.apellido:'Apellido'">
           </div>
         </div>
         <div class="v-admin-userrank">
           <p class="title-text">CARGO</p>
           <div class="v-admin-rankvalues">
-            <input class="v-input-text w-100" type="text" v-model="userVal.rank" :placeholder="userVal.rank?userVal.rank:'Cargo'">
+            <input class="v-input-text w-100" type="text" v-model="user.cargo" :placeholder="user.cargo?user.cargo:'Cargo'">
           </div>
         </div>
         <div class="v-admin-useremail">
           <p class="title-text">CORREO ELECTRÓNICO</p>
           <div class="v-admin-emailvalues">
-            <input class="v-input-text w-100" type="text" v-model="userVal.email" :placeholder="userVal.email?userVal.email:'Correo'">
+            <input class="v-input-text w-100" type="text" v-model="user.correo" :placeholder="user.correo?user.correo:'Correo'">
           </div>
         </div>
         <button class="btn btn-success mt-5 float-right">Salvar cambios</button>
@@ -40,7 +40,6 @@ export default {
           ''
         ],
       },
-      loader: false,
     }
   },
 
@@ -53,7 +52,7 @@ export default {
   },
 
   mounted(){
-    setTimeout(() => {
+    /* setTimeout(() => {
       if(this.user){
         const splittedName = this.user.displayName.split('|');
         if(this.user.displayName && splittedName[0]){
@@ -70,7 +69,7 @@ export default {
         }
         this.loader = true
       }
-    }, 500);
+    }, 500); */
   },
 
 }
