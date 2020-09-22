@@ -4830,6 +4830,10 @@ Menu Responsive
 
 ***/
 
+#actualidad{
+	background-color:#f0f2f5;
+}
+
 #actualidad section{
 	transition: all 0.7s ease-in-out;
 	transform: translateX(0vw);
@@ -4843,13 +4847,11 @@ Menu Responsive
 	transform: translateX(-100vw);
 }
 
-#actualidad{
-	background-color:#f0f2f5;
-}
-
 #actualidad .v-act-wrapper{
+	display: flex;
 	position:relative;
 	padding: 5% 0px;
+	min-height: 90vh;
 }
 
 #actualidad .noti-block{
@@ -4881,116 +4883,22 @@ Menu Responsive
 	left: 0 !important;
 }
 
-#actualidad .noti-block .inner-box .image::after{
-	position: absolute;
-	top: -5%;
-	left: 0;
-	display: initial;
-	content: '';
-	min-width: 100%;
-	min-height: 110%;
-	background: black;
-	clip-path: polygon(50% 0%,
-	/* Esquina superior externa derecha */
-	89% 0%, 95% 8%,
-	/* Esquina inferior externa derecha */
-	95% 92%, 89% 100%, 
-	50% 100%, 50% 99.3%,
-	/* Esquina inferior interna derecha */
-	88.7% 99.3%, 94.5% 91.5%,
-	/* Esquina superior interna derecha */
-	94.5% 8.7%, 88.7% .7%, 
-	50% .7%);
-	transition: .7s ease all;
-}
-
-#actualidad .noti-block .inner-box:hover .image:after{
-	position: absolute;
-	background-color: #FE5D25 !important;
-	display: initial;
-	content: '';
-	min-width: 100%;
-	min-height: 110%;
-	background: black;
-	clip-path: polygon(50% 0%, 
-	/* Esquina superior externa derecha */
-	97% 0%, 97% 0%, 
-	/* Esquina inferior externa derecha */
-	97% 100%, 97% 100%,
-	50% 100%, 50% 99.3%, 
-	/* Esquina inferior interna derecha*/
-	96.5% 99.3%, 96.5% 99.3%,
-	/* Esquina superior interna derecha */
-	96.5% .7%, 96.5% .7%, 
-	50% .7%);
-}
-
-#actualidad .noti-block .inner-box .image::before{
-	position: absolute;
-	top: -5%;
-	left: 0;
-	display: initial;
-	content: '';
-	min-width: 100%;
-	max-width: 100%;
-	min-height: 110%;
-	background: black;
-	clip-path: polygon(50% 0%,
-	/* Esquina superior externa izquierda */
-	11% 0%, 5% 8%,
-	/* Esquina inferior externa izquierda */
-	5% 92%, 11% 100%,
-	50% 100%, 50% 99.3%,
-	/* Esquina inferior interna izquierda */
-	11.3% 99.3%, 5.5% 91.5%,
-	/* Esquina superior interna izquierda */
-	5.5% 8.7%, 11.3% .7%,
-	50% .7%);
-	transition: .7s ease all;
-}
-
-#actualidad .noti-block .inner-box:hover .image:before{
-	position: absolute;
-	background-color: #FE5D25 !important;
-	display: initial;
-	content: '';
-	min-width: 100%;
-	max-width: 100%;
-	min-height: 110%;
-	background: black;
-	clip-path: polygon(50% 0%,
-	/* Esquina superior externa izquierda */
-	2% 0%, 2% 0%,
-	/* Esquina inferior externa izquierda */
-	2% 100%, 2% 100%,
-	50% 100%, 50% 99.3%,
-	/* Esquina inferior interna izquierda */
-	2.5% 99.3%, 2.5% 99.3%,
-	/* Esquina superior interna izquierda */
-	2.5% .7%, 2.5% .7%,
-	50% .7%);
-}
-
 #actualidad .noti-block .inner-box .image{
 	position:relative;
 	border-radius: 10px;
 	height: auto;
-}
-
-#actualidad .noti-block .inner-box .image .img-container-flow{
 	overflow: hidden;
-	height: auto;
+	max-width: 360px;
 }
 
 #actualidad .noti-block .inner-box .image img{
 	position:relative;
-	height: auto;
+	height: 260px;
 	min-height: 160px;
-	max-height: 250px;
+	max-height: 260px;
 	transform: translateX(500px);
 	opacity: 0;
-	min-width: 100%;
-	display:block;
+	max-width: 360px;
 	border-radius: 10px;
 	transition:all 900ms ease, opacity 800ms ease-in;
 	-moz-transition:all 900ms ease, opacity 800ms ease-in;
@@ -5000,7 +4908,7 @@ Menu Responsive
 }
 
 #actualidad .noti-block .inner-box:hover .image img{
-	transform: scale(1.1);
+	transform: scale(1.05) !important;
 }
 
 .lazy-show{
@@ -5031,7 +4939,7 @@ Menu Responsive
 
 #actualidad .noti-block .inner-box .lower-content .upper-box h5{
 	position:relative;
-	font-size: 2vw;
+	font-size: max(1.8vw, 20px);
 	text-align: center;
 	font-weight:bolder;
 	line-height: auto;
@@ -5040,10 +4948,11 @@ Menu Responsive
 }
 
 #actualidad .noti-block .inner-box .lower-content .text{
+	color: black;
 	position:relative;
-	color:#000000;
+	font-family: 'Rubik', sans-serif;
 	text-align: justify;
-	font-size:1.7vw;
+	font-size: min(1.7vw, 15px);
 	line-height:1.8em;
 	margin-top:5px;
 	font-weight:300;
@@ -5051,7 +4960,7 @@ Menu Responsive
 
 #actualidad .noti-block .inner-box .lower-content .upper-box a{
 	position:relative;
-	font-size: 1.7vw;
+	font-size: min(1.7vw, 15px);
 	font-weight:  bold;
 }
 
@@ -5116,13 +5025,16 @@ Menu Responsive
 
 @media screen and (max-width: 720px){
 	#actualidad .noti-block .inner-box .lower-content .upper-box h5{
-		font-size: 3vw;
+		font-size: max(3vw, 20px);
 	}
 	#actualidad .noti-block .inner-box .lower-content .text{
 		font-size: 2.5vw;
 	}
 	#actualidad .noti-block .inner-box .lower-content .upper-box a{
 		font-size: 2.5vw;
+	}
+	#actualidad .noti-block .inner-box .lower-content{
+		width: 100% !important;
 	}
 }
 
@@ -5153,9 +5065,13 @@ Seccion 2 Pagina de Actualidad
 
 #actualidad #section2 .info-container .text{
 	text-align: justify;
-}
-
-#actualidad #section2 a{
+	color: black;
+	position:relative;
+	font-family: 'Rubik', sans-serif;
+	font-size: 15px;
+	line-height:1.8em;
+	margin-top:5px;
+	font-weight:300;
 }
 
 /*** 

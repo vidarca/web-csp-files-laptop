@@ -1,6 +1,9 @@
 <template>
   <div id="admin-edit">
-      <form @submit.prevent="isUserDiff(userVal)">
+    <div class="alert-box position-fixed" ref="alertBox">
+      <i :class="error?'icon-err flaticon-close':successUpload?'icon-succ flaticon-check': ' '"></i> <p>{{error?error:successUpload?successUpload:' '}}</p>
+    </div>
+      <form @submit.prevent="isUserDiff()">
         <div class="v-admin-username w-100">
           <p class="title-text">NOMBRE DE USUARIO</p>
           <div class="v-admin-namevalues w-100">
@@ -8,19 +11,30 @@
             <input class="v-input-text" id="last-name" type="text" v-model="user.apellido" :placeholder="user.apellido?user.apellido:'Apellido'">
           </div>
         </div>
-        <div class="v-admin-userrank">
-          <p class="title-text">CARGO</p>
-          <div class="v-admin-rankvalues">
-            <input class="v-input-text w-100" type="text" v-model="user.cargo" :placeholder="user.cargo?user.cargo:'Cargo'">
+        <div class="v-admin-userrank d-flex flex-row align-items-center justify-content-center">
+          <div class="d-flex w-100 flex-column justify-content-center align-items-center" style="margin: 2px;">
+            <p class="title-text">CARGO</p>
+            <div class="v-admin-rankvalues w-100">
+              <input class="v-input-text w-100" type="text" v-model="user.cargo" :placeholder="user.cargo?user.cargo:'Cargo'">
+            </div>
+          </div>
+          <div class="d-flex w-100 flex-column justify-content-center align-items-center" style="margin: 2px;">
+            <p class="title-text">CORREO ELECTRÓNICO</p>
+            <div class="v-admin-emailvalues w-100">
+              <input class="v-input-text w-100" type="text" v-model="user.correo" :placeholder="user.correo?user.correo:'Correo'">
+            </div>
           </div>
         </div>
-        <div class="v-admin-useremail">
-          <p class="title-text">CORREO ELECTRÓNICO</p>
-          <div class="v-admin-emailvalues">
-            <input class="v-input-text w-100" type="text" v-model="user.correo" :placeholder="user.correo?user.correo:'Correo'">
-          </div>
+        <div class="submit-button">
+          <button class="btn btn-success mt-5 float-right">
+            <div v-if="actUser === true" class="spinner-border text-light" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+            <p v-else>
+              Salvar cambios
+            </p>
+          </button>
         </div>
-        <button class="btn btn-success mt-5 float-right">Salvar cambios</button>
       </form>
   </div>
 </template>
@@ -40,38 +54,36 @@ export default {
           ''
         ],
       },
+      error: null,
     }
   },
 
   computed:{
-    ...mapState(['user']),
+    ...mapState(['user', 'successUpload', 'actUser']),
   },
 
   methods:{
-    ...mapMutations(['isUserDiff', 'setRefUser']),
+    ...mapMutations(['isUserDiff', 'setRefUser', 'successAdvise',]),
   },
 
-  mounted(){
-    /* setTimeout(() => {
-      if(this.user){
-        const splittedName = this.user.displayName.split('|');
-        if(this.user.displayName && splittedName[0]){
-          this.userVal.name[0] = splittedName[0]
-          this.userVal.name[1] = splittedName[1]
-        }else if(this.user.displayName){
-          this.userVal.name = this.user.displayName.split(' ');
-        }
-
-        this.userVal.email = this.user.email;
-
-        if(this.user.displayName && splittedName[2]){
-          this.userVal.rank = splittedName[2]
-        }
-        this.loader = true
+  watch:{
+    successUpload(){
+      if(this.successUpload !== null){
+        this.$refs.alertBox.classList.add('alert-show')
+        setTimeout(() => {
+          try {
+          this.$refs.alertBox.classList.remove('alert-show');}catch{}
+        }, 3000);
+        setTimeout(() => {
+          const data = {
+            0: 'successUpload',
+            1: null
+          }
+          this.successAdvise(data)
+        }, 3600);
       }
-    }, 500); */
+    },
   },
-
 }
 </script>
 
@@ -81,6 +93,8 @@ export default {
   font-size: 15px;
   font-weight: bold;
   margin: 15px 0 0 0;
+  text-align: left;
+  width: 100%;
 }
 
 .v-input-text{
@@ -92,6 +106,11 @@ export default {
 
 .v-input-text#name, .v-input-text#last-name{
   width: calc(100%/2 - 2*2px);
+}
+
+.btn.btn-success p{
+  color: inherit;
+  font-weight: inherit;
 }
 
 </style>

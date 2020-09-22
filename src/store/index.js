@@ -11,6 +11,7 @@ export default new Vuex.Store({
     deletingVal: null,
     loadEdit: false,
     deletingIndex: '',
+    actUser: null,
     dbWeb:[],
     dpResponsive: false,
     headerView: 0,
@@ -69,24 +70,28 @@ export default new Vuex.Store({
     },
     setUser(state, user){
       state.user = {
-        name: user[0],
+        activo: user[0],
         apellido: user[1],
-        cargo: user[2],
-        correoVeri: user[3],
+        autori: user[2],
+        cargo: user[3],
         correo: user[4],
-        autori: user[5],
+        correoVeri: user[5],
         fotoUrl: user[6],
-        telefono: user[7],
+        id: user[7],
+        name: user[8],
+        telefono: user[9],
       }
       state.refUser = {
-        name: user[0],
+        activo: user[0],
         apellido: user[1],
-        cargo: user[2],
-        correoVeri: user[3],
+        autori: user[2],
+        cargo: user[3],
         correo: user[4],
-        autori: user[5],
+        correoVeri: user[5],
         fotoUrl: user[6],
-        telefono: user[7],
+        id: user[7],
+        name: user[8],
+        telefono: user[9],
       }
     },
     updateUser(state, value){
@@ -95,49 +100,58 @@ export default new Vuex.Store({
         // Aqui debo poner el activador para el cargador
         
         user.updateProfile({
-          displayName: value.name[0] + '|' + value.name[1] + '|' + value.rank,
-          email: value.email
+          displayName: value.name,
+          email: value.correo
         }).then(() =>{
-          // Aqui debo poner para quitar el cargador
-          state.user.displayName = user.displayName
-          state.user.email = user.email
+          const valuesRef = {
+            uadmin_correo: value.correo,
+            uadmin_correoVeri: value.correoVeri,
+            uadmin_nombre: value.name,
+            uadmin_apellido: value.apellido,
+            uadmin_autori: value.autori,
+            uadmin_fotoUrl: value.fotoUrl,
+            uadmin_telefono: value.telefono,
+            uadmin_cargo: value.cargo,
+            uadmin_id: value.id,
+            uadmin_activo: value.activo,
+          }
+          const dbRef = firebase.database().ref('Usuarios_admin');
+          dbRef.child(value.id).set(valuesRef).then(()=>{
+            // Aqui debo poner para quitar el cargador
+            this.commit('setUser', Object.values(value));
+            state.actUser = null;
+            const success = {
+              0: 'successUpload',
+              1: 'Se ha actualizado exitosamente'
+            };
+            this.commit('successAdvise', success);
+          })
         })
       }
     },
     dbUserVal(state, value){
-      if(value[0] === 0){
-        const valuesRef = {
-          uadmin_activo: true,
-          uadmin_correo: value[3],
-          uadmin_correoVeri: value[4],
-          uadmin_id: value[1],
-          uadmin_nombre: value[2],
-          uadmin_apellido: '',
-          uadmin_autori: '',
-          uadmin_fotoUrl: `${value[5]}`,
-          uadmin_telefono: `${value[6]}`,
-          uadmin_cargo: '',
-        }
-        const dbRef = firebase.database().ref('Usuarios_admin');
-        dbRef.child(valuesRef.uadmin_id).set(valuesRef).then(()=>{
-          const setUserRef = {
-            0: valuesRef.uadmin_nombre,
-            1: valuesRef.uadmin_apellido,
-            2: valuesRef.uadmin_cargo,
-            3: valuesRef.uadmin_correoVeri,
-            4: valuesRef.uadmin_correo,
-            5: valuesRef.uadmin_autori,
-            6: valuesRef.uadmin_fotoUrl,
-            7: valuesRef.uadmin_telefono,
-          }
-          this.commit('setUser', setUserRef);
-        })
+      const valuesRef = {
+        uadmin_activo: true,
+        uadmin_apellido: '',
+        uadmin_autori: '',
+        uadmin_cargo: '',
+        uadmin_correo: value[0],
+        uadmin_correoVeri: value[1],
+        uadmin_fotoUrl: `${value[2]}`,
+        uadmin_id: value[3],
+        uadmin_nombre: value[4],
+        uadmin_telefono: `${value[5]}`,
       }
+      const dbRef = firebase.database().ref('Usuarios_admin');
+      dbRef.child(valuesRef.uadmin_id).set(valuesRef).then(()=>{
+        this.commit('setUser', Object.values(valuesRef));
+      })
     },
     isUserDiff(state){
       for(let i = 0; i < Object.values(state.user).length; i++){
         if(Object.values(state.user)[i] !== Object.values(state.refUser)[i]){
-          return this.commit('updateUser', value);
+          state.actUser = true;
+          return this.commit('updateUser', state.user);
         }
       }
     },
@@ -391,13 +405,23 @@ export default new Vuex.Store({
   },
   actions: {
     getData: async function({commit}, val){
-      const data = await fetch("https://web-database-66842.firebaseio.com/.json");
-      const dbWeb = await data.json();
-      const value = {
-        0: dbWeb,
-        1: val,
+      let tryAgain = true;
+      while(tryAgain){
+        try{
+          const data = await fetch("https://web-database-66842.firebaseio.com/.json");
+          const dbWeb = await data.json();
+          const value = {
+            0: dbWeb,
+            1: val,
+          }
+          tryAgain = false;
+          commit('dataWeb', value)
+        }catch(err){
+          setTimeout(() => {
+            console.log('Error');
+          }, 2000);
+        }
       }
-      commit('dataWeb', value)
     },
   },
   modules: {

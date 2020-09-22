@@ -151,7 +151,7 @@ export default {
     },
 
     computed:{
-      ...mapState(['editContent', 'successUpload', 'dbWeb', 'deletingVal', 'deletingIndex', 'loadEdit']),
+      ...mapState(['editContent', 'successUpload', 'dbWeb', 'deletingVal', 'deletingIndex']),
       ...mapActions(['getData']),
       reverseArray(){
         if(this.dbWeb.Noticias !== undefined){

@@ -1,17 +1,15 @@
 <template>
   <div id="actualidad" class="">
     <!-- Seccion de Actualidad -->
-    <section id="section1" ref="section1" class="v-act-wrapper" v-show="reverseArray[0] !== undefined && showMin" style="min-height: 50vh">
-        <div class="w-85 m-auto">
+    <section id="section1" ref="section1" class="v-act-wrapper justify-content-center align-items-center" v-show="reverseArray[0] !== undefined && showMin">
+        <div class="ext-wrapper w-75 m-auto">
             <!-- Titulo de seccion -->
             <div class="row">
             <!-- Bloque de Notica -->
                 <div class="noti-block col-lg-12 col-sm-12" ref="anuncios" v-for="(anuncio, index) in reverseArray" :key="anuncio.noti_id" :id="anuncio.noti_seccion" data-transitioned="false" :data-index="index" v-show="index < 5 + showIndex && index >= showIndex">
-                    <div :class="['inner-box d-flex justify-content-between align-items-center', flexAndCliWidth(index)]" :data-index="index" :data-src="anuncio.noti_imagenes[1].url"  ref="elLazy" >
+                    <div :class="['inner-box d-flex justify-content-center align-items-center', flexAndCliWidth(index)]" :data-index="index" :data-src="anuncio.noti_imagenes[1].url"  ref="elLazy" >
                       <div class="image w-100 d-flex align-items-center justify-content-center">
-                        <div class="img-container-flow w-100">
-                          <img  src=" " :alt="anuncio.noti_imagenes[1].name" :ref="`foto${index}`"/>
-                        </div>
+                        <img  src=" " :alt="anuncio.noti_imagenes[1].name" :ref="`foto${index}`"/>
                       </div>
                       <div class="lower-content w-100">
                           <div class="upper-box">
@@ -31,7 +29,7 @@
                 </div>
             </div>
         </div>
-        <div class="bot-selectors d-flex flex-row align-items-center justify-content-center position-relative" v-if="showSelect === true">
+        <div class="bot-selectors d-flex flex-row align-items-center justify-content-center position-relative align-self-end" v-if="showSelect === true">
           <div class="position-relative" style="width: 25px; height: 25px;">
             <i class="icon left-arrow flaticon-arrowhead-pointing-to-the-right" style="transform: rotate(180deg);" @click="translateLeft()"></i>
           </div>
@@ -222,6 +220,7 @@ export default {
       this.$refs.section1.classList.toggle('translate');
       setTimeout(() => {
         this.showMin = false;
+
       }, 700);
       setTimeout(() => {
         window.scrollTo(0, 0);
@@ -236,7 +235,7 @@ export default {
       }, 700);
       setTimeout(() => {
 		  window.scrollTo(0, 0);
-      this.$refs.section1.classList.toggle('translate');
+        this.$refs.section1.classList.toggle('translate');
       }, 800);
     },
     parrShow(index, val){
@@ -282,8 +281,8 @@ export default {
           if(!entry.isIntersecting){
             return;
           }
-          entry.target.children[0].children[0].children[0].src = entry.target.dataset.src;
-          entry.target.children[0].children[0].children[0].classList.toggle('lazy-show');
+          entry.target.children[0].children[0].src = entry.target.dataset.src;
+          entry.target.children[0].children[0].classList.toggle('lazy-show');
           observer.unobserve(entry.target)
         });
       }, ops);

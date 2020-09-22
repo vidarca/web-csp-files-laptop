@@ -16,7 +16,7 @@
     </nav>
     <div class="container-fluid">
       <div class="row">
-        <nav id="sidebarMenu" class="col-md-3 col-lg-3 d-md-block bg-light v-sidebar" ref="sidebarMenu">
+        <nav id="sidebarMenu" class="d-md-block bg-light v-sidebar" ref="sidebarMenu">
           <div class="sidebar-sticky pt-3">
             <ul class="nav flex-column">
               <li class="nav-item">
@@ -59,30 +59,18 @@
                 </ul>
               </li>
               <li class="nav-item">
-                <div class="nav-link-collapse-principal">
+                <div class="nav-link">
                   <i class="icon-mini flaticon-group col-2 pr-1 pr-md-2"></i>
-                  <a class="nav-link col-8" @click="expandSidebar('listJunta', 'listJuntaIcon')">
+                  <a class="nav-link col-8" @click.prevent="selectComponent('4')">
                     JUNTA DIRECTIVA
                   </a>
-                  <span class="icon flaticon-arrowhead-pointing-to-the-right col-2 pl-1 pl-md-2" ref="listJuntaIcon" @click="expandSidebar('listJunta', 'listJuntaIcon')"></span>
+                  <span class="col-2 pl-md-2"></span>
                 </div>
-                <ul class="v-collapsed-side v-collapsed-list" ref="listJunta">
-                  <li class="nav-item">
-                    <a class="nav-link" href="#"> <!-- @click.prevent="selectComponent('')" -->
-                      JUNTA ACTUAL
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#"> <!-- @click.prevent="selectComponent('')" -->
-                      JUNTAS ANTERIORES
-                    </a>
-                  </li>
-                </ul>
               </li>
             </ul>
           </div>
         </nav>
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-9 px-md-4">
+        <main role="main" class="main-content">
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 -3 border-bottom">
             <h1 class="h2">Dashboard</h1>
           </div>
@@ -104,6 +92,7 @@ import AdminCreateContent from './AdminCreateContent'
 import AdminEditUser from './AdminEditUser'
 import AdminEditContent from './AdminEditContent'
 import AdminDashboard from './AdminDashboard'
+import AdminEditJunta from './AdminEditJunta'
 import {mapState, mapMutations, mapGetters, mapActions} from 'vuex'
 
 export default {
@@ -113,12 +102,14 @@ export default {
       'AdminEditUser',
       'AdminDashboard',
       'AdminEditContent',
+      'AdminEditJunta',
   ],
   components:{
     AdminCreateContent,
     AdminEditUser,
     AdminDashboard,
     AdminEditContent,
+    AdminEditJunta,
   },
   data(){
     return {
@@ -128,6 +119,7 @@ export default {
         'AdminCreateContent',
         'AdminEditContent',
         'AdminEditUser',
+        'AdminEditJunta',
       ],
       currentCompon: 'AdminDashboard',
       dataName: [],
@@ -176,32 +168,34 @@ export default {
   },
   
   created(){
+    try {
     let values = [];
     const data = setInterval(() => {
-      const user = firebase.auth().currentUser
+        const user = firebase.auth().currentUser
       if(user){
         clearTimeout(data)
         if(this.dbWeb.Usuarios_admin[`${user.uid}`]){
           values = {
-            0: this.dbWeb.Usuarios_admin[`${user.uid}`].uadmin_nombre,
+            0: this.dbWeb.Usuarios_admin[`${user.uid}`].uadmin_activo,
             1: this.dbWeb.Usuarios_admin[`${user.uid}`].uadmin_apellido,
-            2: this.dbWeb.Usuarios_admin[`${user.uid}`].uadmin_cargo,
-            3: this.dbWeb.Usuarios_admin[`${user.uid}`].uadmin_correoVeri,
+            2: this.dbWeb.Usuarios_admin[`${user.uid}`].uadmin_autori,
+            3: this.dbWeb.Usuarios_admin[`${user.uid}`].uadmin_cargo,
             4: this.dbWeb.Usuarios_admin[`${user.uid}`].uadmin_correo,
-            5: this.dbWeb.Usuarios_admin[`${user.uid}`].uadmin_autori,
+            5: this.dbWeb.Usuarios_admin[`${user.uid}`].uadmin_correoVeri,
             6: this.dbWeb.Usuarios_admin[`${user.uid}`].uadmin_fotoUrl,
-            7: this.dbWeb.Usuarios_admin[`${user.uid}`].uadmin_telefono,
+            7: this.dbWeb.Usuarios_admin[`${user.uid}`].uadmin_id,
+            8: this.dbWeb.Usuarios_admin[`${user.uid}`].uadmin_nombre,
+            9: this.dbWeb.Usuarios_admin[`${user.uid}`].uadmin_telefono,
           }
-          
+
           this.setUser(values)
           this.loaded = true;
         }else{
-          values.push(0);
-          values.push(user.uid);
-          values.push(user.displayName);
           values.push(user.email);
           values.push(user.emailVerified);
           values.push(user.photoURL);
+          values.push(user.uid);
+          values.push(user.displayName);
           values.push(user.phoneNumber);
 
           this.dbUserVal(values);
@@ -209,6 +203,9 @@ export default {
         }
       }
     }, 500);
+    }catch(err){
+      console.log('El error es ' + err);
+    }
   },
 
   mounted(){
@@ -244,12 +241,6 @@ export default {
       }
     })   
   },
-
-  /* watch:{
-    userUpdate(){
-      this.dataName = this.user.displayName.split('|')
-    }
-  } */
 }
 
 </script>
@@ -270,6 +261,8 @@ export default {
 
   .v-sidebar{
     height: 760px;
+    width: 256px;
+    max-width: auto;
     position: fixed;
     padding: 0 10px;
   }
@@ -354,6 +347,12 @@ export default {
     overflow: hidden;
   }
 
+  .main-content{
+    margin-left: 250px;
+    width: 100%;
+    padding: 15px;
+  }
+
   @media screen and (max-width: 768px) {
     .bd-placeholder-img-lg {
       font-size: 3.5rem;
@@ -369,6 +368,16 @@ export default {
       position: relative !important;
       transition: all 1s ease;
       overflow: hidden;
+    }
+
+    .v-sidebar{
+      width: auto;
+    }
+
+    .main-content{
+      margin-left: 0;
+      width: 100%;
+      padding: 15px;
     }
   }
 </style>

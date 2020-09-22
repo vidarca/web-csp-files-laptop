@@ -34,12 +34,6 @@ export default {
     this.getData().then(() => {
       this.loaded = true
     })
-  
-
-    /* this.isResponsive()
-    window.addEventListener('resize', ()=>{
-      this.isResponsive()
-    }) */
   },
 
   updated(){
