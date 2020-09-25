@@ -97,6 +97,7 @@ export default {
         showIndex: 0,
         currentIndex: 1,
         anunSelecIndex: 0,
+        numElements: 5,
       }
     },
     components: {
@@ -195,7 +196,7 @@ export default {
         }
       })
       setTimeout(() => {
-        this.showIndex = 5*(val-1);
+        this.showIndex = this.numElements*(val-1);
       }, 700);
       setTimeout(() => {
         this.$refs.anuncios.forEach(element => {

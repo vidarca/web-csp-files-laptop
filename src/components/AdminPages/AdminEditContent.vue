@@ -1,38 +1,84 @@
 <template>
-  <div id="admin-editar-junta" class="position-relative" v-if="show">
+  <div id="admin-editar" class="position-relative" v-if="show">
     <div class="alert-box position-fixed" ref="alertBox">
       <i :class="error?'icon-err flaticon-close':successUpload?'icon-succ flaticon-check': ' '"></i> <p>{{error?error:successUpload?successUpload:' '}}</p>
     </div>
-    <div class="v-wrapper">
+    <div class="v-wrapper" style="background-color: transparent;">
         <p>Seleccione una de las secciones</p>
         <select class="custom-select" v-model="editContent.formUpload.seccion" @change="filterChangeHandler()">
           <option selected>Todas las secciones</option>
           <option value="Actualidad">Actualidad</option>
           <option value="Tenis">Tenis</option>
           <option value="Natación">Natación</option>
-          <option value="Actualidad">Artes Marciales</option>
-          <option value="Tenis">Comunicaciones</option>
-          <option value="Natación">Cultura</option>
-          <option value="Actualidad">Dominó</option>
-          <option value="Tenis">Bailoterapia</option>
-          <option value="Natación">Squash</option>
-          <option value="Actualidad">TRX</option>
+          <option value="Artes Marciales">Artes Marciales</option>
+          <option value="Comunicaciones">Comunicaciones</option>
+          <option value="Cultura">Cultura</option>
+          <option value="Domino">Dominó</option>
+          <option value="Bailoterapia">Bailoterapia</option>
+          <option value="Squash">Squash</option>
+          <option value="TRX">TRX</option>
         </select>
     </div>
-    <div ref="anuncios" class="position-relative w-100" v-if="reverseArray[0] !== undefined">
-      <div class="anun-container d-flex flex-row align-items-center justify-content-center w-100" v-for="(anuncio, index) in reverseArray" :key="anuncio.noti_id" :id="anuncio.noti_seccion" data-transitioned="false">
-        <div :key="index"  :class="['transitioned d-flex flex-row align-items-center justify-content-between mt-1 mb-1 mr-1', (showPrev === false)?'col-10':'col-9']" :ref="anuncio.noti_seccion" style="height: 55px;" :id="`anun${index}`" @click="anunSelected($event, index)">
-          <span class="text-uppercase text-center col-2" id="val1">{{anuncio.noti_seccion}}</span>
-          <span class="text-uppercase text-center col-7" id="val2">{{anuncio.noti_titulo}}</span>
-          <span class="text-center col-2" id="val3">{{fechaAnuncio[index]}}</span>
+    <div class="list-db w-auto" v-if="reverseArray[0] !== undefined">
+      <div class="list-header w-100 d-flex flex-row align-items-center justify-content-between">
+        <div>
+          <h5 style="font-weight: bold;">
+            Lista de Noticias
+          </h5>
         </div>
-        <button class="btn btn-danger p-2 ml-3" @click="deleteElement(index)">
-          <div v-if="deletingVal === true && deletingIndex === index" class="spinner-border text-light" role="status">
-            <span class="sr-only">Loading...</span>
+      </div>
+      <div class="list-header w-100 row align-items-center justify-content-start">
+        <div class="text col-3 pl-1 pr-1">
+          Sección
+        </div>
+        <div class="text col-5 pl-1 pr-1">
+          Título de Noticia
+        </div>
+        <div class="text col-2 pl-1 pr-1 text-center">
+          Fecha de Creación
+        </div>
+        <div class="col-2 pl-1 pr-1">
+        </div>
+      </div>
+      <ul class="list-item w-100 row align-items-center justify-content-start" v-for="(anuncio, index) in reverseArray" :key="anuncio.noti_id" :id="anuncio.noti_seccion" :data-id="`anun${index}`" data-transitioned="false" v-show="index < 4 + showIndex && index >= showIndex" ref="listElements">
+        <li class="item-element text col-3 pl-1 pr-1">
+          {{anuncio.noti_seccion}}
+        </li>
+        <li class="item-element text col-5 pl-1 pr-1">
+          {{anuncio.noti_titulo}}
+        </li>
+        <li class="item-element text col-2 pl-1 pr-1 text-center">
+          {{fechaAnuncio[index]}}
+        </li>
+        <li class="item-element text col-2 d-flex flex-sm-row flex-column justify-content-end align-items-center pl-sm-1 pr-sm-1">
+          <i class="icon edit flaticon-edit mt-1 mb-1" title="Editar" :data-id="`anun${index}`" @click="anunSelected($event, index)"></i>
+          <div class="icon delete mt-1 mb-1" title="Eliminar" :data-index="index" @click="deleteElement(index)" v-show="showPrev === false" :ref='`spinner${index}`'>
+            <div class="spinner-border text-light" v-if="deletingVal === true && index === deletingIndex" role="status" style="width: 14px; height: 14px; margin-bottom: 2px">
+              <span class="sr-only">Loading...</span>
+            </div>
+            <i class="flaticon-close" v-else></i>
           </div>
-          <i class=" flaticon-close" v-else></i>
-        </button>
-        <button v-show="showPrev === true" class="btn btn-dark ml-3" @click="filterChangeHandler()">Regresar</button>
+          <i class="icon btn-dark flaticon-back-arrow mt-1 mb-1" title="Editar" v-show="showPrev === true" @click="filterChangeHandler()"></i>
+        </li>
+      </ul>
+      <div style="min-height: 46px; height: 46px;">
+        <div class="bot-selectors h-100 d-flex flex-row align-items-center justify-content-center position-relative align-self-end" v-if="showSelect === true">
+          <div class="position-relative" style="width: 25px; height: 25px;">
+            <i class="icon left-arrow flaticon-arrowhead-pointing-to-the-right" style="transform: rotate(180deg);" @click="translateLeft()"></i>
+          </div>
+          <div class="bot-container">
+            <div class="inner-container d-flex flex-row justify-content-center align-items-center" ref="innerContainer">
+              <div v-for="index in number" :key="index">
+                <div :class="['circle', (index === 1)?'active':'']" :ref="`bot${index}`" :id="index">
+                  <div class="text" @click="changeIndex(index)">{{index}}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="position-relative" style="width: 25px; height: 25px;">
+            <i class="icon right-arrow flaticon-arrowhead-pointing-to-the-right" @click="translateRight()"></i>
+          </div>
+        </div>
       </div>
     </div>
     <div v-show="showPrev">
@@ -41,11 +87,16 @@
           <div class="row align-items-start justify-content-between w-100 m-2">
             <div class="input-files col-lg-4 col-sm-6 d-flex flex-column align-items-start p-1" v-for="(image, index) in imagesData" :key="index">
               <div class="w-100 h-100 d-flex align-items-center position-relative">
-                <div class="button-files d-flex flex-row align-items-center justify-content-center bg-success w-100 p-2">
-                  <i class="flaticon-folder mr-3"></i>
-                  <label for="collectionFiles">{{`Imagen 0${parseInt(index) + 1}`}}</label>
-                </div>
-                <input :ref='`file${index}`' @change="filesVerification($event, index)" class="collectionFiles"  type="file" accept="image/*">
+                <div class="d-flex w-100 flex-column align-items-center justify-content-center">
+                    <div class="text" style="text-align: center;">
+                      {{(index === '0')?'El tamaño de la imagen debe ser 1260x460 px':'El tamaño de la imagen debe ser 360x260 px'}}
+                    </div>
+                    <div class="button-files d-flex flex-row align-items-center justify-content-center bg-success w-100 p-2">
+                      <i class="flaticon-folder mr-3"></i>
+                      <label for="collectionFiles">{{`Imagen 0${parseInt(index) + 1}`}}</label>
+                    </div>
+                    <input :ref='`file${index}`' @change="filesVerification($event, index)" class="collectionFiles"  type="file" accept="image/*">
+                  </div>
               </div>
             <!-- PREV IMAGENES -->
               <div  class="uploadCont d-flex flex-row align-items-center w-100 mt-2" v-if="image.length !== 0">
@@ -56,7 +107,7 @@
                       <img :src="image.url" width="200" height="200" style="min-height: 200px; min-width: 200px; ">
                     </div>
                     <div v-else class="w-100 h-100 d-flex flex-row align-items-center justify-content-center">
-                      <p class="align-self-star ml-2">{{image.name}}</p>
+                      <p class="align-self-star ml-2" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">{{image.name}}</p>
                     </div>
                     <!-- ICONO DE QUITAR -->
                     <div class="veri-box w-100 mt-2 d-flex flex-row justify-content-center align-items-center">
@@ -108,12 +159,15 @@
 import {mapState, mapMutations, mapActions} from 'vuex'
 
 export default {
-    name: 'AdminEditJunta',
+    name: 'AdminEditContent',
     data(){
       return {
         show: false,
         error: null,
         displayArr: false,
+        showIndex: 0,
+        showSelect: false,
+        number: 0,
         tipoSol: 0,
         seccion: '',
         titulo: '',
@@ -147,12 +201,12 @@ export default {
         changeDB: false,
         changePics: false,
         showPrev: false,
+        numElements: 10,
       }
     },
 
     computed:{
       ...mapState(['editContent', 'successUpload', 'dbWeb', 'deletingVal', 'deletingIndex']),
-      ...mapActions(['getData']),
       reverseArray(){
         if(this.dbWeb.Noticias !== undefined){
           let array = Object.values(this.dbWeb.Noticias);
@@ -177,12 +231,13 @@ export default {
     },
     
     methods:{
-      ...mapMutations(['filesUpload', 'resetContentValues', 'deleteFileState', 'successAdvise', 'deletedEl']),
+      ...mapMutations(['filesUpload', 'resetContentValues', 'deleteFileState', 'successAdvise', 'deletedEl', 'changeSecTitle']),
+      ...mapActions(['getData']),
       filterChangeHandler(){
-        if(this.$refs.anuncios !== undefined){
+        if(this.$refs.listElements !== undefined){
           const waiting = setInterval(() => {
-            for(let i = 0; i < this.$refs.anuncios.children.length; i++) {
-              if(this.$refs.anuncios.children[i].dataset.transitioned === 'true'){
+            for(let i = 0; i < this.$refs.listElements.length; i++) {
+              if(this.$refs.listElements[i].dataset.transitioned === 'true'){
                 return false
               }else{
                 this.filterChange()
@@ -195,27 +250,27 @@ export default {
       filterChange(){
         this.showPrev = false
         if(this.editContent.formUpload.seccion !== 'Todas las secciones'){
-          for(let i = 0; i < this.$refs.anuncios.children.length; i++) {
+          for(let i = 0; i < this.$refs.listElements.length; i++) {
             setTimeout(() => {
-              this.$refs.anuncios.children[i].classList.add('slide-list');
-              this.$refs.anuncios.children[i].dataset.transitioned = 'true'
+              this.$refs.listElements[i].classList.add('slide-list');
+              this.$refs.listElements[i].dataset.transitioned = 'true'
             }, 50*i);
-            if(this.$refs.anuncios.children[i].id !== this.editContent.formUpload.seccion){
+            if(this.$refs.listElements[i].id !== this.editContent.formUpload.seccion){
               setTimeout(() => {
-                this.$refs.anuncios.children[i].classList.add('hide-list');
-                this.$refs.anuncios.children[i].dataset.transitioned = 'false'
+                this.$refs.listElements[i].classList.add('hide-list');
+                this.$refs.listElements[i].dataset.transitioned = 'false'
               }, 1000 + 50*i);
             }else{
               setTimeout(() => {
-                this.$refs.anuncios.children[i].classList.remove('slide-list');
-                this.$refs.anuncios.children[i].classList.remove('hide-list');
-                this.$refs.anuncios.children[i].dataset.transitioned = 'false'
+                this.$refs.listElements[i].classList.remove('slide-list');
+                this.$refs.listElements[i].classList.remove('hide-list');
+                this.$refs.listElements[i].dataset.transitioned = 'false'
               }, 1000 + 50*i);
             }
           }
         }else{
           let i = 0;
-          this.$refs.anuncios.children.forEach(element => {
+          this.$refs.listElements.forEach(element => {
             setTimeout(() => {
               element.classList.add('slide-list');
               element.dataset.transitioned = 'true'
@@ -231,26 +286,25 @@ export default {
       },
       anunSelected(value, index){
         let count = 0;
-        let root = document.documentElement;
         let j = 0;
 
-        for(let i = 0; i < this.$refs.anuncios.children.length; i++) {
+        for(let i = 0; i < this.$refs.listElements.length; i++) {
           setTimeout(() => {
-            this.$refs.anuncios.children[i].classList.add('slide-list');
+            this.$refs.listElements[i].classList.add('slide-list');
           }, 50*i);
-          if(this.$refs.anuncios.children[i].children[0].id !== value.target.parentNode.id){
+          if(this.$refs.listElements[i].dataset.id !== value.target.dataset.id){
             setTimeout(() => {
-              this.$refs.anuncios.children[i].classList.add('hide-list');
-            }, 900 + 50*i);
+              this.$refs.listElements[i].classList.add('hide-list');
+            }, 900 + 1*i);
           }
-          if(i === this.$refs.anuncios.children.length-1){
+          if(i === this.$refs.listElements.length-1){
             setTimeout(() => {
-              this.$refs.anuncios.children[index].classList.remove('slide-list');
-              this.$refs.anuncios.children[index].classList.remove('hide-list');
-            }, 900 + 50*i + 100);
+              this.$refs.listElements[index].classList.remove('slide-list');
+              this.$refs.listElements[index].classList.remove('hide-list');
+            }, 900 + 1*i + 100);
           }
           j ++;
-          if(j === this.$refs.anuncios.children.length){
+          if(j === this.$refs.listElements.length){
             setTimeout(() => {
               for(let k = 0; k < this.reverseArray[index].noti_imagenes.length; k++){
                   this.imagesData[k] = this.reverseArray[index].noti_imagenes[k];
@@ -261,7 +315,7 @@ export default {
                   this.prev = this.reverseArray[index].noti_prev;
               }
               this.showPrev = true
-            }, 900 + 50*j + 300);
+            }, 900 + 1*j + 300);
           }
         }
       },
@@ -383,16 +437,56 @@ export default {
           }
         }
       },
+      translateRight(){
+        if(this.currentIndex <= 5*((this.$refs.innerContainer.children.length/5)-1)){
+          this.$refs.innerContainer.style.transform = `translateX(${parseFloat(this.$refs.innerContainer.style.transform.split('(')[1].split(')')[0]) - 45}px)`
+          this.currentIndex ++;
+        }
+      },
+      translateLeft(){
+        if(this.currentIndex > 1){
+          this.$refs.innerContainer.style.transform = `translateX(${parseFloat(this.$refs.innerContainer.style.transform.split('(')[1].split(')')[0]) + 45}px)`
+          this.currentIndex --;
+        }
+      },
+      changeIndex(val){
+        this.$refs.listElements.forEach(element => {
+          element.dataset.transitioned = 'true';
+          element.classList.toggle('translate');
+        })
+        setTimeout(() => {
+          this.showIndex = this.numElements*(val-1);
+        }, 700);
+        setTimeout(() => {
+          this.$refs.listElements.forEach(element => {
+            element.dataset.transitioned = 'false';
+            element.classList.toggle('translate');
+          })
+        }, 900);
+        this.$refs.innerContainer.children.forEach(element => {
+          if(parseInt(element.children[0].id) !== val){
+            element.children[0].classList.remove('active');
+          }else if(parseInt(element.children[0].id) === val){
+            element.children[0].classList.add('active');
+          }
+        })
+      },
     },
 
     created(){
-      try{
-      this.getData()
-      } catch{this.show = true}
+      this.changeSecTitle('Editar Noticias');
+      this.getData().then(()=>{
+        this.show = true;
+      })
     },
 
     mounted(){
       this.resetContentValues(1);
+
+      if(this.reverseArray.length/this.numElements > 1){
+        this.number = Math.ceil(this.reverseArray.length/this.numElements);
+        this.showSelect = true;
+      }
     },
 
     watch:{
@@ -433,13 +527,15 @@ export default {
         if(this.deletingVal === false){
           this.deletedEl(n)
         }else if(this.deletingVal === null){
-          this.$refs.anuncios.children[`${this.deletingIndex}`].classList.add('slide-list');
+          this.$refs.listElements[`${this.deletingIndex}`].classList.add('slide-list');
           setTimeout(() => {
             let m = {
               0: 1,
               1: '',
             }
-            this.$refs.anuncios.children[`${this.deletingIndex}`].classList.add('deleted');
+            try{
+              this.$refs.listElements[`${this.deletingIndex}`].classList.add('deleted');
+            }catch{}
             this.deletedEl(m)
           }, 1000);
         }
@@ -553,7 +649,6 @@ export default {
   }
 
   .input-files .collectionFiles::after{
-    /* display: none; */
     position: absolute;
     width: 100%;
     height: 100%;
@@ -588,65 +683,96 @@ export default {
     margin: 5px 0;
   }
 
-  .anun-container{
-    max-width: 100%;
-    max-height: 600px;
-    opacity: 1;
-    height: auto; 
-    transition: transform 1s ease, opacity 0.8s ease-in, top 1s ease;
+  .list-db{
+    margin: 10px 5px;
+    border: 1px solid rgb(240, 240, 240);
+    border-radius: 5px;
+    box-shadow: 0 0 7px rgba(0,0,0,.5);
+  }
+
+  .list-db .list-header{
     overflow: hidden;
-    top: auto;
+    text-overflow: ellipsis;
+    font-weight: bold;
+    margin: 0;
+    padding: 10px;
+    border-bottom: 1px solid rgb(215, 215, 215);
+  }
+  
+  .list-db .list-header .text{
+    font-size: 14px;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
-  .transitioned{
-    cursor: pointer;
+  .list-db .list-item{
     position: relative;
-    border-radius: 15px;
-    border: 1px solid black;
-    padding: 0 15px;
-    transition: background-color 0.15s ease-in;
-    background-color: white;
+    width: 100%;
+    margin: 0;
+    padding: 10px;
+    border-bottom: 1px solid rgb(230, 230, 230);
+    transition: all .9s ease;
+    -moz-transition: all .9s ease;
+    -o-transition: all .9s ease;
+    -webkit-transition: all .9s ease;
   }
 
-  .transitioned::before{
+  .list-db .list-item::before{
     position: absolute;
-    content: ' ';
+    content: '';
     width: 100%;
     height: 100%;
     top: 0;
-    right: 0;
-    border: 1px transparent;
-    border-radius: 15px;
+    left: 0;
+    background-color: rgba(0,0,0,0);
   }
 
-  .transitioned span{
+  .list-db .list-item:hover::before{
+    background-color: rgba(0,0,0,.05);
+  }
+
+  .list-db .list-item:nth-child(odd){
+    background-color: rgb(245, 245, 245); 
+  }
+
+  .list-db .list-item .item-element .icon{
     cursor: pointer;
-    font-size: 12px;
-    padding: 0;
-    font-weight: bold;
-    transition: color 0.15s ease-in;
-  }
-
-  .anun-container .btn-danger{
-    width: 50px;
-    height: auto;
-    border: none;
+    border-radius: 5px;
     font-size: 14px;
-  }
-
-  .transitioned:hover{
-    background-color: #FE5D25;
-  }
-
-  .transitioned:hover span{
+    margin: 0 5px;
+    padding: .5px 4px .5px 5px;
     color: white;
+    transition: all .5s ease;
+    -moz-transition: all .5s ease;
+    -o-transition: all .5s ease;
+    -webkit-transition: all .5s ease;
   }
 
-  /* .form-class .info-label{
-    position: absolute;
-    left: 5px;
-    top: 0;
-  } */
+  .list-db .list-item .item-element .icon.edit:hover{
+    background-color: rgb(247, 226, 43);
+  }
+
+  .list-db .list-item .item-element .icon.delete:hover{
+    background-color: #fd364a;
+  }
+
+  .list-db .list-item .item-element .icon.edit{
+    background-color: rgb(228, 207, 25);
+    border: 0.3px solid  rgb(228, 207, 25);
+  }
+
+  .list-db .list-item .item-element .icon.delete{
+    background-color: #ce3140;
+    border: 0.3px solid  #ce3140;
+  }
+
+  .list-db .list-item .item-element.text{
+    font-size: 13px;
+    white-space: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: bold;
+  }
 
 
 </style>

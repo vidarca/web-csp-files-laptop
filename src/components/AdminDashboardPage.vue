@@ -3,7 +3,7 @@
     <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-3 shadow">
       <a class="navbar-brand mr-0 d-flex justify-content-center align-items-center"> 
       <i class="icon flaticon-user-1"></i> 
-        <p class="ml-3" v-if="user.name !== ''"> {{user.name}} {{user.apellido}} <br> {{user.cargo}} </p>
+        <p class="ml-3" v-if="user.nombre !== ''"> {{user.nombre}} {{user.apellido}} <br> {{user.cargo}} </p>
         <p class="ml-3" v-else>{{user.correo}}</p>
       </a>
       <button class="navbar-toggler position-absolute d-md-none collapsed flaticon-menu" type="button" ta-toggle="collapse" data-target="sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" ia-label="Toggle navigation" @click="expandMenu($event)">
@@ -23,7 +23,7 @@
                 <div class="nav-link">
                   <i class="icon-mini flaticon-dashboard col-2 pr-1 pr-md-2"></i>
                   <a class="nav-link col-8" @click.prevent="selectComponent('0')">
-                    DASHBOARD
+                    Dashboard
                   </a>
                   <span class="col-2 pl-md-2"></span>
                 </div>
@@ -31,8 +31,8 @@
               <li class="nav-item">
                 <div class="nav-link">
                   <i class="icon-mini flaticon-user-2 col-2 pr-1 pr-md-2"></i>
-                  <a class="nav-link col-8" @click.prevent="selectComponent('3')">
-                    EDITAR USUARIO
+                  <a class="nav-link col-8" @click.prevent="selectComponent('1')">
+                    Perfil de Usuario
                   </a>
                   <div class="col-2 pl-md-2"></div>
                 </div>
@@ -40,39 +40,98 @@
               <li class="nav-item">
                 <div class="nav-link-collapse-principal">
                   <i class="icon-mini flaticon-newspaper col-2 pr-1 pr-md-2"></i>
-                  <a class="nav-link col-8" @click="expandSidebar('listNoticias', 'listNoticiasIcon')">
-                    CONTENIDO DE NOTICIAS
+                  <a class="nav-link col-8" @click="expandSidebar('listSeguridad', 'listSeguridadIcon')">
+                    Seguridad
                   </a>
-                  <span class="icon flaticon-arrowhead-pointing-to-the-right col-2 pl-1 pl-md-2" ref="listNoticiasIcon" @click="expandSidebar('listNoticias', 'listNoticiasIcon')"></span>
+                  <span class="icon flaticon-arrowhead-pointing-to-the-right col-2 pl-1 pl-md-2" ref="listSeguridadIcon" @click="expandSidebar('listSeguridad', 'listSeguridadIcon')"></span>
                 </div>
-                <ul class="v-collapsed-side v-collapsed-list" ref="listNoticias">
+                <ul class="v-collapsed-side v-collapsed-list" ref="listSeguridad">
                   <li class="nav-item">
-                    <a class="nav-link" href="#" @click.prevent="selectComponent('1')">
-                      CREAR NOTICIA
+                    <a class="nav-link" href="#" @click.prevent="selectComponent('2')">
+                      Usuarios
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="#" @click.prevent="selectComponent('2')">
-                      EDITAR NOTICIAS
+                    <a class="nav-link" href="#" @click.prevent="selectComponent('3')">
+                      Contenido Extra
                     </a>
                   </li>
                 </ul>
               </li>
               <li class="nav-item">
-                <div class="nav-link">
-                  <i class="icon-mini flaticon-group col-2 pr-1 pr-md-2"></i>
-                  <a class="nav-link col-8" @click.prevent="selectComponent('4')">
-                    JUNTA DIRECTIVA
+                <div class="nav-link-collapse-principal">
+                  <i class="icon-mini flaticon-newspaper col-2 pr-1 pr-md-2"></i>
+                  <a class="nav-link col-8" @click="expandSidebar('listNoticias', 'listNoticiasIcon')">
+                    Noticias
                   </a>
-                  <span class="col-2 pl-md-2"></span>
+                  <span class="icon flaticon-arrowhead-pointing-to-the-right col-2 pl-1 pl-md-2" ref="listNoticiasIcon" @click="expandSidebar('listNoticias', 'listNoticiasIcon')"></span>
                 </div>
+                <ul class="v-collapsed-side v-collapsed-list" ref="listNoticias">
+                  <li class="nav-item">
+                    <a class="nav-link" href="#" @click.prevent="selectComponent('4')">
+                      Crear Noticia
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#" @click.prevent="selectComponent('5')">
+                      Editar Noticia
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <div class="nav-link-collapse-principal">
+                  <i class="icon-mini flaticon-newspaper col-2 pr-1 pr-md-2"></i>
+                  <a class="nav-link col-8" @click="expandSidebar('listAreas', 'listAreasIcon')">
+                    Áreas
+                  </a>
+                  <span class="icon flaticon-arrowhead-pointing-to-the-right col-2 pl-1 pl-md-2" ref="listAreasIcon" @click="expandSidebar('listAreas', 'listAreasIcon')"></span>
+                </div>
+                <ul class="v-collapsed-side v-collapsed-list" ref="listAreas">
+                  <li class="nav-item">
+                    <a class="nav-link" href="#" @click.prevent="selectComponent('6')">
+                      Juntas Directivas
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#" @click.prevent="selectComponent('7')">
+                      Sevicios
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#" @click.prevent="selectComponent('8')">
+                      Equipo de Trabajo
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <div class="nav-link-collapse-principal">
+                  <i class="icon-mini flaticon-newspaper col-2 pr-1 pr-md-2"></i>
+                  <a class="nav-link col-8" @click="expandSidebar('listComites', 'listComitesIcon')">
+                    Comités
+                  </a>
+                  <span class="icon flaticon-arrowhead-pointing-to-the-right col-2 pl-1 pl-md-2" ref="listComitesIcon" @click="expandSidebar('listComites', 'listComitesIcon')"></span>
+                </div>
+                <ul class="v-collapsed-side v-collapsed-list" ref="listComites">
+                  <li class="nav-item">
+                    <a class="nav-link" href="#" @click.prevent="selectComponent('9')">
+                      Profesores
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#" @click.prevent="selectComponent('10')">
+                      Comités Registrados
+                    </a>
+                  </li>
+                </ul>
               </li>
             </ul>
           </div>
         </nav>
         <main role="main" class="main-content">
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 -3 border-bottom">
-            <h1 class="h2">Dashboard</h1>
+            <h1 class="h2">{{secTitle}}</h1>
           </div>
           
           <transition name="fade-down" mode="out-in">
@@ -88,38 +147,62 @@
 
 <script>
 import firebase from 'firebase'
-import AdminCreateContent from './AdminCreateContent'
-import AdminEditUser from './AdminEditUser'
-import AdminEditContent from './AdminEditContent'
-import AdminDashboard from './AdminDashboard'
-import AdminEditJunta from './AdminEditJunta'
+import AdminDashboard from './AdminPages/AdminDashboard'
+import AdminEditUser from './AdminPages/AdminEditUser'
+import AdminUsers from './AdminPages/AdminUsers'
+import AdminContenidoExtra from './AdminPages/AdminContenidoExtra'
+import AdminEditContent from './AdminPages/AdminEditContent'
+import AdminCreateContent from './AdminPages/AdminCreateContent'
+import AdminEditJunta from './AdminPages/AdminEditJunta'
+import AdminServices from './AdminPages/AdminServices'
+import AdminEqWork from './AdminPages/AdminEqWork'
+import AdminComites from './AdminPages/AdminComites'
+import AdminProfesores from './AdminPages/AdminProfesores'
 import {mapState, mapMutations, mapGetters, mapActions} from 'vuex'
 
 export default {
   name: 'AdminDashboardPage',
   props:[
-      'AdminCreateContent',
-      'AdminEditUser',
       'AdminDashboard',
+      'AdminEditUser',
+      'AdminUsers',
+      'AdminContenidoExtra',
+      'AdminCreateContent',
       'AdminEditContent',
       'AdminEditJunta',
+      'AdminServices',
+      'AdminEqWork',
+      'AdminProfesores',
+      'AdminComites',
   ],
   components:{
-    AdminCreateContent,
-    AdminEditUser,
     AdminDashboard,
+    AdminEditUser,
+    AdminUsers,
+    AdminContenidoExtra,
+    AdminCreateContent,
     AdminEditContent,
     AdminEditJunta,
+    AdminServices,
+    AdminEqWork,
+    AdminProfesores,
+    AdminComites,
   },
   data(){
     return {
       loaded: false,
       allCompon: [
         'AdminDashboard',
+        'AdminEditUser',
+        'AdminUsers',
+        'AdminContenidoExtra',
         'AdminCreateContent',
         'AdminEditContent',
-        'AdminEditUser',
         'AdminEditJunta',
+        'AdminServices',
+        'AdminEqWork',
+        'AdminProfesores',
+        'AdminComites',
       ],
       currentCompon: 'AdminDashboard',
       dataName: [],
@@ -162,7 +245,7 @@ export default {
   },
 
   computed:{
-    ...mapState(['user', 'dbWeb']),
+    ...mapState(['user', 'dbWeb','secTitle']),
     ...mapGetters(['userUpdate']),
 
   },
@@ -170,39 +253,51 @@ export default {
   created(){
     try {
     let values = [];
-    const data = setInterval(() => {
-        const user = firebase.auth().currentUser
-      if(user){
-        clearTimeout(data)
-        if(this.dbWeb.Usuarios_admin[`${user.uid}`]){
-          values = {
-            0: this.dbWeb.Usuarios_admin[`${user.uid}`].uadmin_activo,
-            1: this.dbWeb.Usuarios_admin[`${user.uid}`].uadmin_apellido,
-            2: this.dbWeb.Usuarios_admin[`${user.uid}`].uadmin_autori,
-            3: this.dbWeb.Usuarios_admin[`${user.uid}`].uadmin_cargo,
-            4: this.dbWeb.Usuarios_admin[`${user.uid}`].uadmin_correo,
-            5: this.dbWeb.Usuarios_admin[`${user.uid}`].uadmin_correoVeri,
-            6: this.dbWeb.Usuarios_admin[`${user.uid}`].uadmin_fotoUrl,
-            7: this.dbWeb.Usuarios_admin[`${user.uid}`].uadmin_id,
-            8: this.dbWeb.Usuarios_admin[`${user.uid}`].uadmin_nombre,
-            9: this.dbWeb.Usuarios_admin[`${user.uid}`].uadmin_telefono,
+    this.getData().then(()=>{
+      const data = setInterval(() => {
+          const user = firebase.auth().currentUser
+        if(user){
+          clearTimeout(data)
+          if(this.dbWeb.Usuarios[`${user.uid}`]){
+            values = {
+              activo: this.dbWeb.Usuarios[`${user.uid}`].user_activo,
+              apellido: this.dbWeb.Usuarios[`${user.uid}`].user_apellido,
+              autori: this.dbWeb.Usuarios[`${user.uid}`].user_autori,
+              cargo: this.dbWeb.Usuarios[`${user.uid}`].user_cargo,
+              correo: this.dbWeb.Usuarios[`${user.uid}`].user_correo,
+              correoVeri: this.dbWeb.Usuarios[`${user.uid}`].user_correoVeri,
+              fotoUrl: this.dbWeb.Usuarios[`${user.uid}`].user_fotoUrl,
+              id: this.dbWeb.Usuarios[`${user.uid}`].user_id,
+              nombre: this.dbWeb.Usuarios[`${user.uid}`].user_nombre,
+              telefono: this.dbWeb.Usuarios[`${user.uid}`].user_telefono,
+              accion: this.dbWeb.Usuarios[`${user.uid}`].user_accion,
+            }
+  
+            this.setUser(values)
+            this.loaded = true;
+          }else{
+            
+            values = {
+              activo: true,
+              apellido: '',
+              autori: '',
+              cargo: '',
+              correo: user.email,
+              correoVeri: user.emailVerified,
+              photoUrl: '',
+              id: user.uid,
+              nombre: user.displayName,
+              telefono: '',
+              accion: '',
+            }
+  
+            this.dbUserVal(values);
+            this.loaded = true;
           }
-
-          this.setUser(values)
-          this.loaded = true;
-        }else{
-          values.push(user.email);
-          values.push(user.emailVerified);
-          values.push(user.photoURL);
-          values.push(user.uid);
-          values.push(user.displayName);
-          values.push(user.phoneNumber);
-
-          this.dbUserVal(values);
-          this.loaded = true;
         }
-      }
-    }, 500);
+      }, 500);
+
+    })
     }catch(err){
       console.log('El error es ' + err);
     }
@@ -246,6 +341,10 @@ export default {
 </script>
 
 <style scoped>
+  .admin-dashboard-page{
+    background-color: #f0f2f5;;
+  }
+
   .navbar{
     min-height: 100px;
   }
@@ -283,16 +382,17 @@ export default {
     align-items: center;
   }
 
-  .nav-link{
+  .nav-item .nav-link{
     display: flex;
-    justify-content: space-around;
+    justify-content: flex-start;
     align-items: center;
     flex-direction: row;
     width: 100%;
     padding: 8px 0;
-    text-align: center;
+    text-align: left !important;
     font-size: 16px;
     font-weight: bold;
+    height: 60px;
   }
 
   .nav-item .icon-mini{

@@ -1,6 +1,6 @@
 	/*
   	Flaticon icon font: Flaticon
-  	Creation date: 20/09/2020 23:48
+  	Creation date: 24/09/2020 14:58
   	*/
 
 @font-face {
@@ -58,16 +58,16 @@
 .flaticon-folder:before { content: "\f11b"; }
 .flaticon-checked:before { content: "\f11c"; }
 .flaticon-check:before { content: "\f11d"; }
-.flaticon-trapeze:before { content: "\f11e"; }
-.flaticon-octagon-outline-shape:before { content: "\f11f"; }
-.flaticon-swimming:before { content: "\f120"; }
-.flaticon-squash-rackets:before { content: "\f121"; }
-.flaticon-back-arrow:before { content: "\f122"; }
-.flaticon-suspension:before { content: "\f123"; }
-.flaticon-domino:before { content: "\f124"; }
-.flaticon-martial-arts:before { content: "\f125"; }
-.flaticon-dry-clean:before { content: "\f126"; }
-.flaticon-dashboard:before { content: "\f127"; }
-.flaticon-user-2:before { content: "\f128"; }
-.flaticon-group:before { content: "\f129"; }
-.flaticon-newspaper:before { content: "\f12a"; }
+.flaticon-swimming:before { content: "\f11e"; }
+.flaticon-squash-rackets:before { content: "\f11f"; }
+.flaticon-back-arrow:before { content: "\f120"; }
+.flaticon-suspension:before { content: "\f121"; }
+.flaticon-domino:before { content: "\f122"; }
+.flaticon-martial-arts:before { content: "\f123"; }
+.flaticon-dry-clean:before { content: "\f124"; }
+.flaticon-dashboard:before { content: "\f125"; }
+.flaticon-user-2:before { content: "\f126"; }
+.flaticon-group:before { content: "\f127"; }
+.flaticon-newspaper:before { content: "\f128"; }
+.flaticon-edit:before { content: "\f129"; }
+.flaticon-question:before { content: "\f12a"; }

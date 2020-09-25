@@ -1,5 +1,5 @@
 <template>
-  <div id="admin-dashboard" class="mih">
+  <div id="admin-dashboard" class="mih" style="background-color:#f0f2f5;">
     <AdminDashboardPage></AdminDashboardPage>
   </div>
 </template>

@@ -211,6 +211,14 @@ img{
 	text-align:center;	
 }
 
+.text{
+	position:relative;
+	color: black;
+	line-height:1.8em;
+	font-family: 'Rubik', sans-serif;
+	margin: 0;
+}
+
 /***
 
 ====================================================================
@@ -1004,7 +1012,7 @@ Menu Responsive
 	float: right;
 }
 
-.show{
+.v-show{
 	height: auto!important;
 	overflow: visible!important;
 }
@@ -4964,7 +4972,7 @@ Menu Responsive
 	font-weight:  bold;
 }
 
-#actualidad .bot-selectors .icon{
+.bot-selectors .icon{
 	cursor: pointer;
 	position: absolute;
 	top: 0;
@@ -4972,30 +4980,30 @@ Menu Responsive
 	transition: font-size .3s ease;
 }
 
-#actualidad .bot-selectors .icon.left-arrow{
+.bot-selectors .icon.left-arrow{
  	right: 0;
 }
 
-#actualidad .bot-selectors .icon.right-arrow{
+.bot-selectors .icon.right-arrow{
 	left: 0;
 }
 
-#actualidad .bot-selectors .icon:hover{
+.bot-selectors .icon:hover{
 	font-size: 25px;
 }
 
-#actualidad .bot-container{
+.bot-container{
 	max-width: calc(45px * 5);
 	height: 30px;
 	overflow: hidden;
 }
 
-#actualidad .bot-container .inner-container{
+.bot-container .inner-container{
 	height: 100%;
 	transition: all .5s ease-in-out;
 }
 
-#actualidad .bot-container .circle{
+.bot-container .circle{
 	cursor: pointer;
 	text-align: center;
 	font-weight: bold;
@@ -5010,16 +5018,20 @@ Menu Responsive
 	transition: all 0.1s ease;
 }
 
-#actualidad .circle .text{
+.circle .text{
 	transition: all 0.1s ease;
 }
 
-#actualidad .circle.active{
+.circle.active{
 	color: white;
 	background-color: black;
 }
 
-#actualidad .circle:hover, #actualidad .circle:hover .text{
+.circle.active .text{
+	color: white;
+}
+
+.circle:hover, .circle:hover .text{
 	transform: scale(1.1);
 }
 
@@ -5300,8 +5312,8 @@ Seccion 2 Pagina de Actualidad
 	border-radius: 5px;
 }
 
-.v-wrapper .v-container form input.error{
-	border-bottom: 3px solid red;
+input.error{
+	border-bottom: 3px solid red !important;
 }
 
 .v-wrapper .v-container form .button-box{
@@ -5448,9 +5460,28 @@ Seccion 2 Pagina de Actualidad
 
 .hide-list{
 	max-height: 0px !important;
+	height: 0px !important;
+	overflow: hidden !important;
+	padding: 0 !important;
+	border: none !important;
 }
 
 .deleted{
 	max-height: 0px !important;
 	display: none !important;
+}
+
+.translate{
+	transform: translateX(100vw);
+}
+
+.circle{
+	cursor: pointer;
+	height: 25px;
+	width: 25px;
+	line-height: 24.5px;
+	background-color: transparent;
+	border: 0.3px solid black;
+	border-radius: 50%;
+	transition: all 0.1s ease;
 }

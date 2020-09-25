@@ -125,7 +125,7 @@
           </li>
           
           <li class="v-nav-item" id="cont">
-            <div class="v-nav-menu">
+            <div class="v-nav-menu" style="border-bottom-right-radius: 10px; border-bottom-left-radius: 10px;">
               <router-link class="v-menu-txt" :to="{name:'Contacto'}">Contacto</router-link>
             </div>
           </li>
@@ -178,8 +178,8 @@ export default {
       }
     },
     toggleMenu(){
-      this.$refs.vCollapse.classList.toggle("show");
-      if(this.$refs.vCollapse.classList.contains('show')){
+      this.$refs.vCollapse.classList.toggle("v-show");
+      if(this.$refs.vCollapse.classList.contains('v-show')){
         this.$refs.toggleMenuIcon.setAttribute('class', 'flaticon-close')
       }else{
         this.toggleValues.forEach(element =>{
@@ -281,7 +281,7 @@ export default {
 
     window.addEventListener('resize', ()=>{
       if(window.innerWidth > 600){
-        collapseMenu.classList.remove("show");
+        collapseMenu.classList.remove("v-show");
         if(this.$refs.toggleMenuIcon !== undefined){
           this.$refs.toggleMenuIcon.setAttribute('class', "flaticon-menu");
           this.$refs.usIcon.setAttribute('class', "flaticon-sort-down");

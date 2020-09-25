@@ -9,11 +9,16 @@
             <div class="row align-items-start justify-content-between w-100 m-2">
               <div class="input-files col-lg-4 col-sm-6 d-flex flex-column align-items-start p-1" v-for="(image, index) in imagesData" :key="index">
                 <div class="w-100 h-100 d-flex align-items-center position-relative">
-                  <div class="button-files d-flex flex-row align-items-center justify-content-center bg-success w-100 p-2">
-                    <i class="flaticon-folder mr-3"></i>
-                    <label for="collectionFiles">{{`Imagen 0${parseInt(index) + 1}`}}</label>
+                  <div class="d-flex w-100 flex-column align-items-center justify-content-center">
+                    <div class="text" style="text-align: center;">
+                      {{(index === '0')?'El tamaño de la imagen debe ser 1260x460 px':'El tamaño de la imagen debe ser 360x260 px'}}
+                    </div>
+                    <div class="button-files d-flex flex-row align-items-center justify-content-center bg-success w-100 p-2">
+                      <i class="flaticon-folder mr-3"></i>
+                      <label for="collectionFiles">{{`Imagen 0${parseInt(index) + 1}`}}</label>
+                    </div>
+                    <input :ref='`file${index}`' @change="filesVerification($event, index)" class="collectionFiles"  type="file" accept="image/*">
                   </div>
-                  <input :ref='`file${index}`' @change="filesVerification($event, index)" class="collectionFiles"  type="file" accept="image/*">
                 </div>
                 <!-- PREV IMAGENES -->
               <div  class="uploadCont d-flex flex-row align-items-center w-100 mt-2" v-if="image.length !== 0">
@@ -24,7 +29,7 @@
                         <img :src="!(createContent.formUpload.images[index] === undefined)?createContent.formUpload.images[index].url : ' '" width="200" height="200" style="min-height: 200px; min-width: 200px; ">
                       </div>
                       <div v-else class="w-100 h-100 d-flex flex-row align-items-center justify-content-center">
-                        <p class="align-self-star ml-2" style="text-overflow: ellipsis;">{{image.name}}</p>
+                        <p class="align-self-star ml-2" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">{{image.name}}</p>
                         <!-- ICONO DE QUITAR -->
                         <div class="veri-box ml-2 mr-2">
                           <a @click.prevent="deleteFile(index)" class="icon flaticon-close mr-1 ml-auto" v-show="createContent.formUpload.images[index] === undefined"></a>
@@ -101,7 +106,7 @@ export default {
     },
     
     methods:{
-      ...mapMutations(['filesUpload', 'resetContentValues', 'deleteFileState', 'successAdvise']),
+      ...mapMutations(['filesUpload', 'resetContentValues', 'deleteFileState', 'successAdvise', 'changeSecTitle']),
       deleteFile(index){
         this.imagesData[index] = [];
         this.files[index] = [];
@@ -177,6 +182,7 @@ export default {
 
     created(){
       this.resetContentValues(0);
+      this.changeSecTitle('Crear Noticia');
     },
 
     watch:{
@@ -226,6 +232,7 @@ export default {
     width: auto;
     height: auto;
     margin: 30px 0;
+    background-color: transparent;
   }
 
   .form-class{

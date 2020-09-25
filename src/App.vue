@@ -26,7 +26,6 @@ export default {
     } 
   },
   methods:{
-    ...mapMutations(['isResponsive']),
     ...mapActions(['getData']),
   },
 

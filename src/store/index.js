@@ -1,13 +1,15 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import firebase from 'firebase'
+import firebase, { auth } from 'firebase'
 import { data } from 'jquery'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    secTitle: 'Dashboard',
     successUpload: null,
+    errorUpload: null,
     deletingVal: null,
     loadEdit: false,
     deletingIndex: '',
@@ -17,8 +19,17 @@ export default new Vuex.Store({
     headerView: 0,
     formtipo: 0,
     user: {
-      email: '',
-      displayName: ''
+      activo: '',
+      apellido: '',
+      autori: '',
+      cargo: '',
+      correo: '',
+      correoVeri: '',
+      fotoUrl: '',
+      id: '',
+      nombre: '',
+      telefono: '',
+      accion: '',
     },
     refUser: {},
     createContent:{
@@ -47,6 +58,24 @@ export default new Vuex.Store({
         uploadDataBase: false,
       },
     },
+    users:{
+      userRefer: false,
+      createUser:{
+        formUpload: {
+          activo: '',
+          apellido: '',
+          cargo: '',
+          correo: '',
+          correoVeri: '',
+          fotoUrl: '',
+          id: '',
+          nombre: '',
+          telefono: '',
+          create: false,
+          pass: '',
+        },
+      },
+    },
     deleteContent:{
       formUpload: {
         id: '',
@@ -61,99 +90,216 @@ export default new Vuex.Store({
         baseDatos[1] = true;
       }
     },
-    isResponsive(state){
-      if(window.innerWidth >= 768){
-        state.dpResponsive = false
-      }else if(window.innerWidth < 768){
-        state.dpResponsive = true
-      }
+    changeSecTitle(state, value){
+      state.secTitle = value
     },
     setUser(state, user){
+      state.users.userRefer = false;
+      
       state.user = {
-        activo: user[0],
-        apellido: user[1],
-        autori: user[2],
-        cargo: user[3],
-        correo: user[4],
-        correoVeri: user[5],
-        fotoUrl: user[6],
-        id: user[7],
-        name: user[8],
-        telefono: user[9],
+        activo: user.activo,
+        apellido: user.apellido,
+        autori: user.autori,
+        cargo: user.cargo,
+        correo: user.correo,
+        correoVeri: user.correoVeri,
+        fotoUrl: user.fotoUrl,
+        id: user.id,
+        nombre: user.nombre,
+        telefono: user.telefono,
+        accion: user.accion,
       }
+
       state.refUser = {
-        activo: user[0],
-        apellido: user[1],
-        autori: user[2],
-        cargo: user[3],
-        correo: user[4],
-        correoVeri: user[5],
-        fotoUrl: user[6],
-        id: user[7],
-        name: user[8],
-        telefono: user[9],
-      }
-    },
-    updateUser(state, value){
-      const user = firebase.auth().currentUser;
-      if(user){
-        // Aqui debo poner el activador para el cargador
-        
-        user.updateProfile({
-          displayName: value.name,
-          email: value.correo
-        }).then(() =>{
-          const valuesRef = {
-            uadmin_correo: value.correo,
-            uadmin_correoVeri: value.correoVeri,
-            uadmin_nombre: value.name,
-            uadmin_apellido: value.apellido,
-            uadmin_autori: value.autori,
-            uadmin_fotoUrl: value.fotoUrl,
-            uadmin_telefono: value.telefono,
-            uadmin_cargo: value.cargo,
-            uadmin_id: value.id,
-            uadmin_activo: value.activo,
-          }
-          const dbRef = firebase.database().ref('Usuarios_admin');
-          dbRef.child(value.id).set(valuesRef).then(()=>{
-            // Aqui debo poner para quitar el cargador
-            this.commit('setUser', Object.values(value));
-            state.actUser = null;
-            const success = {
-              0: 'successUpload',
-              1: 'Se ha actualizado exitosamente'
-            };
-            this.commit('successAdvise', success);
-          })
-        })
+        activo: user.activo,
+        apellido: user.apellido,
+        autori: user.autori,
+        cargo: user.cargo,
+        correo: user.correo,
+        correoVeri: user.correoVeri,
+        fotoUrl: user.fotoUrl,
+        id: user.id,
+        nombre: user.nombre,
+        telefono: user.telefono,
+        accion: user.accion,
       }
     },
     dbUserVal(state, value){
       const valuesRef = {
-        uadmin_activo: true,
-        uadmin_apellido: '',
-        uadmin_autori: '',
-        uadmin_cargo: '',
-        uadmin_correo: value[0],
-        uadmin_correoVeri: value[1],
-        uadmin_fotoUrl: `${value[2]}`,
-        uadmin_id: value[3],
-        uadmin_nombre: value[4],
-        uadmin_telefono: `${value[5]}`,
+        user_activo: true,
+        user_apellido: value.apellido,
+        user_autori: value.autori,
+        user_cargo: value.cargo,
+        user_correo: value.correo,
+        user_correoVeri: value.correoVeri,
+        user_fotoUrl: `${value.fotoUrl}`,
+        user_id: value.id,
+        user_nombre: value.nombre,
+        user_telefono: `${value.telefono}`,
+        user_accion: `${value.accion}`,
       }
-      const dbRef = firebase.database().ref('Usuarios_admin');
-      dbRef.child(valuesRef.uadmin_id).set(valuesRef).then(()=>{
+      const dbRef = firebase.database().ref('Usuarios');
+      dbRef.child(valuesRef.user_id).set(valuesRef).then(()=>{
         this.commit('setUser', Object.values(valuesRef));
       })
     },
-    isUserDiff(state){
-      for(let i = 0; i < Object.values(state.user).length; i++){
-        if(Object.values(state.user)[i] !== Object.values(state.refUser)[i]){
-          state.actUser = true;
-          return this.commit('updateUser', state.user);
+    createUser(state, value){
+      state.users.userRefer = true;
+      const config = {
+        apiKey: "AIzaSyCpsNVtsACCeS-amNprGUh0vGOE-SD9y5Q",
+        authDomain: "web-database-66842.firebaseapp.com",
+        databaseURL: "https://web-database-66842.firebaseio.com",
+      }
+      const secondaryApp = firebase.initializeApp(config, "Secondary");
+      
+      secondaryApp.auth().createUserWithEmailAndPassword(state.users.createUser.formUpload.correo, state.users.createUser.formUpload.pass).then(user => {
+          const valuesRef = {
+            correo: user.user.email,
+            correoVeri: user.user.emailVerified,
+            nombre: user.user.displayName,
+            apellido: '',
+            autori: '',
+            fotoUrl: '',
+            telefono: '',
+            cargo: '',
+            id: user.user.uid,
+            activo: '',
+            accion: '',
+          }
+          secondaryApp.auth().signOut();
+          secondaryApp.delete()
+          const success = {
+            0: 'successUpload',
+            1: 'Se ha creado exitosamente'
+          };
+          this.commit('successAdvise', success);
+          const valuesDb = {
+            user_correo: user.user.email,
+            user_correoVeri: user.user.emailVerified,
+            user_nombre: user.user.displayName,
+            user_apellido: '',
+            user_autori: '',
+            user_fotoUrl: '',
+            user_telefono: '',
+            user_cargo: '',
+            user_id: user.user.uid,
+            user_activo: '',
+            user_accion: '',
+          }
+          this.commit('dbUserVal', valuesRef);
+          state.dbWeb.Usuarios[`${valuesDb.id}`] = valuesDb;
+          console.log(Object.values(state.dbWeb.Usuarios));
+        }).catch(err => {
+          state.users.userRefer = false;
+          secondaryApp.delete();
+          if(err.message === 'The email address is already in use by another account.'){
+            const success = {
+              0: 'errorUpload',
+              1: 'El correo ya está en uso'
+            };
+            this.commit('successAdvise', success);
+          }
+        })
+    },
+    updateUser(state, value){
+      if(value.tipo === '1'){
+        const valuesRef = {
+          user_id: value.id,
+          user_correo: value.correo,
+          user_correoVeri: value.correoVeri,
+          user_accion: value.accion,
+          user_telefono: value.telefono,
+          user_nombre: value.nombre,
+          user_apellido: value.apellido,
+          user_activo: value.activo,
+          user_fotoUrl: value.fotoUrl,
+          user_autori: value.autori,
+          user_cargo: value.cargo,
+        }
+
+        const dbRef = firebase.database().ref('Usuarios');
+        dbRef.child(valuesRef.user_id).set(valuesRef).then(()=>{
+          // Aqui debo poner para quitar el cargador
+          this.commit('setUser', value);
+          state.actUser = null;
+          const success = {
+            0: 'successUpload',
+            1: 'Se ha actualizado exitosamente'
+          };
+          this.commit('successAdvise', success);
+        })
+      }else{
+        const user = firebase.auth().currentUser;
+        if(user){
+          // Aqui debo poner el activador para el cargador
+          
+          user.updateProfile({
+            displayName: value.nombre,
+            email: value.correo,
+            phoneNumber: value.telefono,
+          }).then(() =>{
+            const valuesRef = {
+              user_correo: value.correo,
+              user_correoVeri: value.correoVeri,
+              user_nombre: value.nombre,
+              user_apellido: value.apellido,
+              user_autori: value.autori,
+              user_fotoUrl: value.fotoUrl,
+              user_telefono: value.telefono,
+              user_cargo: value.cargo,
+              user_id: value.id,
+              user_activo: value.activo,
+              user_accion: value.accion,
+            }
+            const dbRef = firebase.database().ref('Usuarios');
+            dbRef.child(value.id).set(valuesRef).then(()=>{
+              // Aqui debo poner para quitar el cargador
+              this.commit('setUser', value);
+              state.actUser = null;
+              const success = {
+                0: 'successUpload',
+                1: 'Se ha actualizado exitosamente'
+              };
+              this.commit('successAdvise', success);
+            })
+          })
         }
       }
+    },
+    isUserDiff(state, value){
+      if(value.tipo === '0'){
+        for(let i = 0; i < Object.values(state.user).length; i++){
+          if(Object.values(state.user)[i] !== Object.values(state.refUser)[i]){
+            state.actUser = true;
+            return this.commit('updateUser', state.user);
+          }
+        }
+      }else{
+        state.actUser = true;
+        this.commit('updateUser', value);
+      }
+    },
+    deleteItem(state, value){
+      state.deletingVal === true;
+      state.deletingIndex === value.index;
+
+      const config = {
+        apiKey: "AIzaSyCpsNVtsACCeS-amNprGUh0vGOE-SD9y5Q",
+        authDomain: "web-database-66842.firebaseapp.com",
+        databaseURL: "https://web-database-66842.firebaseio.com",
+      }
+      const secondaryApp = firebase.initializeApp(config, "Secondary");
+
+      firebase.database().ref(`${value.ref}/${value.id}`).remove().then(()=>{
+        state.deletingVal = null;
+        state.deletingIndex = '';
+        const success = {
+          0: 'successUpload',
+          1: 'Se ha eliminado exitosamente'
+        }
+        this.commit('successAdvise', success)
+        }
+      )
     },
     deletedEl(state, value){
       if(value[0] === 0){
@@ -180,10 +326,29 @@ export default new Vuex.Store({
         state.editContent.formUpload.fecha = '';
         state.editContent.formUpload.id = '';
         state.editContent.formUpload.seccion = 'Todas las secciones';
+      }else if(val === 3){
+        state.users = {
+          userRefer: false,
+          createUser:{
+            formUpload: {
+              activo: '',
+              apellido: '',
+              cargo: '',
+              correo: '',
+              correoVeri: '',
+              fotoUrl: '',
+              id: '',
+              nombre: '',
+              telefono: '',
+              create: false,
+              pass: '',
+            },
+          },
+        };
       }
     },
     successAdvise(state, data){
-      state[`${data[0]}`] = data[1]
+      state[`${data[0]}`] = data[1];
     },
     handleUpload(state, files){
 
@@ -418,7 +583,6 @@ export default new Vuex.Store({
           commit('dataWeb', value)
         }catch(err){
           setTimeout(() => {
-            console.log('Error');
           }, 2000);
         }
       }
