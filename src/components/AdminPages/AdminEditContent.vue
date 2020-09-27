@@ -40,7 +40,7 @@
         <div class="col-2 pl-1 pr-1">
         </div>
       </div>
-      <ul class="list-item w-100 row align-items-center justify-content-start" v-for="(anuncio, index) in reverseArray" :key="anuncio.noti_id" :id="anuncio.noti_seccion" :data-id="`anun${index}`" data-transitioned="false" v-show="index < 4 + showIndex && index >= showIndex" ref="listElements">
+      <ul class="list-item w-100 row align-items-center justify-content-start" v-for="(anuncio, index) in reverseArray" :key="anuncio.noti_id" :id="anuncio.noti_seccion" :data-id="`anun${index}`" data-transitioned="false" v-show="index < numElements + showIndex && index >= showIndex" ref="listElements">
         <li class="item-element text col-3 pl-1 pr-1">
           {{anuncio.noti_seccion}}
         </li>

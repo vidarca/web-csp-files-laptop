@@ -9,6 +9,7 @@ export default new Vuex.Store({
   state: {
     secTitle: 'Dashboard',
     successUpload: null,
+    cargarDB: false,
     errorUpload: null,
     deletingVal: null,
     loadEdit: false,
@@ -82,6 +83,7 @@ export default new Vuex.Store({
         tipo: false,
       },
     },
+    dbImg: [],
   },
   mutations: {
     dataWeb(state, baseDatos){
@@ -280,26 +282,59 @@ export default new Vuex.Store({
       }
     },
     deleteItem(state, value){
-      state.deletingVal === true;
-      state.deletingIndex === value.index;
+      state.deletingVal = true;
+      state.deletingIndex = value.index;
 
-      const config = {
-        apiKey: "AIzaSyCpsNVtsACCeS-amNprGUh0vGOE-SD9y5Q",
-        authDomain: "web-database-66842.firebaseapp.com",
-        databaseURL: "https://web-database-66842.firebaseio.com",
+      if(value.storage === false){
+        firebase.database().ref(`${value.ref}/${value.id}`).remove().then(()=>{
+          state.deletingVal = null;
+          state.deletingIndex = '';
+          const success = {
+            0: 'successUpload',
+            1: 'Se ha eliminado exitosamente'
+          }
+          this.commit('successAdvise', success)
+          }
+        )
+      }else if(value.storage === true){
+        try{
+          let storageRef = firebase.storage().ref(`/imagenes/${value.ref}/${value.id}`)
+          storageRef.listAll().then(prom => {
+            if(prom.items.length !== 0){
+              prom.items.forEach(element => {
+                storageRef.child(element.name).delete().then( err => {
+                  if(err !== undefined){
+                    console.log(err)
+                  }else{
+                    firebase.database().ref(`${value.ref}/${value.id}`).remove().then(()=>{
+                      state.deletingVal = null;
+                      state.deletingIndex = '';
+                      const success = {
+                        0: 'successUpload',
+                        1: 'Se ha eliminado exitosamente'
+                      }
+                      this.commit('successAdvise', success)
+                      }
+                    )
+                  }
+                })
+              });
+            }else{
+              firebase.database().ref(`${value.ref}/${value.id}`).remove().then(()=>{
+                state.deletingVal = null;
+                state.deletingIndex = '';
+                const success = {
+                  0: 'successUpload',
+                  1: 'Se ha eliminado exitosamente'
+                }
+                this.commit('successAdvise', success)
+                }
+              )
+            }
+          })
+        }catch(err){console.log(err)}
       }
-      const secondaryApp = firebase.initializeApp(config, "Secondary");
 
-      firebase.database().ref(`${value.ref}/${value.id}`).remove().then(()=>{
-        state.deletingVal = null;
-        state.deletingIndex = '';
-        const success = {
-          0: 'successUpload',
-          1: 'Se ha eliminado exitosamente'
-        }
-        this.commit('successAdvise', success)
-        }
-      )
     },
     deletedEl(state, value){
       if(value[0] === 0){
@@ -566,6 +601,152 @@ export default new Vuex.Store({
         this.commit('handleUpload', data[1])
       }
       
+    },
+    crearDB(state, data){
+      if(data.target === 'Juntas'){
+        
+        for(let i = 0; i < Object.values(data.junta.integrantes).length; i++){
+          state.dbImg[i] = [];
+          state.dbImg[i] = Object.values(data.junta.integrantes)[i].image;
+        }
+
+        let storageRef = [];
+        let percentage = [];
+        let order = [];
+        let task = {};
+        let i = 0;
+        let j = 0;
+        let n = 0;
+
+        Object.values(data.archivos).forEach(element => {
+          storageRef= firebase.storage().ref(`/imagenes/${data.target}/${data.junta.inicio}/${data.junta.integrantes[`${element.id}`].cargo.split(' ').join('_')}`);
+          task[`${element.id}`] = storageRef.put(element);
+        })
+        
+        if(Object.values(task).length !== 0){
+          Object.values(data.archivos).forEach(element => {
+            task[`${element.id}`].on('state_changed', snapshot => {
+              percentage[snapshot.task.blob_.data_.id] = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+              state.dbImg[snapshot.task.blob_.data_.id].uploadPercentage = percentage[snapshot.task.blob_.data_.id];
+              if(state.dbImg[snapshot.task.blob_.data_.id].uploadPercentage === 100 && order.length < Object.values(data.archivos).length){
+                order.push(snapshot.task.blob_.data_.id)
+              }
+            }, error => {
+              console.log(error.message);
+            }, () =>{
+  
+              let dataRef = [];
+              dataRef.junt_periodo = `${data.junta.inicio}_${data.junta.fin}`;
+              dataRef.junt_id = `${data.junta.inicio}`;
+              dataRef.junt_activa = data.junta.junta_actual;
+              dataRef.junt_integrantes = [];
+  
+              for(let i = 0; i < Object.values(data.junta.integrantes).length; i++){
+                if(Object.values(data.junta.integrantes)[i].cargo.split(' ').length > 1){
+                  dataRef.junt_integrantes[i] = [];
+                  dataRef.junt_integrantes[i].juin_cargo = Object.values(data.junta.integrantes)[i].cargo
+                  dataRef.junt_integrantes[i].juin_nombre = Object.values(data.junta.integrantes)[i].nombre
+                  dataRef.junt_integrantes[i].juin_apellido = Object.values(data.junta.integrantes)[i].apellido
+                  dataRef.junt_integrantes[i].juin_correo = Object.values(data.junta.integrantes)[i].correo
+                  dataRef.junt_integrantes[i].juin_foto = Object.values(data.junta.integrantes)[i].image
+                  dataRef.junt_integrantes[i].juin_activo = Object.values(data.junta.integrantes)[i].activo
+                  dataRef.junt_integrantes[i].juin_crear = Object.values(data.junta.integrantes)[i].crear
+                }else{
+                  dataRef.junt_integrantes[i] = [];
+                  dataRef.junt_integrantes[i].juin_cargo = Object.values(data.junta.integrantes)[i].cargo
+                  dataRef.junt_integrantes[i].juin_nombre = Object.values(data.junta.integrantes)[i].nombre
+                  dataRef.junt_integrantes[i].juin_apellido = Object.values(data.junta.integrantes)[i].apellido
+                  dataRef.junt_integrantes[i].juin_correo = Object.values(data.junta.integrantes)[i].correo
+                  dataRef.junt_integrantes[i].juin_foto = Object.values(data.junta.integrantes)[i].image
+                  dataRef.junt_integrantes[i].juin_activo = Object.values(data.junta.integrantes)[i].activo
+                  dataRef.junt_integrantes[i].juin_crear = Object.values(data.junta.integrantes)[i].crear
+                }
+              }
+  
+              let storageRef= firebase.storage().ref(`/imagenes/${data.target}/${data.junta.inicio}/${data.junta.integrantes[`${order[j]}`].cargo.split(' ').join('_')}`);
+              
+              storageRef.getDownloadURL().then(url => {
+                let val = order[n];
+                console.log(n);
+                state.dbImg[val].url = url;
+                state.dbImg[val].nombre = `foto${val}`;
+                n ++;
+                if(n >= order.length){
+                  i = 0;
+                  Object.values(dataRef.junt_integrantes).forEach(element => {
+                    if(state.dbImg[i].nombre !== undefined && state.dbImg[i].url !== undefined){
+                      element.juin_foto.nombre = state.dbImg[i].nombre;
+                      element.juin_foto.url = state.dbImg[i].url;
+                    }else{
+                      element.juin_foto = "";
+                    }
+                    i ++;
+                    if(n >= Object.values(data.archivos).length){
+                      const dbRef = firebase.database().ref(`${data.target}`);
+                      dbRef.child(`${data.junta.inicio}`).set(dataRef);
+                      const success = {
+                        0: 'successUpload',
+                        1: 'Se ha creado exitosamente'
+                      }
+                      this.commit('successAdvise', success)
+                    }
+                  })
+                }
+              })
+              j ++;
+            })
+          })
+        }else{
+          let dataRef = [];
+          dataRef.junt_periodo = `${data.junta.inicio}-${data.junta.fin}`;
+          dataRef.junt_id = `${data.junta.inicio}`;
+          dataRef.junt_activa = data.junta.junta_actual;
+          dataRef.junt_integrantes = [];
+
+          for(let i = 0; i < Object.values(data.junta.integrantes).length; i++){
+            if(Object.values(data.junta.integrantes)[i].cargo.split(' ').length > 1){
+              dataRef.junt_integrantes[i] = [];
+              dataRef.junt_integrantes[i].juin_cargo = Object.values(data.junta.integrantes)[i].cargo
+              dataRef.junt_integrantes[i].juin_nombre = Object.values(data.junta.integrantes)[i].nombre
+              dataRef.junt_integrantes[i].juin_apellido = Object.values(data.junta.integrantes)[i].apellido
+              dataRef.junt_integrantes[i].juin_correo = Object.values(data.junta.integrantes)[i].correo
+              dataRef.junt_integrantes[i].juin_foto = Object.values(data.junta.integrantes)[i].image
+              dataRef.junt_integrantes[i].juin_activo = Object.values(data.junta.integrantes)[i].activo
+              dataRef.junt_integrantes[i].juin_crear = Object.values(data.junta.integrantes)[i].crear
+            }else{
+              dataRef.junt_integrantes[i] = [];
+              dataRef.junt_integrantes[i].juin_cargo = Object.values(data.junta.integrantes)[i].cargo
+              dataRef.junt_integrantes[i].juin_nombre = Object.values(data.junta.integrantes)[i].nombre
+              dataRef.junt_integrantes[i].juin_apellido = Object.values(data.junta.integrantes)[i].apellido
+              dataRef.junt_integrantes[i].juin_correo = Object.values(data.junta.integrantes)[i].correo
+              dataRef.junt_integrantes[i].juin_foto = Object.values(data.junta.integrantes)[i].image
+              dataRef.junt_integrantes[i].juin_activo = Object.values(data.junta.integrantes)[i].activo
+              dataRef.junt_integrantes[i].juin_crear = Object.values(data.junta.integrantes)[i].crear
+            }
+          }
+
+          const dbRef = firebase.database().ref(`${data.target}`);
+          dbRef.child(`${data.junta.inicio}`).set(dataRef);
+          const success = {
+            0: 'successUpload',
+            1: 'Se ha creado exitosamente'
+          }
+          this.commit('successAdvise', success)
+        }
+      }
+    },
+    deleteDB(state, data){
+      
+    },
+    resetDBValues(state, value){
+      if(value === undefined){
+        state.dbImg = [];
+      }else if(state.dbImg[`${value}`] !== undefined){
+        state.dbImg[`${value}`] = [];
+      }
+    },
+    falseCargarDB(state){
+      state.cargarDB = false;
     },
   },
   actions: {

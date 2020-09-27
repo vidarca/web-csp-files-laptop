@@ -5485,3 +5485,21 @@ input.error{
 	border-radius: 50%;
 	transition: all 0.1s ease;
 }
+
+.important-field{
+	position: relative;
+	margin-left: 5px;
+	align-self: flex-start;
+	text-align: center;
+	font-size: 17px;
+	color: red;
+	height: 100%;
+	width: 10px;
+}
+
+.important-field::after{
+	position: absolute;
+	top: 0;
+	left: 0;
+	content: '*';
+}
