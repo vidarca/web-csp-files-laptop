@@ -10,7 +10,7 @@
             Lista de Juntas
           </h5>
         </div>
-        <button class="btn btn-success" @click="crearJunta()">
+        <button class="btn btn-success" @click="crearValor()">
           Crear Junta
         </button>
       </div>
@@ -21,7 +21,7 @@
         <div class="col-2 pl-1 pr-1">
         </div>
       </div>
-      <div v-if="dbWeb.Juntas !== undefined">
+      <div v-if="listEmpty">
         <ul class="list-item w-100 row align-items-center justify-content-start" v-for="(junta, index) in Object.values(dbWeb.Juntas).reverse()" :key="junta.id" :id="junta.id" :data-id="`elem${index}`" data-transitioned="false" v-show="index < numElements + showIndex && index >= showIndex" ref="listElements">
           <li class="item-element text col-10 pl-1 pr-1">
             {{junta.junt_periodo.split('_').join(' - ')}}
@@ -34,7 +34,6 @@
               </div>
               <i class="flaticon-close" v-else></i>
             </div>
-            <i class="icon btn-dark flaticon-back-arrow mt-1 mb-1" title="Editar" v-show="showPrev === true" @click="filterChangeHandler()"></i>
           </li>
         </ul>
       </div>
@@ -80,38 +79,39 @@
           <div class="row align-items-start justify-content-between w-100 m-2">
             <h5>Integrantes de la Junta</h5>
             <div class="row align-items-start justify-content-between">
-              <div class="col-4 col-lg-3 mt-2" v-for="(integrante, index) in Object.values(selectJunta.integrantes)" :key="index">
-                <div class="text text-center">{{integrante.cargo}}</div>
+              
+              <div class="col-4 col-lg-3 mt-2" v-for="(integrante, index) in Object.values(Object.values(dbWeb.Juntas).reverse()[indexSelected].junt_integrantes)" :key="integrante.juin_id">
+                <div class="text text-center">{{integrante.juin_cargo}}</div>
                 <div class="d-flex flex-column align-items-center justify-content-center">
                   <div class="custom-control custom-switch">
-                    <input type="checkbox" class="custom-control-input" :id="`crear${index}`" v-model="integrante.crear">
+                    <input type="checkbox" class="custom-control-input" :id="`crear${index}`" v-model="integrante.juin_crear">
                     <label class="custom-control-label text" :for="`crear${index}`"></label>
                   </div>
-                  <div class="input-files w-100 flex-column align-items-start p-1" v-show="integrante.crear === true" style="display: flex;">
+                  <div class="input-files w-100 flex-column align-items-start p-1" v-show="integrante.juin_crear === true" style="display: flex;">
                     <div class="w-100 h-100 d-flex align-items-center position-relative">
                       <div class="d-flex w-100 flex-column align-items-center justify-content-center">
                           <div class="button-files d-flex flex-row align-items-center justify-content-center bg-success w-100 p-2">
                             <i class="flaticon-folder mr-3"></i>
                             <label for="collectionFiles">Imagen</label>
                           </div>
-                          <input :ref='`file${index}`' @change="filesVerification($event, index)" class="collectionFiles"  type="file" accept="image/*">
+                          <input :ref='`file${index}`' @change="filesVerification($event, index, 'select')" class="collectionFiles"  type="file" accept="image/*">
                       </div>
                     </div>
                   </div>
                   <!-- PREV IMAGENES -->
-                  <div  class="uploadCont flex-row align-items-center w-100 mt-2" v-show="integrante.image.nombre !== undefined" style="display: flex;">
+                  <div  class="uploadCont flex-row align-items-center w-100 mt-2" v-show="integrante.juin_foto !== '' && integrante.juin_crear" style="display: flex;">
                     <div :class="['prev-container','d-flex', 'flex-column', 'align-items-center', 'justify-content-between', 'w-100', 'bg-success-light']">
                       <!-- MUESTRA DE IMAGEN -->
                       <div class="w-100 h-100 m-2">
-                        <div class="d-flex justify-content-center align-items-center" v-if="(dbImg[index] !== undefined)">
-                          <img :src="(dbImg[index] === undefined)?'':(dbImg[index].url !== undefined)?dbImg[index].url:''" width="100" height="100" style="min-height: 100px; min-width: 100px; ">
+                        <div class="d-flex justify-content-center align-items-center" v-if="(integrante.juin_foto.url !== '' || dbImg[index] !== undefined)">
+                          <img :src="(dbImg[index] !== undefined && dbImg[index].url !== undefined)?dbImg[index].url:(integrante.juin_foto.url !== undefined)?integrante.juin_foto.url:''" width="100" height="100" style="min-height: 100px; min-width: 100px; ">
                         </div>
                         <div v-else class="w-100 h-100 d-flex flex-row align-items-center justify-content-center">
-                          <p class="align-self-star ml-2" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">{{integrante.image.nombre}}</p>
+                          <p class="align-self-star ml-2" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">{{integrante.juin_foto.nombre}}</p>
                         </div>
                         <!-- ICONO DE QUITAR -->
                         <div class="veri-box w-100 mt-2 d-flex flex-row justify-content-center align-items-center">
-                          <button @click.prevent="deleteFile(index)" class="btn btn-danger pt-1 pb-1 pr-2 pl-2">Eliminar</button>
+                          <button @click.prevent="deleteFile(index, 'select')" class="btn btn-danger pt-1 pb-1 pr-2 pl-2">Eliminar</button>
                         </div>
                         <!-- FIN ICONO DE QUITAR -->
                       </div>
@@ -124,11 +124,11 @@
                     </div>
                   </div>
                 <!--  Fin de IMAGENES -->
-                <input type="text" v-model="integrante.nombre" placeholder="Nombre" v-show="integrante.crear === true">
-                <input type="text" v-model="integrante.apellido" placeholder="Apellido" v-show="integrante.crear === true">
-                <input type="email" v-model="integrante.correo" placeholder="Correo" v-show="integrante.crear === true">
-                <div class="custom-control custom-switch" v-show="integrante.crear === true">
-                  <input type="checkbox" class="custom-control-input" :id="`activo${index}`" v-model="integrante.activo">
+                <input type="text" v-model="integrante.juin_nombre" placeholder="Nombre" v-show="integrante.juin_crear === true">
+                <input type="text" v-model="integrante.juin_apellido" placeholder="Apellido" v-show="integrante.juin_crear === true">
+                <input type="email" v-model="integrante.juin_correo" placeholder="Correo" v-show="integrante.juin_crear === true">
+                <div class="custom-control custom-switch" v-show="integrante.juin_crear === true">
+                  <input type="checkbox" class="custom-control-input" :id="`activo${index}`" v-model="integrante.juin_activo">
                   <label class="custom-control-label text" :for="`activo${index}`">Activo</label>
                 </div>
               </div>
@@ -137,8 +137,15 @@
           </div>
         </div>
         <div class="d-flex flex-row justify-content-between align-items-center m-3">
-          <button class="btn btn-success mr-2 ml-2" @click.prevent="submitCollection()">Actualizar junta</button>
-          <button class="btn btn-danger mr-2 ml-2" @click.prevent="deleteCollection('crear')">Borrar campos</button>
+          <button class="btn btn-success mr-2 ml-2" @click.prevent="submitCollection('select')">
+            <div v-if="crearDBVals" class="spinner-border text-light" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+            <div v-else>
+              Actualizar junta
+            </div>
+          </button>
+          <button class="btn btn-danger mr-2 ml-2" @click.prevent="deleteCollection('select')">Borrar campos</button>
           <button class="btn btn-dark mr-2 ml-2" @click.prevent="regresar('section1', 'selectJunta')">Regresar</button>
         </div>
       </form>
@@ -176,7 +183,7 @@
                             <i class="flaticon-folder mr-3"></i>
                             <label for="collectionFiles">Imagen</label>
                           </div>
-                          <input :ref='`file${index}`' @change="filesVerification($event, index)" class="collectionFiles"  type="file" accept="image/*">
+                          <input :ref='`file${index}`' @change="filesVerification($event, index, 'crear')" class="collectionFiles"  type="file" accept="image/*">
                       </div>
                     </div>
                   </div>
@@ -193,7 +200,7 @@
                         </div>
                         <!-- ICONO DE QUITAR -->
                         <div class="veri-box w-100 mt-2 d-flex flex-row justify-content-center align-items-center">
-                          <button @click.prevent="deleteFile(index)" class="btn btn-danger pt-1 pb-1 pr-2 pl-2">Eliminar</button>
+                          <button @click.prevent="deleteFile(index, 'crear')" class="btn btn-danger pt-1 pb-1 pr-2 pl-2">Eliminar</button>
                         </div>
                         <!-- FIN ICONO DE QUITAR -->
                       </div>
@@ -219,7 +226,14 @@
           </div>
         </div>
         <div class="d-flex flex-row justify-content-between align-items-center m-3">
-          <button class="btn btn-success mr-2 ml-2" @click.prevent="submitCollection()">Crear junta</button>
+          <button class="btn btn-success mr-2 ml-2" @click.prevent="submitCollection('crear')">
+            <div v-if="crearDBVals" class="spinner-border text-light" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+            <div v-else>
+              Crear junta
+            </div>
+          </button>
           <button class="btn btn-danger mr-2 ml-2" @click.prevent="deleteCollection('crear')">Borrar campos</button>
           <button class="btn btn-dark mr-2 ml-2" @click.prevent="regresar('section2')">Regresar</button>
         </div>
@@ -242,19 +256,15 @@ export default {
         showSelect: false,
         showList: true,
         showCreate: false,
+        listEmpty: false,
+        indexSelected: '',
         number: 0,
-        imagesData: {
-          0: [],
-          1: [],
-          2: [],
-        },
         files: {
         },
         changeDB: false,
         changePics: false,
         showPrev: false,
         numElements: 10,
-        juntas: [],
         selectJunta: '',
         nuevaJunta: {
           inicio: '',
@@ -366,36 +376,7 @@ export default {
     },
 
     computed:{
-      ...mapState(['editContent', 'successUpload', 'dbWeb', 'deletingVal', 'deletingIndex', 'cargarDB', 'dbImg']),
-      reverseArray(){
-        if(this.dbWeb.Noticias !== undefined){
-          let array = Object.values(this.dbWeb.Noticias);
-          return array.reverse()
-        }else{
-          let array = []
-          return array
-        }
-      },
-      fechaAnuncio(){
-        let splittedDate = [];
-        let joinedDate = [];
-        let i = 0;
-        this.reverseArray.forEach(element => {
-          splittedDate.push(element.noti_fecha.split('|'));
-        })
-        splittedDate.forEach(element => {
-          joinedDate.push(element.join(' '))
-        })
-        return joinedDate
-      },
-      validEmail(){
-        const exp = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
-        if(exp.test(this.nuevaJunta.correo)){
-          return true
-        }else{
-          return false
-        }
-      },
+      ...mapState(['editContent', 'successUpload', 'dbWeb', 'deletingVal', 'deletingIndex', 'cargarDB', 'dbImg', 'crearDBVals']),
     },
     
     methods:{
@@ -405,41 +386,42 @@ export default {
         this.resetDBValues();
         this.$refs.section0.classList.toggle('translate');
         setTimeout(() => {
+          this.indexSelected = index;
+
           this.showList = false;
           this.showPrev = true;
+          const splittedPer = Object.values(this.dbWeb.Juntas).reverse()[index].junt_periodo.split('-');
+
           this.selectJunta = {
-            inicio: Object.values(this.dbWeb.Juntas).reverse()[index].junt_periodo.split('-')[0],
-            fin: Object.values(this.dbWeb.Juntas).reverse()[index].junt_periodo.split('-')[1],
+            fin: splittedPer[1],
+            inicio: splittedPer[0],
             junta_actual: Object.values(this.dbWeb.Juntas).reverse()[index].junt_activa,
             integrantes: [],
           };
-
-          for(let i = 0; i < Object.values(Object.values(this.dbWeb.Juntas).reverse()[index].junt_integrantes).length; i++){
-            this.selectJunta.integrantes[i] = {};
-            this.selectJunta.integrantes[i].crear = Object.values(Object.values(this.dbWeb.Juntas).reverse()[index].junt_integrantes)[i].juin_crear
-            this.selectJunta.integrantes[i].cargo = Object.values(Object.values(this.dbWeb.Juntas).reverse()[index].junt_integrantes)[i].juin_cargo
-            this.selectJunta.integrantes[i].nombre = Object.values(Object.values(this.dbWeb.Juntas).reverse()[index].junt_integrantes)[i].juin_nombre
-            this.selectJunta.integrantes[i].apellido = Object.values(Object.values(this.dbWeb.Juntas).reverse()[index].junt_integrantes)[i].juin_apellido
-            this.selectJunta.integrantes[i].correo = Object.values(Object.values(this.dbWeb.Juntas).reverse()[index].junt_integrantes)[i].juin_correo
-            this.selectJunta.integrantes[i].image = Object.values(Object.values(this.dbWeb.Juntas).reverse()[index].junt_integrantes)[i].juin_foto
-            this.selectJunta.integrantes[i].activo = Object.values(Object.values(this.dbWeb.Juntas).reverse()[index].junt_integrantes)[i].juin_activo
-          }
-
-          console.log(this.selectJunta);
-
         }, 900);
         setTimeout(() => {
-          this.disableYearCrear('selectJunta')
+          if(this.selectJunta.junta_actual === true){
+            this.disableYearCrear('selectJunta');
+          }
           this.$refs.section1.classList.toggle('translate')
         }, 950);
       },
-      deleteFile(index){
-        Object.values(this.nuevaJunta.integrantes)[index].image = '';
-        this.files[index] = [];
-        this.resetDBValues(index)
+      deleteFile(index,val){
+        if(val === 'crear'){
+          Object.values(this.nuevaJunta.integrantes)[index].image = '';
+          delete this.files[index];
+          this.resetDBValues(index);
+        }else if(val === 'select'){console.log(index + ' ' + val);
+          Object.values(Object.values(this.dbWeb.Juntas).reverse()[this.indexSelected].junt_integrantes)[index].juin_foto = '';
+          delete this.files[index];
+          this.resetDBValues(index);
+        }
       },
       deleteCollection(value){
         if(value === 'crear'){
+          this.nuevaJunta.inicio = '';
+          this.nuevaJunta.fin = '';
+          this.nuevaJunta.junta_actual = false;
           for(let i = 0; i < Object.values(this.nuevaJunta.integrantes).length; i++){
             Object.values(this.nuevaJunta.integrantes)[i].crear = false;
             Object.values(this.nuevaJunta.integrantes)[i].image = '';
@@ -448,7 +430,20 @@ export default {
             Object.values(this.nuevaJunta.integrantes)[i].apellido = '';
             Object.values(this.nuevaJunta.integrantes)[i].correo = '';
           }
+        }else if(value === 'select'){
+          this.selectJunta.inicio = '';
+          this.selectJunta.fin = '';
+          this.selectJunta.junta_actual = false;
+          for(let i = 0; i <  Object.values(Object.values(this.dbWeb.Juntas).reverse()[this.indexSelected].junt_integrantes).length; i++){
+             Object.values(Object.values(this.dbWeb.Juntas).reverse()[this.indexSelected].junt_integrantes)[i].juin_crear = false;
+             Object.values(Object.values(this.dbWeb.Juntas).reverse()[this.indexSelected].junt_integrantes)[i].juin_foto = '';
+             Object.values(Object.values(this.dbWeb.Juntas).reverse()[this.indexSelected].junt_integrantes)[i].juin_activo = false;
+             Object.values(Object.values(this.dbWeb.Juntas).reverse()[this.indexSelected].junt_integrantes)[i].juin_nombre = '';
+             Object.values(Object.values(this.dbWeb.Juntas).reverse()[this.indexSelected].junt_integrantes)[i].juin_apellido = '';
+             Object.values(Object.values(this.dbWeb.Juntas).reverse()[this.indexSelected].junt_integrantes)[i].juin_correo = '';
+          }
         }
+        this.files = {};
         this.resetDBValues();
       },
       validDateFields(value){
@@ -458,6 +453,21 @@ export default {
           return true
         }else{
           return false
+        }
+      },
+      validAllFields(value){
+        if(value === 'crear'){
+          if(this.validDateFields(this.nuevaJunta.inicio) && this.validDateFields(this.nuevaJunta.fin)){
+            return true
+          }else{
+            return false
+          }
+        }else if(value === 'select'){
+          if(this.validDateFields(this.selectJunta.inicio) && this.validDateFields(this.selectJunta.fin)){
+            return true
+          }else{
+            return false
+          }
         }
       },
       disableYearCrear(value){
@@ -472,52 +482,101 @@ export default {
           this.$refs.inputYear1.disabled = false;
         }
       },
-      submitCollection(){
+      submitCollection(value){
 
-        let dataTransfer = {
-          archivos: [],
-          junta: {
-            inicio: '',
-            fin: '',
-            integrantes: {},
-          },
-        };
+        if(this.validAllFields(value)){
+          if(value === 'crear'){
+            let dataTransfer = {
+            archivos: [],
+            junta: {
+              inicio: '',
+              fin: '',
+              integrantes: {},
+            },
+          };
+  
+          dataTransfer.archivos = this.files;
+          dataTransfer.junta.inicio = this.nuevaJunta.inicio;
+          dataTransfer.junta.fin = this.nuevaJunta.fin;
+          dataTransfer.junta.junta_actual = this.nuevaJunta.junta_actual;
+          dataTransfer.target = 'Juntas';
+  
+          for(let i = 0; i < Object.values(this.nuevaJunta.integrantes).length; i++){
+            dataTransfer.junta.integrantes[i] = {},
+            dataTransfer.junta.integrantes[i].cargo = Object.values(this.nuevaJunta.integrantes)[i].cargo
+            dataTransfer.junta.integrantes[i].nombre = Object.values(this.nuevaJunta.integrantes)[i].nombre
+            dataTransfer.junta.integrantes[i].apellido = Object.values(this.nuevaJunta.integrantes)[i].apellido
+            dataTransfer.junta.integrantes[i].correo = Object.values(this.nuevaJunta.integrantes)[i].correo
+            dataTransfer.junta.integrantes[i].image = Object.values(this.nuevaJunta.integrantes)[i].image
+            dataTransfer.junta.integrantes[i].activo = Object.values(this.nuevaJunta.integrantes)[i].activo
+            dataTransfer.junta.integrantes[i].crear = Object.values(this.nuevaJunta.integrantes)[i].crear
+          }
 
-        dataTransfer.archivos = this.files;
-        dataTransfer.junta.inicio = this.nuevaJunta.inicio;
-        dataTransfer.junta.fin = this.nuevaJunta.fin;
-        dataTransfer.junta.junta_actual = this.nuevaJunta.junta_actual;
-        dataTransfer.target = 'Juntas';
-
-        for(let i = 0; i < Object.values(this.nuevaJunta.integrantes).length; i++){
-          dataTransfer.junta.integrantes[i] = {},
-          dataTransfer.junta.integrantes[i].cargo = Object.values(this.nuevaJunta.integrantes)[i].cargo
-          dataTransfer.junta.integrantes[i].nombre = Object.values(this.nuevaJunta.integrantes)[i].nombre
-          dataTransfer.junta.integrantes[i].apellido = Object.values(this.nuevaJunta.integrantes)[i].apellido
-          dataTransfer.junta.integrantes[i].correo = Object.values(this.nuevaJunta.integrantes)[i].correo
-          dataTransfer.junta.integrantes[i].image = Object.values(this.nuevaJunta.integrantes)[i].image
-          dataTransfer.junta.integrantes[i].activo = Object.values(this.nuevaJunta.integrantes)[i].activo
-          dataTransfer.junta.integrantes[i].crear = Object.values(this.nuevaJunta.integrantes)[i].crear
+          this.crearDB(dataTransfer)
+  
+          }else if(value === 'select'){
+            let dataTransfer = {
+            archivos: [],
+            junta: {
+              inicio: '',
+              fin: '',
+              integrantes: {},
+            },
+          };
+  
+          dataTransfer.archivos = this.files;
+          dataTransfer.junta.inicio = this.selectJunta.inicio;
+          dataTransfer.junta.fin = this.selectJunta.fin;
+          dataTransfer.junta.junta_actual = this.selectJunta.junta_actual;
+          dataTransfer.target = 'Juntas';
+  
+          for(let i = 0; i < Object.values(Object.values(this.dbWeb.Juntas).reverse()[this.indexSelected].junt_integrantes).length; i++){
+            dataTransfer.junta.integrantes[i] = {},
+            dataTransfer.junta.integrantes[i].cargo = Object.values(Object.values(this.dbWeb.Juntas).reverse()[this.indexSelected].junt_integrantes)[i].juin_cargo
+            dataTransfer.junta.integrantes[i].nombre = Object.values(Object.values(this.dbWeb.Juntas).reverse()[this.indexSelected].junt_integrantes)[i].juin_nombre
+            dataTransfer.junta.integrantes[i].apellido = Object.values(Object.values(this.dbWeb.Juntas).reverse()[this.indexSelected].junt_integrantes)[i].juin_apellido
+            dataTransfer.junta.integrantes[i].correo = Object.values(Object.values(this.dbWeb.Juntas).reverse()[this.indexSelected].junt_integrantes)[i].juin_correo
+            dataTransfer.junta.integrantes[i].image = Object.values(Object.values(this.dbWeb.Juntas).reverse()[this.indexSelected].junt_integrantes)[i].juin_foto
+            dataTransfer.junta.integrantes[i].activo = Object.values(Object.values(this.dbWeb.Juntas).reverse()[this.indexSelected].junt_integrantes)[i].juin_activo
+            dataTransfer.junta.integrantes[i].crear = Object.values(Object.values(this.dbWeb.Juntas).reverse()[this.indexSelected].junt_integrantes)[i].juin_crear
+          }
+          console.log(dataTransfer);
+          this.crearDB(dataTransfer)
+          }
+        }else{
+          this.error = 'Los campos marcados con * son obligatorios'
         }
-
-        this.crearDB(dataTransfer)
-      },
-      filesVerification(event, val){
         
-        Object.values(this.nuevaJunta.integrantes)[val].image = [];
-
+      },
+      filesVerification(event, val, val2){
+        
+        
         let files = event.target.files[0];
 
         this.files[val] = event.target.files[0];
 
-        this.files[val].id = val
-        Object.values(this.nuevaJunta.integrantes)[val].image = {
-          nombre: files.name,
-          url: '',
-          uploadPercentage: 0,
-          progressBar: {
-            show: true,
-          },
+        if(val2 === 'crear'){
+          Object.values(this.nuevaJunta.integrantes)[val].image = [];
+          this.files[val].id = val
+          Object.values(this.nuevaJunta.integrantes)[val].image = {
+            nombre: files.name,
+            url: '',
+            uploadPercentage: 0,
+            progressBar: {
+              show: true,
+            },
+          }
+        }else if(val2 === 'select'){
+           Object.values(Object.values(this.dbWeb.Juntas).reverse()[this.indexSelected].junt_integrantes)[val].juin_foto = [];
+          this.files[val].id = val
+           Object.values(Object.values(this.dbWeb.Juntas).reverse()[this.indexSelected].junt_integrantes)[val].juin_foto = {
+            nombre: files.name,
+            url: '',
+            uploadPercentage: 0,
+            progressBar: {
+              show: true,
+            },
+          }
         }
 
         event.target.value = ''
@@ -527,7 +586,8 @@ export default {
         if(this.deletingVal === null && this.successUpload === null){
           dataTransfer = {
             ref: 'Juntas',
-            id: Object.values(this.dbWeb.Juntas).reverse()[index].junt_id,
+            idSt: Object.values(this.dbWeb.Juntas).reverse()[index].junt_id,
+            idDb: Object.values(this.dbWeb.Juntas).reverse()[index].junt_id,
             index: index,
             storage: true,
           };
@@ -569,7 +629,8 @@ export default {
           }
         })
       },
-      crearJunta(){
+      crearValor(){
+        this.deleteCollection('crear')
         this.$refs.section0.classList.toggle('translate');
         setTimeout(() => {
           this.showList = false;
@@ -584,11 +645,24 @@ export default {
         setTimeout(() => {
           this[`${value2}`] = '';
           this.showList = true;
-          this.showCreate = false;
+          if(value1 === 'section2'){
+            this.showCreate = false;
+          }else if(value1 === 'section1'){
+            this.showPrev = false;
+          }
         }, 900);
         setTimeout(() => {
           this.$refs.section0.classList.toggle('translate')
         }, 950);
+      },
+      listDisplay(value){
+        if(this.dbWeb.Juntas !== undefined){
+          this.listEmpty = true
+        }else if(value === false){
+          this.listEmpty = false
+        }else{
+          this.listEmpty = false
+        }
       },
     },
 
@@ -599,8 +673,8 @@ export default {
     mounted(){
       
       this.getData().then(()=>{
+        this.listDisplay()
         this.show = true;
-        this.juntas = this.dbWeb.Integrantes_junta;
       })
 
       this.deleteCollection('crear');
@@ -625,36 +699,53 @@ export default {
         }
       },
       successUpload(){
-        if(this.successUpload !== null){
-          this.getData().then(()=>{
-            if(Object.values(this.dbWeb.Juntas).length/this.numElements > 1){
-              this.number = Math.ceil(Object.values(this.dbWeb.Juntas).length/this.numElements);
-              this.showSelect = true;
+        if(this.deletingVal !== null && this.dbWeb.Juntas !== undefined && Object.values(this.dbWeb.Juntas).length - 1 === 0){
+          this.listEmpty = false;
+            let n = {
+              0: 0,
+              1: null,
             }
-            this.$refs.alertBox.classList.add('alert-show')
-            setTimeout(() => {
-              try {
-              this.$refs.alertBox.classList.remove('alert-show');}catch{}
-            }, 1500);
-            setTimeout(() => {
-              const data = {
-                0: 'successUpload',
-                1: null
+            this.deletedEl(n)
+          }else{
+            let n = {
+              0: 0,
+              1: null,
+            }
+            this.deletedEl(n)
+          }
+        setTimeout(() => {
+          if(this.successUpload !== null){
+            this.getData().then(()=>{
+
+              this.listDisplay()
+
+              if(this.dbWeb.Servicios !== undefined){
+                try{
+                if(Object.values(this.dbWeb.Juntas).length/this.numElements > 1){
+                  this.number = Math.ceil(Object.values(this.dbWeb.Juntas).length/this.numElements);
+                  this.showSelect = true;
+                }}catch{}
               }
-              this.successAdvise(data)
-            }, 1600);
-          })
-        }
+              try{
+                this.$refs.alertBox.classList.add('alert-show')
+              }catch{}
+              setTimeout(() => {
+                try {
+                this.$refs.alertBox.classList.remove('alert-show');}catch{}
+              }, 1500);
+              setTimeout(() => {
+                const data = {
+                  0: 'successUpload',
+                  1: null
+                }
+                this.successAdvise(data)
+              }, 1600);
+            })
+          }
+        }, 1500);
       },
       deletingVal(){
-        let n = {
-          0: 0,
-          1: null,
-        } 
-
-        if(this.deletingVal === false){
-          this.deletedEl(n)
-        }else if(this.deletingVal === null){
+        if(this.deletingVal === null){
           setTimeout(() => {
             let m = {
               0: 1,

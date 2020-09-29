@@ -69,7 +69,14 @@
           <textarea type="text" class="info-form-c" placeholder="Información corta" v-model="createContent.formUpload.prev"></textarea>
           <textarea type="text" class="info-form" placeholder="Información" v-model="createContent.formUpload.info"></textarea>
           <div class="d-flex flex-row justify-content-between align-items-center m-3">
-            <button class="btn btn-success mr-2 ml-2" @click.prevent="submitCollection()">Crear noticia</button>
+            <button class="btn btn-success mr-2 ml-2" @click.prevent="submitCollection()">
+              <div v-if="createContent.formUpload.tipo" class="spinner-border text-light" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+              <div v-else>
+                Crear noticia
+              </div>
+            </button>
             <button class="btn btn-danger mr-2 ml-2" @click.prevent="deleteCollection()">Borrar campos</button>
           </div>
         </form>

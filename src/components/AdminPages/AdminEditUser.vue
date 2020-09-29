@@ -21,7 +21,7 @@
           <div class="d-flex w-100 flex-column justify-content-center align-items-center" style="margin: 2px;">
             <p class="title-text">CORREO ELECTRÓNICO</p>
             <div class="v-admin-emailvalues w-100">
-              <input class="v-input-text w-100" type="text" v-model="user.correo" :placeholder="user.correo?user.correo:'Correo'">
+              <input class="v-input-text w-100" type="text" v-model="user.correo" :placeholder="user.correo?user.correo:'Correo'" disabled>
             </div>
           </div>
         </div>

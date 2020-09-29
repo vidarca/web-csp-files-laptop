@@ -348,28 +348,28 @@
 			<div class="row clearfix">
 				
 				<!-- Team Member -->
-                <div class="team-member col-lg-3 col-md-6 col-sm-6" v-for="(item,index) in dbWeb.Gerencia" :key="index">
+                <div class="team-member col-lg-3 col-md-6 col-sm-6" v-for="(item,index) in Object.values(dbWeb.Gerencia)" :key="index" v-show="index < 4">
                     <div class="inner-box team-inner-box" ref="team">
                         <!--Image Box-->
                         <div class="image-box">
                             <!--Image-->
                             <figure class="image">
-                                <img :src="item.gr_img" :alt="item.gr_id" />
+                                <img :src="item.gr_foto.url" :alt="item.gr_cargo" />
                             </figure>
                             <!--Overlay Box-->
                             <div class="overlay-box">
                                 <div class="inner">
                                     <!--Social Icon One-->
                                     <ul class="social-icon-one">
-                                        <li><a class="flaticon-email" :href="`mailto: ${item.gr_mail}`"></a></li>
+                                        <li><a class="flaticon-email" :href="`mailto: ${item.gr_correo}`"></a></li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
                         <!--Lower Content-->
                         <div class="lower-content">
-                            <h5>{{item.gr_name}}</h5>
-                            <div class="designation">{{item.gr_id}}</div>
+                            <h5>{{item.gr_nombre}}</h5>
+                            <div class="designation">{{item.gr_cargo}}</div>
                         </div>
                     </div>
                 </div>
