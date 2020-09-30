@@ -362,7 +362,7 @@ export default {
         if(this.deletingVal === null && this.successUpload === null){
           dataTransfer = {
             ref: 'Gerencia',
-            idSt: '',
+            idSt: `imagenes/${Object.values(this.dbWeb.Gerencia).reverse()[index].gr_id}`,
             idDb: Object.values(this.dbWeb.Gerencia).reverse()[index].gr_id,
             index: index,
             storage: true,
@@ -455,8 +455,8 @@ export default {
 
       this.deleteCollection('crear');
 
-      if(this.dbWeb.Servicios !== undefined && Object.values(this.dbWeb.Servicios).length/this.numElements > 1){
-        this.number = Math.ceil(Object.values(this.dbWeb.Servicios).length/this.numElements);
+      if(this.dbWeb.Gerencia !== undefined && Object.values(this.dbWeb.Gerencia).length/this.numElements > 1){
+        this.number = Math.ceil(Object.values(this.dbWeb.Gerencia).length/this.numElements);
         this.showSelect = true;
       }
     },

@@ -40,7 +40,7 @@
                     <!-- FIN MUESTRA DE IMAGEN -->
                     <!-- BARRA DE PROGRESO -->
                     <div class="progress w-85 mb-2" v-show="!(createContent.formUpload.images[index] === undefined)?createContent.formUpload.images[index].progressBar.show: false">
-                      <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" :style="`width: ${!(createContent.formUpload.images[index] === undefined)?createContent.formUpload.images[index].uploadPercentage: ' '}%; height: ${!(createContent.formUpload.images[index] === undefined)?createContent.formUpload.images[index].progressBar.height: ' '} !importan; color: black`"></div>
+                      <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" :style="`width: ${!(createContent.formUpload.images[index] === undefined)?createContent.formUpload.images[index].uploadPercentage: ' '}%; height: ${!(createContent.formUpload.images[index] === undefined)?createContent.formUpload.images[index].progressBar.height: ' '} !importan; color: black`"></div>
                     </div>
                     <!-- FIN BARRA DE PROGRESO -->
                   </div>

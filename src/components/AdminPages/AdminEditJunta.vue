@@ -118,7 +118,7 @@
                       <!-- FIN MUESTRA DE IMAGEN -->
                       <!-- BARRA DE PROGRESO -->
                       <div class="progress w-85 mb-2" v-if="dbImg[index] !== undefined">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" :style="`width: ${(dbImg[index] !== undefined)?dbImg[index].uploadPercentage: ' '}%; height: 20px; min-height: 20px} !importan; color: black`"></div>
+                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" :style="`width: ${(dbImg[index] !== undefined)?dbImg[index].uploadPercentage: ' '}%; height: 20px; min-height: 20px} !importan; color: black`"></div>
                       </div>
                       <!-- FIN BARRA DE PROGRESO -->
                     </div>
@@ -207,7 +207,7 @@
                       <!-- FIN MUESTRA DE IMAGEN -->
                       <!-- BARRA DE PROGRESO -->
                       <div class="progress w-85 mb-2" v-if="dbImg[index] !== undefined">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" :style="`width: ${(dbImg[index] !== undefined)?dbImg[index].uploadPercentage: ' '}%; height: 20px; min-height: 20px} !importan; color: black`"></div>
+                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" :style="`width: ${(dbImg[index] !== undefined)?dbImg[index].uploadPercentage: ' '}%; height: 20px; min-height: 20px} !importan; color: black`"></div>
                       </div>
                       <!-- FIN BARRA DE PROGRESO -->
                     </div>
@@ -586,7 +586,7 @@ export default {
         if(this.deletingVal === null && this.successUpload === null){
           dataTransfer = {
             ref: 'Juntas',
-            idSt: Object.values(this.dbWeb.Juntas).reverse()[index].junt_id,
+            idSt: `imagenes/${Object.values(this.dbWeb.Juntas).reverse()[index].junt_id}`,
             idDb: Object.values(this.dbWeb.Juntas).reverse()[index].junt_id,
             index: index,
             storage: true,

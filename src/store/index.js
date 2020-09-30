@@ -85,6 +85,7 @@ export default new Vuex.Store({
       },
     },
     dbImg: [],
+    dbFiles: [],
   },
   mutations: {
     dataWeb(state, baseDatos){
@@ -191,7 +192,6 @@ export default new Vuex.Store({
           }
           this.commit('dbUserVal', valuesRef);
           state.dbWeb.Usuarios[`${valuesDb.id}`] = valuesDb;
-          console.log(Object.values(state.dbWeb.Usuarios));
         }).catch(err => {
           state.users.userRefer = false;
           secondaryApp.delete();
@@ -299,9 +299,8 @@ export default new Vuex.Store({
         )
       }else if(value.storage === true){
         try{
-          let storageRef = firebase.storage().ref(`/imagenes/${value.ref}/${value.idSt}`)
+          let storageRef = firebase.storage().ref(`/${value.ref}/${value.idSt}`)
           storageRef.listAll().then(prom => {
-            console.log(prom);
             if(prom.items.length !== 0){
               prom.items.forEach(element => {
                 storageRef.child(element.name).delete().then( err => {
@@ -881,6 +880,115 @@ export default new Vuex.Store({
           if(n >= Object.values(data.archivos).length){
             const dbRef = firebase.database().ref(`${data.target}`);
             dbRef.child(`${data.integrante.id}`).set(dataRef);
+            state.crearDBVals = false;
+            const success = {
+              0: 'successUpload',
+              1: 'Se ha creado exitosamente'
+            }
+            this.commit('successAdvise', success)
+          }
+        }
+      }else if(data.target === 'Profesores'){
+        
+        state.dbImg = [];
+
+        if(data.archivos['archivo0'] !== undefined){
+          state.dbImg[0] = data.profesor.archivos.image;
+        }
+
+        if(data.archivos['archivo1'] !== undefined){
+          state.dbImg[1] = data.profesor.archivos.cv;
+        }
+
+        let storageRef = [];
+        let percentage = [];
+        let order = [];
+        let task = {};
+        let i = 0;
+        let n = 0;
+        let j = 0;
+
+        Object.values(data.archivos).forEach(element => {
+          storageRef= firebase.storage().ref(`/${data.target}/${data.profesor.id}/${Object.values(data.profesor.archivos)[i].nombre}`);
+          task[`${element.id}`] = storageRef.put(element);
+          i++;
+        })
+        
+        if(Object.values(task).length !== 0){
+          Object.values(data.archivos).forEach(element => {
+            task[`${element.id}`].on('state_changed', snapshot => {
+              percentage[snapshot.task.blob_.data_.id] = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+              state.dbImg[snapshot.task.blob_.data_.id].uploadPercentage = percentage[snapshot.task.blob_.data_.id];
+              if(state.dbImg[snapshot.task.blob_.data_.id].uploadPercentage === 100 && order.length < Object.values(data.archivos).length){
+                order.push(snapshot.task.blob_.data_.id)
+              }
+            }, error => {
+              console.log(error.message);
+            }, () =>{
+
+              let dataRef = {
+                comi_id: data.profesor.coid,
+                prof_cv: [],
+                prof_ci: data.profesor.ci,
+                prof_correo: data.profesor.correo,
+                prof_fechadenacimiento: data.profesor.nacimiento,
+                prof_foto: [],
+                prof_id: data.profesor.id,
+                prof_nombre: data.profesor.nombre,
+                prof_telefonos:data.profesor.telefonos,
+              }
+              
+              let storageRef= firebase.storage().ref(`/${data.target}/${data.profesor.id}/${Object.values(data.profesor.archivos)[order[j]].nombre}`);
+              
+              storageRef.getDownloadURL().then(url => {
+                let val = order[n];
+                if(val === 0){
+                  state.dbImg[val].url = url;
+                  state.dbImg[val].nombre = `${data.profesor.id}`;
+                }else{
+                  state.dbImg[val].url = url;
+                  state.dbImg[val].nombre = `c_v_${data.profesor.id}`;
+                }
+                n ++;
+                if(n >= Object.values(data.archivos).length - 1){
+                  dataRef.prof_foto.nombre = state.dbImg[0].nombre;
+                  dataRef.prof_foto.url = state.dbImg[0].url;
+                  dataRef.prof_cv.nombre = state.dbImg[1].nombre;
+                  dataRef.prof_cv.url = state.dbImg[1].url;
+
+                  if(n >= Object.values(data.archivos).length){
+                    const dbRef = firebase.database().ref(`${data.target}`);
+                    dbRef.child(`${data.profesor.id}`).set(dataRef);
+                    state.crearDBVals = false;
+                    const success = {
+                      0: 'successUpload',
+                      1: 'Se ha creado exitosamente'
+                    }
+                    this.commit('successAdvise', success)
+                  }
+                }
+              })
+              j++;
+            })
+          })
+        }else{
+
+          let dataRef = {
+            comi_id: data.profesor.coid,
+            prof_cv: [],
+            prof_ci: data.profesor.ci,
+            prof_correo: data.profesor.correo,
+            prof_fechadenacimiento: data.profesor.nacimiento,
+            prof_foto: [],
+            prof_id: data.profesor.id,
+            prof_nombre: data.profesor.nombre,
+            prof_telefonos:data.profesor.telefonos,
+          }
+
+          n++;
+          if(n >= Object.values(data.archivos).length){
+            const dbRef = firebase.database().ref(`${data.target}`);
+            dbRef.child(`${data.profesor.id}`).set(dataRef);
             state.crearDBVals = false;
             const success = {
               0: 'successUpload',
