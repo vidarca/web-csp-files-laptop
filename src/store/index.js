@@ -950,7 +950,7 @@ export default new Vuex.Store({
                   state.dbImg[val].nombre = `c_v_${data.profesor.id}`;
                 }
                 n ++;
-                if(n >= Object.values(data.archivos).length - 1){
+                if(n >= Object.values(data.archivos).length){
                   dataRef.prof_foto.nombre = state.dbImg[0].nombre;
                   dataRef.prof_foto.url = state.dbImg[0].url;
                   dataRef.prof_cv.nombre = state.dbImg[1].nombre;
@@ -989,6 +989,150 @@ export default new Vuex.Store({
           if(n >= Object.values(data.archivos).length){
             const dbRef = firebase.database().ref(`${data.target}`);
             dbRef.child(`${data.profesor.id}`).set(dataRef);
+            state.crearDBVals = false;
+            const success = {
+              0: 'successUpload',
+              1: 'Se ha creado exitosamente'
+            }
+            this.commit('successAdvise', success)
+          }
+        }
+      }else if(data.target === 'Comites'){
+        
+        state.dbImg = [];
+
+        for(let k = 0; k < Object.values(data.comite.archivos).length; k++){
+          if(Object.values(data.comite.archivos)[k].id !== undefined){
+            state.dbImg[Object.values(data.comite.archivos)[k].id] = Object.values(data.comite.archivos)[k];
+          }else{
+            state.dbImg[k] = '';
+          }
+        }
+        
+        let storageRef = [];
+        let percentage = [];
+        let order = [];
+        let task = {};
+        let i = 0;
+        let n = 0;
+        let j = 0;
+
+        const dbRef = firebase.database().ref(`${data.target}`);
+        const pushdbRef = dbRef.push();
+
+        let dataRef = {
+          comi_id: pushdbRef.key,
+        }
+
+        Object.values(data.archivos).forEach(element => {
+          storageRef= firebase.storage().ref(`/${data.target}/${dataRef.comi_id}/${Object.values(data.comite.archivos)[element.id].nombre}`);
+          task[`${element.id}`] = storageRef.put(element);
+          i++;
+        })
+        
+        if(Object.values(task).length !== 0){
+          Object.values(data.archivos).forEach(element => {
+            task[`${element.id}`].on('state_changed', snapshot => {
+              percentage[snapshot.task.blob_.data_.id] = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+              state.dbImg[snapshot.task.blob_.data_.id].uploadPercentage = percentage[snapshot.task.blob_.data_.id];
+              if(state.dbImg[snapshot.task.blob_.data_.id].uploadPercentage === 100 && order.length < Object.values(data.archivos).length){
+                order.push(snapshot.task.blob_.data_.id)
+              }
+            }, error => {
+              console.log(error.message);
+            }, () =>{
+
+              dataRef = {
+                comi_id: pushdbRef.key,
+                comi_activo: data.comite.activo,
+                comi_comiPage: data.comite.comipage,
+                comi_correo: data.comite.correo,
+                comi_costos: data.comite.costos,
+                comi_descripcion: data.comite.descripcion,
+                comi_fechavigencia: data.comite.fechav,
+                comi_foto: [],
+                comi_int: data.comite.inthpage,
+                comi_integrantes: data.comite.integrantes,
+                comi_nombre: data.comite.nombre,
+                comi_normativa: [],
+                comi_reglamento: [],
+              }
+              
+              let storageRef= firebase.storage().ref(`/${data.target}/${dataRef.comi_id}/${Object.values(data.comite.archivos)[`${order[j]}`].nombre}`);
+              
+              storageRef.getDownloadURL().then(url => {
+                let val = order[n];
+                console.log(val);
+                for(let m = 0; m < Object.values(data.comite.archivos).length; m++){
+                  if(Object.values(data.comite.archivos)[m].id !== undefined && val === Object.values(data.comite.archivos)[m].id){
+                    state.dbImg[val].url = url;
+                    state.dbImg[val].nombre = Object.values(data.comite.archivos)[m].nombre
+                  }
+                }
+                n ++;
+                if(n >= Object.values(data.archivos).length){
+                  if(state.dbImg[0].nombre !== undefined){
+                    dataRef.comi_foto = {
+                      nombre: state.dbImg[0].nombre,
+                      url: state.dbImg[0].url,
+                    } 
+                  }else{
+                    dataRef.comi_foto = '';
+                  }
+
+                  if(state.dbImg[1].nombre !== undefined){
+                    dataRef.comi_reglamento = {
+                      nombre: state.dbImg[1].nombre,
+                      url: state.dbImg[1].url,
+                    }
+                  }else{
+                    dataRef.comi_reglamento = '';
+                  }
+
+                  if(state.dbImg[2].nombre !== undefined){
+                    dataRef.comi_normativa = {
+                      nombre: state.dbImg[2].nombre,
+                      url: state.dbImg[2].url,
+                    }
+                  }else{
+                    dataRef.comi_normativa = '';
+                  }
+
+                  if(n >= Object.values(data.archivos).length){
+                    pushdbRef.set(dataRef);
+                    state.crearDBVals = false;
+                    const success = {
+                      0: 'successUpload',
+                      1: 'Se ha creado exitosamente'
+                    }
+                    this.commit('successAdvise', success)
+                  }
+                }
+              })
+              j++;
+            })
+          })
+        }else{
+
+          dataRef = {
+            comi_id: pushdbRef.key,
+            comi_activo: data.comite.activo,
+            comi_comiPage: data.comite.comipage,
+            comi_correo: data.comite.correo,
+            comi_costos: data.comite.costos,
+            comi_descripcion: data.comite.descripcion,
+            comi_fechavigencia: data.comite.fechav,
+            comi_foto: data.comite.archivos.imagen,
+            comi_int: data.comite.inthpage,
+            comi_integrantes: data.comite.integrantes,
+            comi_nombre: data.comite.nombre,
+            comi_normativa: data.comite.archivos.normativa,
+            comi_reglamento: data.comite.archivos.reglamento,
+          }
+
+          n++;
+          if(n >= Object.values(data.archivos).length){
+            pushdbRef.set(dataRef);
             state.crearDBVals = false;
             const success = {
               0: 'successUpload',

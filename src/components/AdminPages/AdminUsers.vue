@@ -14,7 +14,7 @@
             <input class="w-75" type="email" :class="!validEmail?'error':' '" placeholder="Correo" v-model="users.createUser.formUpload.correo">
             <div class="w-100 d-flex flex-row align-items-center justify-content-start">
               <input class="w-75" type="password" :class="!validPass?'error':' '" placeholder="Contraseña" v-model="users.createUser.formUpload.pass">
-              <i ref="info" class="icon info position-relative flaticon-question">
+              <i ref="info" @mouseenter="toggleInfo()" @mouseleave="toggleInfo()" class="icon info position-relative flaticon-question">
                 <div class="info text position-absolute">
                   La contraseña debe ser de un máximo de 15 caracteres y debe contener sólamente un(1) caracter especial ('*', '$', '#', '@', '!', '?') y, al menos, una letra mayúscula y un caracter numérico.
                 </div>
@@ -385,6 +385,9 @@ export default {
           this.error = 'Revise los campos'
         }
       },
+      toggleInfo(){
+        this.$refs.info.children[0].classList.toggle('show-info')
+      },
     },
 
     watch:{
@@ -453,15 +456,6 @@ export default {
             this.number = Math.ceil(Object.values(this.dbWeb.Usuarios).length/10);
             this.showSelect = true;
           }
-    
-          this.$refs.info.addEventListener('mouseover', () => {
-            this.$refs.info.children[0].classList.toggle('show-info')
-          })
-    
-          this.$refs.info.addEventListener('mouseout', () => {
-            this.$refs.info.children[0].classList.toggle('show-info')
-          })
-
 
           clearInterval(waiting)
         }
@@ -578,7 +572,6 @@ export default {
   }
 
   .modal-body .icon{
-    cursor: pointer;
     font-size: 12px;
     border-radius: 50%;
     padding: 0px 5px 0px 6px;

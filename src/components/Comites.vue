@@ -10,7 +10,7 @@
             <div class="row clearfix justify-content-center">
               
               <!-- Bloque de Notica -->
-              <div class="security-block col-lg-4 col-md-6 col-sm-6" v-for="(comite, index) in dbWeb.Comites" :key="comite.comi_name" v-if="comite.comi_comiPage === true">
+              <div class="security-block col-lg-4 col-md-6 col-sm-6" v-for="(comite, index) in dbWeb.Comites" :key="comite.comi_nombre" v-show="comite.comi_comiPage === true">
                 <div class="inner-box">
                   <div class="image">
                     <img :src="comite.comi_fotoUrl" />
@@ -19,7 +19,7 @@
                     <div class="hover-bg-color"></div>
                     <div class="upper-box">
                       <div :class="['icon mr-1', iconSelect(index)]"></div>
-                      <h5 class="ml-1">{{comite.comi_name}}</h5>
+                      <h5 class="ml-1">{{comite.comi_nombre}}</h5>
                     </div>
                   </div>
                 </div>
@@ -49,43 +49,43 @@ export default {
 	  },
     methods:{
       iconSelect(index){
-        if(this.dbWeb.Comites[index].comi_name === 'Comité de Tenis'){
+        if(this.dbWeb.Comites[index].comi_nombre === 'Comité de Tenis'){
           return 'flaticon-racket-and-tennis-ball'
-        }else if(this.dbWeb.Comites[index].comi_name === 'Comité de Alimentos y Bebidas'){
+        }else if(this.dbWeb.Comites[index].comi_nombre === 'Comité de Alimentos y Bebidas'){
           return 'flaticon-restaurant'
-        }else if(this.dbWeb.Comites[index].comi_name === 'Comité de Gimnasio'){
+        }else if(this.dbWeb.Comites[index].comi_nombre === 'Comité de Gimnasio'){
           return 'flaticon-barbell'
-        }else if(this.dbWeb.Comites[index].comi_name === 'Comité de Admisión'){
+        }else if(this.dbWeb.Comites[index].comi_nombre === 'Comité de Admisión'){
           return 'flaticon-shop'
-        }else if(this.dbWeb.Comites[index].comi_name === 'Comité de Artes Marciales'){
+        }else if(this.dbWeb.Comites[index].comi_nombre === 'Comité de Artes Marciales'){
           return 'flaticon-store'
-        }else if(this.dbWeb.Comites[index].comi_name === 'Comité de Comunicaciones'){
+        }else if(this.dbWeb.Comites[index].comi_nombre === 'Comité de Comunicaciones'){
           return 'flaticon-shop'
-        }else if(this.dbWeb.Comites[index].comi_name === 'Comité de Cultura'){
+        }else if(this.dbWeb.Comites[index].comi_nombre === 'Comité de Cultura'){
           return 'flaticon-store'
-        }else if(this.dbWeb.Comites[index].comi_name === 'Comité de Dominó'){
+        }else if(this.dbWeb.Comites[index].comi_nombre === 'Comité de Dominó'){
           return 'flaticon-shop'
-        }else if(this.dbWeb.Comites[index].comi_name === 'Comité Juvenil'){
+        }else if(this.dbWeb.Comites[index].comi_nombre === 'Comité Juvenil'){
           return 'flaticon-store'
-        }else if(this.dbWeb.Comites[index].comi_name === 'Comité de Bailoterapia'){
+        }else if(this.dbWeb.Comites[index].comi_nombre === 'Comité de Bailoterapia'){
           return 'flaticon-shop'
-        }else if(this.dbWeb.Comites[index].comi_name === 'Comité de Natación'){
+        }else if(this.dbWeb.Comites[index].comi_nombre === 'Comité de Natación'){
           return 'flaticon-store'
-        }else if(this.dbWeb.Comites[index].comi_name === 'Comité de Squash'){
+        }else if(this.dbWeb.Comites[index].comi_nombre === 'Comité de Squash'){
           return 'flaticon-shop'
-        }else if(this.dbWeb.Comites[index].comi_name === 'Comité de Guardería'){
+        }else if(this.dbWeb.Comites[index].comi_nombre === 'Comité de Guardería'){
           return 'flaticon-store'
-        }else if(this.dbWeb.Comites[index].comi_name === 'Comité Social'){
+        }else if(this.dbWeb.Comites[index].comi_nombre === 'Comité Social'){
           return 'flaticon-shop'
-        }else if(this.dbWeb.Comites[index].comi_name === 'Comité de TRX'){
+        }else if(this.dbWeb.Comites[index].comi_nombre === 'Comité de TRX'){
           return 'flaticon-store'
-        }else if(this.dbWeb.Comites[index].comi_name === 'Comité de Infraestructura'){
+        }else if(this.dbWeb.Comites[index].comi_nombre === 'Comité de Infraestructura'){
           return 'flaticon-shop'
-        }else if(this.dbWeb.Comites[index].comi_name === 'Comité de Finanzas'){
+        }else if(this.dbWeb.Comites[index].comi_nombre === 'Comité de Finanzas'){
           return 'flaticon-store'
-        }else if(this.dbWeb.Comites[index].comi_name === 'Comité de Reforma de Estatutos'){
+        }else if(this.dbWeb.Comites[index].comi_nombre === 'Comité de Reforma de Estatutos'){
           return 'flaticon-shop'
-        }else if(this.dbWeb.Comites[index].comi_name === 'Comité de Tribunal Disciplinario'){
+        }else if(this.dbWeb.Comites[index].comi_nombre === 'Comité de Tribunal Disciplinario'){
           return 'flaticon-store'
         }else{
           return ''

@@ -5503,3 +5503,51 @@ input.error{
 	left: 0;
 	content: '*';
 }
+
+.info.icon{
+	font-size: 12px;
+	border-radius: 50%;
+	padding: 0px 5px 0px 6px;
+	background-color: rgb(0, 0, 230);
+	color: white;
+	border: 1px solid black;
+}
+
+.info.icon::after{
+	position: absolute;
+	top: -1px;
+	left: -1px;
+	width: calc(100% + 2px);
+	height: calc(100% + 2px);
+	border-radius: 50%;
+	content: '';
+	background-color: rgba(255,255,255, 0);
+	transition: all .2s ease;
+}
+
+.info.icon:hover::after{
+	background-color: rgba(255,255,255, .2);
+}
+
+.info.icon .text{
+	display: none;
+	height: auto;
+	width: 300px;
+	overflow: hidden;
+	font-size: 13px;
+	opacity: 0;
+	top: -60px;
+	left: 30px;
+	background-color: rgba(255,255,255, .95);
+	border-radius: 10px;
+	padding: 5px 15px;
+	font-style: normal;
+	text-align: justify;
+	font-weight: 500;
+	transition: oacity .2s ease;
+}
+
+.info.icon .text.show-info{
+	display: initial !important;
+	opacity: 1 !important;
+}

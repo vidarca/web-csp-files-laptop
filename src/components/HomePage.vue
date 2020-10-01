@@ -218,14 +218,14 @@
 					<div class="inner-box">
 						<div class="image">
 							<div class="gallery-content-box">
-								<p class="gallery-content-title"> {{dataAdmis.comi_name}} </p>									
+								<p class="gallery-content-title"> {{dataAdmis.comi_nombre}} </p>									
 							</div>
 							<img src="https://via.placeholder.com/750x285" style="min-height: 285px" alt="" />
 							<!-- Overlay Box -->
 							<div class="overlay-box">
 								<div class="overlay-inner">
 									<div class="content">
-										<h4><a href="gallery.html">{{dataAdmis.comi_name}}</a></h4>
+										<h4><a href="gallery.html">{{dataAdmis.comi_nombre}}</a></h4>
 									</div>
 								</div>
 							</div>
@@ -238,14 +238,14 @@
 					<div class="inner-box">
 						<div class="image">
 							<div class="gallery-content-box">
-								<p class="gallery-content-title"> {{element.comi_name}} </p>								
+								<p class="gallery-content-title"> {{element.comi_nombre}} </p>								
 							</div>
 							<img src="https://via.placeholder.com/360x285" alt="" />
 							<!-- Overlay Box -->
 							<div class="overlay-box">
 								<div class="overlay-inner">
 									<div class="content">
-										<h4><a href="gallery.html">{{element.comi_name}}</a></h4>
+										<h4><a href="gallery.html">{{element.comi_nombre}}</a></h4>
 									</div>
 								</div>
 							</div>
@@ -447,10 +447,10 @@ import AutogestionSpan from '@/components/AutogestionSpan.vue'
 		sendTo(url){
 			window.open(`${url}`, '_blank');
 		},
-		getIdInfo(area, val, rel, dataAl){
-			for(let i = 0; i < this.dbWeb[area].length; i++){
-				if(this.dbWeb[area][i][`${val}_name`] === rel){
-					return this.dbWeb[area][i];
+		getIdInfo(area, val, rel){
+			for(let i = 0; i < Object.values(this.dbWeb[area]).length; i++){
+				if(Object.values(this.dbWeb[area])[i][`${val}`] === rel){
+					return Object.values(this.dbWeb[area])[i];
 				}
 			}
 		}
@@ -465,7 +465,7 @@ import AutogestionSpan from '@/components/AutogestionSpan.vue'
 	var waiting = setInterval(() => {
 		if(this.$refs.team !== undefined ){
 			/* Data */
-			this.dataAdmis = this.getIdInfo('Comites', 'comi', 'Comité de Admisión')
+			this.dataAdmis = this.getIdInfo('Comites', 'comi_nombre', 'Comité de Admisión')
 
 
 			/* Observers */
