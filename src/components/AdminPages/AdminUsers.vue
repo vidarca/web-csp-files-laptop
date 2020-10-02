@@ -81,11 +81,6 @@
           </li>
           <li class="item-element text col-2 d-flex flex-sm-row flex-column justify-content-end align-items-center pl-sm-1 pr-sm-1">
             <i class="icon edit flaticon-edit mt-1 mb-1" title="Editar" @click="itemListSelected(index)"></i>
-            <i class="icon delete flaticon-close mt-1 mb-1" title="Eliminar" :data-index="index" @click="itemDelete(index)">
-              <div v-if="deletingVal === true && deletingIndex === $event.parentNode().dataset.index" class="spinner-border text-light" role="status">
-                <span class="sr-only">Loading...</span>
-              </div>
-            </i>
           </li>
         </ul>
         <div style="min-height: 46px; height: 46px;">
@@ -226,7 +221,7 @@ export default {
     },
 
     methods:{
-      ...mapMutations(['createUser', 'isUserDiff', 'successAdvise', 'changeSecTitle', 'resetContentValues', 'deleteItem']),
+      ...mapMutations(['createUser', 'isUserDiff', 'successAdvise', 'changeSecTitle', 'resetContentValues']),
       ...mapActions(['getData']),
       filterChangeHandler(){
         if(this.$refs.anuncios !== undefined){
@@ -302,16 +297,6 @@ export default {
           window.scrollTo(0, 0);
           this.$refs.section2.classList.toggle('translate');
         }, 800);
-      },
-      itemDelete(val){
-        const values = {
-          id: Object.values(this.dbWeb.Usuarios)[val].user_id,
-          ref: 'Usuarios',
-          index: val,
-          storage: false,
-        }
-
-        this.deleteItem(values)
       },
       returnList(){
         this.masterAutori = false;

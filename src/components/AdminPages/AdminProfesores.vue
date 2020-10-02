@@ -372,7 +372,7 @@ export default {
     },
     
     methods:{
-      ...mapMutations(['resetDBValues', 'successAdvise', 'deletedEl', 'changeSecTitle', 'crearDB', 'falseCargarDB', 'deleteItem']),
+      ...mapMutations(['resetDBValues', 'successAdvise', 'deletedEl', 'changeSecTitle', 'crearDB', 'falseCargarDB', 'deleteItem', 'updateDB']),
       ...mapActions(['getData']),
       itemSelected(index){
         this.resetDBValues();
@@ -539,7 +539,6 @@ export default {
               archivos: this.files,
               profesor: {
                 coid: this.nuevoProfesor.coid,
-                id: this.nuevoProfesor.nombre.split(' ').join('_'),
                 ci: this.nuevoProfesor.ci,
                 nacimiento: this.nuevoProfesor.nacimiento,
                 correo: this.nuevoProfesor.correo,
@@ -579,7 +578,7 @@ export default {
               archivos: this.files,
               profesor: {
                 coid: this.selectProfesor.coid,
-                id: this.selectProfesor.nombre.split(' ').join('_'),
+                id: this.selectProfesor.id,
                 ci: this.selectProfesor.ci,
                 nacimiento: this.selectProfesor.nacimiento,
                 correo: this.selectProfesor.correo,
@@ -604,7 +603,7 @@ export default {
               dataTransfer.profesor.telefonos = '';
             }
             
-            this.crearDB(dataTransfer)
+            this.updateDB(dataTransfer)
           }
         }else{
           this.error = 'Los campos marcados con * son obligatorios'

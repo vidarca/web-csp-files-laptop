@@ -243,7 +243,7 @@ export default {
     },
     
     methods:{
-      ...mapMutations(['resetDBValues', 'successAdvise', 'deletedEl', 'changeSecTitle', 'crearDB', 'falseCargarDB', 'deleteItem']),
+      ...mapMutations(['resetDBValues', 'successAdvise', 'deletedEl', 'changeSecTitle', 'crearDB', 'falseCargarDB', 'deleteItem', 'updateDB']),
       ...mapActions(['getData']),
       itemSelected(index){
         this.resetDBValues();
@@ -259,7 +259,6 @@ export default {
             imagen: Object.values(this.dbWeb.Gerencia).reverse()[index].gr_foto,
             correo: Object.values(this.dbWeb.Gerencia).reverse()[index].gr_correo,
           };
-          console.log(this.selectIntegrante);
         }, 900);
         setTimeout(() => {
           this.$refs.section1.classList.toggle('translate')
@@ -304,7 +303,6 @@ export default {
               cargo: this.nuevoIntegrante.cargo,
               correo: this.nuevoIntegrante.correo,
               image: this.nuevoIntegrante.imagen,
-              id: this.nuevoIntegrante.cargo.split(' ').join('_'),
             },
             target: 'Gerencia',
           };
@@ -318,12 +316,12 @@ export default {
               cargo: this.selectIntegrante.cargo,
               correo: this.selectIntegrante.correo,
               image: this.selectIntegrante.imagen,
-              id: this.selectIntegrante.cargo.split(' ').join('_'),
+              id: this.selectIntegrante.id,
             },
             target: 'Gerencia',
           };
 
-          this.crearDB(dataTransfer)
+          this.updateDB(dataTransfer)
         }
       },
       filesVerification(event, val, val2){
@@ -362,7 +360,7 @@ export default {
         if(this.deletingVal === null && this.successUpload === null){
           dataTransfer = {
             ref: 'Gerencia',
-            idSt: `imagenes/${Object.values(this.dbWeb.Gerencia).reverse()[index].gr_id}`,
+            idSt: Object.values(this.dbWeb.Gerencia).reverse()[index].gr_id,
             idDb: Object.values(this.dbWeb.Gerencia).reverse()[index].gr_id,
             index: index,
             storage: true,
@@ -443,7 +441,7 @@ export default {
     },
 
     created(){
-      this.changeSecTitle('Servicios');
+      this.changeSecTitle('Equipo de Trabajo');
     },
 
     mounted(){
@@ -494,9 +492,9 @@ export default {
             this.getData().then(()=>{
               this.listDisplay();
               try{
-              if(this.dbWeb.Servicios !== undefined){
-                if(Object.values(this.dbWeb.Servicios).length/this.numElements > 1){
-                  this.number = Math.ceil(Object.values(this.dbWeb.Servicios).length/this.numElements);
+              if(this.dbWeb.Gerencia !== undefined){
+                if(Object.values(this.dbWeb.Gerencia).length/this.numElements > 1){
+                  this.number = Math.ceil(Object.values(this.dbWeb.Gerencia).length/this.numElements);
                   this.showSelect = true;
                 }
               }}catch{}
@@ -531,7 +529,6 @@ export default {
       },
       cargarDB(){
         if(this.cargarDB === true){
-          console.log('SI');
           this.getData().then(()=>{
             this.falseCargarDB();
           })

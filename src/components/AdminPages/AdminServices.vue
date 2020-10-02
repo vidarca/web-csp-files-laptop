@@ -254,7 +254,7 @@ export default {
     },
     
     methods:{
-      ...mapMutations(['resetDBValues', 'successAdvise', 'deletedEl', 'changeSecTitle', 'crearDB', 'falseCargarDB', 'deleteItem']),
+      ...mapMutations(['resetDBValues', 'successAdvise', 'deletedEl', 'changeSecTitle', 'crearDB', 'falseCargarDB', 'deleteItem', 'updateDB']),
       ...mapActions(['getData']),
       itemSelected(index){
         this.resetDBValues();
@@ -343,7 +343,6 @@ export default {
               image: this.nuevoServicio.imagen,
               contacto: this.nuevoServicio.contacto,
               descripcion: this.nuevoServicio.descripcion,
-              id: this.nuevoServicio.nombre.split(' ').join('_'),
               nombre: this.nuevoServicio.nombre,
             },
             target: 'Servicios',
@@ -360,13 +359,13 @@ export default {
               image: this.selectServicio.imagen,
               contacto: this.selectServicio.contacto,
               descripcion: this.selectServicio.descripcion,
-              id: this.selectServicio.nombre.split(' ').join('_'),
+              id: this.selectServicio.id,
               nombre: this.selectServicio.nombre,
             },
             target: 'Servicios',
           };
 
-          this.crearDB(dataTransfer)
+          this.updateDB(dataTransfer)
         }
       },
       filesVerification(event, val, val2){
@@ -405,7 +404,7 @@ export default {
         if(this.deletingVal === null && this.successUpload === null){
           dataTransfer = {
             ref: 'Servicios',
-            idSt: `imagenes/${Object.values(this.dbWeb.Servicios).reverse()[index].serv_id}`,
+            idSt: Object.values(this.dbWeb.Servicios).reverse()[index].serv_id,
             idDb: Object.values(this.dbWeb.Servicios).reverse()[index].serv_id,
             index: index,
             storage: true,
@@ -574,7 +573,6 @@ export default {
       },
       cargarDB(){
         if(this.cargarDB === true){
-          console.log('SI');
           this.getData().then(()=>{
             this.falseCargarDB();
           })

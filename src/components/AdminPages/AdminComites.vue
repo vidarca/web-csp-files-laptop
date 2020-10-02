@@ -1,5 +1,23 @@
 <template>
   <div id="admin-comites" class="position-relative" v-if="show">
+    <div class="modal fade show" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">{{message.title}}</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            {{message.message}}
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="alert-box position-fixed" ref="alertBox">
       <i :class="error?'icon-err flaticon-close':successUpload?'icon-succ flaticon-check': ' '"></i> <p>{{error?error:successUpload?successUpload:' '}}</p>
     </div>
@@ -209,13 +227,13 @@
                   <label class="custom-control-label text" for="comi_page">Marque si el comité debe tener su propia página</label>
                 </div>
               </div>
-              <div class="col-12 col-md-3 align-self-start align-items-center justify-content-center p-1">
+              <div class="col-12 col-md-3 align-self-start align-items-center justify-content-center p-1" >
                 <div class="custom-control custom-switch d-flex align-items-center justify-content-center">
-                  <input type="checkbox" class="custom-control-input" id="comi_int" v-model="selectComite.inthpage">
-                  <label class="custom-control-label text" for="comi_int">Marque si desea que el comité aparezca en la página principal</label>
+                  <input type="checkbox" class="custom-control-input" id="comi_int_edit" v-model="selectComite.inthpage">
+                  <label class="custom-control-label text" for="comi_int_edit" >Marque si desea que el comité aparezca en la página principal</label>
                   <i ref="info" @mouseenter="toggleInfo()" @mouseleave="toggleInfo()" class="icon info position-relative ml-1 flaticon-question">
                     <div class="info text position-absolute" style="top: auto; bottom: -750% !important; left:-1000% !important; overflow: visible">
-                      Este campo estará desabilidato cuando existan un máximo de 6 comités ya seleccionados. Para cambiar los comités de la página principal, edite cualquier comité que se encuentre seleccionado para aparecer en la página, desabilite la opción y habilite el que desee.
+                      Este campo estará desabilidato cuando existan un máximo de 4 elementos ya seleccionados.
                     </div>
                   </i>
                 </div>
@@ -407,7 +425,7 @@
                   <label class="custom-control-label text" for="comi_int">Marque si desea que el comité aparezca en la página principal</label>
                   <i ref="info" @mouseenter="toggleInfo()" @mouseleave="toggleInfo()" class="icon info position-relative ml-1 flaticon-question">
                     <div class="info text position-absolute" style="top: auto; bottom: -750% !important; left:-1000% !important; overflow: visible">
-                      Este campo estará desabilidato cuando existan un máximo de 6 comités ya seleccionados. Para cambiar los comités de la página principal, edite cualquier comité que se encuentre seleccionado para aparecer en la página, desabilite la opción y habilite el que desee.
+                      Este campo estará desabilidato cuando existan un máximo de 4 elementos ya seleccionados.
                     </div>
                   </i>
                 </div>
@@ -474,6 +492,7 @@ export default {
           },
         },
         show: false,
+        message: {},
         error: null,
         showIndex: 0,
         showSelect: false,
@@ -512,7 +531,7 @@ export default {
     },
     
     methods:{
-      ...mapMutations(['resetDBValues', 'successAdvise', 'deletedEl', 'changeSecTitle', 'crearDB', 'falseCargarDB', 'deleteItem']),
+      ...mapMutations(['resetDBValues', 'successAdvise', 'deletedEl', 'changeSecTitle', 'crearDB', 'falseCargarDB', 'deleteItem', 'updateDB']),
       ...mapActions(['getData']),
       itemSelected(index){
         this.resetDBValues();
@@ -520,7 +539,6 @@ export default {
         setTimeout(() => {
           this.showList = false;
           this.showPrev = true;
-          console.log(Object.values(this.dbWeb.Comites).reverse()[index]);
           this.selectComite = {
             id: Object.values(this.dbWeb.Comites).reverse()[index].comi_id,
             activo: Object.values(this.dbWeb.Comites).reverse()[index].comi_activo,
@@ -541,6 +559,12 @@ export default {
         }, 900);
         setTimeout(() => {
           this.$refs.section1.classList.toggle('translate')
+          const comiintedit = document.getElementById('comi_int_edit');
+          comiintedit.addEventListener('change', ()=>{
+            if(this.selectComite.inthpage === true){
+              this.selectComite.inthpage = this.validCant('appears', this.dbWeb.Comites, 'comi_int', true, 4)
+            }
+          })
         }, 950);
       },
       deleteFile(index, val){
@@ -588,35 +612,26 @@ export default {
             }
           }
         }else if(value === 'select'){
-          this.selectProfesor.correo = '';
-          this.selectProfesor.imagen = '';
-          this.selectProfesor.coid = 'Seleccione una opción';
-          this.selectProfesor.nombre = '';
-          this.selectProfesor.nacimiento = '';
-          this.selectProfesor.telefonos = [];
-          this.selectProfesor.cv = '';
-          this.selectProfesor.id = '';
-          this.selectProfesor.ci = '';
+          this.selectComite = {
+            activo: false,
+            comipage: false,
+            correo: '',
+            costos: '',
+            descripcion: '',
+            fechav: '',
+            inthpage: false,
+            integrantes: [],
+            nombre: '',
+            archivos:{
+              imagen: '',
+              reglamento: '',
+              normativa: '',
+            }
+          }
         }
 
         this.files = {};
         this.resetDBValues();
-      },
-      validPhone(target, index){
-        const exp = /\(?\+[0-9]{1,3}\)? ?-?[0-9]{1,3} ?-?[0-9]{3,5} ?-?[0-9]{4}( ?-?[0-9]{3})? ?(\w{1,10}\s?\d{1,6})?/g;
-        if(index === 0){
-          if(exp.test(target) || target === '' || target === undefined){
-            return true
-          }else{
-            return false
-          }
-        }else{
-          if(exp.test(target)){
-            return true
-          }else{
-            return false
-          }
-        }
       },
       validEmail(target){
         const exp = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
@@ -624,6 +639,27 @@ export default {
           return true
         }else{
           return false
+        }
+      },
+      validCant(tipo, ref, busqueda, valor, top){
+        if(tipo === 'appears'){
+          let count = 0;
+          Object.values(ref).forEach(element => {
+            if(element[`${busqueda}`] === valor){
+              count ++;
+            }
+          })
+          
+          if(count === top){
+            this.message = {
+              message: 'La página principal acepta un máximo de 4 comités para mostrar. Para cambiar los comités que aparecerán en la página principal, deshabilite la opción de "Marque si desea que el comité aparezca en la página principal" en alguno de los comité que posee la opción marcada, guarde los cambios y habilite la opción en el comité que desee.',
+              title: 'ERROR',
+            }
+            $('#exampleModal').modal('show');
+            return false
+          }else{
+            return true
+          }
         }
       },
       validAllFields(value){
@@ -653,7 +689,7 @@ export default {
             }
 
             if(this.nuevoComite.archivos.imagen.nombre !== undefined){
-              this.nuevoComite.archivos.imagen.nombre = this.nuevoComite.nombre.split(' ').join('_')};
+              this.nuevoComite.archivos.imagen.nombre = this.nuevoComite.nombre.split(' ').join('_');
             }
 
             let dataTransfer = {
@@ -682,45 +718,54 @@ export default {
               dataTransfer.comite.integrantes = this.nuevoComite.integrantes;
             }
             
-            console.log(dataTransfer);
-            this.crearDB(dataTransfer)
+            /* this.crearDB(dataTransfer) */
 
           }else if(value ==='select'){
-            if(this.selectProfesor.cv.nombre !== undefined){
-              this.selectProfesor.cv.nombre = `c_v_${this.selectProfesor.nombre.split(' ').join('_')}`;
+
+            if(this.selectComite.archivos.reglamento.nombre !== undefined){
+              this.selectComite.archivos.reglamento.nombre = `reglamento_${this.selectComite.nombre.split(' ').join('_')}`;
             }
 
-            if(this.selectProfesor.imagen.nombre !== undefined){
-              this.selectProfesor.imagen.nombre = this.selectProfesor.nombre.split(' ').join('_');
+            if(this.nuevoComite.archivos.normativa.nombre !== undefined){
+              this.nuevoComite.archivos.normativa.nombre = `normativa_${this.selectComite.nombre.split(' ').join('_')}`;
             }
-            
-            let dataTransfer = {
-              archivos: this.files,
-              profesor: {
-                coid: this.selectProfesor.coid,
-                id: this.selectProfesor.nombre.split(' ').join('_'),
-                ci: this.selectProfesor.ci,
-                nacimiento: this.selectProfesor.nacimiento,
-                correo: this.selectProfesor.correo,
-                archivos:{
-                  image: this.selectProfesor.imagen,
-                  cv: this.selectProfesor.cv,
-                },
-                nombre: this.selectProfesor.nombre,
-              },
-              target: 'Profesores',
+
+            if(this.selectComite.archivos.imagen.nombre !== undefined){
+              this.selectComite.archivos.imagen.nombre = this.selectComite.nombre.split(' ').join('_')
             };
 
-            if(this.selectProfesor.coid === 'Seleccione una opción'){
-              dataTransfer.profesor.coid = '';
+            let dataTransfer = {
+              archivos: this.files,
+              comite: {
+                activo: this.selectComite.activo,
+                comipage: this.selectComite.comipage,
+                correo: this.selectComite.correo,
+                costos: this.selectComite.costos,
+                descripcion: this.selectComite.descripcion,
+                fechav: this.selectComite.fechav,
+                inthpage: this.selectComite.inthpage,
+                nombre: this.selectComite.nombre,
+                id: this.selectComite.id,
+                archivos:{
+                  imagen: this.selectComite.archivos.imagen,
+                  reglamento: this.selectComite.archivos.reglamento,
+                  normativa: this.selectComite.archivos.normativa,
+                },
+              },
+              target: 'Comites',
+            };
+
+            if(Object.values(this.selectComite.integrantes).length === 0){
+              dataTransfer.comite.integrantes = '';
             }else{
-              dataTransfer.profesor.coid = this.selectProfesor.coid;
+              dataTransfer.comite.integrantes = this.selectComite.integrantes;
             }
             
-            this.crearDB(dataTransfer)
+            this.updateDB(dataTransfer)
           }else{
           this.error = 'Los campos marcados con * son obligatorios'
           }
+        }
       },
       filesVerification(event, val, val2){
 
@@ -820,7 +865,6 @@ export default {
         }
       },
       addField(val, index, val2){
-        console.log(val2);
         if(val === 'crear'){
           if(this.nuevoComite.integrantes[`${this.cantFields[`${val2}`].nombre}${index}`] !== undefined && this.nuevoComite.integrantes[`${this.cantFields[`${val2}`].nombre}${index}`] !== ''){
             this.cantFields[`${val2}`].numero++;
@@ -886,6 +930,12 @@ export default {
         setTimeout(() => {
           this.showList = false;
           this.showCreate = true;
+          const comiint = document.getElementById('comi_int');
+          comiint.addEventListener('change', ()=>{
+            if(this.nuevoComite.inthpage === true){
+              this.nuevoComite.inthpage = this.validCant('appears', this.dbWeb.Comites, 'comi_int', true, 4)
+            }
+          })
         }, 900);
         setTimeout(() => {
           this.$refs.section2.classList.toggle('translate')
@@ -936,16 +986,6 @@ export default {
       this.getData().then(()=>{
         this.listDisplay();
         this.show = true;
-        setTimeout(() => {
-          const form = document.querySelectorAll('.form-class')
-          this.$refs.info.addEventListener('mouseover', ()=>{
-            if(this.$refs.info.children[0].offsetWidth > form[0].scrolltWidth){
-              console.log('SI');
-            }else{
-              console.log('NO');
-            }
-          })
-        }, 700);
       })
 
       this.deleteCollection('crear');

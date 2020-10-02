@@ -380,7 +380,7 @@ export default {
     },
     
     methods:{
-      ...mapMutations(['resetDBValues', 'successAdvise', 'deletedEl', 'changeSecTitle', 'crearDB', 'falseCargarDB', 'deleteItem']),
+      ...mapMutations(['resetDBValues', 'successAdvise', 'deletedEl', 'changeSecTitle', 'crearDB', 'falseCargarDB', 'deleteItem', 'updateDB']),
       ...mapActions(['getData']),
       itemSelected(index){
         this.resetDBValues();
@@ -396,6 +396,7 @@ export default {
             fin: splittedPer[1],
             inicio: splittedPer[0],
             junta_actual: Object.values(this.dbWeb.Juntas).reverse()[index].junt_activa,
+            id: Object.values(this.dbWeb.Juntas).reverse()[index].junt_id,
             integrantes: [],
           };
         }, 900);
@@ -411,7 +412,7 @@ export default {
           Object.values(this.nuevaJunta.integrantes)[index].image = '';
           delete this.files[index];
           this.resetDBValues(index);
-        }else if(val === 'select'){console.log(index + ' ' + val);
+        }else if(val === 'select'){
           Object.values(Object.values(this.dbWeb.Juntas).reverse()[this.indexSelected].junt_integrantes)[index].juin_foto = '';
           delete this.files[index];
           this.resetDBValues(index);
@@ -527,6 +528,7 @@ export default {
           dataTransfer.archivos = this.files;
           dataTransfer.junta.inicio = this.selectJunta.inicio;
           dataTransfer.junta.fin = this.selectJunta.fin;
+          dataTransfer.junta.id = this.selectJunta.id;
           dataTransfer.junta.junta_actual = this.selectJunta.junta_actual;
           dataTransfer.target = 'Juntas';
   
@@ -540,8 +542,8 @@ export default {
             dataTransfer.junta.integrantes[i].activo = Object.values(Object.values(this.dbWeb.Juntas).reverse()[this.indexSelected].junt_integrantes)[i].juin_activo
             dataTransfer.junta.integrantes[i].crear = Object.values(Object.values(this.dbWeb.Juntas).reverse()[this.indexSelected].junt_integrantes)[i].juin_crear
           }
-          console.log(dataTransfer);
-          this.crearDB(dataTransfer)
+
+          this.updateDB(dataTransfer)
           }
         }else{
           this.error = 'Los campos marcados con * son obligatorios'
@@ -586,7 +588,7 @@ export default {
         if(this.deletingVal === null && this.successUpload === null){
           dataTransfer = {
             ref: 'Juntas',
-            idSt: `imagenes/${Object.values(this.dbWeb.Juntas).reverse()[index].junt_id}`,
+            idSt: Object.values(this.dbWeb.Juntas).reverse()[index].junt_id,
             idDb: Object.values(this.dbWeb.Juntas).reverse()[index].junt_id,
             index: index,
             storage: true,
@@ -757,7 +759,6 @@ export default {
       },
       cargarDB(){
         if(this.cargarDB === true){
-          console.log('SI');
           this.getData().then(()=>{
             this.falseCargarDB();
           })
