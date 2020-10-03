@@ -380,17 +380,14 @@
 	<!-- Fin Equipo Administrativo -->
 	
 	<!-- Clients Section -->
-    <section class="clients-section">
+    <section class="clients-section" v-if="dbWeb.Anunciantes !== undefined">
 		<!-- <button class="slider-button previous"></button>
 		<button class="slider-button next" @click="carouselMoveLeft" id="next"></button> -->
 		<div class="slider">
 			<div class="clients-slider-container">
-				<img id="client01" src="@/assets/images/logos/client01.png" @click="sendTo('https://www.yonex.com')" class="clients-slider-items" alt="" loading="lazy">
-				<img id="client02" src="@/assets/images/logos/client02.png" @click="sendTo('https://www.youtube.com')" class="clients-slider-items" alt="" loading="lazy">
-				<img id="client03" src="@/assets/images/logos/client03.png" @click="sendTo('https://www.avelina.com')" class="clients-slider-items" alt="" loading="lazy">
-				<img id="client04" src="@/assets/images/logos/client04.png" @click="sendTo('https://www.nike.com')" class="clients-slider-items" alt="" loading="lazy">
-				<img id="client05" src="@/assets/images/logos/client05.png" @click="sendTo('https://www.addidas.com')" class="clients-slider-items" alt="" loading="lazy">
-				<img id="client06" src="@/assets/images/logos/client06.png" @click="sendTo('https://www.gatorade.com.mx')" class="clients-slider-items" alt="" loading="lazy">
+				<div v-for="(anunciante, index) in Object.values(dbWeb.Anunciantes)" :key="anunciante.anun_id" v-if="anunciante.anun_activo === true" class="clients-slider-items d-flex align-items-center justify-content-center" :id="`client0${index+1}`">
+					<img class="clients-images"  :src="anunciante.anun_foto.url" @click="sendTo(`${anunciante.anun_url}`)" :title="anunciante.anun_nombre" alt="" loading="lazy">
+				</div>
 			</div>
 		</div>
     </section>
@@ -573,109 +570,43 @@ import AutogestionSpan from '@/components/AutogestionSpan.vue'
 				index = 1;
 			}
 			if(items === 4){
-				if (allItemsRef[index+3].id === 'last-first-clone') {
+				if (allItemsRef[index+3].id === 'last-first-clone' && allItemsRef[index+3] !== undefined) {
 					container.style.transition = 'none';
 					index = 1;
 					container.style.transform = `translateX(${-(allItemsWidth + marginItems * 2) * index}px)`;
-					}
+				}else{
+				}
 			}else if(items === 2){
-				if (allItemsRef[index+1].id === 'last-first-clone') {
+				if (allItemsRef[index+1].id === 'last-first-clone' && allItemsRef[index+1] !== undefined) {
 					container.style.transition = 'none';
 					index = 1;
 					container.style.transform = `translateX(${-(allItemsWidth + marginItems * 2) * index}px)`;
-					}
+				}else{
+				}
 			}else {
-				if (allItemsRef[index].id === 'last-first-clone') {
+				if (allItemsRef[index].id === 'last-first-clone' && allItemsRef[index] !== undefined) {
 					container.style.transition = 'none';
 					index = 1;
 					container.style.transform = `translateX(${-(allItemsWidth + marginItems * 2) * index}px)`;
-					}	
+				}else{
+				}
 			}
 		})
 
 		const startSlide = () => {
 	  	itemId = setInterval(() => {
 			allItemsRef = document.querySelectorAll('.clients-slider-items');
-	  		if(index >= allItemsRef.length -1){
+	  		if(allItemsRef[index] === undefined || index >= allItemsRef.length -1){
 	  			index = 1;
 	  		}
-	  		index++;
+			  index++;
+			try{
 	  		container.style.transform = `translateX(${-(allItemsWidth + marginItems * 2) * index}px)`;
-	  		container.style.transition = '1s ease-out'
+	  		container.style.transition = '1s ease-out'}catch{
+				  index = 1;
+			  }
 	  	}, interval);
 		};
-
-		/**
-		=================================================
-		Change layout if Resizing or Changing Orientation
-		=================================================  
-		**//* 
-
-		window.addEventListener('orientationchange', ()=>{
-
-			let homeLink = document.getElementById('home-page')
-
-			if(homeLink.classList.contains('router-link-active')){
-				if(container.children.length === allItems.length + 5){
-					container.removeChild(container.firstChild)
-					for(let i = 0; i < 4; i++){
-						container.removeChild(container.lastChild)
-					}
-				}else if(container.children.length === allItems.length + 3){
-					container.removeChild(container.firstChild)
-					for(let i = 0; i < 2; i++){
-						container.removeChild(container.lastChild)
-					}
-				}else {
-					container.removeChild(container.firstChild)
-					for(let i = 0; i < 1; i++){
-						container.removeChild(container.lastChild)
-					}
-				}
-				containerWidth = container.offsetWidth;
-				items = this.clientSliderItems(this.responsive, items);
-				index = 1;
-
-				allItemsWidth = this.clientSliderItemsWidth(items, allItems, containerWidth, marginItems);
-					for(let i=0; i < allItems.length; i++){
-						allItems[i].style.minWidth = allItemsWidth  + "px";
-						allItems[i].style.maxWidth = allItemsWidth  + "px";
-						allItems[i].style.margin = `0px ${marginItems}px`;
-					}
-
-				let firstClone = [''];
-
-				if(items === 4){
-					for(let i=0; i<items; i++){
-						firstClone[i] = allItems[i].cloneNode(true);
-					}
-					firstClone[3].id = 'last-first-clone';
-					for(let i=0; i<items; i++){
-						container.append(firstClone[i]);
-					}
-				}else if(items === 2){
-					for(let i=0; i<items; i++){
-						firstClone[i] = allItems[i].cloneNode(true);
-					}
-					firstClone[1].id = 'last-first-clone';
-					for(let i=0; i<items; i++){
-						container.append(firstClone[i]);
-					}
-				}else {
-					firstClone = allItems[0].cloneNode(true);
-					firstClone.id = 'last-first-clone';
-					container.append(firstClone);
-				}
-
-				lastClone = ['']
-
-				lastClone = allItems[allItems.length - 1].cloneNode(true);
-	
-				lastClone.id = 'last-clone';
-
-				container.prepend(lastClone);
-			}
-		}) */
 		
 		window.addEventListener('resize', ()=>{
 

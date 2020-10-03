@@ -3588,14 +3588,19 @@ Menu Responsive
 
 .clients-slider-container .clients-slider-items{
 	height: 200px;
-	min-height: 200px;
-	line-height: 20vh;
 	transition: transform 0.8s ease;
 }
 
-.clients-slider-items:hover{
+.clients-slider-items:hover .clients-images{
 	cursor: pointer;
 	transform: scale(1.05,1.05);
+}
+
+.clients-slider-items .clients-images{
+	cursor: pointer;
+	width: 350px !important;
+	height: 200px !important;
+	transition: transform 0.9s ease;
 }
 
 .clients-section .slider-button{

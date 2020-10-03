@@ -131,7 +131,7 @@
                     </div>
                     <!-- FIN MUESTRA DE IMAGEN -->
                     <!-- BARRA DE PROGRESO -->
-                    <div class="progress w-85 mb-2" v-if="dbImg[0] !== undefined">
+                    <div class="progress w-85 mb-2" v-if="dbImg[0] !== undefined && dbImg[0] !== ''">
                       <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" :style="`width: ${(dbImg[0] !== undefined)?dbImg[0].uploadPercentage: ' '}%; height: 20px; min-height: 20px} !importan; color: black`"></div>
                     </div>
                     <!-- FIN BARRA DE PROGRESO -->
@@ -168,7 +168,7 @@
                       </div>
                       <!-- FIN MUESTRA DE IMAGEN -->
                       <!-- BARRA DE PROGRESO -->
-                      <div class="progress w-85 mb-2" v-if="dbImg[1] !== undefined">
+                      <div class="progress w-85 mb-2" v-if="dbImg[1] !== undefined && dbImg[1] !== ''">
                         <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" :style="`width: ${(dbImg[1] !== undefined)?dbImg[1].uploadPercentage: ' '}%; height: 20px; min-height: 20px} !importan; color: black`"></div>
                       </div>
                       <!-- FIN BARRA DE PROGRESO -->
@@ -205,7 +205,7 @@
                       </div>
                       <!-- FIN MUESTRA DE IMAGEN -->
                       <!-- BARRA DE PROGRESO -->
-                      <div class="progress w-85 mb-2" v-if="dbImg[2] !== undefined">
+                      <div class="progress w-85 mb-2" v-if="dbImg[2] !== undefined && dbImg[2] !== ''">
                         <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" :style="`width: ${(dbImg[2] !== undefined)?dbImg[2].uploadPercentage: ' '}%; height: 20px; min-height: 20px} !importan; color: black`"></div>
                       </div>
                       <!-- FIN BARRA DE PROGRESO -->
@@ -262,8 +262,8 @@
                   <div class="col-9 p-0 d-flex flex-row align-items-center justify-content-center">
                     <input class="position-relative" ref="integrantes" type="text" v-model="selectComite.integrantes[`${cantFields.integrantes.nombre}${index-1}`]" placeholder="Nombre">
                   </div>
-                  <span @click="addField('crear', index-1, 'integrantes')" :class="['icon p-0 add flaticon-add', (index-1 > 0)?'col-1':'col-3 pl-2']" v-if="index-1 === cantFields.integrantes.numero - 1"></span>
-                  <span @click="deleteField('crear', index-1, 'integrantes')" class="icon col-1 p-0 delete flaticon-minus" v-if="index-1 > 0 && index-1 === cantFields.integrantes.numero - 1"></span>
+                  <span @click="addField('select', index-1, 'integrantes')" :class="['icon p-0 add flaticon-add', (index-1 > 0)?'col-1':'col-3 pl-2']" v-if="index-1 === cantFields.integrantes.numero - 1"></span>
+                  <span @click="deleteField('select', index-1, 'integrantes')" class="icon col-1 p-0 delete flaticon-minus" v-if="index-1 > 0 && index-1 === cantFields.integrantes.numero - 1"></span>
                 </div>
             </div>
           </div>
@@ -274,7 +274,7 @@
               <span class="sr-only">Loading...</span>
             </div>
             <div v-else>
-              Crear comité
+              Actualizar comité
             </div>
           </button>
           <button class="btn btn-danger mr-2 ml-2" @click.prevent="deleteCollection('select')">Borrar campos</button>
@@ -323,7 +323,7 @@
                     </div>
                     <!-- FIN MUESTRA DE IMAGEN -->
                     <!-- BARRA DE PROGRESO -->
-                    <div class="progress w-85 mb-2" v-if="dbImg[0] !== undefined">
+                    <div class="progress w-85 mb-2" v-if="dbImg[0] !== undefined && dbImg[0] !== ''">
                       <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" :style="`width: ${(dbImg[0] !== undefined)?dbImg[0].uploadPercentage: ' '}%; height: 20px; min-height: 20px} !importan; color: black`"></div>
                     </div>
                     <!-- FIN BARRA DE PROGRESO -->
@@ -360,7 +360,7 @@
                       </div>
                       <!-- FIN MUESTRA DE IMAGEN -->
                       <!-- BARRA DE PROGRESO -->
-                      <div class="progress w-85 mb-2" v-if="dbImg[1] !== undefined">
+                      <div class="progress w-85 mb-2" v-if="dbImg[1] !== undefined && dbImg[1] !== ''">
                         <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" :style="`width: ${(dbImg[1] !== undefined)?dbImg[1].uploadPercentage: ' '}%; height: 20px; min-height: 20px} !importan; color: black`"></div>
                       </div>
                       <!-- FIN BARRA DE PROGRESO -->
@@ -397,7 +397,7 @@
                       </div>
                       <!-- FIN MUESTRA DE IMAGEN -->
                       <!-- BARRA DE PROGRESO -->
-                      <div class="progress w-85 mb-2" v-if="dbImg[2] !== undefined">
+                      <div class="progress w-85 mb-2" v-if="dbImg[2] !== undefined && dbImg[2] !== ''">
                         <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" :style="`width: ${(dbImg[2] !== undefined)?dbImg[2].uploadPercentage: ' '}%; height: 20px; min-height: 20px} !importan; color: black`"></div>
                       </div>
                       <!-- FIN BARRA DE PROGRESO -->
@@ -539,6 +539,7 @@ export default {
         setTimeout(() => {
           this.showList = false;
           this.showPrev = true;
+          this.cantFields.integrantes.numero = Object.values(Object.values(this.dbWeb.Comites).reverse()[index].comi_integrantes).length
           this.selectComite = {
             id: Object.values(this.dbWeb.Comites).reverse()[index].comi_id,
             activo: Object.values(this.dbWeb.Comites).reverse()[index].comi_activo,
@@ -718,7 +719,7 @@ export default {
               dataTransfer.comite.integrantes = this.nuevoComite.integrantes;
             }
             
-            /* this.crearDB(dataTransfer) */
+            this.crearDB(dataTransfer)
 
           }else if(value ==='select'){
 
@@ -1366,7 +1367,7 @@ export default {
   }
 
   .phones-input .icon.add::before{
-    padding: 4px 4px 4px 5px;
+    padding: 4px 5px 4px 5px;
     background-color: #27913e;
     border: 0.3px solid  #27913e;
   }

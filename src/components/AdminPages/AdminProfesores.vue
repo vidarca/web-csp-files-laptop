@@ -114,7 +114,7 @@
                     </div>
                     <!-- FIN MUESTRA DE IMAGEN -->
                     <!-- BARRA DE PROGRESO -->
-                    <div class="progress w-85 mb-2" v-if="dbImg[0] !== undefined">
+                    <div class="progress w-85 mb-2" v-if="dbImg[0] !== undefined && dbImg[0] !== ''">
                       <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" :style="`width: ${(dbImg[0] !== undefined)?dbImg[0].uploadPercentage: ' '}%; height: 20px; min-height: 20px} !importan; color: black`"></div>
                     </div>
                     <!-- FIN BARRA DE PROGRESO -->
@@ -149,7 +149,7 @@
                     </div>
                     <!-- FIN MUESTRA DE IMAGEN -->
                     <!-- BARRA DE PROGRESO -->
-                    <div class="progress w-85 mb-2" v-if="dbImg[1] !== undefined">
+                    <div class="progress w-85 mb-2" v-if="dbImg[1] !== undefined && dbImg[1] !== ''">
                       <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" :style="`width: ${(dbImg[1] !== undefined)?dbImg[1].uploadPercentage: ' '}%; height: 20px; min-height: 20px} !importan; color: black`"></div>
                     </div>
                     <!-- FIN BARRA DE PROGRESO -->
@@ -160,7 +160,6 @@
             <div class="col-5 mr-1 ml-1">
               <div class="w-100 d-flex align-items-center justify-content-center">
                 <input class="w-100 position-relative" ref="nombre" type="text" v-model="selectProfesor.nombre" placeholder="Nombre">
-                <div class="important-field" v-show="showCreate && !validNoEmpty(selectProfesor.nombre)"></div>
               </div>
               <input class="w-100 position-relative" ref="ci" type="text" v-model="selectProfesor.ci" placeholder="Cédula de identidad">
               <div class="w-100 d-flex align-items-center justify-content-center">
@@ -240,7 +239,7 @@
                     </div>
                     <!-- FIN MUESTRA DE IMAGEN -->
                     <!-- BARRA DE PROGRESO -->
-                    <div class="progress w-85 mb-2" v-if="dbImg[0] !== undefined">
+                    <div class="progress w-85 mb-2" v-if="dbImg[0] !== undefined && dbImg[0] !== ''">
                       <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" :style="`width: ${(dbImg[0] !== undefined)?dbImg[0].uploadPercentage: ' '}%; height: 20px; min-height: 20px} !importan; color: black`"></div>
                     </div>
                     <!-- FIN BARRA DE PROGRESO -->
@@ -275,7 +274,7 @@
                     </div>
                     <!-- FIN MUESTRA DE IMAGEN -->
                     <!-- BARRA DE PROGRESO -->
-                    <div class="progress w-85 mb-2" v-if="dbImg[1] !== undefined">
+                    <div class="progress w-85 mb-2" v-if="dbImg[1] !== undefined && dbImg[1] !== ''">
                       <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" :style="`width: ${(dbImg[1] !== undefined)?dbImg[1].uploadPercentage: ' '}%; height: 20px; min-height: 20px} !importan; color: black`"></div>
                     </div>
                     <!-- FIN BARRA DE PROGRESO -->
@@ -286,7 +285,6 @@
             <div class="col-5 mr-1 ml-1">
               <div class="w-100 d-flex align-items-center justify-content-center">
                 <input class="w-100 position-relative" ref="nombre" type="text" v-model="nuevoProfesor.nombre" placeholder="Nombre">
-                <div class="important-field" v-show="showCreate && !validNoEmpty(nuevoProfesor.nombre)"></div>
               </div>
               <input class="w-100 position-relative" ref="ci" type="text" v-model="nuevoProfesor.ci" placeholder="Cédula de identidad">
               <div class="w-100 d-flex align-items-center justify-content-center">
@@ -486,7 +484,7 @@ export default {
           txt = 'select'
         }
 
-        if(this.validEmail(this[`${txt}Profesor`].correo) && this.validNoEmpty(this[`${txt}Profesor`].nombre)){
+        if(this.validEmail(this[`${txt}Profesor`].correo)){
           for(let i = 0; i < this.cantTelf; i++){
             if(!this.validPhone(Object.values(this[`${txt}Profesor`].telefonos)[i], i)){
               return false

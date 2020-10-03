@@ -66,11 +66,9 @@
         <div class="file-form">
           <div class="d-flex w-100 flex-row align-items-center justify-content-center position-relative m-2">
             <h6 class="pr-2">Período de la Junta: Desde </h6>
-            <input :class="['col-1 position-relative', validDateFields(selectJunta.inicio)?'':'error']" ref="inputYear0" type="text" v-model="selectJunta.inicio" placeholder="Año">
-            <div class="important-field" v-show="showCreate && !validDateFields(selectJunta.inicio)"></div>
+            <input class= "col-1 position-relative" ref="inputYear0" type="text" v-model="selectJunta.inicio" placeholder="Año">
             <h6 class="pr-2 pl-2"> hasta </h6>
-            <input :class="['col-1 position-relative', validDateFields(selectJunta.fin)?'':'error']" ref="inputYear1" type="text" v-model="selectJunta.fin" placeholder="Año">
-            <div class="important-field" v-show="showCreate && !validDateFields(selectJunta.fin) && this.$refs.inputYear1.disabled !== true"></div>
+            <input class="col-1 position-relative" ref="inputYear1" type="text" v-model="selectJunta.fin" placeholder="Año">
           </div>
           <div class="custom-control custom-switch">
             <input type="checkbox" @change="disableYearCrear('selectJunta')" class="custom-control-input" id="junta_activa" v-model="selectJunta.junta_actual">
@@ -117,7 +115,7 @@
                       </div>
                       <!-- FIN MUESTRA DE IMAGEN -->
                       <!-- BARRA DE PROGRESO -->
-                      <div class="progress w-85 mb-2" v-if="dbImg[index] !== undefined">
+                      <div class="progress w-85 mb-2" v-if="dbImg[index] !== undefined && dbImg[index] !== ''">
                         <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" :style="`width: ${(dbImg[index] !== undefined)?dbImg[index].uploadPercentage: ' '}%; height: 20px; min-height: 20px} !importan; color: black`"></div>
                       </div>
                       <!-- FIN BARRA DE PROGRESO -->
@@ -156,11 +154,9 @@
         <div class="file-form">
           <div class="d-flex w-100 flex-row align-items-center justify-content-center position-relative m-2">
             <h6 class="pr-2">Período de la Junta: Desde </h6>
-            <input :class="['col-1 position-relative', validDateFields(nuevaJunta.inicio)?'':'error']" ref="inputYear0" type="text" v-model="nuevaJunta.inicio" placeholder="Año">
-            <div class="important-field" v-show="showCreate && !validDateFields(nuevaJunta.inicio)"></div>
+            <input class="col-1 position-relative" ref="inputYear0" type="text" v-model="nuevaJunta.inicio" placeholder="Año">
             <h6 class="pr-2 pl-2"> hasta </h6>
-            <input :class="['col-1 position-relative', validDateFields(nuevaJunta.fin)?'':'error']" ref="inputYear1" type="text" v-model="nuevaJunta.fin" placeholder="Año">
-            <div class="important-field" v-show="showCreate && !validDateFields(nuevaJunta.fin) && this.$refs.inputYear1.disabled !== true"></div>
+            <input class="col-1 position-relative" ref="inputYear1" type="text" v-model="nuevaJunta.fin" placeholder="Año">
           </div>
           <div class="custom-control custom-switch">
             <input type="checkbox" @change="disableYearCrear('nuevaJunta')" class="custom-control-input" id="junta_activa" v-model="nuevaJunta.junta_actual">
@@ -206,7 +202,7 @@
                       </div>
                       <!-- FIN MUESTRA DE IMAGEN -->
                       <!-- BARRA DE PROGRESO -->
-                      <div class="progress w-85 mb-2" v-if="dbImg[index] !== undefined">
+                      <div class="progress w-85 mb-2" v-if="dbImg[index] !== undefined && dbImg[index] !== ''">
                         <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" :style="`width: ${(dbImg[index] !== undefined)?dbImg[index].uploadPercentage: ' '}%; height: 20px; min-height: 20px} !importan; color: black`"></div>
                       </div>
                       <!-- FIN BARRA DE PROGRESO -->
@@ -447,30 +443,6 @@ export default {
         this.files = {};
         this.resetDBValues();
       },
-      validDateFields(value){
-        const split = value.split('')
-        const exp = /\d/g;
-        if(exp.test(value) && split.length === 4){
-          return true
-        }else{
-          return false
-        }
-      },
-      validAllFields(value){
-        if(value === 'crear'){
-          if(this.validDateFields(this.nuevaJunta.inicio) && this.validDateFields(this.nuevaJunta.fin)){
-            return true
-          }else{
-            return false
-          }
-        }else if(value === 'select'){
-          if(this.validDateFields(this.selectJunta.inicio) && this.validDateFields(this.selectJunta.fin)){
-            return true
-          }else{
-            return false
-          }
-        }
-      },
       disableYearCrear(value){
         const d = new Date();
         const dsplit = d.toString().split(' ');
@@ -485,68 +457,64 @@ export default {
       },
       submitCollection(value){
 
-        if(this.validAllFields(value)){
-          if(value === 'crear'){
-            let dataTransfer = {
-            archivos: [],
-            junta: {
-              inicio: '',
-              fin: '',
-              integrantes: {},
-            },
-          };
-  
-          dataTransfer.archivos = this.files;
-          dataTransfer.junta.inicio = this.nuevaJunta.inicio;
-          dataTransfer.junta.fin = this.nuevaJunta.fin;
-          dataTransfer.junta.junta_actual = this.nuevaJunta.junta_actual;
-          dataTransfer.target = 'Juntas';
-  
-          for(let i = 0; i < Object.values(this.nuevaJunta.integrantes).length; i++){
-            dataTransfer.junta.integrantes[i] = {},
-            dataTransfer.junta.integrantes[i].cargo = Object.values(this.nuevaJunta.integrantes)[i].cargo
-            dataTransfer.junta.integrantes[i].nombre = Object.values(this.nuevaJunta.integrantes)[i].nombre
-            dataTransfer.junta.integrantes[i].apellido = Object.values(this.nuevaJunta.integrantes)[i].apellido
-            dataTransfer.junta.integrantes[i].correo = Object.values(this.nuevaJunta.integrantes)[i].correo
-            dataTransfer.junta.integrantes[i].image = Object.values(this.nuevaJunta.integrantes)[i].image
-            dataTransfer.junta.integrantes[i].activo = Object.values(this.nuevaJunta.integrantes)[i].activo
-            dataTransfer.junta.integrantes[i].crear = Object.values(this.nuevaJunta.integrantes)[i].crear
-          }
+        if(value === 'crear'){
+          let dataTransfer = {
+          archivos: [],
+          junta: {
+            inicio: '',
+            fin: '',
+            integrantes: {},
+          },
+        };
 
-          this.crearDB(dataTransfer)
-  
-          }else if(value === 'select'){
-            let dataTransfer = {
-            archivos: [],
-            junta: {
-              inicio: '',
-              fin: '',
-              integrantes: {},
-            },
-          };
-  
-          dataTransfer.archivos = this.files;
-          dataTransfer.junta.inicio = this.selectJunta.inicio;
-          dataTransfer.junta.fin = this.selectJunta.fin;
-          dataTransfer.junta.id = this.selectJunta.id;
-          dataTransfer.junta.junta_actual = this.selectJunta.junta_actual;
-          dataTransfer.target = 'Juntas';
-  
-          for(let i = 0; i < Object.values(Object.values(this.dbWeb.Juntas).reverse()[this.indexSelected].junt_integrantes).length; i++){
-            dataTransfer.junta.integrantes[i] = {},
-            dataTransfer.junta.integrantes[i].cargo = Object.values(Object.values(this.dbWeb.Juntas).reverse()[this.indexSelected].junt_integrantes)[i].juin_cargo
-            dataTransfer.junta.integrantes[i].nombre = Object.values(Object.values(this.dbWeb.Juntas).reverse()[this.indexSelected].junt_integrantes)[i].juin_nombre
-            dataTransfer.junta.integrantes[i].apellido = Object.values(Object.values(this.dbWeb.Juntas).reverse()[this.indexSelected].junt_integrantes)[i].juin_apellido
-            dataTransfer.junta.integrantes[i].correo = Object.values(Object.values(this.dbWeb.Juntas).reverse()[this.indexSelected].junt_integrantes)[i].juin_correo
-            dataTransfer.junta.integrantes[i].image = Object.values(Object.values(this.dbWeb.Juntas).reverse()[this.indexSelected].junt_integrantes)[i].juin_foto
-            dataTransfer.junta.integrantes[i].activo = Object.values(Object.values(this.dbWeb.Juntas).reverse()[this.indexSelected].junt_integrantes)[i].juin_activo
-            dataTransfer.junta.integrantes[i].crear = Object.values(Object.values(this.dbWeb.Juntas).reverse()[this.indexSelected].junt_integrantes)[i].juin_crear
-          }
+        dataTransfer.archivos = this.files;
+        dataTransfer.junta.inicio = this.nuevaJunta.inicio;
+        dataTransfer.junta.fin = this.nuevaJunta.fin;
+        dataTransfer.junta.junta_actual = this.nuevaJunta.junta_actual;
+        dataTransfer.target = 'Juntas';
 
-          this.updateDB(dataTransfer)
-          }
-        }else{
-          this.error = 'Los campos marcados con * son obligatorios'
+        for(let i = 0; i < Object.values(this.nuevaJunta.integrantes).length; i++){
+          dataTransfer.junta.integrantes[i] = {},
+          dataTransfer.junta.integrantes[i].cargo = Object.values(this.nuevaJunta.integrantes)[i].cargo
+          dataTransfer.junta.integrantes[i].nombre = Object.values(this.nuevaJunta.integrantes)[i].nombre
+          dataTransfer.junta.integrantes[i].apellido = Object.values(this.nuevaJunta.integrantes)[i].apellido
+          dataTransfer.junta.integrantes[i].correo = Object.values(this.nuevaJunta.integrantes)[i].correo
+          dataTransfer.junta.integrantes[i].image = Object.values(this.nuevaJunta.integrantes)[i].image
+          dataTransfer.junta.integrantes[i].activo = Object.values(this.nuevaJunta.integrantes)[i].activo
+          dataTransfer.junta.integrantes[i].crear = Object.values(this.nuevaJunta.integrantes)[i].crear
+        }
+
+        this.crearDB(dataTransfer)
+
+        }else if(value === 'select'){
+          let dataTransfer = {
+          archivos: [],
+          junta: {
+            inicio: '',
+            fin: '',
+            integrantes: {},
+          },
+        };
+
+        dataTransfer.archivos = this.files;
+        dataTransfer.junta.inicio = this.selectJunta.inicio;
+        dataTransfer.junta.fin = this.selectJunta.fin;
+        dataTransfer.junta.id = this.selectJunta.id;
+        dataTransfer.junta.junta_actual = this.selectJunta.junta_actual;
+        dataTransfer.target = 'Juntas';
+
+        for(let i = 0; i < Object.values(Object.values(this.dbWeb.Juntas).reverse()[this.indexSelected].junt_integrantes).length; i++){
+          dataTransfer.junta.integrantes[i] = {},
+          dataTransfer.junta.integrantes[i].cargo = Object.values(Object.values(this.dbWeb.Juntas).reverse()[this.indexSelected].junt_integrantes)[i].juin_cargo
+          dataTransfer.junta.integrantes[i].nombre = Object.values(Object.values(this.dbWeb.Juntas).reverse()[this.indexSelected].junt_integrantes)[i].juin_nombre
+          dataTransfer.junta.integrantes[i].apellido = Object.values(Object.values(this.dbWeb.Juntas).reverse()[this.indexSelected].junt_integrantes)[i].juin_apellido
+          dataTransfer.junta.integrantes[i].correo = Object.values(Object.values(this.dbWeb.Juntas).reverse()[this.indexSelected].junt_integrantes)[i].juin_correo
+          dataTransfer.junta.integrantes[i].image = Object.values(Object.values(this.dbWeb.Juntas).reverse()[this.indexSelected].junt_integrantes)[i].juin_foto
+          dataTransfer.junta.integrantes[i].activo = Object.values(Object.values(this.dbWeb.Juntas).reverse()[this.indexSelected].junt_integrantes)[i].juin_activo
+          dataTransfer.junta.integrantes[i].crear = Object.values(Object.values(this.dbWeb.Juntas).reverse()[this.indexSelected].junt_integrantes)[i].juin_crear
+        }
+
+        this.updateDB(dataTransfer)
         }
         
       },

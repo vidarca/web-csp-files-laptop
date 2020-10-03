@@ -98,7 +98,7 @@
                 </div>
                 <!-- FIN MUESTRA DE IMAGEN -->
                 <!-- BARRA DE PROGRESO -->
-                <div class="progress w-85 mb-2" v-if="dbImg[0] !== undefined">
+                <div class="progress w-85 mb-2" v-if="dbImg[0] !== undefined && dbImg[0] !== ''">
                   <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" :style="`width: ${(dbImg[0] !== undefined)?dbImg[0].uploadPercentage: ' '}%; height: 20px; min-height: 20px} !importan; color: black`"></div>
                 </div>
                 <!-- FIN BARRA DE PROGRESO -->
@@ -173,7 +173,7 @@
                 </div>
                 <!-- FIN MUESTRA DE IMAGEN -->
                 <!-- BARRA DE PROGRESO -->
-                <div class="progress w-85 mb-2" v-if="dbImg[0] !== undefined">
+                <div class="progress w-85 mb-2" v-if="dbImg[0] !== undefined && dbImg[0] !== ''">
                   <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" :style="`width: ${(dbImg[0] !== undefined)?dbImg[0].uploadPercentage: ' '}%; height: 20px; min-height: 20px} !importan; color: black`"></div>
                 </div>
                 <!-- FIN BARRA DE PROGRESO -->

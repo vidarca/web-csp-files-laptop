@@ -29,15 +29,6 @@
                 </div>
               </li>
               <li class="nav-item">
-                <div class="nav-link">
-                  <i class="icon-mini flaticon-user-2 col-2 pr-1 pr-md-2"></i>
-                  <a class="nav-link col-8" @click.prevent="selectComponent('1')">
-                    Perfil de Usuario
-                  </a>
-                  <div class="col-2 pl-md-2"></div>
-                </div>
-              </li>
-              <li class="nav-item">
                 <div class="nav-link-collapse-principal">
                   <i class="icon-mini flaticon-newspaper col-2 pr-1 pr-md-2"></i>
                   <a class="nav-link col-8" @click="expandSidebar('listSeguridad', 'listSeguridadIcon')">
@@ -46,6 +37,11 @@
                   <span class="icon flaticon-arrowhead-pointing-to-the-right col-2 pl-1 pl-md-2" ref="listSeguridadIcon" @click="expandSidebar('listSeguridad', 'listSeguridadIcon')"></span>
                 </div>
                 <ul class="v-collapsed-side v-collapsed-list" ref="listSeguridad">
+                  <li class="nav-item">
+                    <a class="nav-link" href="#" @click.prevent="selectComponent('1')">
+                      Perfil de Usuario
+                    </a>
+                  </li>
                   <li class="nav-item">
                     <a class="nav-link" href="#" @click.prevent="selectComponent('2')">
                       Usuarios
@@ -61,34 +57,34 @@
               <li class="nav-item">
                 <div class="nav-link-collapse-principal">
                   <i class="icon-mini flaticon-newspaper col-2 pr-1 pr-md-2"></i>
-                  <a class="nav-link col-8" @click="expandSidebar('listNoticias', 'listNoticiasIcon')">
-                    Noticias
+                  <a class="nav-link col-8" @click="expandSidebar('listContenidoPrincipal', 'listContenidoPrincipalIcon')">
+                    Contenido Principal
                   </a>
-                  <span class="icon flaticon-arrowhead-pointing-to-the-right col-2 pl-1 pl-md-2" ref="listNoticiasIcon" @click="expandSidebar('listNoticias', 'listNoticiasIcon')"></span>
+                  <span class="icon flaticon-arrowhead-pointing-to-the-right col-2 pl-1 pl-md-2" ref="listContenidoPrincipalIcon" @click="expandSidebar('listContenidoPrincipal', 'listContenidoPrincipalIcon')"></span>
                 </div>
-                <ul class="v-collapsed-side v-collapsed-list" ref="listNoticias">
+                <ul class="v-collapsed-side v-collapsed-list" ref="listContenidoPrincipal">
                   <li class="nav-item">
-                    <a class="nav-link" href="#" @click.prevent="selectComponent('4')">
-                      Crear Noticia
-                    </a>
+                    <div class="nav-link-collapse-principal">
+                      <i class="icon-mini flaticon-newspaper col-2 pr-1 pr-md-2"></i>
+                      <a class="nav-link col-8" @click="expandSidebar('listNoticias', 'listNoticiasIcon')">
+                        Noticias
+                      </a>
+                      <span class="icon flaticon-arrowhead-pointing-to-the-right col-2 pl-1 pl-md-2" ref="listNoticiasIcon" @click="expandSidebar('listNoticias', 'listNoticiasIcon')"></span>
+                    </div>
+                    <ul class="v-collapsed-side v-collapsed-list" ref="listNoticias">
+                      <li class="nav-item">
+                        <a class="nav-link" href="#" @click.prevent="selectComponent('4')">
+                          Crear Noticia
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#" @click.prevent="selectComponent('5')">
+                          Editar Noticia
+                        </a>
+                      </li>
+                    </ul>
                   </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#" @click.prevent="selectComponent('5')">
-                      Editar Noticia
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li class="nav-item">
-                <div class="nav-link-collapse-principal">
-                  <i class="icon-mini flaticon-newspaper col-2 pr-1 pr-md-2"></i>
-                  <a class="nav-link col-8" @click="expandSidebar('listAreas', 'listAreasIcon')">
-                    Áreas
-                  </a>
-                  <span class="icon flaticon-arrowhead-pointing-to-the-right col-2 pl-1 pl-md-2" ref="listAreasIcon" @click="expandSidebar('listAreas', 'listAreasIcon')"></span>
-                </div>
-                <ul class="v-collapsed-side v-collapsed-list" ref="listAreas">
-                  <li class="nav-item">
+                   <li class="nav-item">
                     <a class="nav-link" href="#" @click.prevent="selectComponent('6')">
                       Juntas Directivas
                     </a>
@@ -103,17 +99,6 @@
                       Equipo de Trabajo
                     </a>
                   </li>
-                </ul>
-              </li>
-              <li class="nav-item">
-                <div class="nav-link-collapse-principal">
-                  <i class="icon-mini flaticon-newspaper col-2 pr-1 pr-md-2"></i>
-                  <a class="nav-link col-8" @click="expandSidebar('listComites', 'listComitesIcon')">
-                    Comités
-                  </a>
-                  <span class="icon flaticon-arrowhead-pointing-to-the-right col-2 pl-1 pl-md-2" ref="listComitesIcon" @click="expandSidebar('listComites', 'listComitesIcon')"></span>
-                </div>
-                <ul class="v-collapsed-side v-collapsed-list" ref="listComites">
                   <li class="nav-item">
                     <a class="nav-link" href="#" @click.prevent="selectComponent('9')">
                       Profesores
@@ -122,6 +107,22 @@
                   <li class="nav-item">
                     <a class="nav-link" href="#" @click.prevent="selectComponent('10')">
                       Comités Registrados
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <div class="nav-link-collapse-principal">
+                  <i class="icon-mini flaticon-newspaper col-2 pr-1 pr-md-2"></i>
+                  <a class="nav-link col-8" @click="expandSidebar('listContenidoExtra', 'listContenidoExtraIcon')">
+                    Contenido Extra
+                  </a>
+                  <span class="icon flaticon-arrowhead-pointing-to-the-right col-2 pl-1 pl-md-2" ref="listContenidoExtraIcon" @click="expandSidebar('listContenidoExtra', 'listContenidoExtraIcon')"></span>
+                </div>
+                <ul class="v-collapsed-side v-collapsed-list" ref="listContenidoExtra">
+                  <li class="nav-item">
+                    <a class="nav-link" href="#" @click.prevent="selectComponent('3')">
+                      Anunciantes
                     </a>
                   </li>
                 </ul>
@@ -150,7 +151,7 @@ import firebase from 'firebase'
 import AdminDashboard from './AdminPages/AdminDashboard'
 import AdminEditUser from './AdminPages/AdminEditUser'
 import AdminUsers from './AdminPages/AdminUsers'
-import AdminContenidoExtra from './AdminPages/AdminContenidoExtra'
+import AdminAnunciantes from './AdminPages/AdminAnunciantes'
 import AdminEditContent from './AdminPages/AdminEditContent'
 import AdminCreateContent from './AdminPages/AdminCreateContent'
 import AdminEditJunta from './AdminPages/AdminEditJunta'
@@ -166,7 +167,7 @@ export default {
       'AdminDashboard',
       'AdminEditUser',
       'AdminUsers',
-      'AdminContenidoExtra',
+      'AdminAnunciantes',
       'AdminCreateContent',
       'AdminEditContent',
       'AdminEditJunta',
@@ -179,7 +180,7 @@ export default {
     AdminDashboard,
     AdminEditUser,
     AdminUsers,
-    AdminContenidoExtra,
+    AdminAnunciantes,
     AdminCreateContent,
     AdminEditContent,
     AdminEditJunta,
@@ -195,7 +196,7 @@ export default {
         'AdminDashboard',
         'AdminEditUser',
         'AdminUsers',
-        'AdminContenidoExtra',
+        'AdminAnunciantes',
         'AdminCreateContent',
         'AdminEditContent',
         'AdminEditJunta',
