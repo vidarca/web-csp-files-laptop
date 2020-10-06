@@ -1286,6 +1286,116 @@ export default new Vuex.Store({
             this.commit('successAdvise', success)
           }
         }
+      }else if(data.target === 'Banners'){
+        
+        state.dbImg = [];
+
+        for(let k = 0; k < Object.values(data.banner.archivos).length; k++){
+          if(Object.values(data.banner.archivos)[k].id !== undefined){
+            state.dbImg[Object.values(data.banner.archivos)[k].id] = Object.values(data.banner.archivos)[k];
+          }else{
+            state.dbImg[k] = '';
+          }
+        }
+        
+        let storageRef = [];
+        let percentage = [];
+        let order = [];
+        let task = {};
+        let i = 0;
+        let n = 0;
+        let j = 0;
+
+        const dbRef = firebase.database().ref(`${data.target}`);
+        const pushdbRef = dbRef.push();
+
+        let dataRef = {
+          bann_id: pushdbRef.key,
+        }
+
+        Object.values(data.archivos).forEach(element => {
+          storageRef= firebase.storage().ref(`/${data.target}/${dataRef.bann_id}/${data.banner.archivos[`${data.name_archivos}${element.id}`].nombre}`);
+          task[`${element.id}`] = storageRef.put(element);
+          i++;
+        })
+        
+        if(Object.values(task).length !== 0){
+          Object.values(data.archivos).forEach(element => {
+            task[`${element.id}`].on('state_changed', snapshot => {
+              percentage[snapshot.task.blob_.data_.id] = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+              state.dbImg[snapshot.task.blob_.data_.id].uploadPercentage = percentage[snapshot.task.blob_.data_.id];
+              if(state.dbImg[snapshot.task.blob_.data_.id].uploadPercentage === 100 && order.length < Object.values(data.archivos).length){
+                order.push(snapshot.task.blob_.data_.id)
+              }
+            }, error => {
+              console.log(error.message);
+            }, () =>{
+
+              dataRef = {
+                bann_id: pushdbRef.key,
+                bann_activo: data.banner.activo,
+                bann_bannerid: data.banner.bannerid,
+                bann_fechaedicion: data.banner.fechaed,
+                bann_seccion: data.banner.seccion,
+                bann_slides: [],
+              }
+              
+              let storageRef= firebase.storage().ref(`/${data.target}/${dataRef.bann_id}/${data.banner.archivos[`${data.name_archivos}${order[j]}`].nombre}`);
+              
+              storageRef.getDownloadURL().then(url => {
+                let val = order[n];
+                for(let m = 0; m < Object.values(data.banner.archivos).length; m++){
+                  if(Object.values(data.banner.archivos)[m].id !== undefined && val === Object.values(data.banner.archivos)[m].id){
+                    state.dbImg[val].url = url;
+                    state.dbImg[val].nombre = Object.values(data.banner.archivos)[m].nombre
+                  }
+                }
+                n ++;
+                if(n >= Object.values(data.archivos).length){
+
+                  for(let i = 1; i <= Object.values(state.dbImg).length; i++){
+                    dataRef.bann_slides[`slides${i}`] = {
+                      nombre: state.dbImg[i].nombre,
+                      url: state.dbImg[i].url,
+                      info: data.banner.archivos[`slides${i}`].info,
+                    }
+                  }
+
+                  if(n >= Object.values(data.archivos).length){
+                    pushdbRef.set(dataRef);
+                    state.crearDBVals = false;
+                    const success = {
+                      0: 'successUpload',
+                      1: 'Se ha creado exitosamente'
+                    }
+                    this.commit('successAdvise', success)
+                  }
+                }
+              })
+              j++;
+            })
+          })
+        }else{
+
+          dataRef = {
+            bann_id: pushdbRef.key,
+            bann_activo: data.banner.activo,
+            bann_bannerid: data.banner.bannerid,
+            bann_fechaedicion: data.banner.fechaed,
+            bann_seccion: data.banner.seccion,
+          }
+
+          n++;
+          if(n >= Object.values(data.archivos).length){
+            pushdbRef.set(dataRef);
+            state.crearDBVals = false;
+            const success = {
+              0: 'successUpload',
+              1: 'Se ha creado exitosamente'
+            }
+            this.commit('successAdvise', success)
+          }
+        }
       }
     },
     updateDB(state, data){
@@ -1883,7 +1993,7 @@ export default new Vuex.Store({
                 for(let m = 0; m < Object.values(data.anunciante.archivos).length; m++){
                   if(Object.values(data.anunciante.archivos)[m].id !== undefined && val === Object.values(data.anunciante.archivos)[m].id){
                     state.dbImg[val].url = url;
-                    state.dbImg[val].nombre = Object.values(data.comite.archivos)[m].nombre
+                    state.dbImg[val].nombre = Object.values(data.anunciante.archivos)[m].nombre
                   }
                 }
                 n ++;
@@ -1933,6 +2043,116 @@ export default new Vuex.Store({
           n++;
           if(n >= Object.values(data.archivos).length){
             const dbRef = firebase.database().ref(`${data.target}/${data.anunciante.id}`);
+            dbRef.set(dataRef);
+            state.crearDBVals = false;
+            const success = {
+              0: 'successUpload',
+              1: 'Se ha creado exitosamente'
+            }
+            this.commit('successAdvise', success)
+          }
+        }
+      }else if(data.target === 'Banners'){
+        
+        state.dbImg = [];
+
+        for(let k = 0; k < Object.values(data.banner.archivos).length; k++){
+          if(Object.values(data.banner.archivos)[k].id !== undefined){
+            state.dbImg[Object.values(data.banner.archivos)[k].id] = Object.values(data.banner.archivos)[k];
+          }else{
+            state.dbImg[k] = '';
+          }
+        }
+        
+        let storageRef = [];
+        let percentage = [];
+        let order = [];
+        let task = {};
+        let i = 0;
+        let n = 0;
+        let j = 0;
+
+        Object.values(data.archivos).forEach(element => {
+          storageRef= firebase.storage().ref(`/${data.target}/${data.banner.id}/${data.banner.archivos[`${data.name_archivos}${element.id}`].nombre}`);
+          task[`${element.id}`] = storageRef.put(element);
+          i++;
+        })
+        
+        if(Object.values(task).length !== 0){
+          Object.values(data.archivos).forEach(element => {
+            task[`${element.id}`].on('state_changed', snapshot => {
+              percentage[snapshot.task.blob_.data_.id] = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+              state.dbImg[snapshot.task.blob_.data_.id].uploadPercentage = percentage[snapshot.task.blob_.data_.id];
+              if(state.dbImg[snapshot.task.blob_.data_.id].uploadPercentage === 100 && order.length < Object.values(data.archivos).length){
+                order.push(snapshot.task.blob_.data_.id)
+              }
+            }, error => {
+              console.log(error.message);
+            }, () =>{
+
+              let dataRef = {
+                bann_id: data.banner.id,
+                bann_activo: data.banner.activo,
+                bann_bannerid: data.banner.bannerid,
+                bann_fechaedicion: data.banner.fechaed,
+                bann_seccion: data.banner.seccion,
+                bann_slides: [],
+              }
+              
+              let storageRef= firebase.storage().ref(`/${data.target}/${data.banner.id}/${data.banner.archivos[`${data.name_archivos}${element.id}`].nombre}`);
+
+              storageRef.getDownloadURL().then(url => {
+                let val = order[n];
+                for(let m = 0; m < Object.values(data.banner.archivos).length; m++){
+                  if(Object.values(data.banner.archivos)[m].id !== undefined && val === Object.values(data.banner.archivos)[m].id){
+                    state.dbImg[val].url = url;
+                    state.dbImg[val].nombre = Object.values(data.banner.archivos)[m].nombre
+                  }
+                }
+                n ++;
+                if(n >= Object.values(data.archivos).length){
+
+                  for(let i = 1; i <= Object.values(data.banner.archivos).length; i++){
+                    if(data.banner.archivos[`slides${i}`].id !== undefined){
+                      dataRef.bann_slides[`slides${i}`] = {
+                        nombre: state.dbImg[i].nombre,
+                        url: state.dbImg[i].url,
+                        info: data.banner.archivos[`slides${i}`].info,
+                      } 
+                    }else{
+                      dataRef.bann_slides[`slides${i}`] = data.banner.archivos[`slides${i}`];
+                    }
+                  }
+
+                  if(n >= Object.values(data.archivos).length){
+                    const dbRef = firebase.database().ref(`${data.target}/${data.banner.id}`);
+                    dbRef.set(dataRef);
+                    state.crearDBVals = false;
+                    const success = {
+                      0: 'successUpload',
+                      1: 'Se ha creado exitosamente'
+                    }
+                    this.commit('successAdvise', success)
+                  }
+                }
+              })
+              j++;
+            })
+          })
+        }else{
+
+          let dataRef = {
+            bann_id: data.banner.id,
+            bann_activo: data.banner.activo,
+            bann_bannerid: data.banner.bannerid,
+            bann_fechaedicion: data.banner.fechaed,
+            bann_seccion: data.banner.seccion,
+            bann_slides: data.banner.archivos,
+          }
+
+          n++;
+          if(n >= Object.values(data.archivos).length){
+            const dbRef = firebase.database().ref(`${data.target}/${data.banner.id}`);
             dbRef.set(dataRef);
             state.crearDBVals = false;
             const success = {

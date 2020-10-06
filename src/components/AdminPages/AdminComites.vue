@@ -232,7 +232,7 @@
                   <input type="checkbox" class="custom-control-input" id="comi_int_edit" v-model="selectComite.inthpage">
                   <label class="custom-control-label text" for="comi_int_edit" >Marque si desea que el comité aparezca en la página principal</label>
                   <i ref="info" @mouseenter="toggleInfo()" @mouseleave="toggleInfo()" class="icon info position-relative ml-1 flaticon-question">
-                    <div class="info text position-absolute" style="top: auto; bottom: -750% !important; left:-1000% !important; overflow: visible">
+                    <div class="info text position-absolute" style="top: auto; bottom: -370% !important; left: -271px; overflow: visible">
                       Este campo estará desabilidato cuando existan un máximo de 4 elementos ya seleccionados.
                     </div>
                   </i>
@@ -424,7 +424,7 @@
                   <input type="checkbox" class="custom-control-input" id="comi_int" v-model="nuevoComite.inthpage">
                   <label class="custom-control-label text" for="comi_int">Marque si desea que el comité aparezca en la página principal</label>
                   <i ref="info" @mouseenter="toggleInfo()" @mouseleave="toggleInfo()" class="icon info position-relative ml-1 flaticon-question">
-                    <div class="info text position-absolute" style="top: auto; bottom: -750% !important; left:-1000% !important; overflow: visible">
+                    <div class="info text position-absolute" style="left: -271px; top: auto; bottom: -370% !important; overflow: visible;">
                       Este campo estará desabilidato cuando existan un máximo de 4 elementos ya seleccionados.
                     </div>
                   </i>

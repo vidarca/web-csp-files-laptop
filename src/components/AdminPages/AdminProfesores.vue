@@ -171,7 +171,7 @@
               <p>Seleccione la opción del comité al que pertenece el profesor</p>
               <select class="custom-select" v-model="selectProfesor.coid">
                 <option selected>Seleccione una opción</option>
-                <option v-for="(comite) in Object.values(dbWeb.Comites)" :key="comite.comi_id" :value="comite.comi_name">{{comite.comi_name}}</option>
+                <option v-for="(comite) in Object.values(dbWeb.Comites)" :key="comite.comi_id" :value="comite.comi_nombre">{{comite.comi_nombre}}</option>
               </select>
               <div class="phones-input row justify-content-between align-items-center" v-for="index in cantTelf" :key="index" style="margin-top: 5px">
                 <div class="col-9 p-0 d-flex flex-row align-items-center justify-content-center">
@@ -296,7 +296,7 @@
               <p>Seleccione la opción del comité al que pertenece el profesor</p>
               <select class="custom-select" v-model="nuevoProfesor.coid">
                 <option selected>Seleccione una opción</option>
-                <option v-for="(comite) in Object.values(dbWeb.Comites)" :key="comite.comi_id" :value="comite.comi_name">{{comite.comi_name}}</option>
+                <option v-for="(comite) in Object.values(dbWeb.Comites)" :key="comite.comi_id" :value="comite.comi_nombre">{{comite.comi_nombre}}</option>
               </select>
               <div class="phones-input row justify-content-between align-items-center" v-for="index in cantTelf" :key="index" style="margin-top: 5px">
                 <div class="col-9 p-0 d-flex flex-row align-items-center justify-content-center">

@@ -419,13 +419,13 @@ export default {
       deleteFile(index, val){
         if(val === 'crear'){
           if(index === 0){
-            this.nuevoAnunciante.archivo.imagen = '';
+            this.nuevoAnunciante.archivos.imagen = '';
           }
           delete this.files[`archivo${index}`];
           this.resetDBValues(index);
         }else if(val === 'select'){
           if(index === 0){
-            this.selectAnunciante.archivo.imagen = '';
+            this.selectAnunciante.archivos.imagen = '';
           }
           delete this.files[`archivo${index}`];
           this.resetDBValues(index);
@@ -453,7 +453,7 @@ export default {
             telefonos: [],
           }
         }else if(value === 'select'){
-          this.nuevoAnunciante = {
+          this.selectAnunciante = {
             activo: false,
             anunURL: '',
             archivos:{
