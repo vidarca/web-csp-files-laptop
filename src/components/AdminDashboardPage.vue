@@ -130,6 +130,11 @@
                       Banners
                     </a>
                   </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#" @click.prevent="selectComponent('12')">
+                      Miscellaneous
+                    </a>
+                  </li>
                 </ul>
               </li>
             </ul>
@@ -165,6 +170,7 @@ import AdminEqWork from './AdminPages/AdminEqWork'
 import AdminComites from './AdminPages/AdminComites'
 import AdminProfesores from './AdminPages/AdminProfesores'
 import AdminBanners from './AdminPages/AdminBanners'
+import AdminMiscellaneous from './AdminPages/AdminMiscellaneous'
 import {mapState, mapMutations, mapGetters, mapActions} from 'vuex'
 
 export default {
@@ -182,6 +188,7 @@ export default {
       'AdminProfesores',
       'AdminComites',
       'AdminBanners',
+      'AdminMiscellaneous',
   ],
   components:{
     AdminDashboard,
@@ -196,6 +203,7 @@ export default {
     AdminProfesores,
     AdminComites,
     AdminBanners,
+    AdminMiscellaneous,
   },
   data(){
     return {
@@ -213,6 +221,7 @@ export default {
         'AdminProfesores',
         'AdminComites',
         'AdminBanners',
+        'AdminMiscellaneous',
       ],
       currentCompon: 'AdminDashboard',
       dataName: [],

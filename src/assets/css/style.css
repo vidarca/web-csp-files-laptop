@@ -5447,15 +5447,15 @@ input.error{
 }
 
 .w-85{
-	width: 85%;
+	width: 85% !important;
 }
 
 .w-95{
-	width: 95%;
+	width: 95% !important;
 }
 
 .mih{
-	min-height: 100vh;
+	min-height: 100vh !important;
 }
 
 .slide-list{

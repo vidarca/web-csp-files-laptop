@@ -178,8 +178,8 @@
                   <input :class="['position-relative', validPhone(selectProfesor.telefonos[`telefono${index-1}`], (index-1))?'':'error']" ref="phone" type="text" v-model="selectProfesor.telefonos[`telefono${index-1}`]" placeholder="Telefono">
                   <div class="important-field" v-show="showCreate && !validPhone(selectProfesor.telefonos[`telefono${index-1}`], (index-1))"></div>
                 </div>
-                <span @click="addPhone('select', index-1)" :class="['icon p-0 add flaticon-add', (index-1 > 0)?'col-1':'col-3 pl-2']" v-if="index-1 === cantTelf-1"></span>
-                <span @click="deletePhone('select', index-1)" class="icon col-1 p-0 delete flaticon-minus" v-if="index-1 > 0 && index-1 === cantTelf-1"></span>
+                <span @click="addPhone('select', index-1)" :class="['icon p-0 add flaticon-add', (index-1 > 0)?'col-1 pr-1 pl-1':'col-3 pl-2']" v-if="index-1 === cantTelf-1"></span>
+                <span @click="deletePhone('select', index-1)" class="icon col-1 p-0 pl-2 delete flaticon-minus" v-if="index-1 > 0 && index-1 === cantTelf-1"></span>
               </div>
             </div>
             </div>
@@ -303,8 +303,8 @@
                   <input :class="['position-relative', validPhone(nuevoProfesor.telefonos[`telefono${index-1}`], (index-1))?'':'error']" ref="phone" type="text" v-model="nuevoProfesor.telefonos[`telefono${index-1}`]" placeholder="Telefono">
                   <div class="important-field" v-show="showCreate && !validPhone(nuevoProfesor.telefonos[`telefono${index-1}`], (index-1))"></div>
                 </div>
-                <span @click="addPhone('crear', index-1)" :class="['icon p-0 add flaticon-add', (index-1 > 0)?'col-1':'col-3 pl-2']" v-if="index-1 === cantTelf-1"></span>
-                <span @click="deletePhone('crear', index-1)" class="icon col-1 p-0 delete flaticon-minus" v-if="index-1 > 0 && index-1 === cantTelf-1"></span>
+                <span @click="addPhone('crear', index-1)" :class="['icon p-0 add flaticon-add', (index-1 > 0)?'col-1 pl-1 pr-1':'col-3 pl-2']" v-if="index-1 === cantTelf-1"></span>
+                <span @click="deletePhone('crear', index-1)" class="icon col-1 p-0 pl-2 delete flaticon-minus" v-if="index-1 > 0 && index-1 === cantTelf-1"></span>
               </div>
             </div>
             </div>
