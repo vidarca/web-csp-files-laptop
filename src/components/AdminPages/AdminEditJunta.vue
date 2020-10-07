@@ -61,7 +61,7 @@
       </div>
     </section>
     
-    <section ref='section1' class="translate" v-if="dbWeb.Juntas !== undefined && selectJunta !== ''" v-show="showPrev">
+    <section ref='section1' id="section1" class="translate p-3" v-if="dbWeb.Juntas !== undefined && selectJunta !== ''" v-show="showPrev">
       <form class="form-class d-flex flex-column justify-content-center align-items-center">
         <div class="file-form">
           <div class="d-flex w-100 flex-row align-items-center justify-content-center position-relative m-2">
@@ -149,7 +149,7 @@
       </form>
     </section>
 
-    <section class="translate" v-show="showCreate" ref="section2">
+    <section class="translate p-3" id="section2" v-show="showCreate" ref="section2">
       <form class="form-class d-flex flex-column justify-content-center align-items-center">
         <div class="file-form">
           <div class="d-flex w-100 flex-row align-items-center justify-content-center position-relative m-2">
@@ -742,6 +742,13 @@ export default {
     -moz-transition: all .9s ease;
     -o-transition: all .9s ease;
     -webkit-transition: all .9s ease;
+  }
+
+  section#section2, section#section1{
+    margin: 10px 5px;
+    border: 1px solid rgb(240, 240, 240);
+    border-radius: 5px;
+    box-shadow: 0 0 7px rgba(0,0,0,.5);
   }
 
   p{

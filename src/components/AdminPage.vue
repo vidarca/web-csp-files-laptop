@@ -55,7 +55,6 @@
                         .then(user => {
                             this.$router.push({name: 'AdminDashboard', params:{id: 'admin-dashboard'} })
                         }).catch(error => {
-                            console.log('ERROR');
                             if(error.code === 'auth/wrong-password'){
                                 this.error = 'La contraseña es incorrecta'
                             }else{

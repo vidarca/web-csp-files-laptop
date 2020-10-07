@@ -76,7 +76,7 @@
     <section class="translate" id="section1" v-show="showPrev" v-if="dbWeb.Banners !== undefined && selectBanner !== ''" ref="section1">
       <form class="form-class d-flex flex-column justify-content-center align-items-center overflow-hidden">
         <div class="file-form">
-          <div class="list-db w-95">
+          <div class="list-db w-95" style = "box-shadow: none !important;">
             <div class="list-header w-100 d-flex flex-row align-items-center justify-content-end">
               <span @click="addField('select', 'slides', true)" class="icon p-0 add flaticon-add ml-2 mr-2"></span>
               <div class="ml-2 mr-2" style="width: 21.5px">
@@ -188,7 +188,7 @@
     <section id="section2" class="translate" v-if="showCreate" ref="section2">
       <form class="form-class d-flex flex-column justify-content-center align-items-center overflow-hidden">
         <div class="file-form">
-          <div class="list-db w-95">
+          <div class="list-db w-95" style = "box-shadow: none !important;">
             <div class="list-header w-100 d-flex flex-row align-items-center justify-content-end">
               <span @click="addField('crear', 'slides', true)" class="icon p-0 add flaticon-add ml-2 mr-2"></span>
               <div class="ml-2 mr-2" style="width: 21.5px">
@@ -376,7 +376,6 @@ export default {
               this.$set(this.selectBanner.archivos, `slides${i+1}`, Object.values(this.dbWeb.Banners).reverse()[index].bann_slides[`slides${i+1}`]); 
             }
           }
-          console.log(this.selectBanner);
         }, 900);
         setTimeout(() => {
           this.$refs.section1.classList.toggle('translate')
@@ -393,7 +392,6 @@ export default {
           if(this.selectBanner.archivos[`slides${index}`] !== undefined && this.selectBanner.archivos[`slides${index}`] !== ''){
             this.selectBanner.archivos[`slides${index}`] = '';
           }
-          console.log(this.selectBanner);
           delete this.files[`archivo${index}`];
           this.resetDBValues(index);
         }
@@ -449,7 +447,6 @@ export default {
               return false
             }
           }
-          'Todas los slides o diapositivas deben tener una imagen'
           if(this.dbWeb.Banners !== undefined){
             for(let i = 0; i < Object.values(this.dbWeb.Banners).length; i++){
               if(Object.values(this.dbWeb.Banners)[i].bann_bannerid === this[`${txt}Banner`].seccion.toLowerCase().split(' ').join('_') && txt !== 'select'){
@@ -534,9 +531,6 @@ export default {
                 dataTransfer.banner.archivos[`slides${i}`].info = this.selectBanner.info[`info${i}`];
               }
             }
-
-
-            console.log(dataTransfer);
             
             this.updateDB(dataTransfer)
 
@@ -1056,7 +1050,7 @@ export default {
 
   .list-db{
     margin: 10px 5px;
-    border: 1px solid rgb(240, 240, 240);
+    border: 1px solid rgb(20, 20, 20, 0.3);
     border-radius: 5px;
     box-shadow: 0 0 7px rgba(0,0,0,.5);
   }

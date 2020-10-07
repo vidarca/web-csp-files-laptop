@@ -3,7 +3,7 @@
     <div class="alert-box position-fixed" ref="alertBox">
       <i :class="error?'icon-err flaticon-close':successUpload?'icon-succ flaticon-check': errorUpload?'icon-err flaticon-close':''"></i> <p>{{error?error:successUpload?successUpload:errorUpload?errorUpload:''}}</p>
     </div>
-      <form @submit.prevent="isUserDiff(tipo)">
+      <form class="p-3" @submit.prevent="isUserDiff(tipo)">
         <div class="v-admin-username w-100">
           <p class="title-text">NOMBRE DE USUARIO</p>
           <div class="v-admin-namevalues w-100">
@@ -31,12 +31,12 @@
             <div class="v-checked-container">
               <div class="v-checked-selector text position-relative">
                 <div class="custom-control custom-switch">
-                  <input type="checkbox" class="custom-control-input" id="customSwitches" v-model="masterAutori" disabled>
-                  <label class="custom-control-label text" for="customSwitches">Nivel Master</label>
+                  <input type="checkbox" class="custom-control-input" id="masterautori" v-model="masterAutori" disabled>
+                  <label class="custom-control-label text" for="masterautori">Nivel Master</label>
                 </div>
                 <div class="custom-control custom-switch">
-                  <input type="checkbox" class="custom-control-input" id="customSwitches" v-model="adminAutori" disabled>
-                  <label class="custom-control-label text" for="customSwitches">Nivel Admin</label>
+                  <input type="checkbox" class="custom-control-input" id="adminautori" v-model="adminAutori" disabled>
+                  <label class="custom-control-label text" for="adminautori">Nivel Admin</label>
                 </div>
               </div>
             </div>
@@ -58,8 +58,8 @@
             </div>
           </div>
         </div>
-        <div class="submit-button">
-          <button class="btn btn-success mt-5 float-right">
+        <div class="submit-button d-flex justify-content-end align-items-center">
+          <button class="btn btn-success mt-5">
             <div v-if="actUser === true" class="spinner-border text-light" role="status">
               <span class="sr-only">Loading...</span>
             </div>
@@ -101,7 +101,7 @@ export default {
   },
 
   methods:{
-    ...mapMutations(['isUserDiff', 'setRefUser', 'successAdvise']),
+    ...mapMutations(['isUserDiff', 'setRefUser', 'successAdvise', 'changeSecTitle']),
     validPhone(target){
       const exp = /\(?\+[0-9]{1,3}\)? ?-?[0-9]{1,3} ?-?[0-9]{3,5} ?-?[0-9]{4}( ?-?[0-9]{3})? ?(\w{1,10}\s?\d{1,6})?/g;
       if(exp.test(target) || target === ''){
@@ -110,6 +110,10 @@ export default {
         return false
       }
     },
+  },
+
+  created(){
+    this.changeSecTitle('Editar Perfil');
   },
 
   watch:{
@@ -144,6 +148,13 @@ export default {
 </script>
 
 <style scoped>
+
+#admin-edit form{
+  margin: 10px 5px;
+  border: 1px solid rgb(240, 240, 240);
+  border-radius: 5px;
+  box-shadow: 0 0 7px rgba(0,0,0,.5);
+}
 
 .title-text{
   font-size: 15px;

@@ -1,6 +1,6 @@
 	/*
   	Flaticon icon font: Flaticon
-  	Creation date: 29/09/2020 22:10
+  	Creation date: 07/10/2020 18:58
   	*/
 
 @font-face {
@@ -74,3 +74,10 @@
 .flaticon-add:before { content: "\f12b"; }
 .flaticon-minus:before { content: "\f12c"; }
 .flaticon-file:before { content: "\f12d"; }
+.flaticon-seleccionar:before { content: "\f12e"; }
+.flaticon-apoyo-tecnico:before { content: "\f12f"; }
+.flaticon-jefe:before { content: "\f130"; }
+.flaticon-entrenador:before { content: "\f131"; }
+.flaticon-marketing:before { content: "\f132"; }
+.flaticon-corredizo:before { content: "\f133"; }
+.flaticon-archivo:before { content: "\f134"; }

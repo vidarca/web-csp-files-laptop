@@ -38,7 +38,7 @@
     <div class="alert-box position-fixed" ref="alertBox">
       <i :class="error?'icon-err flaticon-close':successUpload?'icon-succ flaticon-check': errorUpload?'icon-err flaticon-close':''"></i> <p>{{error?error:successUpload?successUpload:errorUpload?errorUpload:''}}</p>
     </div>
-    <section class="w-100" v-show="Object.values(dbWeb.Usuarios)[0] !== undefined && showPrev === false" ref="section1">
+    <section id="section1" class="w-100" v-show="Object.values(dbWeb.Usuarios)[0] !== undefined && showPrev === false" ref="section1">
       <div class="list-db w-auto">
         <div class="list-header w-100 d-flex flex-row align-items-center justify-content-between">
           <div>
@@ -104,7 +104,7 @@
         </div>
       </div>      
     </section>
-    <section class="w-100 translate" v-show="showPrev" ref="section2">
+    <section id="section2" class="translate p-3" v-show="showPrev" ref="section2">
       <form v-if="itemSelected !== ''">
         <div class="v-admin-username w-100">
           <p class="title-text">NOMBRE DE USUARIO</p>
@@ -133,12 +133,12 @@
             <div class="v-checked-container">
               <div class="v-checked-selector text position-relative">
                 <div class="custom-control custom-switch">
-                  <input type="checkbox" class="custom-control-input" id="customSwitches" v-model="masterAutori">
-                  <label class="custom-control-label text" for="customSwitches">Nivel Master</label>
+                  <input type="checkbox" class="custom-control-input" id="masterautori" v-model="masterAutori">
+                  <label class="custom-control-label text" for="masterautori">Nivel Master</label>
                 </div>
                 <div class="custom-control custom-switch">
-                  <input type="checkbox" class="custom-control-input" id="customSwitches" v-model="adminAutori">
-                  <label class="custom-control-label text" for="customSwitches">Nivel Admin</label>
+                  <input type="checkbox" class="custom-control-input" id="adminautori" v-model="adminAutori">
+                  <label class="custom-control-label text" for="adminautori">Nivel Admin</label>
                 </div>
               </div>
             </div>
@@ -170,7 +170,7 @@
             </p>
           </button>
           <button class="btn btn-dark ml-3" @click.prevent="returnList()">
-            Regresar <i class="flaticon-back-arrow"></i>
+            Regresar
           </button>
         </div>
       </form>
@@ -458,6 +458,13 @@ export default {
     -webkit-transition: all .9s ease;
   }
 
+  section#section2{
+    margin: 10px 5px;
+    border: 1px solid rgb(240, 240, 240);
+    border-radius: 5px;
+    box-shadow: 0 0 7px rgba(0,0,0,.5);
+  }
+
   .list-db{
     margin: 10px 5px;
     border: 1px solid rgb(240, 240, 240);
@@ -554,54 +561,6 @@ export default {
     padding: 5px;
     border: 1px solid rgba(0,0,0,.2);
     border-radius: 5px;
-  }
-
-  .modal-body .icon{
-    font-size: 12px;
-    border-radius: 50%;
-    padding: 0px 5px 0px 6px;
-    background-color: rgb(0, 0, 230);
-    color: white;
-    border: 1px solid black;
-  }
-
-  .modal-body .icon::after{
-    position: absolute;
-    top: -1px;
-    left: -1px;
-    width: calc(100% + 2px);
-    height: calc(100% + 2px);
-    border-radius: 50%;
-    content: '';
-    background-color: rgba(255,255,255, 0);
-    transition: all .2s ease;
-  }
-
-  .modal-body .icon:hover::after{
-    background-color: rgba(255,255,255, .2);
-  }
-
-  .modal-body .icon .text{
-    display: none;
-    height: auto;
-    width: 300px;
-    overflow: hidden;
-    font-size: 13px;
-    opacity: 0;
-    top: -60px;
-    left: 30px;
-    background-color: rgba(255,255,255, .95);
-    border-radius: 10px;
-    padding: 5px 15px;
-    font-style: normal;
-    text-align: justify;
-    font-weight: 500;
-    transition: oacity .2s ease;
-  }
-
-  .modal-body .text.show-info{
-    display: initial !important;
-    opacity: 1 !important;
   }
 
   /* Parte de edicion de usuario */

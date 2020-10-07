@@ -3,25 +3,56 @@
     <div class="alert-box position-fixed" ref="alertBox">
       <i :class="error?'icon-err flaticon-close':successUpload?'icon-succ flaticon-check': ' '"></i> <p>{{error?error:successUpload?successUpload:' '}}</p>
     </div>
-    <section id="section0" ref="section0">
+    <section id="section0" class="p-3" ref="section0">
       <form class="form-class d-flex flex-column justify-content-center align-items-center overflow-hidden">
         <div class="file-form d-flex flex-row align-items-start justify-content-center p-1">
            <div class="col-6 p-1 h-100 d-flex flex-column align-items-center justify-content-center">
-               <textarea type="text" class="info-form-c w-100" placeholder="Dirección de contacto" v-model="miscellaneous.direccion" style="height: 200px"></textarea>
+              <!-- IMAGEN LOGO -->
+              <div class="h-100 w-100 d-flex flex-row align-items-center justify-content-start p-1">
+                <div class="input-files d-flex w-auto h-100 flex-column align-items-center justify-content-center position-relative" v-if="miscellaneous.logo.nombre === undefined || miscellaneous.logo.nombre === ''">
+                  <input :ref='`file0`' @change="filesVerification($event, 0, 'crear')" class="collectionFiles" title="Elija un archivo"  type="file" accept=".png">
+                  <div class="button-files d-flex flex-row align-items-center justify-content-center">
+                    <i class="icon flaticon-add m-0 p-0"></i>
+                  </div>
+                </div>
+                <!-- PREV IMAGENES -->
+                <div  class="uploadCont flex-row align-items-center justify-content-start" v-else style="display: flex;">
+                  <div :class="['prev-container d-flex position-relative flex-column align-items-center justify-content-between', (miscellaneous.logo.url === '' || miscellaneous.logo.url === undefined && dbImg[0] === undefined || dbImg[0] === '')?'bg-success-light':(miscellaneous.logo.url !== '' && miscellaneous.logo.url !== undefined || dbImg[0].url !== undefined && dbImg[0].url !== '')?'bg-white':'bg-success-light']">
+                    <!-- MUESTRA DE IMAGEN -->
+                    <div class="w-100 d-flex position-relative justify-content-end flex-column h-100">
+                      <div class="d-flex h-100 w-100 justify-content-center align-items-center" v-if="(dbImg[0] !== undefined || miscellaneous.logo.url !== '')">
+                        <img :src="(dbImg[0] !== undefined && dbImg[0].url !== undefined)?dbImg[0].url:(miscellaneous.logo.url !== '')?miscellaneous.logo.url:''"  >
+                      </div>
+                      <div v-else class="w-100 h-100 d-flex flex-row align-items-center justify-content-center">
+                        <p class="align-self-star" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">{{miscellaneous.logo.nombre}}</p>
+                      </div>
+                      <!-- ICONO DE QUITAR -->
+                      <div @click.prevent="deleteFile(0, 'crear')" title="Eliminar" class="remove position-absolute flaticon-close" style="top:-10px; right:-7px;"></div>
+                        <!-- FIN ICONO DE QUITAR -->
+                    </div>
+                      <!-- FIN MUESTRA DE IMAGEN -->
+                  </div>
+                </div>
+                <p class="text pl-2">
+                  Seleccione el logo de la página SIN TEXTO en formato PNG
+                </p>
+              </div>
+              <!--  Fin de IMAGEN LOGO -->
+               <textarea type="text" class="info-form-c w-100" placeholder="Dirección de contacto" v-model="miscellaneous.direccion" style="height: 100px"></textarea>
                <p class="text mt-2">
                     Haga clic en cualquiera de los íconos para activar o desactivar el campo correspondiente
                 </p>
                <div class="redes d-flex align-items-center justify-content-between flex-row w-100">
                    <div class="w-100 d-flex flex-column align-items-center justify-content-center col-6 col-md-4">
-                        <i class="icon flaticon-instagram" @click="disableRS('instagram')"></i>
+                        <i :class="['icon flaticon-instagram', (miscellaneous.redes.instagram.activo === true)?'active':'']" @click="disableRS('instagram')"></i>
                         <input class="w-100" ref="inputinstagram" type="text" v-model="miscellaneous.redes.instagram.link" placeholder="Link del perfil">
                    </div>
                    <div class="w-100 d-flex flex-column align-items-center justify-content-center col-6 col-md-4">
-                        <i class="icon flaticon-twitter" @click="disableRS('twitter')"></i>
+                        <i :class="['icon flaticon-twitter', (miscellaneous.redes.twitter.activo === true)?'active':'']" @click="disableRS('twitter')"></i>
                         <input class="w-100" ref="inputtwitter" type="text" v-model="miscellaneous.redes.twitter.link" placeholder="Link del perfil">
                    </div>
                    <div class="w-100 d-flex flex-column align-items-center justify-content-center col-6 col-md-4">
-                        <i class="icon flaticon-facebook" @click="disableRS('facebook')"></i>
+                        <i :class="['icon flaticon-facebook', (miscellaneous.redes.facebook.activo === true)?'active':'']" @click="disableRS('facebook')"></i>
                         <input class="w-100" ref="inputfacebook" type="text" v-model="miscellaneous.redes.facebook.link" placeholder="Link del perfil">
                    </div>
                </div>
@@ -30,8 +61,8 @@
                <div class="w-100" style="min-height: 200px;">
                     <div class=" w-100 phones-input row justify-content-between align-items-center" v-for="index in cantFields.telefonos.numero" :key="`telefono${index}`" style="margin-top: 5px;">
                         <div class="col-9 p-0 d-flex flex-row align-items-center justify-content-center">
-                            <input :class="['position-relative', validPhone(miscellaneous.telefonos[`telefono${index}`], (index))?'':'error']" ref="phone" type="text" v-model="miscellaneous.telefonos[`telefono${index}`]" placeholder="Télefono (Ej. +581112223333)">
-                            <div class="important-field" v-show="!validPhone(miscellaneous.telefonos[`telefono${index}`], (index))"></div>
+                            <input :class="['position-relative', validPhone(miscellaneous.telefonos[`telefonos${index}`], (index))?'':'error']" ref="phone" type="text" v-model="miscellaneous.telefonos[`telefonos${index}`]" placeholder="Télefono (Ej. +581112223333)">
+                            <div class="important-field" v-show="!validPhone(miscellaneous.telefonos[`telefonos${index}`], (index))"></div>
                         </div>
                         <span @click="addField('crear', 'telefonos', false)" :class="['icon p-0 add flaticon-add', (index-1 > 0)?'col-1 pl-1 pr-1':'col-3 pl-2']" v-if="index === cantFields.telefonos.numero"></span>
                         <span @click="deleteField('crear', 'telefonos', false)" class="icon col-1 p-0 pl-2 delete flaticon-minus" v-if="index > 1 && index === cantFields.telefonos.numero"></span>
@@ -93,7 +124,8 @@ export default {
         },
         show: false,
         error: null,
-        valores: ['telefonos', 'correos', 'direccion', 'redes'],
+        files: {},
+        valores: ['telefonos', 'correos', 'direccion', 'redes', 'logo', 'id'],
         redes: ['instagram', 'facebook', 'twitter'],
         miscellaneous: {
         },
@@ -116,7 +148,13 @@ export default {
             redes: {},
             correos: {},
             direccion: '',
+            logo: '',
         }
+      },
+      deleteFile(index, val){
+        this.miscellaneous.logo = '';
+        delete this.files[`archivo${index}`];
+        this.resetDBValues(index);
       },
       validPhone(target, index){
         const exp = /\(?\+[0-9]{1,3}\)? ?-?[0-9]{1,3} ?-?[0-9]{3,5} ?-?[0-9]{4}( ?-?[0-9]{3})? ?(\w{1,10}\s?\d{1,6})?/g;
@@ -150,116 +188,69 @@ export default {
           }
         }
       },
-      validAllFields(value){
-        let txt = '';
-        if(value === 'crear'){
-          txt = 'nuevo';
-        }else if(value === 'select'){
-          txt = 'select'
+      validAllFields(){
+        let ref = false;
+
+        for(let i = 1; i <= this.cantFields.telefonos.numero; i++){
+          if(this.validPhone(this.miscellaneous.telefonos[`telefonos${i}`], i) === false){
+            this.error = 'Los campos marcados con * son obligatorios';
+            return false
+          }
         }
 
-        let err = {};
-
-        if(this.validSelection('Seleccione una opción', this[`${txt}Banner`].seccion)){
-          for(let i = 0; i < Object.values(this[`${txt}Banner`].archivos).length; i++){
-            if(Object.values(this[`${txt}Banner`].archivos)[i] === undefined || Object.values(this[`${txt}Banner`].archivos)[i] === ''){
-              this.error = 'Todas los slides o diapositivas deben tener una imagen'
-              return false
-            }
+        for(let i = 1; i <= this.cantFields.correos.numero; i++){
+          if(this.validPhone(this.miscellaneous.correos[`correos${i}`], i)){
+            this.error = 'Los campos marcados con * son obligatorios';
+            return false
           }
-          'Todas los slides o diapositivas deben tener una imagen'
-          if(this.dbWeb.Banners !== undefined){
-            for(let i = 0; i < Object.values(this.dbWeb.Banners).length; i++){
-              if(Object.values(this.dbWeb.Banners)[i].bann_bannerid === this[`${txt}Banner`].seccion.toLowerCase().split(' ').join('_') && txt !== 'select'){
-                this.error = 'El sitio ya posee su banner. Si desea crear otro, elimine el banner ya existente y cree uno nuevo'
-                return false
-              }
-            }
-          }
-          return true
-        }else{
-          this.error = 'Los campos marcados con * son obligatorios'
-          return false
         }
+
+        return true
       },
       submitCollection(value){
-        if(this.validAllFields(value)){
-          
-          if(value === 'crear'){
-
-            const d = new Date();
-            const date = Date.parse(d)
-
-
-            if(Object.values(this.files).length !== 0){
-              for(let i = 0; i < Object.values(this.nuevoBanner.archivos).length; i++){
-                Object.values(this.nuevoBanner.archivos)[i].nombre = Object.values(this.nuevoBanner.archivos)[i].nombreref;
-              }
+        if(this.validAllFields()){
+            if(this.miscellaneous.logo.id !== undefined){
+              this.miscellaneous.logo.nombre = this.miscellaneous.logo.nombreref;
             }
 
             let dataTransfer = {
               archivos: this.files,
-              name_archivos: this.cantFields.slides.nombre,
-              banner: {
-                activo: this.nuevoBanner.activo,
-                fechaed: date,
-                seccion: this.nuevoBanner.seccion,
-                bannerid: this.nuevoBanner.seccion.toLowerCase().split(' ').join('_'),
-                archivos:{},
+              miscellaneous: {
+                correos: this.miscellaneous.correos,
+                direccion: this.miscellaneous.direccion,
+                redes: this.miscellaneous.redes,
+                telefonos: this.miscellaneous.telefonos,
+                logo: this.miscellaneous.logo,
+                id: this.miscellaneous.id,
               },
-              target: 'Banners',
+              target: 'Miscellaneous',
             };
-
-            if(Object.values(this.files).length !== 0){
-              for(let i = 0; i < Object.values(this.nuevoBanner.archivos).length; i++){
-                dataTransfer.banner.archivos[`slides${i+1}`] = Object.values(this.nuevoBanner.archivos)[i];
-                dataTransfer.banner.archivos[`slides${i+1}`].info = Object.values(this.nuevoBanner.info)[i];
-              }
-            }
-            
-            this.crearDB(dataTransfer)
-
-          }else if(value ==='select'){
-
-            const d = new Date();
-            const date = Date.parse(d)
-
-
-            if(Object.values(this.files).length !== 0){
-              for(let i = 0; i < Object.values(this.files).length; i++){
-                if(this.selectBanner.archivos[`slides${Object.values(this.files)[i].id}`].nombre !== `slides${Object.values(this.files)[i].id}`){
-                  this.selectBanner.archivos[`slides${Object.values(this.files)[i].id}`].nombre = this.selectBanner.archivos[`slides${Object.values(this.files)[i].id}`].nombreref;
-                }
-              }
-            }
-
-            let dataTransfer = {
-              archivos: this.files,
-              name_archivos: this.cantFields.slides.nombre,
-              banner: {
-                activo: this.selectBanner.activo,
-                fechaed: date,
-                id: this.selectBanner.id,
-                seccion: this.selectBanner.seccion,
-                bannerid: this.selectBanner.seccion.toLowerCase().split(' ').join('_'),
-                archivos: this.selectBanner.archivos,
-              },
-              target: 'Banners',
-            };
-
-            if(this.selectBanner.archivos[`slides1`] !== undefined){
-              for(let i = 1; i <= Object.values(this.selectBanner.archivos).length; i++){
-                dataTransfer.banner.archivos[`slides${i}`].info = this.selectBanner.info[`info${i}`];
-              }
-            }
-
 
             console.log(dataTransfer);
             
-            this.updateDB(dataTransfer)
-
-          }
+            this.updateDB(dataTransfer);
         }
+      },
+      filesVerification(event, index, val2){
+
+        let files = event.target.files[0];
+
+        this.files[`archivo${index}`] = event.target.files[0];
+
+        this.files[`archivo${index}`].id = index;
+
+        this.miscellaneous.logo = {
+          nombre: files.name,
+          url: '',
+          id: index,
+          nombreref: `logo_png`,
+          uploadPercentage: 0,
+          progressBar: {
+            show: true,
+          },
+        }
+
+        event.target.value = ''
       },
       deleteElement(index){
         let dataTransfer = [];
@@ -281,13 +272,23 @@ export default {
             return this.error = 'Primero debe llenar la casilla vacía'
         }else{
             for(let i = 0; i < Object.values(this.miscellaneous[`${this.cantFields[val2].nombre}`]).length; i++){
-                console.log((Object.values(this.miscellaneous[`${this.cantFields[val2]}`])[i]))
-                if(Object.values(this.miscellaneous[`${this.cantFields[val2]}`])[i] === undefined || Object.values(this.miscellaneous[`${this.cantFields[val2]}`])[i] === ''){
+                if(Object.values(this.miscellaneous[`${this.cantFields[val2].nombre}`])[i] === undefined || Object.values(this.miscellaneous[`${this.cantFields[val2].nombre}`])[i] === ''){
                     return this.error = 'Primero debe llenar la casilla vacía'
                 }
             }
+            for(let i = 1; i <= this.cantFields[val2].numero; i++){
+              if(val2 === 'telefonos'){
+                if(this.validPhone(this.miscellaneous[`${this.cantFields[val2].nombre}`][`${this.cantFields[val2].nombre}${i}`], i) === false){
+                  return this.error = 'Primero debe llenar correctamente la casilla'
+                }
+              }else if(val2 === 'correos'){
+                if(this.validEmail(this.miscellaneous[`${this.cantFields[val2].nombre}`][`${this.cantFields[val2].nombre}${i}`], i) === false){
+                  return this.error = 'Primero debe llenar correctamente la casilla'
+                }
+              }
+            }
         }
-        this.$set(this.miscellaneous, `${this.cantFields[`${val2}`].nombre}${this.cantFields[`${val2}`].numero + 1}`, '');
+        this.$set(this.miscellaneous[`${this.cantFields[`${val2}`].nombre}`], `${this.cantFields[`${val2}`].nombre}${this.cantFields[`${val2}`].numero + 1}`, '');
         this.cantFields[`${val2}`].numero++;
       },
       deleteField(val, val2, val3){
@@ -321,10 +322,13 @@ export default {
         }
       },
       getDB(){
+        this.files = {};
         if(this.dbWeb.Miscellaneous !== undefined){
+          const id = Object.values(this.dbWeb.Miscellaneous)[0].misc_id;
+          this.miscellaneous.id = Object.values(this.dbWeb.Miscellaneous)[0].misc_id;
             for(let i = 0; i < this.valores.length; i++){
-                if(this.dbWeb.Miscellaneous[`${this.valores[i]}`] !== undefined){
-                    this.$set(this.miscellaneous, `${this.valores[i]}`,  this.dbWeb.Miscellaneous[`${this.valores[i]}`]);
+                if(this.dbWeb.Miscellaneous[`${id}`][`misc_${this.valores[i]}`] !== undefined){
+                    this.$set(this.miscellaneous, `${this.valores[i]}`,  this.dbWeb.Miscellaneous[`${id}`][`misc_${this.valores[i]}`]);
                     if(this.valores[i] === 'redes'){
                         for(let j = 0; j < this.redes.length; j++){
                             if(this.miscellaneous.redes[this.redes[j]] === undefined){
@@ -361,7 +365,6 @@ export default {
                 }
             }
         }
-        console.log(this.miscellaneous);
       },
     },
 
@@ -587,8 +590,9 @@ export default {
   .input-files .button-files{
     color: white;
     background-color: rgb(190, 190, 190);
-    height: 100%;
-    border-radius: 10px;
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
     font-weight: 400;
     cursor: pointer;
     transition: all .2s ease;
@@ -597,13 +601,28 @@ export default {
     -webkit-transition: all .2s ease;
   }
 
+  .input-files .button-files .icon{
+    position: relative;
+    line-height: 100px !important;
+    height: 100px !important;
+    width: 100px !important;
+    min-width: 100px !important;
+  }
+
   .input-files .button-files .icon::before{
+    position: absolute;
+    top: 0;
+    left: 0;
+    text-align: center;
     color: white;
     background-color: rgba(150, 150, 150);
     border-radius: 50%;
+    height: 100px !important;
+    line-height: 100px !important;
+    width: 100px !important;
+    min-width: 100px !important;
     font-size: 25px !important;
     cursor: pointer;
-    padding: 15px 15px 16px 15px;
     transition: all .2s ease;
     -moz-transition: all 29s ease;
     -o-transition: all .2s ease;
@@ -625,6 +644,7 @@ export default {
     height: 100%;
     width: 100%;
     opacity: 0;
+    z-index: 5000;
   }
 
   .input-files .collectionFiles::after{
@@ -639,20 +659,24 @@ export default {
 
   .prev-container{
     height: auto;
-    border-radius: 10px;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
   }
 
   .prev-container img{
-    border-radius: 10px;
     border: 1px transparent;
+    height: 70px;
+    width: 70px;
   }
 
   .prev-container .remove::before{
     cursor: pointer;
     border-radius: 50%;
     font-size: 13px !important;
-    color: rgb(136, 136, 136);
-    padding: 5px 5px 6px 5px;
+    color: rgb(110, 110, 110);
+    padding: 5px 5px 5px 5px;
+    border: 1px solid rgba(0,0,0,.6);
     transition: all 0.2s ease;
     -moz-transition: all 0.2s ease;
     -o-transition: all 0.2s ease;
@@ -660,7 +684,7 @@ export default {
   }
 
   .prev-container .remove:hover::before{
-    color: rgb(115, 115, 115);
+    color: rgb(85, 85, 85);
   }
 
   .uploadCont .prev-container .image .icon{
