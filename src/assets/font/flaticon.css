@@ -1,6 +1,6 @@
 	/*
   	Flaticon icon font: Flaticon
-  	Creation date: 07/10/2020 18:58
+  	Creation date: 08/10/2020 16:26
   	*/
 
 @font-face {
@@ -81,3 +81,15 @@
 .flaticon-marketing:before { content: "\f132"; }
 .flaticon-corredizo:before { content: "\f133"; }
 .flaticon-archivo:before { content: "\f134"; }
+.flaticon-grupo:before { content: "\f135"; }
+.flaticon-lista-de-verificacion:before { content: "\f136"; }
+.flaticon-megafono:before { content: "\f137"; }
+.flaticon-mascaras-felices-y-tristes:before { content: "\f138"; }
+.flaticon-chico:before { content: "\f139"; }
+.flaticon-baile:before { content: "\f13a"; }
+.flaticon-chupete:before { content: "\f13b"; }
+.flaticon-asistencia-social:before { content: "\f13c"; }
+.flaticon-edificio:before { content: "\f13d"; }
+.flaticon-ahorrar-dinero:before { content: "\f13e"; }
+.flaticon-libro-de-leyes:before { content: "\f13f"; }
+.flaticon-subasta:before { content: "\f140"; }

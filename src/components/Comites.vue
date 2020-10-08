@@ -56,37 +56,37 @@ export default {
         }else if(this.dbWeb.Comites[index].comi_nombre === 'Comité de Gimnasio'){
           return 'flaticon-barbell'
         }else if(this.dbWeb.Comites[index].comi_nombre === 'Comité de Admisión'){
-          return 'flaticon-shop'
+          return 'flaticon-lista-de-verificacion'
         }else if(this.dbWeb.Comites[index].comi_nombre === 'Comité de Artes Marciales'){
-          return 'flaticon-store'
+          return 'flaticon-martial-arts'
         }else if(this.dbWeb.Comites[index].comi_nombre === 'Comité de Comunicaciones'){
-          return 'flaticon-shop'
+          return 'flaticon-megafono'
         }else if(this.dbWeb.Comites[index].comi_nombre === 'Comité de Cultura'){
-          return 'flaticon-store'
+          return 'flaticon-mascaras-felices-y-tristes'
         }else if(this.dbWeb.Comites[index].comi_nombre === 'Comité de Dominó'){
-          return 'flaticon-shop'
+          return 'flaticon-domino'
         }else if(this.dbWeb.Comites[index].comi_nombre === 'Comité Juvenil'){
-          return 'flaticon-store'
+          return 'flaticon-chico'
         }else if(this.dbWeb.Comites[index].comi_nombre === 'Comité de Bailoterapia'){
-          return 'flaticon-shop'
+          return 'flaticon-baile'
         }else if(this.dbWeb.Comites[index].comi_nombre === 'Comité de Natación'){
-          return 'flaticon-store'
+          return 'flaticon-swimming'
         }else if(this.dbWeb.Comites[index].comi_nombre === 'Comité de Squash'){
-          return 'flaticon-shop'
+          return 'flaticon-squash-rackets'
         }else if(this.dbWeb.Comites[index].comi_nombre === 'Comité de Guardería'){
-          return 'flaticon-store'
+          return 'flaticon-chupete'
         }else if(this.dbWeb.Comites[index].comi_nombre === 'Comité Social'){
-          return 'flaticon-shop'
+          return 'flaticon-asistencia-social'
         }else if(this.dbWeb.Comites[index].comi_nombre === 'Comité de TRX'){
-          return 'flaticon-store'
+          return 'flaticon-suspension'
         }else if(this.dbWeb.Comites[index].comi_nombre === 'Comité de Infraestructura'){
-          return 'flaticon-shop'
+          return 'flaticon-edificio'
         }else if(this.dbWeb.Comites[index].comi_nombre === 'Comité de Finanzas'){
-          return 'flaticon-store'
+          return 'flaticon-ahorrar-dinero'
         }else if(this.dbWeb.Comites[index].comi_nombre === 'Comité de Reforma de Estatutos'){
-          return 'flaticon-shop'
+          return 'flaticon-libo-de-leyes'
         }else if(this.dbWeb.Comites[index].comi_nombre === 'Comité de Tribunal Disciplinario'){
-          return 'flaticon-store'
+          return 'flaticon-subasta'
         }else{
           return ''
         }

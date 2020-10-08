@@ -1,5 +1,6 @@
 <template>
   <div id="admin-dashboard-page" class="admin-dashboard-page flex-row align-items-start justify-content-center" v-if="loaded">
+    <div class="v-back" ref="back" @click="expandMenu('collapsedTrigger')"></div>
     <div class="d-flex flex-column align-items-center justify-content-center left-screen-container">
       <nav id="sidebarMenu" class="d-md-block bg-light v-sidebar" ref="sidebarMenu">
         <div class="sidebar-sticky h-100">
@@ -14,8 +15,8 @@
             </div>
             <div class="nav-items-container">
               <li class="nav-item d-flex flex-row align-items-center justify-content-start">
-                  <i class="icon icon-mini flaticon-dashboard"></i>
-                  <a class="nav-link" @click.prevent="selectComponent('0')">
+                  <i class="icon icon-mini flaticon-dashboard selected"></i>
+                  <a class="nav-link selected" :ref="allCompon['0']" @click.prevent="selectComponent('0')">
                     Dashboard
                   </a>
               </li>
@@ -32,13 +33,13 @@
                 <ul class="v-collapsed-side v-collapsed-list" ref="listSeguridad">
                   <li class="nav-item">
                     <i class="icon flaticon-user"></i>
-                    <a class="nav-link" href="#" @click.prevent="selectComponent('1')">
+                    <a class="nav-link" :ref="allCompon['1']" @click.prevent="selectComponent('1')">
                       Perfil de Usuario
                     </a>
                   </li>
                   <li class="nav-item">
                     <i class="icon flaticon-group"></i>
-                    <a class="nav-link" href="#" @click.prevent="selectComponent('2')">
+                    <a class="nav-link" :ref="allCompon['2']" @click.prevent="selectComponent('2')">
                       Usuarios Registrados
                     </a>
                   </li>
@@ -55,37 +56,38 @@
                 <ul class="v-collapsed-side v-collapsed-list" ref="listContenidoPrincipal">
                   <li class="nav-item">
                     <i class="icon flaticon-newspaper"></i>
-                    <a class="nav-link" href="#" @click.prevent="selectComponent('3')">
+                    <a class="nav-link" :ref="allCompon['3']" @click.prevent="selectComponent('3')">
                       Noticias
                     </a>
                   </li>
                   <li class="nav-item">
                     <i class="icon flaticon-jefe"></i>
-                    <a class="nav-link" href="#" @click.prevent="selectComponent('4')">
+                    <a class="nav-link" :ref="allCompon['4']" @click.prevent="selectComponent('4')">
                       Juntas Directivas
                     </a>
                   </li>
                   <li class="nav-item">
                     <i class="icon flaticon-apoyo-tecnico"></i>
-                    <a class="nav-link" href="#" @click.prevent="selectComponent('5')">
+                    <a class="nav-link" :ref="allCompon['5']" @click.prevent="selectComponent('5')">
                       Sevicios
                     </a>
                   </li>
                   <li class="nav-item">
                     <i class="icon flaticon-seleccionar"></i>
-                    <a class="nav-link" href="#" @click.prevent="selectComponent('6')">
+                    <a class="nav-link" :ref="allCompon['6']" @click.prevent="selectComponent('6')">
                       Equipo de Trabajo
                     </a>
                   </li>
                   <li class="nav-item">
-                    <i class="icon flaticon-entrenador"></i>
-                    <a class="nav-link" href="#" @click.prevent="selectComponent('7')">
-                      Profesores
+                    <i class="icon flaticon-grupo"></i>
+                    <a class="nav-link" :ref="allCompon['8']" @click.prevent="selectComponent('8')">
+                      Comités Registrados
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="#" @click.prevent="selectComponent('8')">
-                      Comités Registrados
+                    <i class="icon flaticon-entrenador"></i>
+                    <a class="nav-link" :ref="allCompon['7']" @click.prevent="selectComponent('7')">
+                      Profesores
                     </a>
                   </li>
                 </ul>
@@ -101,19 +103,19 @@
                 <ul class="v-collapsed-side v-collapsed-list" ref="listContenidoExtra">
                   <li class="nav-item">
                     <i class="icon flaticon-marketing"></i>
-                    <a class="nav-link" href="#" @click.prevent="selectComponent('9')">
+                    <a class="nav-link" :ref="allCompon['9']" @click.prevent="selectComponent('9')">
                       Anunciantes
                     </a>
                   </li>
                   <li class="nav-item">
                     <i class="icon flaticon-corredizo"></i>
-                    <a class="nav-link" href="#" @click.prevent="selectComponent('10')">
+                    <a class="nav-link" :ref="allCompon['10']" @click.prevent="selectComponent('10')">
                       Banners
                     </a>
                   </li>
                   <li class="nav-item">
                     <i class="icon flaticon-archivo"></i>
-                    <a class="nav-link" href="#" @click.prevent="selectComponent('11')">
+                    <a class="nav-link" :ref="allCompon['11']" @click.prevent="selectComponent('11')">
                       Miscellaneous
                     </a>
                   </li>
@@ -121,8 +123,10 @@
                 <div class="border-bottom-white"></div>
               </li>
             </div>
-            <li class="nav-item v-logOut text-nowrap align-self-end">
-              <a class="nav-link" @click="logOut()">Cerrar sesión</a>
+            <li class="nav-item v-logOut text-nowrap d-flex align-items-center justify-content-between p-4">
+              <a class="nav-link p-0" @click="logOut()">Cerrar sesión</a>
+              <i class="icon flaticon-close" v-show="responsive === true" @click="expandMenu('collapsedTrigger')">
+              </i>
             </li>
           </ul>
         </div>
@@ -130,7 +134,7 @@
     </div>
     <div class="right-screen-container position-relative">
       <nav class="navbar sticky-top w-100 flex-md-nowrap p-2">
-        <button class="navbar-toggler position-absolute d-md-none collapsed flaticon-menu" type="button" ta-toggle="collapse" data-target="sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" ia-label="Toggle navigation" @click="expandMenu($event)">
+        <button class="navbar-toggler position-absolute d-md-none collapsed flaticon-menu" ref="collapsedTrigger" type="button" ta-toggle="collapse" data-collapsed="true" data-target="sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" ia-label="Toggle navigation" @click="expandMenu('collapsedTrigger')">
         </button>
         <div class="w-100 text-right">
           <p class="text" v-if="user.nombre !== ''"> {{user.nombre}} {{user.apellido}}</p>
@@ -221,6 +225,7 @@ export default {
       ],
       currentCompon: 'AdminDashboard',
       dataName: [],
+      responsive: false,
     }
   },
   methods:{
@@ -233,7 +238,15 @@ export default {
       })
     },
     selectComponent(val){
-      this.currentCompon = this.allCompon[val]
+      this.currentCompon = this.allCompon[val];
+      this.allCompon.forEach(element => {
+        this.$refs[`${element}`].classList.remove('selected');
+          this.$refs[`${element}`].parentNode.children[0].classList.remove('selected');
+        if(element === this.allCompon[val]){
+          this.$refs[`${element}`].classList.add('selected');
+          this.$refs[`${element}`].parentNode.children[0].classList.add('selected');
+        }
+      })
     },
     expandSidebar(val, val2){
       this.$refs[`${val}`].classList.toggle('v-collapsed-side');
@@ -241,22 +254,24 @@ export default {
       this.$refs[`${val2}`].classList.toggle('flaticon-sort-down');
     },
     expandMenu(event){
-      const refVal = event.target.getAttribute('data-target')
+      const refVal = this.$refs[`${event}`].getAttribute('data-target')
 
-      if(event.target.getAttribute('data-collapsed') === null){
-        event.target.setAttribute('data-collapsed', 'true')
+      if(this.$refs[`${event}`].getAttribute('data-collapsed') === null){
+        this.$refs[`${event}`].setAttribute('data-collapsed', 'true')
       }
       
-      let isCollapse = event.target.getAttribute('data-collapsed')
+      let isCollapse = this.$refs[`${event}`].getAttribute('data-collapsed')
 
       if(isCollapse === 'true'){
-        this.$refs[`${refVal}`].style.maxHeight = '400px'
-        event.target.setAttribute('data-collapsed', 'false')
+        this.$refs[`${refVal}`].style.maxHeight = '100vh'
+        this.$refs[`${event}`].setAttribute('data-collapsed', 'false')
+        this.$refs.back.classList.toggle('v-show-back')
       }else{
         this.$refs[`${refVal}`].style.maxHeight = '0px'
-        event.target.setAttribute('data-collapsed', 'true')
+        this.$refs[`${event}`].setAttribute('data-collapsed', 'true')
+        this.$refs.back.classList.toggle('v-show-back')
       }
-    }
+    },
   },
 
   computed:{
@@ -321,27 +336,35 @@ export default {
 
     const waiting = setInterval(() => { 
       if(this.loaded === true){
-        if(window.innerWidth >= 769){
+        if(window.innerWidth > 767){
           this.$refs.sidebarMenu.classList.remove('v-collapsed')
+          this.$refs.collapsedTrigger.setAttribute('data-collapsed', 'true')
+          this.$refs.back.classList.remove('v-show-back')
+          this.responsive = false;
         }else{
           this.$refs.sidebarMenu.classList.add('v-collapsed')
+          this.responsive = true;
         }
         
         clearTimeout(waiting)
       }else {
       }
-    }, 500);
+    }, 200);
 
     window.addEventListener('resize', ()=>{
-      if(window.innerWidth >= 768){
+      if(window.innerWidth > 767){
         try {
           this.$refs.sidebarMenu.classList.remove('v-collapsed')
+          this.$refs.collapsedTrigger.setAttribute('data-collapsed', 'true')
           this.$refs.sidebarMenu.style.maxHeight = 'none'
+          this.$refs.back.classList.remove('v-show-back')
+          this.responsive = false;
         }
         catch(e){}
       }else{
         try {
           this.$refs.sidebarMenu.classList.add('v-collapsed')
+          this.responsive = true;
           if(this.$refs.sidebarMenu.style.maxHeight === 'none'){
             this.$refs.sidebarMenu.style.maxHeight = '0'
           }
@@ -399,8 +422,8 @@ export default {
   }
 
   .v-sidebar a, .v-sidebar i, .v-sidebar .icon{
-    color: white !important;
-    font-weight: 400 !important;
+    color: white;
+    font-weight: 400;
   }
   
   .v-sidebar .logo-container{
@@ -452,12 +475,33 @@ export default {
     box-shadow: 0px -6px 15px -10px rgba(0,0,0,0.75);
   }
 
+  .v-sidebar .v-logOut .icon{
+    cursor: pointer;
+    position: relative !important;
+    height: 40px;
+    line-height: 40px;
+    min-width: 40px !important;
+    width: 40px !important;
+  }
+
+  .v-sidebar .v-logOut .icon::before{
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    left: 7px;
+    font-size: 30px;
+    height: 40px;
+    line-height: 40px;
+    width: 40px;
+  }
+
   .navbar-toggler{
     height: 50px;
     width: 50px;
+    z-index: 999999999;
     font-size: 30px;
     padding: 5px;
-    right: 10px;
+    left: 10px;
   }
 
   .v-sidebar .nav-items-container .nav-item{
@@ -520,7 +564,6 @@ export default {
     text-align: left !important;
     padding: 0 0 0 15px;
     font-size: 16px;
-    font-weight: bold;
     height: 80px;
     line-height: 80px;
     white-space: nowrap;
@@ -548,9 +591,9 @@ export default {
   .nav-item .v-collapsed-list{
     width: 100%;
     overflow: hidden;
-    max-height: 400px;
+    max-height: 800px;
     height: auto !important;
-    transition: max-height .7s ease;
+    transition: max-height .2s ease;
   }
 
   .v-sidebar .nav-items-container .nav-item .v-collapsed-list .nav-item{
@@ -620,6 +663,10 @@ export default {
     background: rgb(160, 160, 160); 
   }
 
+  .selected{
+    color: #fe5b25 !important;
+  }
+
   @media screen and (max-width: 767px) {
     .bd-placeholder-img-lg {
       font-size: 3.5rem;
@@ -631,18 +678,37 @@ export default {
 
     .admin-dashboard-page .left-screen-container{
       position: absolute;
+      left: 0;
+      top: 0;
+      z-index: 99999999;
+    }
+
+    .v-show-back{
+      display: initial !important;
+    }
+
+    .v-back{
+      display: none;
+      position: absolute;
+      z-index: 99999;
+      left: 0;
+      top: 0;
+      content: '';
+      background-color: rgba(0,0,0,.6);
+      height: 100vh;
+      width: 100vw;
     }
 
     .v-collapsed{
       max-height: 0;
-      height: auto !important;
+      height: 100vh !important;
       position: relative !important;
-      transition: all 1s ease;
+      transition: all .4s ease;
       overflow: hidden;
     }
 
     .v-sidebar{
-      width: auto;
+      width: 100%;
     }
 
     .main-content{
