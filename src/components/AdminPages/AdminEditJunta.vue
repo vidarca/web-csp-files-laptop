@@ -124,7 +124,7 @@
                 <!--  Fin de IMAGENES -->
                 <input type="text" v-model="integrante.juin_nombre" placeholder="Nombre" v-show="integrante.juin_crear === true">
                 <input type="text" v-model="integrante.juin_apellido" placeholder="Apellido" v-show="integrante.juin_crear === true">
-                <input type="email" v-model="integrante.juin_correo" placeholder="Correo" v-show="integrante.juin_crear === true">
+                <input type="email" v-model="integrante.juin_correo" placeholder="Correo (Ej. ejemplo@direccion.com)" v-show="integrante.juin_crear === true">
                 <div class="custom-control custom-switch" v-show="integrante.juin_crear === true">
                   <input type="checkbox" class="custom-control-input" :id="`activo${index}`" v-model="integrante.juin_activo">
                   <label class="custom-control-label text" :for="`activo${index}`">Activo</label>
@@ -211,7 +211,7 @@
                 <!--  Fin de IMAGENES -->
                 <input type="text" v-model="integrante.nombre" placeholder="Nombre" v-show="integrante.crear === true">
                 <input type="text" v-model="integrante.apellido" placeholder="Apellido" v-show="integrante.crear === true">
-                <input type="email" v-model="integrante.correo" placeholder="Correo" v-show="integrante.crear === true">
+                <input type="email" v-model="integrante.correo" placeholder="Correo (Ej. ejemplo@direccion.com)" v-show="integrante.crear === true">
                 <div class="custom-control custom-switch" v-show="integrante.crear === true">
                   <input type="checkbox" class="custom-control-input" :id="`activo${index}`" v-model="integrante.activo">
                   <label class="custom-control-label text" :for="`activo${index}`">Activo</label>

@@ -8,7 +8,7 @@
 import ActPage from '@/components/ActPage.vue'
 
 export default {
-	name: 'Admin',
+	name: 'Actualidad',
     components: {
 		ActPage,
 	},

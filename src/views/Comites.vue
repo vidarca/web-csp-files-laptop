@@ -11,7 +11,7 @@ import Comites from '@/components/Comites.vue'
 import Footer from '@/components/Footer.vue'
 
 export default {
-	name: 'Home',
+	name: 'Comites',
   components: {
 		Comites,
 		Footer,

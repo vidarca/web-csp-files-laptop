@@ -119,7 +119,7 @@
           <!--  Fin de IMAGENES -->
           <div class="w-100 row align-items-center justify-content-center">
             <input class="col-5 mr-1 ml-1 position-relative" ref="nombre" type="text" v-model="selectIntegrante.nombre" placeholder="Nombre">
-            <input class="col-5 mr-1 ml-1 position-relative" ref="nombre" type="text" v-model="selectIntegrante.correo" placeholder="Correo">
+            <input class="col-5 mr-1 ml-1 position-relative" ref="nombre" type="text" v-model="selectIntegrante.correo" placeholder="Correo (Ej. ejemplo@direccion.com)">
             <input class="col-5 position-relative" ref="nombre" type="text" v-model="selectIntegrante.cargo" placeholder="Cargo">
           </div>
         </div>
@@ -184,7 +184,7 @@
           <!--  Fin de IMAGENES -->
           <div class="w-100 row align-items-center justify-content-center">
             <input class="col-5 mr-1 ml-1 position-relative" ref="nombre" type="text" v-model="nuevoIntegrante.nombre" placeholder="Nombre">
-            <input class="col-5 mr-1 ml-1 position-relative" ref="nombre" type="text" v-model="nuevoIntegrante.correo" placeholder="Correo">
+            <input class="col-5 mr-1 ml-1 position-relative" ref="nombre" type="text" v-model="nuevoIntegrante.correo" placeholder="Correo (Ej. ejemplo@direccion.com)">
             <input class="col-5 position-relative" ref="nombre" type="text" v-model="nuevoIntegrante.cargo" placeholder="Cargo">
           </div>
         </div>

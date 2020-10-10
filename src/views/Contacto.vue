@@ -1,5 +1,20 @@
 <template>
-  <div class="comites mih">
-    <h1>Esto es una pagina de contactos</h1>
+  <div class="secP mih">
+    <ContactPage></ContactPage>
   </div>
 </template>
+
+<script>
+
+import ContactPage from '@/components/ContactPage.vue'
+
+export default {
+	name: 'Contacto',
+  components: {
+		ContactPage,
+	},
+	mounted() {
+		window.scrollTo(0, 0);
+	},
+}
+</script>

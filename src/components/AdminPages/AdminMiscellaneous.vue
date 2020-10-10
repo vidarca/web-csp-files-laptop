@@ -61,7 +61,7 @@
                <div class="w-100" style="min-height: 200px;">
                     <div class=" w-100 phones-input row justify-content-between align-items-center" v-for="index in cantFields.telefonos.numero" :key="`telefono${index}`" style="margin-top: 5px;">
                         <div class="col-9 p-0 d-flex flex-row align-items-center justify-content-center">
-                            <input :class="['position-relative', validPhone(miscellaneous.telefonos[`telefonos${index}`], (index))?'':'error']" ref="phone" type="text" v-model="miscellaneous.telefonos[`telefonos${index}`]" placeholder="Télefono (Ej. +581112223333)">
+                            <input :class="['position-relative', validPhone(miscellaneous.telefonos[`telefonos${index}`], (index))?'':'error']" ref="phone" type="text" v-model="miscellaneous.telefonos[`telefonos${index}`]" placeholder="Teléfono (Ej. +581112223333)">
                             <div class="important-field" v-show="!validPhone(miscellaneous.telefonos[`telefonos${index}`], (index))"></div>
                         </div>
                         <span @click="addField('crear', 'telefonos', false)" :class="['icon p-0 add flaticon-add', (index-1 > 0)?'col-1 pl-1 pr-1':'col-3 pl-2']" v-if="index === cantFields.telefonos.numero"></span>

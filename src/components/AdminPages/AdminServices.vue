@@ -118,7 +118,7 @@
                hasta 
               <input class="ml-2 mr-2 position-relative" ref="nombre" type="time" v-model="selectServicio.fin" placeholder="Cierre">
             </div>
-            <input :class="['col-3 position-relative', validPhone(selectServicio.contacto)?'':'error']" ref="nombre" type="text" v-model="selectServicio.contacto" placeholder="Telefono">
+            <input :class="['col-3 position-relative', validPhone(selectServicio.contacto)?'':'error']" ref="nombre" type="text" v-model="selectServicio.contacto" placeholder="Teléfono (Ej. +581112223333)">
           </div>
         </div>
         <div class="d-flex flex-row justify-content-between align-items-center m-3">
@@ -193,7 +193,7 @@
                hasta 
               <input class="ml-2 mr-2 position-relative" ref="nombre" type="time" v-model="nuevoServicio.fin" placeholder="Cierre">
             </div>
-            <input :class="['col-3 position-relative', validPhone(nuevoServicio.contacto)?'':'error']" ref="nombre" type="text" v-model="nuevoServicio.contacto" placeholder="Telefono">
+            <input :class="['col-3 position-relative', validPhone(nuevoServicio.contacto)?'':'error']" ref="nombre" type="text" v-model="nuevoServicio.contacto" placeholder="Teléfono (Ej. +581112223333)">
           </div>
         </div>
         <div class="d-flex flex-row justify-content-between align-items-center m-3">
