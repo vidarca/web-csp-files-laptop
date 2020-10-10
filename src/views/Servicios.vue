@@ -9,7 +9,7 @@
 import Services from '@/components/Services.vue'
 
 export default {
-	name: 'Home',
+	name: 'Servicios',
   components: {
 		Services,
 	},

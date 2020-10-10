@@ -247,7 +247,7 @@
               </div>
               <div class="col-9 col-sm-3 align-items-center justify-content-center p-1">
                 <div class="w-100 d-flex align-items-center justify-content-center">
-                  <input :class="['position-relative', validEmail(selectComite.correo)?'':'error']" ref="coreo" type="text" v-model="selectComite.correo" placeholder="Correo">
+                  <input :class="['position-relative', validEmail(selectComite.correo)?'':'error']" ref="coreo" type="text" v-model="selectComite.correo" placeholder="Correo (Ej. ejemplo@direccion.com)">
                   <div class="important-field" v-show="showCreate && !validEmail(selectComite.correo)"></div>
                 </div>
               </div>
@@ -439,7 +439,7 @@
               </div>
               <div class="col-9 col-sm-3 align-items-center justify-content-center p-1">
                 <div class="w-100 d-flex align-items-center justify-content-center">
-                  <input :class="['position-relative', validEmail(nuevoComite.correo)?'':'error']" ref="coreo" type="text" v-model="nuevoComite.correo" placeholder="Correo">
+                  <input :class="['position-relative', validEmail(nuevoComite.correo)?'':'error']" ref="coreo" type="text" v-model="nuevoComite.correo" placeholder="Correo (Ej. ejemplo@direccion.com)">
                   <div class="important-field" v-show="showCreate && !validEmail(nuevoComite.correo)"></div>
                 </div>
               </div>

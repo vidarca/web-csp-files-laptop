@@ -84,7 +84,7 @@ export default {
         }else if(this.dbWeb.Comites[index].comi_nombre === 'Comité de Finanzas'){
           return 'flaticon-ahorrar-dinero'
         }else if(this.dbWeb.Comites[index].comi_nombre === 'Comité de Reforma de Estatutos'){
-          return 'flaticon-libo-de-leyes'
+          return 'flaticon-libro-de-leyes'
         }else if(this.dbWeb.Comites[index].comi_nombre === 'Comité de Tribunal Disciplinario'){
           return 'flaticon-subasta'
         }else{

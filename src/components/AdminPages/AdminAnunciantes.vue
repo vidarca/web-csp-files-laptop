@@ -155,7 +155,7 @@
               </div>
               <div class="w-100 w-sm-75 p-1">
                 <div class="w-100 d-flex align-items-center justify-content-center">
-                  <input :class="['position-relative', validEmail(selectAnunciante.correo)?'':'error']" ref="coreo" type="text" v-model="selectAnunciante.correo" placeholder="Correo">
+                  <input :class="['position-relative', validEmail(selectAnunciante.correo)?'':'error']" ref="coreo" type="text" v-model="selectAnunciante.correo" placeholder="Correo (Ej. ejemplo@direccion.com)">
                   <div class="important-field" v-show="showCreate && !validEmail(selectAnunciante.correo)"></div>
                 </div>
               </div>
@@ -177,7 +177,7 @@
               <div class="w-100 w-sm-75 p-1">
                 <div class="phones-input row justify-content-between align-items-center" v-for="index in cantFields.telefonos.numero" :key="index" style="margin-top: 5px">
                   <div class="col-9 p-0 d-flex flex-row align-items-center justify-content-center">
-                    <input :class="['position-relative', validPhone(selectAnunciante.telefonos[`${cantFields.telefonos.nombre}${index-1}`], (index-1))?'':'error']" ref="phone" type="text" v-model="selectAnunciante.telefonos[`${cantFields.telefonos.nombre}${index-1}`]" placeholder="Telefono">
+                    <input :class="['position-relative', validPhone(selectAnunciante.telefonos[`${cantFields.telefonos.nombre}${index-1}`], (index-1))?'':'error']" ref="phone" type="text" v-model="selectAnunciante.telefonos[`${cantFields.telefonos.nombre}${index-1}`]" placeholder="Teléfono (Ej. +581112223333)">
                     <div class="important-field" v-show="showCreate && !validPhone(selectAnunciante.telefonos[`${cantFields.telefonos.nombre}${index-1}`], (index-1))"></div>
                   </div>
                   <span @click="addField('select', index-1, 'telefonos')" :class="['icon p-0 add flaticon-add', (index-1 > 0)?'col-1':'col-3 pl-2']" v-if="index-1 === cantFields.telefonos.numero - 1"></span>
@@ -276,7 +276,7 @@
               </div>
               <div class="w-100 w-sm-75 p-1">
                 <div class="w-100 d-flex align-items-center justify-content-center">
-                  <input :class="['position-relative', validEmail(nuevoAnunciante.correo)?'':'error']" ref="coreo" type="text" v-model="nuevoAnunciante.correo" placeholder="Correo">
+                  <input :class="['position-relative', validEmail(nuevoAnunciante.correo)?'':'error']" ref="coreo" type="text" v-model="nuevoAnunciante.correo" placeholder="Correo (Ej. ejemplo@direccion.com)">
                   <div class="important-field" v-show="showCreate && !validEmail(nuevoAnunciante.correo)"></div>
                 </div>
               </div>
@@ -298,7 +298,7 @@
               <div class="w-100 w-sm-75 p-1">
                 <div class="phones-input row justify-content-between align-items-center" v-for="index in cantFields.telefonos.numero" :key="index" style="margin-top: 5px">
                   <div class="col-9 p-0 d-flex flex-row align-items-center justify-content-center">
-                    <input :class="['position-relative', validPhone(nuevoAnunciante.telefonos[`${cantFields.telefonos.nombre}${index-1}`], (index-1))?'':'error']" ref="phone" type="text" v-model="nuevoAnunciante.telefonos[`${cantFields.telefonos.nombre}${index-1}`]" placeholder="Telefono">
+                    <input :class="['position-relative', validPhone(nuevoAnunciante.telefonos[`${cantFields.telefonos.nombre}${index-1}`], (index-1))?'':'error']" ref="phone" type="text" v-model="nuevoAnunciante.telefonos[`${cantFields.telefonos.nombre}${index-1}`]" placeholder="Teléfono (Ej. +581112223333)">
                     <div class="important-field" v-show="showCreate && !validPhone(nuevoAnunciante.telefonos[`${cantFields.telefonos.nombre}${index-1}`], (index-1))"></div>
                   </div>
                   <span @click="addField('crear', index-1, 'telefonos')" :class="['icon p-0 add flaticon-add', (index-1 > 0)?'col-1':'col-3 pl-2']" v-if="index-1 === cantFields.telefonos.numero - 1"></span>

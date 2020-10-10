@@ -11,7 +11,7 @@
             </button>
           </div>
           <div class="modal-body d-flex flex-column align-items-start justify-content-start">
-            <input class="w-75" type="email" :class="!validEmail?'error':' '" placeholder="Correo" v-model="users.createUser.formUpload.correo">
+            <input class="w-75" type="email" :class="!validEmail?'error':' '" placeholder="Correo (Ej. ejemplo@direccion.com)" v-model="users.createUser.formUpload.correo">
             <div class="w-100 d-flex flex-row align-items-center justify-content-start">
               <input class="w-75" type="password" :class="!validPass?'error':' '" placeholder="Contraseña" v-model="users.createUser.formUpload.pass">
               <i ref="info" @mouseenter="toggleInfo()" @mouseleave="toggleInfo()" class="icon info position-relative flaticon-question">

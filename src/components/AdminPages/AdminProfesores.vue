@@ -163,7 +163,7 @@
               </div>
               <input class="w-100 position-relative" ref="ci" type="text" v-model="selectProfesor.ci" placeholder="Cédula de identidad">
               <div class="w-100 d-flex align-items-center justify-content-center">
-                <input :class="['position-relative', validEmail(selectProfesor.correo)?'':'error']" ref="coreo" type="text" v-model="selectProfesor.correo" placeholder="Correo">
+                <input :class="['position-relative', validEmail(selectProfesor.correo)?'':'error']" ref="coreo" type="text" v-model="selectProfesor.correo" placeholder="Correo (Ej. ejemplo@direccion.com)">
                 <div class="important-field" v-show="showCreate && !validEmail(selectProfesor.correo)"></div>
               </div>
               <input class="w-100 position-relative" ref="nacimiento" type="date" v-model="selectProfesor.nacimiento" placeholder="Fecha de nacimiento">
@@ -175,7 +175,7 @@
               </select>
               <div class="phones-input row justify-content-between align-items-center" v-for="index in cantTelf" :key="index" style="margin-top: 5px">
                 <div class="col-9 p-0 d-flex flex-row align-items-center justify-content-center">
-                  <input :class="['position-relative', validPhone(selectProfesor.telefonos[`telefono${index-1}`], (index-1))?'':'error']" ref="phone" type="text" v-model="selectProfesor.telefonos[`telefono${index-1}`]" placeholder="Telefono">
+                  <input :class="['position-relative', validPhone(selectProfesor.telefonos[`telefono${index-1}`], (index-1))?'':'error']" ref="phone" type="text" v-model="selectProfesor.telefonos[`telefono${index-1}`]" placeholder="Teléfono (Ej. +581112223333)">
                   <div class="important-field" v-show="showCreate && !validPhone(selectProfesor.telefonos[`telefono${index-1}`], (index-1))"></div>
                 </div>
                 <span @click="addPhone('select', index-1)" :class="['icon p-0 add flaticon-add', (index-1 > 0)?'col-1 pr-1 pl-1':'col-3 pl-2']" v-if="index-1 === cantTelf-1"></span>
@@ -288,7 +288,7 @@
               </div>
               <input class="w-100 position-relative" ref="ci" type="text" v-model="nuevoProfesor.ci" placeholder="Cédula de identidad">
               <div class="w-100 d-flex align-items-center justify-content-center">
-                <input :class="['position-relative', validEmail(nuevoProfesor.correo)?'':'error']" ref="coreo" type="text" v-model="nuevoProfesor.correo" placeholder="Correo">
+                <input :class="['position-relative', validEmail(nuevoProfesor.correo)?'':'error']" ref="coreo" type="text" v-model="nuevoProfesor.correo" placeholder="Correo (Ej. ejemplo@direccion.com)">
                 <div class="important-field" v-show="showCreate && !validEmail(nuevoProfesor.correo)"></div>
               </div>
               <input class="w-100 position-relative" ref="nacimiento" type="date" v-model="nuevoProfesor.nacimiento" placeholder="Fecha de nacimiento">
@@ -300,7 +300,7 @@
               </select>
               <div class="phones-input row justify-content-between align-items-center" v-for="index in cantTelf" :key="index" style="margin-top: 5px">
                 <div class="col-9 p-0 d-flex flex-row align-items-center justify-content-center">
-                  <input :class="['position-relative', validPhone(nuevoProfesor.telefonos[`telefono${index-1}`], (index-1))?'':'error']" ref="phone" type="text" v-model="nuevoProfesor.telefonos[`telefono${index-1}`]" placeholder="Telefono">
+                  <input :class="['position-relative', validPhone(nuevoProfesor.telefonos[`telefono${index-1}`], (index-1))?'':'error']" ref="phone" type="text" v-model="nuevoProfesor.telefonos[`telefono${index-1}`]" placeholder="Teléfono (Ej. +581112223333)">
                   <div class="important-field" v-show="showCreate && !validPhone(nuevoProfesor.telefonos[`telefono${index-1}`], (index-1))"></div>
                 </div>
                 <span @click="addPhone('crear', index-1)" :class="['icon p-0 add flaticon-add', (index-1 > 0)?'col-1 pl-1 pr-1':'col-3 pl-2']" v-if="index-1 === cantTelf-1"></span>
