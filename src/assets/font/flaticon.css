@@ -1,6 +1,6 @@
 	/*
   	Flaticon icon font: Flaticon
-  	Creation date: 08/10/2020 16:26
+  	Creation date: 12/10/2020 16:37
   	*/
 
 @font-face {
@@ -93,3 +93,4 @@
 .flaticon-ahorrar-dinero:before { content: "\f13e"; }
 .flaticon-libro-de-leyes:before { content: "\f13f"; }
 .flaticon-subasta:before { content: "\f140"; }
+.flaticon-location-pin:before { content: "\f141"; }

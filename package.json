@@ -3,16 +3,25 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "dev": "nodemon src/mailer/index",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build"
   },
   "dependencies": {
+    "@sendgrid/mail": "^7.2.6",
+    "axios": "^0.20.0",
     "bootstrap": "^4.5.2",
     "core-js": "^3.6.5",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
     "firebase": "^7.23.0",
     "jquery": "^3.5.1",
+    "net": "^1.0.2",
+    "nodemailer": "^6.4.13",
+    "path": "^0.12.7",
     "v-click-outside": "^3.0.1",
     "vue": "^2.6.11",
+    "vue-axios": "^3.0.1",
     "vue-router": "^3.2.0",
     "vuex": "^3.4.0"
   },
@@ -21,6 +30,7 @@
     "@vue/cli-plugin-router": "^4.5.4",
     "@vue/cli-plugin-vuex": "^4.5.4",
     "@vue/cli-service": "^4.5.4",
+    "nodemon": "^2.0.4",
     "vue-loader": "^15.9.3",
     "vue-template-compiler": "^2.6.11"
   },

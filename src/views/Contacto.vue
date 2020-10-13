@@ -1,5 +1,5 @@
 <template>
-  <div class="secP mih">
+  <div class="secP mih" style="background-color: #f0f2f5;">
     <ContactPage></ContactPage>
   </div>
 </template>

@@ -5336,52 +5336,26 @@ input.error{
 	text-decoration: underline;
 }
 
-.v-btn{
-	padding: .375rem .75rem;
-	font-family: 'Rubik', sans-serif;
-	color: #ffffff;
-	font-weight: 400;
-	font-size: 15px;
-	line-height: 1.5;
-	border-radius: .25rem;
-	border: 1px solid transparent;
-	display: inline-block;
-	transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+input[type="text"], textarea, input[type="email"], input[type="date"]{
+	font-size: 14px;
+	width: 100%;
+	border: 0.5px solid black;
+	padding: 5px;
+	border-radius: 5px;
+	margin: 5px 0;
 }
 
-.v-btn.v-btn-blue{
-	background-color: #0C6392;
-	border-color: #0C6392;
+input[type="time"]{
+	font-size: 14px;
+	border: 0.5px solid black;
+	padding: 5px;
+	border-radius: 5px;
 }
 
-.v-btn-blue:hover{
-	background-color: rgba(3,60,90);
-	border-color: rgba(3,60,90);
-}
-
-.v-btn-blue:active{
-	box-shadow: 0 0 2px 2.5px #0C6392;
-}
-
-.btn-success{
-  border: 1px solid rgb(0, 75, 0);
-}
-.btn-danger{
-  border: 1px solid rgb(120, 0, 0);
-}
-.bg-success{
-  border: 1px solid rgb(0, 75, 0);
-}
-.bg-success-light{
-  color: black;
-  background-color: rgba(0,230,0,0.1);
-  border: 1px solid rgb(0, 75, 0);
-}
-.bg-success-light p{
-  color: black;
-}
-.bg-danger{
-  border: 1px solid rgb(120, 0, 0);
+textarea{
+	min-height: 150px;
+	resize: none;
+	overflow: auto;
 }
 
 /*** 
@@ -5452,6 +5426,10 @@ input.error{
 
 .w-95{
 	width: 95% !important;
+}
+
+.w-60{
+	width: 60% !important;
 }
 
 .mih{
@@ -5576,4 +5554,77 @@ input.error{
 .bg-white{
 	background-color: white !important;
 	border: 1px solid white !important;
+}
+
+.v-btn{
+	padding: .375rem .75rem;
+	font-family: 'Rubik', sans-serif;
+	color: #ffffff;
+	font-weight: 400;
+	font-size: 15px;
+	line-height: 1.5;
+	border-radius: .25rem;
+	border: 1px solid transparent;
+	display: inline-block;
+	transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.v-btn.v-btn-blue{
+	background-color: #0C6392;
+	border-color: #0C6392;
+}
+
+.v-btn-blue:hover{
+	background-color: rgba(3,60,90);
+	border-color: rgba(3,60,90);
+}
+
+.v-btn-blue:active{
+	box-shadow: 0 0 2px 2.5px #0C6392;
+}
+
+.btn-success{
+  border: 1px solid rgb(0, 75, 0);
+}
+
+.btn-danger{
+  border: 1px solid rgb(120, 0, 0);
+}
+
+.btn-danger-light{
+  color: black;
+  border: 1px solid rgb(120, 0, 0);
+  background-color: rgba(189, 0, 0, 0.1);
+}
+
+.btn-success-light{
+  color: black;
+  background-color: rgba(0,230,0,0.1);
+  border: 1px solid rgb(0, 75, 0);
+}
+
+.bg-success{
+  border: 1px solid rgb(0, 75, 0);
+}
+
+.bg-success-light{
+  color: black;
+  background-color: rgba(0,230,0,0.1);
+  border: 1px solid rgb(0, 75, 0);
+}
+
+.bg-success-light p{
+  color: black;
+}
+
+.bg-danger{
+  border: 1px solid rgb(120, 0, 0);
+}
+
+.box-shadow-none{
+	box-shadow: none !important;
+}
+
+.cursor-normal{
+	cursor: auto !important;
 }
