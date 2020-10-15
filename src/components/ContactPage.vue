@@ -4,7 +4,7 @@
       <h1 class="w-100 text-center border-bottom" style="padding: 40px 0 20px 0;">Contacto</h1>
     </div>
     <h4 class="w-75 text-center m-auto" style="padding: 20px 0 60px 0;">No dudes en escribirnos a cualquiera de nuestras redes, correos o teléfonos, responderemos a la brevedad</h4>
-    <div class="d-flex flex-column flex-md-row justify-content-center align-items-center w-75 m-auto">
+    <div class="d-flex flex-column flex-md-row justify-content-center align-items-center w-75 m-auto" style="padding-bottom: 60px;">
       <form class="col-md-6 p-1 d-flex flex-column align-items-center justify-content-center">
         <div class="form-group w-100 d-flex flex-row align-items-center justify-content-center">
           <input type="text" name="name" placeholder="Nombre" v-model="form.nombre">
@@ -157,9 +157,9 @@ export default {
         if(this.response.status !== null){
           setTimeout(() => {
             if(this.response.status === true){
-              form.email = '';
-              form.nombre = '';
-              form.texto = '';
+              this.form.email = '';
+              this.form.nombre = '';
+              this.form.texto = '';
             }
             this.response.status = null;
             this.response.value = '';

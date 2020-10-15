@@ -35,10 +35,10 @@
 		<div class="auto-wrapper ">
 			<div class="inner-container ">
 				
-				<div class="clearfix row m-auto" style="width:100%">
+				<div class="clearfix row m-auto align-items-center justify-content-center" style="width:100%">
 					
 					<!-- Featured Block -->
-					<div class="featured-block col-lg-4	col-md-6 col-sm-12">
+					<div class="featured-block col-lg-6	col-md-6 col-sm-12">
 						<div class="inner-box">
 							<div class="content">
 								<div class="icon-box">
@@ -50,25 +50,13 @@
 					</div>
 					
 					<!-- Featured Block -->
-					<div class="featured-block col-lg-4 col-md-6 col-sm-12" id="second-featured">
+					<div class="featured-block col-lg-6 col-md-6 col-sm-12" id="second-featured">
 						<div class="inner-box">
 							<div class="content">
 								<div class="icon-box">
 									<span class="icon flaticon-key"></span>
 								</div>
 								<h5><a href="http://clubsantapaula.dyndns.org:1081/user/auth/login">Autogestión</a></h5>
-							</div>
-						</div>
-					</div>
-					
-					<!-- Featured Block -->
-					<div class="featured-block col-lg-4 col-md-6 col-sm-12">
-						<div class="inner-box">
-							<div class="content">
-								<div class="icon-box">
-									<span class="icon flaticon-newspaper"></span>
-								</div>
-								<h5><a href="#">Systems</a></h5>
 							</div>
 						</div>
 					</div>
@@ -93,106 +81,20 @@
 				<div class="text">Entérate de los últimos eventos y noticias <br> de nuestro Club Santa Paula</div>
 			</div>
 			
-			<div class="row clearfix">
+			<div class="row clearfix" v-if="dbWeb.Noticias !== undefined">
 				
 				<!-- Bloque de Notica -->
-				<div class="security-block col-lg-4 col-md-6 col-sm-12">
+				<div class="security-block col-lg-4 col-md-6 col-sm-12" v-for="noticia in reverseArray" :key="noticia.noti_id">
 					<div class="inner-box">
 						<div class="image">
-							<a href="service-detail"><img src="https://via.placeholder.com/360x260" alt="" /></a>
+							<img :src="noticia.noti_imagenes[1].name" alt="" />
 						</div>
 						<div class="lower-content">
 							<div class="hover-bg-color"></div>
 							<div class="upper-box">
-								<div class="icon flaticon-cctv"></div>
-								<h5><a href="service-detail">CCTV Cameras</a></h5>
+								<h5>{{noticia.noti_titulo}}</h5>
 							</div>
-							<div class="text">Corem ipsum dolor sit amet consec exea dolore fugiatmagna exerd coas</div>
-						</div>
-					</div>
-				</div>
-				
-				<!-- Bloque de Notica -->
-				<div class="security-block col-lg-4 col-md-6 col-sm-12">
-					<div class="inner-box">
-						<div class="image">
-							<a href="service-detail"><img src="https://via.placeholder.com/360x260" alt="" /></a>
-						</div>
-						<div class="lower-content">
-							<div class="hover-bg-color"></div>
-							<div class="upper-box">
-								<div class="icon flaticon-lcd"></div>
-								<h5><a href="service-detail">Theft Protection</a></h5>
-							</div>
-							<div class="text">Corem ipsum dolor sit amet consec exea dolore fugiatmagna exerd coas</div>
-						</div>
-					</div>
-				</div>
-				
-				<!-- Bloque de Notica -->
-				<div class="security-block col-lg-4 col-md-6 col-sm-12">
-					<div class="inner-box">
-						<div class="image">
-							<a href="service-detail"><img src="https://via.placeholder.com/360x260" alt="" /></a>
-						</div>
-						<div class="lower-content">
-							<div class="hover-bg-color"></div>
-							<div class="upper-box">
-								<div class="icon flaticon-alarm-1"></div>
-								<h5><a href="service-detail">Fire Alarm Systems</a></h5>
-							</div>
-							<div class="text">Corem ipsum dolor sit amet consec exea dolore fugiatmagna exerd coas</div>
-						</div>
-					</div>
-				</div>
-				
-				<!-- Bloque de Notica -->
-				<div class="security-block col-lg-4 col-md-6 col-sm-12">
-					<div class="inner-box">
-						<div class="image">
-							<a href="service-detail"><img src="https://via.placeholder.com/360x260" alt="" /></a>
-						</div>
-						<div class="lower-content">
-							<div class="hover-bg-color"></div>
-							<div class="upper-box">
-								<div class="icon flaticon-keyboard"></div>
-								<h5><a href="service-detail">Touchscreen Keypads</a></h5>
-							</div>
-							<div class="text">Corem ipsum dolor sit amet consec exea dolore fugiatmagna exerd coas</div>
-						</div>
-					</div>
-				</div>
-				
-				<!-- Bloque de Notica -->
-				<div class="security-block col-lg-4 col-md-6 col-sm-12">
-					<div class="inner-box">
-						<div class="image">
-							<a href="service-detail"><img src="https://via.placeholder.com/360x260" alt="" /></a>
-						</div>
-						<div class="lower-content">
-							<div class="hover-bg-color"></div>
-							<div class="upper-box">
-								<div class="icon flaticon-bell"></div>
-								<h5><a href="service-detail">Doorbell Cameras</a></h5>
-							</div>
-							<div class="text">Corem ipsum dolor sit amet consec exea dolore fugiatmagna exerd coas</div>
-						</div>
-					</div>
-				</div>
-				
-				<!-- Bloque de Notica -->
-				<div class="security-block col-lg-4 col-md-6 col-sm-12">
-					<div class="inner-box">
-						<div class="image">
-							<a href="service-detail"><img src="https://via.placeholder.com/360x260" alt="" /></a>
-						</div>
-						<div class="lower-content">
-							<div class="hover-bg-color"></div>
-							<div class="upper-box">
-								<div class="icon flaticon-telephone-1"></div>
-								<h5><a href="service-detail">Home Automation</a></h5>
-							</div>
-							<div class="text">Corem ipsum dolor sit amet consec exea dolore fugiatmagna exerd coas</div>
+							<div class="text">{{noticia.noti_prev}}</div>
 						</div>
 					</div>
 				</div>
@@ -234,7 +136,7 @@
 				</div>
 				
 				<!-- Bloque de comite -->
-				<div  v-for="element in this.dbWeb.Comites" :key="element.id" v-show="element.comi_int === true" class="gallery-block col-lg-4 col-md-6 col-sm-12">
+				<div  v-for="element in this.dbWeb.Comites" :key="element.id" v-show="element.comi_int === true" class="gallery-block col-lg-4 col-md-6 col-sm-6">
 					<div class="inner-box">
 						<div class="image">
 							<div class="gallery-content-box">
@@ -385,7 +287,7 @@
 		<button class="slider-button next" @click="carouselMoveLeft" id="next"></button> -->
 		<div class="slider">
 			<div class="clients-slider-container">
-				<div v-for="(anunciante, index) in Object.values(dbWeb.Anunciantes)" :key="anunciante.anun_id" v-if="anunciante.anun_activo === true" class="clients-slider-items d-flex align-items-center justify-content-center" :id="`client0${index+1}`">
+				<div v-for="(anunciante, index) in Object.values(dbWeb.Anunciantes)" :key="anunciante.anun_id" v-show="anunciante.anun_activo === true" class="clients-slider-items d-flex align-items-center justify-content-center" :id="`client0${index+1}`">
 					<img class="clients-images"  :src="anunciante.anun_foto.url" @click="sendTo(`${anunciante.anun_url}`)" :title="anunciante.anun_nombre" alt="" loading="lazy">
 				</div>
 			</div>
@@ -420,7 +322,16 @@ import AutogestionSpan from '@/components/AutogestionSpan.vue'
 	  	}
 	  },
 	computed:{
-		...mapState(['dbWeb'])
+		...mapState(['dbWeb']),
+        reverseArray(){
+            if(this.dbWeb.Noticias !== undefined){
+            let array = Object.values(this.dbWeb.Noticias);
+            return array.reverse()
+            }else{
+            let array = []
+            return array
+            }
+        },
 	},
   	methods: {
 		goToTop(){
@@ -450,7 +361,24 @@ import AutogestionSpan from '@/components/AutogestionSpan.vue'
 					return Object.values(this.dbWeb[area])[i];
 				}
 			}
+		},
+		iconAnun(index){
+			if(this.reverseArray[index].noti_seccion === 'Comité de Tenis'){
+				return 'flaticon-racket-and-tennis-ball'
+			}else if(this.reverseArray[index].noti_seccion === 'Comité de Squash'){
+				return 'flaticon-squash-rackets'
+			}else if(this.reverseArray[index].noti_seccion === 'Comité de Natación'){
+				return 'flaticon-swimming'
+			}else if(this.reverseArray[index].noti_seccion === 'Comité de Dominó'){
+				return 'flaticon-domino'
+			}else if(this.reverseArray[index].noti_seccion === 'Comité de TRX'){
+				return 'flaticon-suspension'
+			}else if(this.reverseArray[index].noti_seccion === 'Comité de Artes Marciales'){
+				return 'flaticon-martial-arts'
+			}else{
+				return ''
 		}
+    },
 	  },
 	mounted() {
 	/** 

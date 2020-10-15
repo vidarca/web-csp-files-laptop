@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="main w-100" v-if="loaded">
+  <div id="app" class="main w-100" v-if="loaded" style="background-color: rgb(240, 242, 245);">
     <Header></Header>
     <transition name="fade-down" mode="out-in">
       <router-view/>
