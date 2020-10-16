@@ -1,76 +1,207 @@
 <template>
   <div id="nosotros">
-
-    <!-- <section class="v-misvis-section">
-
-        <div class="v-misvis-leftbox">
-            <div class="v-leftbox-pattern1"></div>
-            <div class="v-leftbox-pattern2"></div>
-        </div>
-        
-        <div class="v-icon-box">
-                <div class="v-icon-cont">
-                    <div class="v-icon"><i class="fas fa-bullseye"></i></div>
-                    <p>Misión</p>
-                </div>
-                <div class="v-icon-cont">
-                    <div class="v-icon"><i class="fab fa-tripadvisor"></i></div>
-                    <p>Visión</p>
-                </div>
-                <div class="v-icon-cont">
-                    <div class="v-icon"><i class="fas fa-heart" style="padding-top: 2px"></i></div>
-                    <p>Valores</p>
-                </div>
-        </div>
-
-        <div class="v-misvis-rightbox">
-            <div class="v-rightbox-title">
-                <div class="title-cont">
-                    <span>n</span><span>u</span><span>e</span><span>s</span><span>t</span><span>r</span><span>o</span><span>s</span>
-                </div>
-                <div class="title-cont">
-                    <span>o</span><span>b</span><span>j</span><span>e</span><span>t</span><span>i</span><span>v</span><span>o</span><span>s</span>
-                </div>
+    <!-- Banner con bootstrap -->
+    <section class="banner-section">
+        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="@/assets/images/background/BannerSlide01.jpg" alt="...">
             </div>
-            <div class="v-rightbox-txt">
-                El objetivo primordial del Club Santa Paula es proporcionar a sus socios actividades sociales, culturales, deportivas, de recreación y esparcimiento. Es, en sus fines, una manera de contribuir al ejercicio de la vida en sociedad y a procurar un espacio donde prive la humanización y la unidad familiar.
+            <div class="carousel-item">
+                <img src="@/assets/images/background/BannerSlide01.jpg" class="d-block w-100" alt="...">
             </div>
-            
-            <div class="v-rightbox-txt">
-                Ser una institución líder en recreación y deportes, tanto en Caracas como en el resto del país, donde participaremos mediante torneos y competencias deportivas que aseguren la generación de valor para nuestros accionistas. Estaremos orientados a destacarnos en las diversas disciplinas deportivas y sociales dentro de la Asociación de Clubes del país. Seleccionaremos y capacitaremos a nuestro personal con el fin de alcanzar los perfiles requeridos, lograremos su pleno compromiso con los valores del Club Santa Paula y le ofreceremos las mejores oportunidades de desarrollo.
+            <div class="carousel-item">
+                <img src="@/assets/images/background/BannerSlide01.jpg" class="d-block w-100" alt="...">
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+        </div>
+    </section>
+    <!-- Fin del banner -->
+    <!-- Seccion Destacados -->
+    <section class="featured-section">
+        <div class="auto-wrapper ">
+            <div class="inner-container ">
+                
+                <div class="clearfix row m-auto align-items-center justify-content-center" style="width:100%">
+                    
+                    <!-- Featured Block -->
+                    <div class="featured-block col-lg-6	col-md-6 col-sm-12">
+                        <div class="inner-box">
+                            <div class="content">
+                                <div class="icon-box">
+                                    <span class="icon flaticon-newspaper"></span>
+                                </div>
+                                <h5><router-link :to="{name: 'Actualidad'}">Actualidad</router-link></h5>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Featured Block -->
+                    <div class="featured-block col-lg-6 col-md-6 col-sm-12" id="second-featured">
+                        <div class="inner-box">
+                            <div class="content">
+                                <div class="icon-box">
+                                    <span class="icon flaticon-key"></span>
+                                </div>
+                                <h5><a href="http://clubsantapaula.dyndns.org:1081/user/auth/login">Autogestión</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                
             </div>
         </div>
     </section>
-        
-    <div class="v-history">
-        <div class="v-history-imgbox" id="leftbox">
-            <img src="https://via.placeholder.com/360x260" alt="History" width="100%" height="50%" loading="lazy" style="align-self:start">
+    <!-- Seccion Destacados -->
+    <div class="w-95 m-auto">
+        <h3 class="w-100 text-center border-bottom" style="padding: 40px 0 20px 0;">¿Quiénes somos?</h3>
+        <h4 class="w-75 text-center m-auto" style="padding: 20px 0 60px 0;">El Club Santa Paula es un club social interdisciplinario enfocado en el deporte. Entre nuestras actividades deportivas se encuentran tenis, karate, squash y natación.</h4>
+    </div>
+
+    <section class="featured-section-three">
+		<div class="auto-container">
+				<div class="inner-container d-flex flex-column flex-lg-row align-items-center justify-content-center w-95 m-auto">
+
+                    <div class="icons-container">
+                        <!-- Featured Block Three -->
+                        <div class="featured-block-three style-two right-corner">
+                            <div class="inner-box wow fadeInLeft">
+                                <div class="icon-box">
+                                    <span class="icon flaticon-objetivo"></span>
+                                </div>
+                                <div>
+                                    <h5>Misión</h5>
+                                    <div class="text">El objetivo primordial del Club Santa Paula es proporcionar a sus socios actividades sociales, culturales, deportivas, de recreación y esparcimiento.</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Featured Block Three -->
+                        <div class="featured-block-three color-two bottom-corner">
+                            <div class="inner-box wow fadeInLeft">
+                                <div class="icon-box">
+                                    <span class="icon flaticon-vision"></span>
+                                </div>
+                                <div>
+                                    <h5>Visión</h5>
+                                    <div class="text">Ser reconocida como una institución líder en recreación y deportes, participando en torneos y competencias deportivas de las diversas Asociaciones de Clubes.</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Featured Block Three -->
+                        <div class="featured-block-three  top-corner">
+                            <div class="inner-box wow fadeInRight">
+                                <div class="icon-box flaticon-objetivo-1"></div>
+                                <div>
+                                    <h5>Objetivos</h5>
+                                    <div class="text">
+                                        Ser líder absoluto entre los clubes de ciudad, al brindar la mejor opción de entretenimiento y descanso para los citadinos. Ser el club de referencia y colocarse entre los primeros en cuanto al control interno administrativo.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="extra"></div>
+                    </div>
+					
+					<!-- Icon Column -->
+					<div class="w-75 center-column m-auto">
+                        <div class="circle-one"></div>
+                        <div class="circle-two"></div>
+                        <div class="circle-three"></div>
+                        <div class="icon flaticon-seguro-de-hogar"></div>
+					</div>
+					
+				</div>
+		</div>
+	</section>
+
+    <section class="junta-directiva w-95 m-auto"  v-if="getJuntaActual">
+        <h3 class="w-100 text-center border-bottom" style="padding: 40px 0 20px 0;">Junta Directiva Actual</h3>
+        <div class="d-flex flex-column flex-sm-row align-items-center justify-content-center flex-wrap" style="padding: 40px 0 20px 0;">
+            <div v-for="(integrante, index) in juntaActual.junt_integrantes" :key="integrante.juin_cargo" v-show="index < maxShowJuin" :class="['juin-container flex-column align-items-center justify-content-start pt-3 pb-3 col-12', (index === 0 || index === 1)?'col-sm-6':(index >= 1 && index < 5)?'col-sm-4':(index >= 5 && index < 9)?'col-sm-3':'col-sm-6']" style="display:  flex;">
+                <div class="imagen">
+                    <img :src="(integrante.juin_foto !== '' && integrante.juin_foto !== undefined)?integrante.juin_foto:'https://firebasestorage.googleapis.com/v0/b/web-database-66842.appspot.com/o/transparent.png?alt=media&token=533f3017-de64-49b5-8ee9-cb8950445931'" class="juin-foto">
+                    <i :class="[(integrante.juin_foto === '' || integrante.juin_foto === undefined)?'icon flaticon-user':'']"></i>
+                </div>
+                <div class="text">{{integrante.juin_cargo}}</div>
+                <div class="text">{{integrante.juin_nombre}} {{integrante.juin_apellido}}</div>
+                <div class="text">{{integrante.juin_correo}}</div>
+            </div>
         </div>
-        <div class="v-history-midbox">
-            El Club Santa Paula fue creado el 20 de diciembre de 1976, cuando el grupo de promotores integrado por los señores: Henrik D. Ravn, Eric Larsson, Elba Porras, Acnne Brigitt de Ravn y Ali Lasser, se reunieron en una Asamblea y con fecha 30 de diciembre de ese mismo año se registró legalmente el acta constitutiva.
-
-            El capital de riesgo y fondo de inversión equivalió a ciento veinte (120) cuotas de participación por valor nominal de Bolívares Mil cada una.
-
-            El numero de cuotas de participación patrimonial autorizado por los estatutos de ese momento fue de setecientas cuotas, en la actualidad se mantienen seiscientas cincuenta (650) acciones y cincuenta (50) en tesorería.
-
-            La Junta Directiva decidió comprarle a la empresa Venezolana de Bienes S.A., una parcela de terreno ubicado en la Urbanización Santa Paula, dicha negociación se realizó el 17 de mayo de 1977, habiéndose ordenado el anteproyecto al arquitecto Harry Jagenberg.
-
-            El asiento permanente del Club es el inmueble de su propiedad construido en la Parcela n° 647, Avenida Circunvalación del Sol, Urbanización Santa Paula, Jurisdicción del Municipio Autónomo de Baruta, Distrito Sucre, del Estado Miranda, cuya propiedad se evidencia en documento protocolizado en la Oficina Subalterna del Segundo Circuito del Registro del Distrito Sucre del Estado Miranda el 17 de Mayo de 1977, bajo el n° 20, Folio 87 Vto. Tomo 47 del Protocolo Primero, así como en el correspondiente Titulo Supletorio declarado por el Juzgado de Primera Instancia en lo Civil del Distrito Federal y Estado Miranda en fecha 18 de Agosto de 1987.
-
-            La Asociación Civil Club Santa Paula quedó debidamente inscrita en la Oficina Subalterna del Primer Circuito de Registro del Distrito Sucre del Estado Miranda en fecha 30 de Diciembre de 1976, bajo el n° 33, Folio 218, Protocolo Primero.
-
-            La idea fundamental está basada en las instalaciones necesarias para la practica de tenis, actualmente también se incluyen otras áreas de esparcimiento como la piscina, gimnasio, sauna, salones de juego, cafetería, bar, entre otras.
-        </div>
-        <div class="v-history-imgbox">
-
-        </div> 
-    </div>-->
+    </section>
   </div>
 </template>
 
 <script>
 
+import {mapState} from 'vuex'
+
 export default {
     name: 'UsPage',
+    data(){
+        return {
+            juntaActual: [],
+            maxShowJuin: 11,
+            smScreen: false,
+        }
+    },
+
+    computed:{
+        ...mapState(['dbWeb']),
+        getJuntaActual(){
+            const d = new Date();
+            const dString = d.toString();
+            const dStringSplitted = dString.split(' ');
+            const actualDate = dStringSplitted[3]
+            if(this.dbWeb.Juntas !== undefined){
+                for(let i = 0; i < Object.values(this.dbWeb.Juntas).length; i++){
+                    if(Object.values(this.dbWeb.Juntas)[i].junt_periodo.split('-')[1] === actualDate){
+                        this.juntaActual = Object.values(this.dbWeb.Juntas)[i];
+                        return true
+                    }
+                }
+                return false
+            }
+        }
+    },
+
+    methods:{
+        imgSrcErr(event){
+            event.target.style.display = "none";
+        }
+    },
+
+    created(){
+        if(window.innerWidth <= 768){
+            this.maxShowJuin = 5;
+        }else{
+            this.maxShowJuin = 11;
+        }
+        if(window.innerWidth <= 576){
+            this.smScreen = true;
+        }
+
+        window.addEventListener('resize', ()=>{
+            if(window.innerWidth <= 768){
+                this.maxShowJuin = 5;
+            }else{
+                this.maxShowJuin = 11;
+            }
+            if(window.innerWidth <= 576){
+                this.smScreen = true;
+            }
+        })
+    },
 }
 </script>

@@ -166,6 +166,9 @@
               <select class="w-85 custom-select mt-1" @change="validSelection('Seleccione una opción', selectBanner.seccion)" v-model="selectBanner.seccion" disabled>
                 <option selected>Seleccione una opción</option>
                 <option value="Inicio">Página de Inicio</option>
+                <option value="Nosotros">Página de Nosotros</option>
+                <option value="Servicios">Página de Servicios</option>
+                <option value="Comités">Página de Comités</option>
                 <option v-for="(comite) in Object.values(dbWeb.Comites)" :key="comite.comi_id" :value="comite.comi_nombre">{{comite.comi_nombre}}</option>
               </select>
           </div>
@@ -278,6 +281,9 @@
               <select class="w-85 custom-select mt-1" v-model="nuevoBanner.seccion">
                 <option selected>Seleccione una opción</option>
                 <option value="Inicio">Página de Inicio</option>
+                <option value="Nosotros">Página de Nosotros</option>
+                <option value="Servicios">Página de Servicios</option>
+                <option value="Comités">Página de Comités</option>
                 <option v-for="(comite) in Object.values(dbWeb.Comites)" :key="comite.comi_id" :value="comite.comi_nombre">{{comite.comi_nombre}}</option>
               </select>
           </div>

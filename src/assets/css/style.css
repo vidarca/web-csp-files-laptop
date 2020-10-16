@@ -4280,174 +4280,6 @@ Menu Responsive
 /*** 
 
 ====================================================================
-	Featured Section Three
-====================================================================
-
-***/
-
-.featured-section-three{
-	position:relative;
-	padding:150px 0px 0px;
-}
-
-.featured-section-three .inner-container{
-	position:relative;
-}
-
-.featured-section-three .left-column{
-	position:relative;
-}
-
-.featured-section-three .left-column .inner-column{
-	position:relative;
-	margin-right:-45px;
-}
-
-.featured-section-three .right-column{
-	position:relative;
-}
-
-.featured-section-three .right-column .inner-column{
-	position:relative;
-	margin-left:-45px;
-}
-
-.featured-block-three{
-	position:relative;
-	z-index:1;
-	margin-bottom:170px;
-}
-
-.featured-block-three .inner-box{
-	position:relative;
-	text-align:right;
-	padding-right:130px;
-}
-
-.featured-block-three .inner-box .icon-box{
-	position:absolute;
-	right:0px;
-	top:0px;
-	width:105px;
-	height:105px;
-	line-height:88px;
-	text-align:center;
-	border-radius:50%;
-	display:inline-block;
-	background-color:#7cb434;
-	border:8px solid #edeff2;
-}
-
-.featured-block-three.color-two .inner-box .icon-box{
-	background-color:#f89429;
-}
-
-.featured-block-three .inner-box h5{
-	position:relative;
-	font-weight:500;
-	line-height:1.3em;
-}
-
-.featured-block-three .inner-box h5 a{
-	position:relative;
-	color:#222222;
-	transition:all 0.3s ease;
-	-moz-transition:all 0.3s ease;
-	-webkit-transition:all 0.3s ease;
-	-ms-transition:all 0.3s ease;
-	-o-transition:all 0.3s ease;
-}
-
-.featured-block-three .inner-box h5 a:hover{
-	color:#7cb434;
-}
-
-.featured-block-three .inner-box .text{
-	position:relative;
-	color:#555555;
-	font-size:15px;
-	margin-top:10px;
-	line-height:1.8em;
-}
-
-.featured-block-three.style-two .inner-box{
-	position:relative;
-	text-align:left;
-	padding-left:130px;
-	padding-right:0px;
-}
-
-.featured-block-three.style-two .inner-box .icon-box{
-	position:absolute;
-	right:auto;
-	left:0px;
-}
-
-.featured-section-three .icon-column{
-	position:relative;
-}
-
-.featured-section-three .icon-column .inner-column{
-	position:relative;
-	margin-left:-75px;
-	margin-right:-75px;
-}
-
-.featured-section-three .icon-column .inner-column:before{
-	position:absolute;
-	content:'';
-	top:-150px;
-	left:-100px;
-	right:-40px;
-	width:726px;
-	height:600px;
-	z-index:-1;
-	background-position:center bottom;
-	background:url(../images/background/pattern-3.png) no-repeat;
-}
-
-.featured-section-three .icon-column .circle-one{
-	position:absolute;
-	left: 20px;
-    top: -40px;
-	width:480px;
-	height:480px;
-	border-radius:50%;
-	background-color:#ffffff;
-	box-shadow:0px 0px 25px rgba(0,0,0,0.15);
-}
-
-.featured-section-three .icon-column .circle-two{
-	position:absolute;
-	left: 40px;
-    top: -20px;
-	width:440px;
-	height:440px;
-	border-radius:50%;
-	background-color:#ffffff;
-	box-shadow:0px 0px 25px rgba(0,0,0,0.15);
-}
-
-.featured-section-three .icon-column .circle-three{
-	position:absolute;
-	left: 60px;
-    top: 0px;
-	width:400px;
-	height:400px;
-	border-radius:50%;
-	background-color:#ffffff;
-	box-shadow:0px 0px 25px rgba(0,0,0,0.15);
-}
-
-.featured-section-three .icon-column .icon{
-	position:relative;
-	text-align:center;
-	padding-top:60px;
-}
-
-/*** 
-
-====================================================================
 	About Us Page: Seccion Mision y Vision
 ====================================================================
 
@@ -5270,6 +5102,259 @@ Seccion 2 Pagina de Actualidad
 /*** 
 
 ====================================================================
+	Página de Nosotros
+====================================================================
+
+***/
+
+/*** 
+
+====================================================================
+	Featured Section Three (Mision vision)
+====================================================================
+
+***/
+
+.featured-section-three{
+	position:relative;
+	padding: 30px 0px 80px 0;
+	height: 600px;
+}
+
+.featured-section-three .inner-container{
+	position:relative;
+	height: 500px;
+}
+
+.featured-block-three{
+	position:absolute;
+	z-index:1;
+	width: min(400px, calc(100vw / 3.2));
+	height: max(140px, auto);
+}
+
+.featured-block-three.top-corner{
+	right: 310px;
+	top: -45px;
+}
+
+.featured-block-three.bottom-corner{
+	right: 310px;
+	top: 310px;
+}
+
+.featured-block-three.right-corner{
+	left: 385px;
+	top: 145px;
+}
+
+.featured-block-three .inner-box{
+	position:relative;
+	text-align:right;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: row-reverse;
+}
+
+.featured-block-three .inner-box .icon-box{
+	margin: 0 5px;
+	position:relative;
+	width:85px !important;
+	min-width:85px !important;
+	height:85px !important;
+	line-height:68px;
+	text-align:center;
+	border-radius:50%;
+	display:inline-block;
+	background-color:#7cb434;
+	color: white;
+	font-size: 35px;
+	border:8px solid #edeff2;
+	box-shadow:0px 0px 25px rgba(0,0,0,0.15);
+}
+
+.featured-block-three .inner-box .icon-box::before{
+	position:absolute;
+	left:0;
+	top:0;
+	width:100%;
+	height:100%;
+	line-height:68px;
+	text-align:center;
+	border-radius:50%;
+	border:8px transparent;
+	color: white;
+}
+
+.featured-block-three .inner-box .icon-box.flaticon-objetivo-1::before{
+	position:absolute;
+	left: 3px;
+	top:0;
+	width:100%;
+	height:100%;
+	line-height:68px;
+	text-align:center;
+	border-radius:50%;
+	border:8px transparent;
+	color: white;
+	font-size: 35px;
+}
+
+.featured-block-three.color-two .inner-box .icon-box{
+	background-color:#f89429;
+}
+
+.featured-block-three .inner-box h5{
+	position:relative;
+	font-weight:500;
+	line-height:1.3em;
+}
+
+.featured-block-three .inner-box h5 a{
+	position:relative;
+	color:#222222;
+	transition:all 0.3s ease;
+	-moz-transition:all 0.3s ease;
+	-webkit-transition:all 0.3s ease;
+	-ms-transition:all 0.3s ease;
+	-o-transition:all 0.3s ease;
+}
+
+.featured-block-three .inner-box h5 a:hover{
+	color:#7cb434;
+}
+
+.featured-block-three .inner-box .text{
+	position:relative;
+	color:#555555;
+	font-size:13px;
+	margin-top:10px;
+	line-height:1.8em;
+}
+
+.featured-block-three.style-two .inner-box{
+	position:relative;
+	text-align:left;
+	flex-direction: row;
+}
+
+.featured-section-three .icons-container{
+	position: absolute;
+	height: 420px; 
+	width: 420px; 
+	left: calc((100% - 420px) / 2);
+}
+
+.featured-section-three .center-column{
+	position:relative;
+	height: 420px;
+}
+
+.featured-section-three .center-column .circle-one{
+	position:absolute;
+	left: calc((100% - 420px) / 2);
+	top: 0;
+	text-align: center;
+	width:420px;
+	height:420px;
+	line-height: 420px;
+	border-radius:50%;
+	background-color:#ffffff;
+	box-shadow:0px 0px 25px rgba(0,0,0,0.15);
+}
+
+.featured-section-three .center-column .circle-two{
+	position:absolute;
+	left: calc(((100% - 420px) / 2) + 20px);
+    top: 20px;
+	width:380px;
+	height:380px;
+	line-height:380px;
+	border-radius:50%;
+	background-color:#ffffff;
+	box-shadow:0px 0px 25px rgba(0,0,0,0.15);
+}
+
+.featured-section-three .center-column .circle-three{
+	position:absolute;
+	left: calc(((100% - 420px) / 2) + 40px);
+    top: 40px;
+	width:340px;
+	height:340px;
+	border-radius:50%;
+	background-color:#ffffff;
+	box-shadow:0px 0px 25px rgba(0,0,0,0.15);
+}
+
+.featured-section-three .center-column .icon::before{
+	position: absolute;
+	top: 50px;
+	left: calc(((100% - 420px) / 2) + 50px);
+	width: 320px;
+	height: 320px;
+	line-height: 320px;
+	text-align: center;
+	font-size: 220px;
+	color: rgb(167, 167, 167);
+}
+
+/*** 
+
+====================================================================
+	Seccion de Junta directiva
+====================================================================
+
+***/
+
+.junta-directiva .juin-container{
+	position: relative;
+	height: 310px;
+}
+
+.junta-directiva .juin-container .imagen{
+	position: relative;
+	width: 150px;
+	height: 200px;
+	max-width: 150px;
+	border-radius: 10px;
+
+}
+
+.junta-directiva .juin-container .imagen .juin-foto{
+	position: relative;
+	width: 100%;
+	height: 100%;
+	border-radius: 10px;
+
+}
+
+.junta-directiva .juin-container .imagen .icon{
+	position: absolute;
+	border-radius: 10px;
+	width: 150px;
+	height: 200px;
+	left: 0;
+	top: 0;
+}
+
+.junta-directiva .juin-container .icon::before{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	line-height: 180px;
+	text-align: center;
+	font-size: 100px;
+	padding-left: 18px;
+	background-color: rgb(71, 71, 71);
+	border-radius: 10px;
+}
+
+/*** 
+
+====================================================================
 	Extra
 ====================================================================
 
@@ -5430,6 +5515,18 @@ textarea{
 
 .w-60{
 	width: 60% !important;
+}
+
+.w-30{
+	width: 30% !important;
+}
+
+.w-35{
+	width: 35% !important;
+}
+
+.w-40{
+	width: 40% !important;
 }
 
 .mih{

@@ -117,20 +117,20 @@ export default {
   },
   methods:{
     iconAnun(index){
-      if(this.reverseArray[index].noti_seccion === 'Tenis'){
-        return 'flaticon-racket-and-tennis-ball'
-      }else if(this.reverseArray[index].noti_seccion === 'Squash'){
-        return 'flaticon-squash-rackets'
-      }else if(this.reverseArray[index].noti_seccion === 'Natacion'){
-        return 'flaticon-swimming'
-      }else if(this.reverseArray[index].noti_seccion === 'Domino'){
-        return 'flaticon-domino'
-      }else if(this.reverseArray[index].noti_seccion === 'TRX'){
-        return 'flaticon-suspension'
-      }else if(this.reverseArray[index].noti_seccion === 'Artes Marciales'){
-        return 'flaticon-martial-arts'
-      }else{
-        return ''
+			if(this.reverseArray[index].noti_seccion === 'Comité de Tenis'){
+				return 'flaticon-racket-and-tennis-ball'
+			}else if(this.reverseArray[index].noti_seccion === 'Comité de Squash'){
+				return 'flaticon-squash-rackets'
+			}else if(this.reverseArray[index].noti_seccion === 'Comité de Natación'){
+				return 'flaticon-swimming'
+			}else if(this.reverseArray[index].noti_seccion === 'Comité de Dominó'){
+				return 'flaticon-domino'
+			}else if(this.reverseArray[index].noti_seccion === 'Comité de TRX'){
+				return 'flaticon-suspension'
+			}else if(this.reverseArray[index].noti_seccion === 'Comité de Artes Marciales'){
+				return 'flaticon-martial-arts'
+			}else{
+				return ''
       }
     },
     calcTime(val){
