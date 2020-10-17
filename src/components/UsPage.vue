@@ -138,6 +138,9 @@
                 <div class="text">{{integrante.juin_nombre}} {{integrante.juin_apellido}}</div>
                 <div class="text">{{integrante.juin_correo}}</div>
             </div>
+            <h5 class="w-100 text text-center pb-3">
+                <router-link :to="{name:'HistorialDeJuntas'}"> Ver todas las juntas directivas </router-link>
+            </h5>
         </div>
     </section>
   </div>
@@ -173,12 +176,6 @@ export default {
                 }
                 return false
             }
-        }
-    },
-
-    methods:{
-        imgSrcErr(event){
-            event.target.style.display = "none";
         }
     },
 

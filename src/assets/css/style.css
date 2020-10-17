@@ -5318,6 +5318,7 @@ Seccion 2 Pagina de Actualidad
 	height: 200px;
 	max-width: 150px;
 	border-radius: 10px;
+	box-shadow: 0 0 15px rgba(0,0,0,.5);
 
 }
 
@@ -5350,6 +5351,109 @@ Seccion 2 Pagina de Actualidad
 	padding-left: 18px;
 	background-color: rgb(71, 71, 71);
 	border-radius: 10px;
+}
+
+/*** 
+
+====================================================================
+	Página de todas las juntas
+====================================================================
+
+***/
+
+#juntas-directivas section{
+    transition: all .9s ease;
+    -moz-transition: all .9s ease;
+    -o-transition: all .9s ease;
+    -webkit-transition: all .9s ease;
+}
+
+.juntas-todas .cada-junta{
+	position: relative;
+	height: 310px;
+}
+
+.juntas-todas .junta-container{
+	width: 150px;
+	height: 200px !important;
+	max-width: 150px;
+}
+
+.juntas-todas .junta-container .imagen{
+	position: relative;
+	width: 100%;
+	height: 100%;
+	border-radius: 10px;
+	box-shadow: 0 0 15px rgba(0,0,0,.5);
+    transition: all .3s ease;
+    -moz-transition: all .3s ease;
+    -o-transition: all .3s ease;
+    -webkit-transition: all .3s ease;
+
+}
+
+.juntas-todas .cada-junta .junta-container .imagen::after{
+	content: '';
+	background-color: rgba(0,0,0,0);
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100% !important;
+	height: 100% !important;
+	border-radius: 10px;
+	cursor: pointer;
+}
+
+.juntas-todas .junta-container .imagen .junta-foto{
+	position: relative;
+	width: 100%;
+	height: 100%;
+	border-radius: 10px;
+    transition: all .3s ease;
+    -moz-transition: all .3s ease;
+    -o-transition: all .3s ease;
+    -webkit-transition: all .3s ease;
+
+}
+
+.juntas-todas .junta-container .imagen .icon{
+	position: absolute;
+	border-radius: 10px;
+	width: 150px;
+	height: 200px;
+	left: 0;
+	top: 0;
+}
+
+.juntas-todas .junta-container .icon::before{
+	position: absolute;
+	content: url('https://firebasestorage.googleapis.com/v0/b/web-database-66842.appspot.com/o/Miscellaneous%2F-MJ-ES8GA5_ExmSkmStx%2Flogo_png?alt=media&token=7e06e10b-4bc3-4f7d-a964-ed93d2aac29b');
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	line-height: 180px;
+	text-align: center;
+	font-size: 100px;
+	background-color: rgb(250, 250, 250);
+	border-radius: 10px;
+    transition: all .3s ease;
+    -moz-transition: all .3s ease;
+    -o-transition: all .3s ease;
+    -webkit-transition: all .3s ease;
+}
+
+.juntas-todas .cada-junta .junta-container .imagen:hover::after{
+	background-color: rgba(0,0,0,0.05);
+	transform: scale(1.03);
+}
+
+.juntas-todas .cada-junta .junta-container .imagen:hover .junta-foto{
+	transform: scale(1.03);
+}
+
+.juntas-todas .cada-junta .junta-container .imagen:hover .icon::before{
+	transform: scale(1.03);
 }
 
 /*** 

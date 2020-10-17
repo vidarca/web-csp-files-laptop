@@ -53,16 +53,7 @@
             <router-link class="v-menu-txt" :to="{name:'Nosotros'}">Nosotros</router-link>
             <ul class="v-dropdown-menu" ref="us">
               <li class="v-dropdown-item">
-                <router-link :to="{name:'Nosotros'}"> Historia </router-link> 
-              </li>
-              <li class="v-dropdown-item">
-                <router-link :to="{name:'Nosotros'}"> Juntas Directivas </router-link>
-              </li>
-              <li class="v-dropdown-item">
-                <router-link :to="{name:'Nosotros'}"> Reglamentos </router-link>
-              </li>
-              <li class="v-dropdown-item">
-                <router-link :to="{name:'Nosotros'}"> Normativas </router-link>  
+                <router-link :to="{name:'HistorialDeJuntas'}"> Juntas Directivas </router-link>
               </li>
               <li class="v-dropdown-item">
                 <router-link :to="{name:'Nosotros'}"> Instalaciones </router-link>        

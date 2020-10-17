@@ -11,6 +11,7 @@ import Comites from '../views/Comites.vue'
 import Actualidad from '../views/Actualidad.vue'
 import Admin from '../views/Admin.vue'
 import AdminDashboard from '../views/AdminDashboard.vue'
+import HistorialDeJuntas from '../views/HistorialDeJuntas.vue'
 import errPage from '../views/errPage.vue'
 
 Vue.use(VueRouter)
@@ -25,6 +26,11 @@ Vue.use(VueRouter)
     path: '/nosotros',
     name: 'Nosotros',
     component: Nosotros
+  },
+  {
+    path: '/nosotros/juntas-directivas/',
+    component: HistorialDeJuntas,
+    name: 'HistorialDeJuntas',
   },
   {
     path: '/servicios',
