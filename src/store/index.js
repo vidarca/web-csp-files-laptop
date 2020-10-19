@@ -20,6 +20,7 @@ export default new Vuex.Store({
     dpResponsive: false,
     headerView: 0,
     formtipo: 0,
+    itemSelect: false,
     user: {
       activo: '',
       apellido: '',
@@ -2393,8 +2394,14 @@ export default new Vuex.Store({
         
         state.dbImg = [];
 
-        if(data.miscellaneous.logo.id !== undefined){
-          state.dbImg[data.miscellaneous.logo.id] = data.miscellaneous.logo;
+        if(Object.values(data.archivos).length !== 0){
+          for(let j = 0; j < Object.values(data.archivos).length; j++){
+            for(let i = 0; i < Object.values(data.miscellaneous.archivos).length; i++){
+              if(Object.values(data.miscellaneous.archivos)[i].id !== undefined && Object.values(data.miscellaneous.archivos)[i].id === Object.values(data.archivos)[j].id){
+                state.dbImg[Object.values(data.archivos)[j].id] = Object.values(data.miscellaneous.archivos)[i];
+              }
+            }
+          }
         }
         
         let storageRef = [];
@@ -2406,7 +2413,7 @@ export default new Vuex.Store({
         let j = 0;
 
         Object.values(data.archivos).forEach(element => {
-          storageRef= firebase.storage().ref(`/${data.target}/${data.miscellaneous.id}/${data.miscellaneous.logo.nombre}`);
+          storageRef= firebase.storage().ref(`/${data.target}/${data.miscellaneous.id}/${data.miscellaneous.archivos[`archivo${element.id}`].nombre}`);
           task[`${element.id}`] = storageRef.put(element);
           i++;
         })
@@ -2430,26 +2437,54 @@ export default new Vuex.Store({
                 misc_direccion: data.miscellaneous.direccion,
                 misc_redes: data.miscellaneous.redes,
                 misc_logo: [],
+                misc_reglamentos: [],
+                misc_normativas: [],
               }
               
-              let storageRef= firebase.storage().ref(`/${data.target}/${data.miscellaneous.id}/${data.miscellaneous.logo.nombre}`);
+              let storageRef= firebase.storage().ref(`/${data.target}/${data.miscellaneous.id}/${data.miscellaneous.archivos[`archivo${order[j]}`].nombre}`);
 
               storageRef.getDownloadURL().then(url => {
                 let val = order[n];
-                if(data.miscellaneous.logo.id !== undefined && val === data.miscellaneous.logo.id){
-                  state.dbImg[val].url = url;
-                  state.dbImg[val].nombre = data.miscellaneous.logo.nombre
-                }
+                state.dbImg[val].url = url;
+                state.dbImg[val].nombre = data.miscellaneous.archivos[`archivo${val}`].nombre
                 n ++;
                 if(n >= Object.values(data.archivos).length){
 
-                  if(state.dbImg[data.miscellaneous.logo.id].nombre !== undefined){
-                    dataRef.misc_logo = {
-                      nombre: state.dbImg[data.miscellaneous.logo.id].nombre,
-                      url: state.dbImg[data.miscellaneous.logo.id].url,
+                  for(let i = 0; i < Object.values(data.miscellaneous.archivos).length; i++){
+                    if(state.dbImg[i] !== undefined && state.dbImg[i].id !== undefined){
+                      if(i === 0){
+                        dataRef.misc_logo = {
+                          nombre: state.dbImg[i]. nombre,
+                          nombre: state.dbImg[i]. url,
+                        }
+                      }else if(i === 1){
+                        dataRef.misc_reglamentos = {
+                          nombre: state.dbImg[i]. nombre,
+                          nombre: state.dbImg[i]. url,
+                        }
+                      }else if(i === 2){
+                        dataRef.misc_normativas = {
+                          nombre: state.dbImg[i]. nombre,
+                          nombre: state.dbImg[i]. url,
+                        }
+                      }
+                    }else if(Object.values(data.miscellaneous.archivos)[i] === ''){
+                      if(i === 0){
+                        dataRef.misc_logo = '';
+                      }else if(i === 1){
+                        dataRef.misc_reglamentos = '';
+                      }else if(i === 2){
+                        dataRef.misc_normativas = '';
+                      }
+                    }else{
+                      if(i === 0){
+                        dataRef.misc_logo = data.miscellaneous.archivos.archivo0
+                      }else if(i === 1){
+                        dataRef.misc_reglamentos = data.miscellaneous.archivos.archivo1
+                      }else if(i === 2){
+                        dataRef.misc_normativas = data.miscellaneous.archivos.archivo2
+                      }
                     }
-                  }else{
-                    dataRef.misc_logo = '';
                   }
 
                   if(n >= Object.values(data.archivos).length){
@@ -2475,7 +2510,9 @@ export default new Vuex.Store({
               misc_correos: data.miscellaneous.correos,
               misc_direccion: data.miscellaneous.direccion,
               misc_redes: data.miscellaneous.redes,
-              misc_logo: data.miscellaneous.logo,
+              misc_logo: data.miscellaneous.archivos.archivo0,
+              misc_reglamentos: data.miscellaneous.archivos.archivo1,
+              misc_normativas: data.miscellaneous.archivos.archivo2,
           }
 
           n++;
@@ -2504,6 +2541,12 @@ export default new Vuex.Store({
     falseCargarDB(state){
       state.cargarDB = false;
     },
+    selectItemSelect(state, val){
+      state.itemSelect = val;
+    },
+    resetItemSelect(state){
+      state.itemSelect = false;
+    }
   },
   actions: {
     getData: async function({commit}, val){

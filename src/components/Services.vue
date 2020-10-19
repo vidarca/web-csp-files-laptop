@@ -1,6 +1,6 @@
 <template>
-  <div id="services" ref="fullContent">
-    <div class="w-95 m-auto">
+  <div id="services" ref="fullContent" :class="(dbWeb.Servicios === undefined || dbWeb.Servicios === '')?'mih w-100 d-flex align-items-end justify-content-center':''">
+    <div class="w-95 m-auto" v-if="dbWeb.Servicios !== undefined && dbWeb.Servicios !== ''">
       <!-- Seccion de Actualidad -->
         <section class="premium-section">
           <div class="pattern-layer"></div>
@@ -40,7 +40,7 @@
         </section>
         <!-- Fin Seccion Actualidad -->
     </div>
-    <AutogestionSpan></AutogestionSpan>
+    <AutogestionSpan class="w-100"></AutogestionSpan>
   </div>
 </template>
 

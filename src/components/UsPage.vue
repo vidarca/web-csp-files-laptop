@@ -126,6 +126,11 @@
 		</div>
 	</section>
 
+    
+	<!-- Seccion de Autogestion -->
+		<AutogestionSpan></AutogestionSpan>
+	<!-- Fin Seccion Autogestion -->
+
     <section class="junta-directiva w-95 m-auto"  v-if="getJuntaActual">
         <h3 class="w-100 text-center border-bottom" style="padding: 40px 0 20px 0;">Junta Directiva Actual</h3>
         <div class="d-flex flex-column flex-sm-row align-items-center justify-content-center flex-wrap" style="padding: 40px 0 20px 0;">
@@ -143,12 +148,31 @@
             </h5>
         </div>
     </section>
+
+    <section class="reglamento-normativas w-95 m-auto">
+        <h3 class="w-100 text-center border-bottom" style="padding: 40px 0 20px 0;">Reglamentos y Normativas</h3>
+        <div class="file-download-container radial-circle d-flex align-items-center justify-content-center">
+            <div class="w-60 d-flex flex-column flex-md-row align-items-center justify-content-md-between justify-content-center m-auto">
+                <div class="btn-download" @click="openFile($event, Object.values(dbWeb.Miscellaneous)[0].misc_reglamentos.url)" data-animated="false">
+                    <div class="text noselect">
+                        Reglamentos
+                    </div>
+                </div>
+                <div class="btn-download" @click="openFile($event, Object.values(dbWeb.Miscellaneous)[0].misc_normativas.url)" data-animated="false">
+                    <div class="text noselect">
+                        Normativas
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
   </div>
 </template>
 
 <script>
 
 import {mapState} from 'vuex'
+import AutogestionSpan from '@/components/AutogestionSpan.vue'
 
 export default {
     name: 'UsPage',
@@ -158,6 +182,9 @@ export default {
             maxShowJuin: 11,
             smScreen: false,
         }
+    },
+    components:{
+        AutogestionSpan
     },
 
     computed:{
@@ -177,6 +204,14 @@ export default {
                 return false
             }
         }
+    },
+
+    methods:{
+        openFile(event, url){
+            if(url !== '' && url !== undefined){
+                window.open(url,'_blank');
+            }
+      },
     },
 
     created(){

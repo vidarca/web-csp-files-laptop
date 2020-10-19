@@ -38,24 +38,104 @@
                 </p>
               </div>
               <!--  Fin de IMAGEN LOGO -->
-               <textarea type="text" class="info-form-c w-100" placeholder="Dirección de contacto" v-model="miscellaneous.direccion" style="height: 100px"></textarea>
-               <p class="text mt-2">
-                    Haga clic en cualquiera de los íconos para activar o desactivar el campo correspondiente
-                </p>
-               <div class="redes d-flex align-items-center justify-content-between flex-row w-100">
-                   <div class="w-100 d-flex flex-column align-items-center justify-content-center col-6 col-md-4">
-                        <i :class="['icon flaticon-instagram', (miscellaneous.redes.instagram.activo === true)?'active':'']" @click="disableRS('instagram')"></i>
-                        <input class="w-100" ref="inputinstagram" type="text" v-model="miscellaneous.redes.instagram.link" placeholder="Link del perfil">
-                   </div>
-                   <div class="w-100 d-flex flex-column align-items-center justify-content-center col-6 col-md-4">
-                        <i :class="['icon flaticon-twitter', (miscellaneous.redes.twitter.activo === true)?'active':'']" @click="disableRS('twitter')"></i>
-                        <input class="w-100" ref="inputtwitter" type="text" v-model="miscellaneous.redes.twitter.link" placeholder="Link del perfil">
-                   </div>
-                   <div class="w-100 d-flex flex-column align-items-center justify-content-center col-6 col-md-4">
-                        <i :class="['icon flaticon-facebook', (miscellaneous.redes.facebook.activo === true)?'active':'']" @click="disableRS('facebook')"></i>
-                        <input class="w-100" ref="inputfacebook" type="text" v-model="miscellaneous.redes.facebook.link" placeholder="Link del perfil">
-                   </div>
-               </div>
+              <textarea type="text" class="info-form-c w-100" placeholder="Dirección de contacto" v-model="miscellaneous.direccion" style="height: 100px"></textarea>
+              <p class="text mt-2">
+                Haga clic en cualquiera de los íconos para activar o desactivar el campo correspondiente
+              </p>
+              <!-- Redes Sociales -->
+              <div class="redes d-flex align-items-center justify-content-between flex-row w-100">
+                <div class="w-100 d-flex flex-column align-items-center justify-content-center col-6 col-md-4">
+                  <i :class="['icon flaticon-instagram', (miscellaneous.redes.instagram.activo === true)?'active':'']" @click="disableRS('instagram')"></i>
+                  <input class="w-100" ref="inputinstagram" type="text" v-model="miscellaneous.redes.instagram.link" placeholder="Link del perfil">
+                </div>
+                <div class="w-100 d-flex flex-column align-items-center justify-content-center col-6 col-md-4">
+                  <i :class="['icon flaticon-twitter', (miscellaneous.redes.twitter.activo === true)?'active':'']" @click="disableRS('twitter')"></i>
+                  <input class="w-100" ref="inputtwitter" type="text" v-model="miscellaneous.redes.twitter.link" placeholder="Link del perfil">
+                </div>
+                <div class="w-100 d-flex flex-column align-items-center justify-content-center col-6 col-md-4">
+                  <i :class="['icon flaticon-facebook', (miscellaneous.redes.facebook.activo === true)?'active':'']" @click="disableRS('facebook')"></i>
+                  <input class="w-100" ref="inputfacebook" type="text" v-model="miscellaneous.redes.facebook.link" placeholder="Link del perfil">
+                </div>
+              </div>
+              <!-- Fin de Redes Sociales -->
+
+              <!-- Reglamentos y Normaticas -->
+              <div class="reglamentos-normativas d-flex flex-column flex-lg-row align-items-center justify-content-center w-100 mt-3">
+                <!-- Reglamento -->
+                <div class="col-12 col-lg-6">
+                  <div class="text text-center">
+                    Reglamentos del club
+                  </div>
+                  <div class="input-files files d-flex w-auto h-100 flex-column align-items-center justify-content-center position-relative bg-success" v-if="miscellaneous.reglamentos.nombre === undefined || miscellaneous.reglamentos.nombre === ''">
+                    <input :ref='`file0`' @change="filesVerification($event, 1, 'crear')" class="collectionFiles" title="Elija un archivo"  type="file" accept=".pdf, .doc, .docx">
+                    <div class="button-files d-flex flex-row align-items-center justify-content-center">
+                      <div class="icon flaticon-folder m-0 p-0">
+                        <div class="text" style="color: white; padding-left: 5px;">
+                          Reglamentos
+                        </div> 
+                      </div>
+                    </div>
+                  </div>
+                  <!-- PREV IMAGENES -->
+                  <div  class="uploadCont flex-row align-items-center justify-content-start" v-else style="display: flex;">
+                    <div :class="['prev-container files d-flex position-relative flex-column align-items-center justify-content-between bg-success-light']">
+                      <!-- MUESTRA DE IMAGEN -->
+                      <div class="w-100 d-flex position-relative justify-content-end flex-column h-100">
+                        <div class="d-flex h-100 w-100 justify-content-center align-items-center" v-if="(dbImg[1] !== undefined || miscellaneous.reglamentos.url !== '')">
+                          <div v-if="dbImg[1] !== undefined && dbImg[1].url !== undefined && dbImg[1].url !== '' || miscellaneous.reglamentos.url !== ''" class="icon flaticon-file" @click="openFile((dbImg[1].url !== undefined && dbImg[1].url !== '')?dbImg[1].url:miscellaneous.reglamentos.url)">
+                          </div>
+                        </div>
+                        <div v-else class="w-100 h-100 d-flex flex-row align-items-center justify-content-center">
+                          <p class="align-self-star" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">{{miscellaneous.reglamentos.nombre}}</p>
+                        </div>
+                        <!-- ICONO DE QUITAR -->
+                        <div @click.prevent="deleteFile(1, 'crear')" title="Eliminar" class="remove position-absolute flaticon-close" style="top:5px; right:5px;"></div>
+                          <!-- FIN ICONO DE QUITAR -->
+                      </div>
+                        <!-- FIN MUESTRA DE IMAGEN -->
+                    </div>
+                  </div>
+                </div>
+                <!-- Fin Reglamento -->
+
+                <!-- Normativa -->
+                <div class="col-12 col-lg-6">
+                  <div class="text text-center">
+                    Normativas del club
+                  </div>
+                  <div class="input-files files d-flex w-auto h-100 flex-column align-items-center justify-content-center position-relative bg-success" v-if="miscellaneous.normativas.nombre === undefined || miscellaneous.normativas.nombre === ''">
+                    <input :ref='`file0`' @change="filesVerification($event, 2, 'crear')" class="collectionFiles" title="Elija un archivo"  type="file" accept=".pdf, .doc, .docx">
+                    <div class="button-files d-flex flex-row align-items-center justify-content-center">
+                      <div class="icon flaticon-folder m-0 p-0">
+                        <div class="text" style="color: white; padding-left: 5px;">
+                          Normativas
+                        </div> 
+                      </div>
+                    </div>
+                  </div>
+                  <!-- PREV IMAGENES -->
+                  <div  class="uploadCont flex-row align-items-center justify-content-start" v-else style="display: flex;">
+                    <div :class="['prev-container files d-flex position-relative flex-column align-items-center justify-content-between bg-success-light']">
+                      <!-- MUESTRA DE IMAGEN -->
+                      <div class="w-100 d-flex position-relative justify-content-end flex-column h-100">
+                        <div class="d-flex h-100 w-100 justify-content-center align-items-center" v-if="(dbImg[2] !== undefined || miscellaneous.normativas.url !== '')">
+                          <div v-if="dbImg[2] !== undefined && dbImg[2].url !== undefined && dbImg[2].url !== '' || miscellaneous.normativas.url !== ''" class="icon flaticon-file" @click="openFile((dbImg[2].url !== undefined && dbImg[2].url !== '')?dbImg[2].url:miscellaneous.normativas.url)">
+                          </div>
+                        </div>
+                        <div v-else class="w-100 h-100 d-flex flex-row align-items-center justify-content-center">
+                          <p class="align-self-star" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">{{miscellaneous.normativas.nombre}}</p>
+                        </div>
+                        <!-- ICONO DE QUITAR -->
+                        <div @click.prevent="deleteFile(2, 'crear')" title="Eliminar" class="remove position-absolute flaticon-close" style="top:5px; right:5px;"></div>
+                          <!-- FIN ICONO DE QUITAR -->
+                      </div>
+                        <!-- FIN MUESTRA DE IMAGEN -->
+                    </div>
+                  </div>
+                </div>
+                <!-- Fin Normativa -->
+              </div>
+              <!-- Fin de Reglamentos y Normativas -->
            </div>
            <div class="col-6 p-1 d-flex flex-column align-items-center justify-content-center" style="min-height: 400px">
                <div class="w-100" style="min-height: 200px;">
@@ -125,9 +205,16 @@ export default {
         show: false,
         error: null,
         files: {},
-        valores: ['telefonos', 'correos', 'direccion', 'redes', 'logo', 'id'],
+        valores: ['telefonos', 'correos', 'direccion', 'redes', 'logo', 'id', 'reglamentos', 'normativas'],
         redes: ['instagram', 'facebook', 'twitter'],
         miscellaneous: {
+          telefonos: {},
+          redes: {},
+          correos: {},
+          direccion: '',
+          logo: '',
+          reglamentos: {},
+          normativas: {},
         },
       }
     },
@@ -149,10 +236,18 @@ export default {
             correos: {},
             direccion: '',
             logo: '',
+            reglamentos: '',
+            normativas: '',
         }
       },
       deleteFile(index, val){
-        this.miscellaneous.logo = '';
+        if(index === 0){
+          this.miscellaneous.logo = '';
+        }else if(index === 1){
+          this.miscellaneous.reglamentos = '';
+        }else{
+          this.miscellaneous.normativas = '';
+        }
         delete this.files[`archivo${index}`];
         this.resetDBValues(index);
       },
@@ -213,14 +308,26 @@ export default {
               this.miscellaneous.logo.nombre = this.miscellaneous.logo.nombreref;
             }
 
+            if(this.miscellaneous.reglamentos.id !== undefined){
+              this.miscellaneous.reglamentos.nombre = this.miscellaneous.reglamentos.nombreref;
+            }
+
+            if(this.miscellaneous.normativas.id !== undefined){
+              this.miscellaneous.normativas.nombre = this.miscellaneous.normativas.nombreref;
+            }
+
             let dataTransfer = {
               archivos: this.files,
               miscellaneous: {
+                archivos: {
+                  archivo0: this.miscellaneous.logo,
+                  archivo1: this.miscellaneous.reglamentos,
+                  archivo2: this.miscellaneous.normativas,
+                },
                 correos: this.miscellaneous.correos,
                 direccion: this.miscellaneous.direccion,
                 redes: this.miscellaneous.redes,
                 telefonos: this.miscellaneous.telefonos,
-                logo: this.miscellaneous.logo,
                 id: this.miscellaneous.id,
               },
               target: 'Miscellaneous',
@@ -239,16 +346,41 @@ export default {
 
         this.files[`archivo${index}`].id = index;
 
-        this.miscellaneous.logo = {
-          nombre: files.name,
-          url: '',
-          id: index,
-          nombreref: `logo_png`,
-          uploadPercentage: 0,
-          progressBar: {
-            show: true,
-          },
+        if(index === 0){
+          this.miscellaneous.logo = {
+            nombre: files.name,
+            url: '',
+            id: index,
+            nombreref: `logo_png`,
+            uploadPercentage: 0,
+            progressBar: {
+              show: true,
+            },
+          }
+        }else if(index === 1){
+          this.miscellaneous.reglamentos = {
+            nombre: files.name,
+            url: '',
+            id: index,
+            nombreref: `reglamentos`,
+            uploadPercentage: 0,
+            progressBar: {
+              show: true,
+            },
+          }
+        }else{
+          this.miscellaneous.normativas = {
+            nombre: files.name,
+            url: '',
+            id: index,
+            nombreref: `normativas`,
+            uploadPercentage: 0,
+            progressBar: {
+              show: true,
+            },
+          }
         }
+
 
         event.target.value = ''
       },
@@ -339,14 +471,18 @@ export default {
                         }
                     }
                 }else{
-                    this.$set(this.miscellaneous, `${this.valores[i]}`,  '');
-                    if(this.valores[i] === 'redes'){
-                        for(let j = 0; j < this.redes.length; j++){
-                            this.$set(this.miscellaneous[`${this.valores[i]}`], `${this.redes[j]}`,  {});
-                            this.$set(this.miscellaneous[`${this.valores[i]}`][`${this.redes[j]}`], `activo`,  false);
-                            this.$set(this.miscellaneous[`${this.valores[i]}`][`${this.redes[j]}`], `link`,  '');
-                        }
-                    }
+                  if(this.valores[i] === 'direccion'){
+                      this.$set(this.miscellaneous, `${this.valores[i]}`,  '');
+                  }else if (this.valores[i] === 'redes'){
+                      this.$set(this.miscellaneous, `${this.valores[i]}`,  {});
+                      for(let j = 0; j < this.redes.length; j++){
+                          this.$set(this.miscellaneous[`${this.valores[i]}`], `${this.redes[j]}`,  {});
+                          this.$set(this.miscellaneous[`${this.valores[i]}`][`${this.redes[j]}`], `activo`,  false);
+                          this.$set(this.miscellaneous[`${this.valores[i]}`][`${this.redes[j]}`], `link`,  '');
+                      }
+                  }else{
+                      this.$set(this.miscellaneous, `${this.valores[i]}`,  {});
+                  }
                 }
             }
         }else{
@@ -364,6 +500,13 @@ export default {
                     this.$set(this.miscellaneous, `${this.valores[i]}`,  {});
                 }
             }
+        }
+      },
+      openFile(url){
+        if(url !== '' && url !== undefined){
+          window.open(url,'_blank');
+        }else{
+          this.error = 'Primero debe actualizar el perfil'
         }
       },
     },
@@ -583,6 +726,13 @@ export default {
     padding-right: 0 !important;
   }
 
+  .input-files.files{
+    height: auto;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    border-radius: 5px;
+  }
+
   .input-files .button-files, .input-files label{
     cursor: pointer;
   }
@@ -593,6 +743,20 @@ export default {
     height: 100px;
     width: 100px;
     border-radius: 50%;
+    font-weight: 400;
+    cursor: pointer;
+    transition: all .2s ease;
+    -moz-transition: all .2s ease;
+    -o-transition: all .2s ease;
+    -webkit-transition: all .2s ease;
+  }
+
+  .input-files.files .button-files{
+    color: white;
+    height: 100px;
+    width: 100%;
+    background-color: rgba(0,0,0,0);
+    border-radius: 5px !important;
     font-weight: 400;
     cursor: pointer;
     transition: all .2s ease;
@@ -629,12 +793,53 @@ export default {
     -webkit-transition: all .2s ease;
   }
 
+  .input-files.files .button-files .icon{
+    position: relative;
+    line-height: 100px !important;
+    height: 100px !important;
+    width: 70% !important;
+    min-width: 100px !important;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .input-files.files .button-files .icon::before{
+    position: relative;
+    top: initial;
+    left: initial;
+    text-align: left;
+    color: white;
+    background-color: rgba(150, 150, 150,0);
+    border-radius: 50%;
+    height: auto !important;
+    line-height: auto !important;
+    width: 25px !important;
+    min-width: 25px !important;
+    font-size: 25px !important;
+    cursor: pointer;
+    transition: all .2s ease;
+    -moz-transition: all .2s ease;
+    -o-transition: all .2s ease;
+    -webkit-transition: all .2s ease;
+  }
+
   .input-files:hover  .button-files{
     background-color: rgb(170, 170, 170);
   }
 
   .input-files:hover .button-files .icon::before{
     background-color: rgba(130, 130, 130);
+  }
+
+  .input-files.files:hover  .button-files{
+    background-color: rgba(255,255,255,.1);
+  }
+
+  .input-files.files:hover .button-files .icon::before{
+    background-color: rgba(150, 150, 150,0);
   }
 
   .input-files .collectionFiles{
@@ -664,10 +869,45 @@ export default {
     border-radius: 50%;
   }
 
+  .prev-container.files{
+    height: auto;
+    width: 100%;
+    height: 100px;
+    border-radius: 5px;
+  }
+
   .prev-container img{
     border: 1px transparent;
     height: 70px;
     width: 70px;
+  }
+
+  .prev-container.files .icon{
+    height: 70px;
+    width: 70px;
+    background-color: transparent;
+    position: relative;
+  }
+
+  .prev-container.files .icon::before{
+    cursor: pointer;
+    position: absolute;
+    color: rgba(0,0,0);
+    top: 0;
+    left: 0;
+    text-align: center;
+    height: 70px;
+    line-height: 70px;
+    width: 70px;
+    font-size: 60px;
+    transition: all .2s ease;
+    -moz-transition: all .2s ease;
+    -o-transition: all .2s ease;
+    -webkit-transition: all .2s ease;
+  }
+
+  .prev-container.files .icon:hover::before{
+    transform: scale(1.1);
   }
 
   .prev-container .remove::before{

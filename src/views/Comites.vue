@@ -1,19 +1,18 @@
 <template>
   <div class="secP mih">
-    <Comites></Comites>
-    <Footer></Footer>
+    <ComitesPage></ComitesPage>
   </div>
 </template>
 
 <script>
 
-import Comites from '@/components/Comites.vue'
+import ComitesPage from '@/components/ComitesPage.vue'
 import Footer from '@/components/Footer.vue'
 
 export default {
 	name: 'Comites',
   components: {
-		Comites,
+		ComitesPage,
 		Footer,
 	},
 	mounted() {

@@ -170,8 +170,7 @@ h6{
 
 .auto-wrapper{
 	position:static;
-	max-width:1200px;
-	padding:0px 5vw;
+	width: 90vw;
 	margin:0 auto;
 }
 
@@ -921,12 +920,7 @@ img{
 }
 
 .v-nav-item:hover .v-menu-txt{
-	color: #ffffff !important;
-}
-
-.v-nav-item:hover{
-	background-color: #FE5D25;
-	border-radius: 5px;
+	color: #FE5D25 !important;
 }
 
 .router-link-active.v-menu-txt{
@@ -952,7 +946,7 @@ img{
 	height: 0;
 	white-space: nowrap;
 	color: #000000;
-	margin-top: -1px;
+	margin-top: -5px;
 	width: auto;
 	position: absolute;
 	background-color: #ffffff;
@@ -962,6 +956,7 @@ img{
 	transition: transform 0.4s ease-out, opacity 0.4s ease-in;
 	border-radius: 10px;
 	overflow: hidden;
+	box-shadow: 0 0 5px rgba(0,0,0,.35);
 }
 
 
@@ -981,13 +976,8 @@ img{
 	font-family: 'Rubik', sans-serif;
 }
 
-.v-dropdown-menu .v-dropdown-item:hover{
-	background-color: #FE5D25;
-	color: #ffffff;
-}
-
 .v-dropdown-item:hover a{
-	color: #ffffff;
+	color: #FE5D25;
 }
 
 .v-dropdown-menu-on{
@@ -1051,11 +1041,6 @@ Menu Responsive
 		height: auto;
 		border-bottom-right-radius: 10px;
 		border-bottom-left-radius: 10px;
-	}
-
-	.v-nav-item:hover{
-		background-color: #FE5D25;
-		border-radius: 0px;
 	}
 
 	.v-nav-item i{
@@ -2325,140 +2310,9 @@ Menu Responsive
 
 ***/
 
-.security-section{
-	position:relative;
-	padding:115px 0px 60px;
-}
-
-.security-section .content-column{
-	position:relative;
-	margin-bottom:40px;
-}
-
-.security-section .content-column .inner-column{
-	position:relative;
-	padding-right:20px;
-}
-
-.security-section .content-column .title{
-	position:relative;
-	color:#888888;
-	font-size:18px;
-	padding-left:35px;
-	padding-top:2px;
-	font-weight:400;
-	margin-bottom:35px;
-}
-
-.security-section .content-column .title .icon{
-	position:absolute;
-	left:0px;
-	top:0px;
-	padding-bottom:16px;
-}
-
-.security-section .content-column .title .icon:before{
-	position:absolute;
-	content:'';
-	left:0px;
-	bottom:0px;
-	width:25px;
-	height:6px;
-	border-top:2px solid #888888;
-	border-bottom:2px solid #888888;
-}
-
-.security-section .content-column h2{
-	position:relative;
-	color:#222222;
-	font-weight:500;
-	line-height:1.2em;
-}
-
-.security-section .content-column .bold-text{
-	position:relative;
-	color:#222222;
-	font-size:16px;
-	font-weight:500;
-	line-height:1.9em;
-	margin-top:20px;
-}
-
-.security-section .content-column .text{
-	position:relative;
-	color:#555555;
-	font-size:15px;
-	font-weight:300;
-	line-height:1.9em;
-	margin-top:15px;
-	margin-bottom:22px;
-}
-
-.security-section .content-column .read-more{
-	position:relative;
-	color:#7cb434;
-	font-size:14px;
-	font-weight:500;
-	text-transform:uppercase;
-	transition:all 500ms ease;
-	-moz-transition:all 500ms ease;
-	-webkit-transition:all 500ms ease;
-	-ms-transition:all 500ms ease;
-	-o-transition:all 500ms ease;
-}
-
-.security-section .content-column .read-more .fa{
-	position:relative;
-	font-size:20px;
-	top:1px;
-	padding-left:5px;
-}
-
-.security-section .content-column .read-more:hover{
-	color:#222222;
-	border-bottom:1px solid #7cb434;
-}
-
-.security-section .images-column{
-	position:relative;
-	margin-bottom:40px;
-}
-
-.security-section .images-column .inner-column{
-	position:relative;
-}
-
-.security-section .images-column .image{
-	position:relative;
-	margin-bottom:20px;
-}
-
-.security-section .images-column .image:last-child{
-	position:absolute;
-	right:15px;
-	bottom:40px;
-}
-
-/*** 
-
-====================================================================
-	Premium Section
-====================================================================
-
-***/
-
 .premium-section{
 	position:relative;
-	padding:110px 0px 150px;
-	background-color:#f0f2f5;
-}
-
-.premium-section.style-two{
-	background:none;
-	padding-bottom:90px;
-}
-
-.premium-section.style-two .security-block .inner-box{
+	padding: 5% 0px;
 	background-color:#f0f2f5;
 }
 
@@ -2492,11 +2346,14 @@ Menu Responsive
 .security-block .inner-box{
 	position:relative;
 	background-color:#ffffff;
+	border-radius: 15px;
 }
 
 .security-block .inner-box .image{
 	position:relative;
 	overflow:hidden;
+	border-top-right-radius: 15px;
+	border-top-left-radius: 15px;
 }
 
 .security-block .inner-box .image:before{
@@ -2550,7 +2407,10 @@ Menu Responsive
 .security-block .inner-box .image img{
 	position:relative;
 	width:100%;
+	height: 400px;
 	display:block;
+	min-height: 0px;
+	background-color: grey;
 	transition:all 900ms ease;
 	-moz-transition:all 900ms ease;
 	-webkit-transition:all 900ms ease;
@@ -2564,7 +2424,8 @@ Menu Responsive
 
 .security-block .inner-box .lower-content{
 	position:relative;
-	padding:35px 40px;
+	padding:15px 30px;
+	height: auto;
 }
 
 .security-block .inner-box .lower-content .hover-bg-color{
@@ -2598,6 +2459,8 @@ Menu Responsive
 	width:0%;
 	height:50%;
 	background-color:#FE5D25;
+	border-bottom-right-radius: 15px;
+	border-bottom-left-radius: 15px;
 	transition:all 900ms ease;
 	-moz-transition:all 900ms ease;
 	-webkit-transition:all 900ms ease;
@@ -2612,16 +2475,31 @@ Menu Responsive
 
 .security-block .inner-box .lower-content .upper-box{
 	position:relative;
-	padding-left:44px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	padding-left:0;
+	width: 100%;
+	height: 60px;
 }
 
 .security-block .inner-box .lower-content .upper-box .icon{
-	position:absolute;
-	left:0px;
-	top:0px;
+	position:relative;
+	width: 50px;
+	height: 50px;
+}
+
+.security-block .inner-box .lower-content .upper-box .icon::before{
+	position: absolute;
+	top: 0;
+	left: 0;
 	color:#09197d;
-	font-size:30px;
-	line-height:1em;
+	width: 100%;
+	height: 100%;
+	line-height: 50px;
+	text-align: center;
+	font-size:50px;
 	transition:all 900ms ease;
 	-moz-transition:all 900ms ease;
 	-webkit-transition:all 900ms ease;
@@ -2631,12 +2509,11 @@ Menu Responsive
 
 .security-block .inner-box .lower-content .upper-box h5{
 	position:relative;
+	text-align: center;
+	width: 100%;
+	font-size: 25px;
 	font-weight:500;
 	line-height:1.3em;
-}
-
-.security-block .inner-box .lower-content .upper-box h5 a{
-	position:relative;
 	color:#222222;
 	transition:all 900ms ease;
 	-moz-transition:all 900ms ease;
@@ -2645,12 +2522,22 @@ Menu Responsive
 	-o-transition:all 900ms ease;
 }
 
-.security-block .inner-box .lower-content .text{
+
+.security-block .inner-box .lower-content .lower-box{
 	position:relative;
-	color:#555555;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	padding-left:0;
+	width: 100%;
+	height: 100px;
+}
+
+.security-block .inner-box .lower-content .lower-box a{
+	position:relative;
+	color:#000000;
 	font-size:15px;
-	line-height:1.8em;
-	margin-top:25px;
 	font-weight:300;
 	transition:all 900ms ease;
 	-moz-transition:all 900ms ease;
@@ -2659,8 +2546,22 @@ Menu Responsive
 	-o-transition:all 900ms ease;
 }
 
+.security-block .inner-box .lower-content .lower-box .text{
+	position:relative;
+	color:#000000;
+	font-size:15px;
+	font-weight:300;
+	width: 70%;
+	transition:all 900ms ease;
+	-moz-transition:all 900ms ease;
+	-webkit-transition:all 900ms ease;
+	-ms-transition:all 900ms ease;
+	-o-transition:all 900ms ease;
+}
+
 .security-block .inner-box:hover .lower-content .text,
-.security-block .inner-box:hover .lower-content .upper-box h5 a,
+.security-block .inner-box:hover .lower-content .upper-box h5,
+.security-block .inner-box:hover .lower-content .lower-box a,
 .security-block .inner-box:hover .lower-content .upper-box .icon{
 	color:#ffffff;
 }
@@ -4701,6 +4602,8 @@ Menu Responsive
 
 #actualidad .noti-block{
 	margin-bottom:50px;
+	border: 1px solid rgba(141, 141, 141, 0.15);
+	border-radius: 5px;
 	min-height: 300px;
 	transition: all 900ms ease;
 	-moz-transition: all 900ms ease;
@@ -4733,6 +4636,7 @@ Menu Responsive
 	border-radius: 10px;
 	height: auto;
 	overflow: hidden;
+	width: 360px;
 	max-width: 360px;
 }
 
@@ -4743,6 +4647,7 @@ Menu Responsive
 	max-height: 260px;
 	transform: translateX(500px);
 	opacity: 0;
+	width: 100%;
 	max-width: 360px;
 	border-radius: 10px;
 	transition:all 900ms ease, opacity 800ms ease-in;
@@ -5356,6 +5261,79 @@ Seccion 2 Pagina de Actualidad
 /*** 
 
 ====================================================================
+	Sección Reglamentos y Normativas
+====================================================================
+
+***/
+
+.file-download-container{
+	height: 200px;
+	width: 105%;
+	background-color: rgb(228, 228, 228);
+	margin-left: -2.5%;
+}
+
+.file-download-container .btn-download{
+	position: relative;
+	cursor: pointer;
+	width: 300px;
+	height: 60px;
+	line-height: 60px;
+	text-align: center;
+	color: white;
+	font-size: 15px;
+	font-weight: 600;
+	box-shadow: 0 0 10px rgba(0,0,0,.5);
+	background-color: #FE5D25;
+	border-radius: 5px;
+    transition: all .3s ease;
+    -moz-transition: all .3s ease;
+    -o-transition: all .3s ease;
+    -webkit-transition: all .3s ease;
+}
+
+.file-download-container .btn-download .text{
+	cursor: pointer;
+	width: 100%;
+	height: 100%;
+	line-height: 60px;
+	text-align: center;
+	color: white;
+	font-size: 15px;
+	font-weight: 600;
+    transition: box-shadow .3s ease;
+    -moz-transition: box-shadow .3s ease;
+    -o-transition: box-shadow .3s ease;
+    -webkit-transition: box-shadow .3s ease;
+}
+
+.file-download-container.radial-circle .btn-download::before{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	content: '';
+	background-color: red;
+	border-radius: 5px;
+	-webkit-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	width: 0;
+	height: 0;
+	opacity: 0;
+    transition: height .5s ease, width .5s ease, opacity 1s ease;
+    -moz-transition: height .5s ease, width .5s ease, opacity 1s ease;
+    -o-transition: height .5s ease, width .5s ease, opacity 1s ease;
+    -webkit-transition: height .5s ease, width .5s ease, opacity 1s ease;
+}
+
+.file-download-container.radial-circle .btn-download:hover::before{
+	width: 100% !important;
+	height: 100% !important;
+	opacity: 1;
+}
+
+/*** 
+
+====================================================================
 	Página de todas las juntas
 ====================================================================
 
@@ -5635,6 +5613,14 @@ textarea{
 
 .mih{
 	min-height: 100vh !important;
+}
+
+.noselect{
+	-webkit-touch-callout: none;
+	user-select: none;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
 }
 
 .slide-list{

@@ -10,6 +10,5 @@ app.use(express.json());
 app.use(require('./router/index.js'));
 
 app.listen(3000, () => {
-    console.log('Puerto 3000');
 })
 

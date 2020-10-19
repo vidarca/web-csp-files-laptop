@@ -81,21 +81,30 @@
 				<div class="text">Entérate de los últimos eventos y noticias <br> de nuestro Club Santa Paula</div>
 			</div>
 			
-			<div class="row clearfix" v-if="dbWeb.Noticias !== undefined">
+			<div class="d-flex align-items-center justify-content-center flex-row clearfix" v-if="dbWeb.Noticias !== undefined">
 				
 				<!-- Bloque de Notica -->
-				<div class="security-block col-lg-4 col-md-6 col-sm-12" v-for="noticia in reverseArray" :key="noticia.noti_id">
+				<div class="security-block col-md-6 col-12" v-for="(noticia, index) in reverseArray" :key="noticia.noti_id">
 					<div class="inner-box">
-						<div class="image">
-							<img :src="noticia.noti_imagenes[1].name" alt="" />
+					<div class="image">
+						<img :src="noticia.noti_fotos.imagen1.url" />
+					</div>
+					<div class="lower-content d-flex flex-column align-items-center justify-content-center">
+						<div class="hover-bg-color"></div>
+						<div class="upper-box">
+							<div :class="['icon mr-1', iconSelect(index)]"></div>
+							<h5 class="ml-1 w-100 text-left">{{noticia.noti_titulo}}</h5>
 						</div>
-						<div class="lower-content">
-							<div class="hover-bg-color"></div>
-							<div class="upper-box">
-								<h5>{{noticia.noti_titulo}}</h5>
+						<div class="lower-box">
+							<div class="align-self-end text" style="width: auto; font-size: 13px">
+								{{calcTime(noticia.noti_fecha)}}
 							</div>
-							<div class="text">{{noticia.noti_prev}}</div>
+							<div class="text text-center">
+								{{noticia.noti_prev}}
+							</div>
+							<a class="align-self-end" @click="selectAnun(index)" style=" font-size: 13px">Leer más ...</a>
 						</div>
+					</div>
 					</div>
 				</div>
 				
@@ -303,7 +312,7 @@
 </template>
 
 <script>
-import {mapState} from 'vuex'
+import {mapState, mapMutations} from 'vuex'
 import AutogestionSpan from '@/components/AutogestionSpan.vue'
 
   export default {
@@ -334,6 +343,7 @@ import AutogestionSpan from '@/components/AutogestionSpan.vue'
         },
 	},
   	methods: {
+		...mapMutations(['selectItemSelect']),
 		goToTop(){
 			window.scrollTo(0, 0);
 		},
@@ -362,24 +372,87 @@ import AutogestionSpan from '@/components/AutogestionSpan.vue'
 				}
 			}
 		},
-		iconAnun(index){
+		iconSelect(index){
 			if(this.reverseArray[index].noti_seccion === 'Comité de Tenis'){
 				return 'flaticon-racket-and-tennis-ball'
-			}else if(this.reverseArray[index].noti_seccion === 'Comité de Squash'){
-				return 'flaticon-squash-rackets'
-			}else if(this.reverseArray[index].noti_seccion === 'Comité de Natación'){
-				return 'flaticon-swimming'
-			}else if(this.reverseArray[index].noti_seccion === 'Comité de Dominó'){
-				return 'flaticon-domino'
-			}else if(this.reverseArray[index].noti_seccion === 'Comité de TRX'){
-				return 'flaticon-suspension'
+			}else if(this.reverseArray[index].noti_seccion === 'Comité de Alimentos y Bebidas'){
+				return 'flaticon-restaurant'
+			}else if(this.reverseArray[index].noti_seccion === 'Comité de Gimnasio'){
+				return 'flaticon-barbell'
+			}else if(this.reverseArray[index].noti_seccion === 'Comité de Admisión'){
+				return 'flaticon-lista-de-verificacion'
 			}else if(this.reverseArray[index].noti_seccion === 'Comité de Artes Marciales'){
 				return 'flaticon-martial-arts'
+			}else if(this.reverseArray[index].noti_seccion === 'Comité de Comunicaciones'){
+				return 'flaticon-megafono'
+			}else if(this.reverseArray[index].noti_seccion === 'Comité de Cultura'){
+				return 'flaticon-mascaras-felices-y-tristes'
+			}else if(this.reverseArray[index].noti_seccion === 'Comité de Dominó'){
+				return 'flaticon-domino'
+			}else if(this.reverseArray[index].noti_seccion === 'Comité Juvenil'){
+				return 'flaticon-chico'
+			}else if(this.reverseArray[index].noti_seccion === 'Comité de Bailoterapia'){
+				return 'flaticon-baile'
+			}else if(this.reverseArray[index].noti_seccion === 'Comité de Natación'){
+				return 'flaticon-swimming'
+			}else if(this.reverseArray[index].noti_seccion === 'Comité de Squash'){
+				return 'flaticon-squash-rackets'
+			}else if(this.reverseArray[index].noti_seccion === 'Comité de Guardería'){
+				return 'flaticon-chupete'
+			}else if(this.reverseArray[index].noti_seccion === 'Comité Social'){
+				return 'flaticon-asistencia-social'
+			}else if(this.reverseArray[index].noti_seccion === 'Comité de TRX'){
+				return 'flaticon-suspension'
+			}else if(this.reverseArray[index].noti_seccion === 'Comité de Infraestructura'){
+				return 'flaticon-edificio'
+			}else if(this.reverseArray[index].noti_seccion === 'Comité de Finanzas'){
+				return 'flaticon-ahorrar-dinero'
+			}else if(this.reverseArray[index].noti_seccion === 'Comité de Reforma de Estatutos'){
+				return 'flaticon-libro-de-leyes'
+			}else if(this.reverseArray[index].noti_seccion === 'Comité de Tribunal Disciplinario'){
+				return 'flaticon-subasta'
 			}else{
 				return ''
-		}
-    },
-	  },
+			}
+		},
+		calcTime(val){
+			const p = new Date(val);
+			const pSplitted = p.toString().split(' ');
+			let mm = '';
+			if(pSplitted[1] === "Jan"){
+				mm = "01";
+			}else if(pSplitted[1] === "Feb"){
+				mm = "02";
+			}else if(pSplitted[1] === "Mar"){
+				mm = "03";
+			}else if(pSplitted[1] === "Apr"){
+				mm = "04";
+			}else if(pSplitted[1] === "May"){
+				mm = "05";
+			}else if(pSplitted[1] === "Jun"){
+				mm = "06";
+			}else if(pSplitted[1] === "Jul"){
+				mm = "07";
+			}else if(pSplitted[1] === "Ago"){
+				mm = "08";
+			}else if(pSplitted[1] === "Sep"){
+				mm = "09";
+			}else if(pSplitted[1] === "Oct"){
+				mm = "10";
+			}else if(pSplitted[1] === "Nov"){
+				mm = "11";
+			}else if(pSplitted[1] === "Dic"){
+				mm = "12";
+			}
+
+			return `${pSplitted[2]}/${mm}/${pSplitted[3]}`
+		},
+		selectAnun(val){
+			this.selectItemSelect(val)
+			this.$router.push({name:'Actualidad'})
+		},
+	},
+	
 	mounted() {
 	/** 
 	========================================
@@ -498,21 +571,21 @@ import AutogestionSpan from '@/components/AutogestionSpan.vue'
 				index = 1;
 			}
 			if(items === 4){
-				if (allItemsRef[index+3].id === 'last-first-clone' && allItemsRef[index+3] !== undefined) {
+				if (allItemsRef[index+3] === undefined || allItemsRef[index+2] === undefined || allItemsRef[index+1] === undefined || allItemsRef[index] === undefined || allItemsRef[index+3].id === 'last-first-clone' && allItemsRef[index+3] !== undefined) {
 					container.style.transition = 'none';
 					index = 1;
 					container.style.transform = `translateX(${-(allItemsWidth + marginItems * 2) * index}px)`;
 				}else{
 				}
 			}else if(items === 2){
-				if (allItemsRef[index+1].id === 'last-first-clone' && allItemsRef[index+1] !== undefined) {
+				if (allItemsRef[index+1] === undefined || allItemsRef[index] === undefined || allItemsRef[index+1].id === 'last-first-clone' && allItemsRef[index+1] !== undefined) {
 					container.style.transition = 'none';
 					index = 1;
 					container.style.transform = `translateX(${-(allItemsWidth + marginItems * 2) * index}px)`;
 				}else{
 				}
 			}else {
-				if (allItemsRef[index].id === 'last-first-clone' && allItemsRef[index] !== undefined) {
+				if (allItemsRef[index] === undefined || allItemsRef[index].id === 'last-first-clone' && allItemsRef[index] !== undefined) {
 					container.style.transition = 'none';
 					index = 1;
 					container.style.transform = `translateX(${-(allItemsWidth + marginItems * 2) * index}px)`;

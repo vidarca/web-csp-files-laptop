@@ -1,25 +1,25 @@
 <template>
-  <div id="actualidad" class="">
+  <div id="actualidad" :class="(reverseArray[0] === undefined || reverseArray[0] === '')?'mih w-100 d-flex align-items-end justify-content-center':''">
     <!-- Seccion de Actualidad -->
     <section id="section1" ref="section1" class="v-act-wrapper justify-content-center align-items-center" v-show="reverseArray[0] !== undefined && showMin">
         <div class="ext-wrapper w-75 m-auto">
             <!-- Titulo de seccion -->
             <div class="row">
             <!-- Bloque de Notica -->
-                <div class="noti-block col-lg-12 col-sm-12" ref="anuncios" v-for="(anuncio, index) in reverseArray" :key="anuncio.noti_id" :id="anuncio.noti_seccion" data-transitioned="false" :data-index="index" v-show="index < 5 + showIndex && index >= showIndex">
-                    <div :class="['inner-box d-flex justify-content-center align-items-center', flexAndCliWidth(index)]" :data-index="index" :data-src="anuncio.noti_imagenes[1].url"  ref="elLazy" >
+                <div class="noti-block col-lg-12 col-sm-12 d-flex align-items-center" ref="anuncios" v-for="(anuncio, index) in reverseArray" :key="anuncio.noti_id" :id="anuncio.noti_seccion" data-transitioned="false" :data-index="index" v-show="index < 5 + showIndex && index >= showIndex">
+                    <div :class="['inner-box w-100 d-flex justify-content-center align-items-center', flexAndCliWidth(index)]" :data-index="index" :data-src="anuncio.noti_fotos['imagen1'].url"  ref="elLazy" >
                       <div class="image w-100 d-flex align-items-center justify-content-center">
-                        <img  src=" " :alt="anuncio.noti_imagenes[1].name" :ref="`foto${index}`"/>
+                        <img  src=" " :ref="`foto${index}`"/>
                       </div>
                       <div class="lower-content w-100">
                           <div class="upper-box">
                             <h5>{{anuncio.noti_titulo}}</h5>
-                            <div class="text">{{anuncio.noti_prev}}</div>
+                            <div class="text text-left w-100">{{anuncio.noti_prev}}</div>
                             <div :class="['d-flex justify-content-between align-items-center w-100', (index % 2 === 0)?'flex-row':'flex-row-reverse']">
                               <div class="d-inline-block">
                                 <div :class="['icon d-inline-block', iconAnun(index)]"></div>
                                 <div class="text ml-2 mr-1 d-inline-block">
-                                  Hace ~ {{calcTime(anuncio.noti_id)}}
+                                  {{calcTime(anuncio.noti_fecha)}}
                                 </div>
                               </div>
                               <a class="align-self-end" @click="anunSelected(index)">Leer más...</a>
@@ -52,13 +52,13 @@
     <section id="section2" ref="section2" class="selected-anun translate" v-show="!showMin">
       <div class="w-100 position-relative" v-if="!showMin">
         <div class="w-100 d-flex flex-row justify-content-between">
-          <img :src="reverseArray[anunSelecIndex].noti_imagenes[0].url" :alt="reverseArray[anunSelecIndex].noti_imagenes[0].name" width="100%" height="auto" style="min-height: 300px;">
+          <img :src="reverseArray[anunSelecIndex].noti_fotos.imagen0.url" width="100%" height="auto" style="min-height: 300px;">
         </div>
         <div class="info-container w-95">
           <h5 class="w-100">{{reverseArray[anunSelecIndex].noti_titulo}}</h5>
-          <img class="mr-3" :src="reverseArray[anunSelecIndex].noti_imagenes[1].url" :alt="reverseArray[anunSelecIndex].noti_imagenes[1].name" align="left">
+          <img class="mr-3" :src="reverseArray[anunSelecIndex].noti_fotos.imagen1.url" align="left">
           <div>
-            <div v-if="reverseArray[anunSelecIndex].noti_imagenes[2]" v-for="(item, index) in reverseArray[anunSelecIndex].noti_info.split(/[\r\n]+/)" :key="index">
+            <div v-if="reverseArray[anunSelecIndex].noti_fotos.imagen2" v-for="(item, index) in reverseArray[anunSelecIndex].noti_info.split(/[\r\n]+/)" :key="index">
               <div class="text" v-if="parrShow(index, '0')">
                 {{item}}
               </div>
@@ -67,7 +67,7 @@
               {{reverseArray[anunSelecIndex].noti_info}}
             </div>
           </div>
-          <img v-if="reverseArray[anunSelecIndex].noti_imagenes[2]" class="ml-3" :src="reverseArray[anunSelecIndex].noti_imagenes[2].url" :alt="reverseArray[anunSelecIndex].noti_imagenes[2].name" align="right">
+          <img v-if="reverseArray[anunSelecIndex].noti_fotos.imagen2" class="ml-3" :src="reverseArray[anunSelecIndex].noti_fotos.imagen2.url" align="right">
           <div v-for="(item, index) in reverseArray[anunSelecIndex].noti_info.split(/[\r\n]+/)" :key="item">
             <div class="text" v-if="parrShow(index, '1')">
               {{item}}
@@ -79,13 +79,13 @@
         <button class="btn btn-dark text-right mb-3 mt-3" @click="regresar()">Regresar <i class="icon flaticon-back-arrow ml-1"></i></button>
       </div>
     </section>
-    <AutogestionSpan></AutogestionSpan>
+    <AutogestionSpan class="w-100"></AutogestionSpan>
   </div>
 </template>
 
 <script>
 import AutogestionSpan from '@/components/AutogestionSpan.vue'
-import {mapState} from 'vuex'
+import {mapState, mapMutations} from 'vuex'
 
 export default {
     name: 'ActPage',
@@ -96,7 +96,7 @@ export default {
         number: 0,
         showIndex: 0,
         currentIndex: 1,
-        anunSelecIndex: 0,
+        anunSelecIndex: false,
         numElements: 5,
       }
     },
@@ -104,7 +104,7 @@ export default {
         AutogestionSpan,
     },
     computed:{
-        ...mapState(['dbWeb']),
+        ...mapState(['dbWeb', 'itemSelect']),
         reverseArray(){
             if(this.dbWeb.Noticias !== undefined){
             let array = Object.values(this.dbWeb.Noticias);
@@ -116,63 +116,81 @@ export default {
         },
   },
   methods:{
+    ...mapMutations(['selectItemSelect', 'resetItemSelect']),
     iconAnun(index){
-			if(this.reverseArray[index].noti_seccion === 'Comité de Tenis'){
-				return 'flaticon-racket-and-tennis-ball'
-			}else if(this.reverseArray[index].noti_seccion === 'Comité de Squash'){
-				return 'flaticon-squash-rackets'
-			}else if(this.reverseArray[index].noti_seccion === 'Comité de Natación'){
-				return 'flaticon-swimming'
-			}else if(this.reverseArray[index].noti_seccion === 'Comité de Dominó'){
-				return 'flaticon-domino'
-			}else if(this.reverseArray[index].noti_seccion === 'Comité de TRX'){
-				return 'flaticon-suspension'
-			}else if(this.reverseArray[index].noti_seccion === 'Comité de Artes Marciales'){
-				return 'flaticon-martial-arts'
-			}else{
-				return ''
-      }
+      if(this.reverseArray[index].noti_seccion === 'Comité de Tenis'){
+          return 'flaticon-racket-and-tennis-ball'
+        }else if(this.reverseArray[index].noti_seccion === 'Comité de Alimentos y Bebidas'){
+          return 'flaticon-restaurant'
+        }else if(this.reverseArray[index].noti_seccion === 'Comité de Gimnasio'){
+          return 'flaticon-barbell'
+        }else if(this.reverseArray[index].noti_seccion === 'Comité de Admisión'){
+          return 'flaticon-lista-de-verificacion'
+        }else if(this.reverseArray[index].noti_seccion === 'Comité de Artes Marciales'){
+          return 'flaticon-martial-arts'
+        }else if(this.reverseArray[index].noti_seccion === 'Comité de Comunicaciones'){
+          return 'flaticon-megafono'
+        }else if(this.reverseArray[index].noti_seccion === 'Comité de Cultura'){
+          return 'flaticon-mascaras-felices-y-tristes'
+        }else if(this.reverseArray[index].noti_seccion === 'Comité de Dominó'){
+          return 'flaticon-domino'
+        }else if(this.reverseArray[index].noti_seccion === 'Comité Juvenil'){
+          return 'flaticon-chico'
+        }else if(this.reverseArray[index].noti_seccion === 'Comité de Bailoterapia'){
+          return 'flaticon-baile'
+        }else if(this.reverseArray[index].noti_seccion === 'Comité de Natación'){
+          return 'flaticon-swimming'
+        }else if(this.reverseArray[index].noti_seccion === 'Comité de Squash'){
+          return 'flaticon-squash-rackets'
+        }else if(this.reverseArray[index].noti_seccion === 'Comité de Guardería'){
+          return 'flaticon-chupete'
+        }else if(this.reverseArray[index].noti_seccion === 'Comité Social'){
+          return 'flaticon-asistencia-social'
+        }else if(this.reverseArray[index].noti_seccion === 'Comité de TRX'){
+          return 'flaticon-suspension'
+        }else if(this.reverseArray[index].noti_seccion === 'Comité de Infraestructura'){
+          return 'flaticon-edificio'
+        }else if(this.reverseArray[index].noti_seccion === 'Comité de Finanzas'){
+          return 'flaticon-ahorrar-dinero'
+        }else if(this.reverseArray[index].noti_seccion === 'Comité de Reforma de Estatutos'){
+          return 'flaticon-libro-de-leyes'
+        }else if(this.reverseArray[index].noti_seccion === 'Comité de Tribunal Disciplinario'){
+          return 'flaticon-subasta'
+        }else{
+          return ''
+        }
     },
     calcTime(val){
-      const d = new Date()
-      const miliSec = Date.parse(d)
-      const p = new Date(val)
-      
-      let subida = d - val
-
-      if(subida/1000 < 60){
-        return ' hace poco'
-      }else if(subida/60000 < 60){
-        subida = Math.floor(subida/60000);
-        if(subida === 1){
-          return subida + ' minuto'
-        }
-        return subida + ' minutos'
-      }else if(subida/3600000 < 24){
-        subida = Math.floor(subida/3600000);
-        if(subida === 1){
-          return subida + ' hora'
-        }
-        return subida + ' horas'
-      }else if(subida/86400000 < 7){
-        subida = Math.floor(subida/86400000);
-        if(subida === 1){
-          return subida + ' día'
-        }
-        return subida + ' días'
-      }else if(subida/604800000 < 4){
-        subida = Math.floor(subida/604800000);
-        if(subida === 1){
-          return subida + ' semana'
-        }
-        return subida + ' semanas'
-      }else if(subida/2419200000 < 12){
-        subida = Math.floor(subida/2419200000);
-        if(subida === 1){
-          return subida + ' mes'
-        }
-        return subida + ' meses'
+      const p = new Date(val);
+      const pSplitted = p.toString().split(' ');
+      let mm = '';
+      if(pSplitted[1] === "Jan"){
+        mm = "01";
+      }else if(pSplitted[1] === "Feb"){
+        mm = "02";
+      }else if(pSplitted[1] === "Mar"){
+        mm = "03";
+      }else if(pSplitted[1] === "Apr"){
+        mm = "04";
+      }else if(pSplitted[1] === "May"){
+        mm = "05";
+      }else if(pSplitted[1] === "Jun"){
+        mm = "06";
+      }else if(pSplitted[1] === "Jul"){
+        mm = "07";
+      }else if(pSplitted[1] === "Ago"){
+        mm = "08";
+      }else if(pSplitted[1] === "Sep"){
+        mm = "09";
+      }else if(pSplitted[1] === "Oct"){
+        mm = "10";
+      }else if(pSplitted[1] === "Nov"){
+        mm = "11";
+      }else if(pSplitted[1] === "Dic"){
+        mm = "12";
       }
+
+      return `${pSplitted[2]}/${mm}/${pSplitted[3]}`
     },
     translateRight(){
       if(this.currentIndex <= 5*((this.$refs.innerContainer.children.length/5)-1)){
@@ -229,10 +247,11 @@ export default {
       }, 800);
     },
     regresar(){
-      this.anunSelecIndex = 0;
       this.$refs.section2.classList.toggle('translate');
       setTimeout(() => {
         this.showMin = true;
+        this.anunSelecIndex = false;
+        this.resetItemSelect();
       }, 700);
       setTimeout(() => {
 		  window.scrollTo(0, 0);
@@ -265,32 +284,42 @@ export default {
 
   mounted(){
 
+    if(this.itemSelect !== false){
+      this.$refs.section1.classList.add('translate')
+      this.$refs.section2.classList.toggle('translate')
+      this.showMin = false;
+      this.anunSelecIndex = this.itemSelect;
+    }
+
     /**
       OBSERVERS
     **/
     const lazyImgs = this.$refs.elLazy;
 
-    const ops = {
-      root: null,
-      threshold: 0,
-      rootMargin: '-50px'
-    };
+    if(lazyImgs !== undefined && lazyImgs !== ''){
+      const ops = {
+        root: null,
+        threshold: 0,
+        rootMargin: '-50px'
+      };
+  
+      const observer = new IntersectionObserver(
+        function(entries, observer){
+          entries.forEach(entry => {
+            if(!entry.isIntersecting){
+              return;
+            }
+            entry.target.children[0].children[0].src = entry.target.dataset.src;
+            entry.target.children[0].children[0].classList.toggle('lazy-show');
+            observer.unobserve(entry.target)
+          });
+        }, ops);
+      
+      lazyImgs.forEach(element => {
+        observer.observe(element)
+      })
+    }
 
-    const observer = new IntersectionObserver(
-      function(entries, observer){
-        entries.forEach(entry => {
-          if(!entry.isIntersecting){
-            return;
-          }
-          entry.target.children[0].children[0].src = entry.target.dataset.src;
-          entry.target.children[0].children[0].classList.toggle('lazy-show');
-          observer.unobserve(entry.target)
-        });
-      }, ops);
-    
-    lazyImgs.forEach(element => {
-      observer.observe(element)
-    })
 
     /**
      EXTRAS

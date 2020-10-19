@@ -95,7 +95,7 @@ export default {
         if(this.response.status === null){
           if(this.validAllFields()){
             this.sending = true;
-            axios.post('http://localhost:3000/send-email', {
+            axios.post('https://vidarca.github.io:3000/send-email', {
               form: this.form
             }).then(response => {
               if(response.status === 200){

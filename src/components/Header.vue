@@ -7,12 +7,12 @@
             <p>Contáctanos</p>
           </div>
           <div class="item">
-            <a class="icon flaticon-phone-call" href="tel: +582129851038"></a>
-            <a class="v-social-leftTxt" href="tel: +582129851038"> +58.212.985.1038 </a>
+            <a class="icon flaticon-phone-call" :href="`tel: ${Object.values(dbWeb.Miscellaneous)[0].misc_telefonos.telefonos1}`"></a>
+            <a class="v-social-leftTxt" :href="`tel: ${Object.values(dbWeb.Miscellaneous)[0].misc_telefonos.telefonos1}`"> {{Object.values(dbWeb.Miscellaneous)[0].misc_telefonos.telefonos1}} </a>
           </div>
           <div class="item">
-            <a class="icon flaticon-email" href="mailto: info@clubsantapaula.net"></a>
-            <a class="v-social-leftTxt" href="mailto: info@clubsantapaula.net"> info@clubsantapaula.net</a>
+            <a class="icon flaticon-email" :href="`mailto: ${Object.values(dbWeb.Miscellaneous)[0].misc_correos.correos1}`"></a>
+            <a class="v-social-leftTxt" :href="`mailto: ${Object.values(dbWeb.Miscellaneous)[0].misc_correos.correos1}`"> {{Object.values(dbWeb.Miscellaneous)[0].misc_correos.correos1}}</a>
           </div>
         </div>
       <div class="v-social-rightbox">
@@ -137,6 +137,7 @@
 
 <script>
 import $ from 'jquery'
+import {mapState} from 'vuex'
 
 export default {
   name: 'Header',
@@ -144,6 +145,9 @@ export default {
     return {
       toggleValues: ['com', 'serv', 'us']
     }
+  },
+  computed:{
+    ...mapState(['dbWeb'])
   },
   methods:{
     addGlowClassButton(id){

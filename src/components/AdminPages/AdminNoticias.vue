@@ -376,7 +376,7 @@ export default {
       validAllFields(value){
         let txt = '';
         if(value === 'crear'){
-          txt = 'nuevo';
+          txt = 'nueva';
         }else if(value === 'select'){
           txt = 'select'
         }
