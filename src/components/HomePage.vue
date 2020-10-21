@@ -69,7 +69,7 @@
 	<!-- Seccion Destacados -->
 	
 	<!-- Seccion de Actualidad -->
-	<section class="premium-section">
+	<section class="premium-section overflow-hidden"  v-if="dbWeb.Noticias !== undefined">
 		<div class="pattern-layer"></div>
 		<div class="auto-wrapper">
 			<!-- Titulo de seccion -->
@@ -77,14 +77,14 @@
 				<div class="icon">
 					<img src="assets/images/icons/separater.png" alt="" />
 				</div>
-				<h2>Eventos y Noticias</h2>
+				<h2 id="beforeNoti">Eventos y Noticias</h2>
 				<div class="text">Entérate de los últimos eventos y noticias <br> de nuestro Club Santa Paula</div>
 			</div>
 			
-			<div class="d-flex align-items-center justify-content-center flex-row clearfix" v-if="dbWeb.Noticias !== undefined">
+			<div class="d-flex align-items-center justify-content-center flex-row flex-wrap clearfix">
 				
 				<!-- Bloque de Notica -->
-				<div class="security-block col-md-6 col-12" v-for="(noticia, index) in reverseArray" :key="noticia.noti_id">
+				<div class="security-block col-md-6 col-12" ref="anuncios" v-for="(noticia, index) in reverseArray" :key="noticia.noti_id" v-show="index < numElements + showIndex && index >= showIndex">
 					<div class="inner-box">
 					<div class="image">
 						<img :src="noticia.noti_fotos.imagen1.url" />
@@ -109,14 +109,28 @@
 				</div>
 				
 			</div>
+
+			<div class="bot-selectors d-flex flex-row align-items-center justify-content-center position-relative align-self-end" v-if="showSelect === true">
+				<div class="position-relative" style="width: 25px; height: 25px;">
+				<i class="icon left-arrow flaticon-arrowhead-pointing-to-the-right" style="transform: rotate(180deg);" @click="translateLeft()"></i>
+				</div>
+				<div class="bot-container">
+				<div class="inner-container d-flex flex-row justify-content-center align-items-center" ref="innerContainer">
+					<div v-for="index in number" :key="index">
+					<div :class="['circle', (index === 1)?'active':'']" :ref="`bot${index}`" :id="index">
+						<div class="text" @click="changeIndex(index)">{{index}}</div>
+					</div>
+					</div>
+				</div>
+				</div>
+				<div class="position-relative" style="width: 25px; height: 25px;">
+				<i class="icon right-arrow flaticon-arrowhead-pointing-to-the-right" @click="translateRight()"></i>
+				</div>
+			</div>
 			
 		</div>
 	</section>
 	<!-- Fin Seccion Actualidad -->
-
-	<!-- Seccion de Autogestion -->
-		<AutogestionSpan></AutogestionSpan>
-	<!-- Fin Seccion Autogestion -->
 	
 	<!-- Seccion de Comites -->
 	<section class="gallery-section">
@@ -170,6 +184,10 @@
 		</div>
 	</section>
 	<!-- Fin Seccion Comites -->
+
+	<!-- Seccion de Autogestion -->
+		<AutogestionSpan></AutogestionSpan>
+	<!-- Fin Seccion Autogestion -->
 	
 	<!-- Seccion Distribucion de Cuotas -->
     <section class="cuot-section">
@@ -323,6 +341,11 @@ import AutogestionSpan from '@/components/AutogestionSpan.vue'
   	data(){
 	  	return{
 			dataAdmis: [],
+        	showSelect: false,
+			number: 0,
+			numElements: 4,
+			showIndex: 0,
+			currentIndex: 1,
 			responsive:[
 				{breakpoint:{width:0, items:1}},
 				{breakpoint:{width:600, items:2}},
@@ -451,6 +474,41 @@ import AutogestionSpan from '@/components/AutogestionSpan.vue'
 			this.selectItemSelect(val)
 			this.$router.push({name:'Actualidad'})
 		},
+		translateRight(){
+			if(this.currentIndex <= this.maxShowNoti*((this.$refs.innerContainer.children.length/this.maxShowNoti)-1)){
+				this.$refs.innerContainer.style.transform = `translateX(${parseFloat(this.$refs.innerContainer.style.transform.split('(')[1].split(')')[0]) - 45}px)`
+				this.currentIndex ++;
+			}
+		},
+		translateLeft(){
+			if(this.currentIndex > 1){
+				this.$refs.innerContainer.style.transform = `translateX(${parseFloat(this.$refs.innerContainer.style.transform.split('(')[1].split(')')[0]) + 45}px)`
+				this.currentIndex --;
+			}
+		},
+		changeIndex(val){
+			this.$refs.anuncios.forEach(element => {
+				element.dataset.transitioned = 'true';
+				element.classList.toggle('translate');
+			})
+			setTimeout(() => {
+				this.showIndex = this.numElements*(val-1);
+			}, 700);
+			setTimeout(() => {
+				location.href = "#beforeNoti";
+				this.$refs.anuncios.forEach(element => {
+				element.dataset.transitioned = 'false';
+				element.classList.toggle('translate');
+				})
+			}, 800);
+			this.$refs.innerContainer.children.forEach(element => {
+				if(parseInt(element.children[0].id) !== val){
+				element.children[0].classList.remove('active');
+				}else if(parseInt(element.children[0].id) === val){
+				element.children[0].classList.add('active');
+				}
+			})
+		},
 	},
 	
 	mounted() {
@@ -459,6 +517,11 @@ import AutogestionSpan from '@/components/AutogestionSpan.vue'
 	Data y Observers
 	========================================
 	**/
+
+	if(this.reverseArray !== undefined && this.reverseArray.length/this.numElements > 1){
+      this.number = Math.ceil(this.reverseArray.length/this.numElements);
+      this.showSelect = true;
+    }
 
 	var waiting = setInterval(() => {
 		if(this.$refs.team !== undefined ){

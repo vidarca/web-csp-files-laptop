@@ -2,33 +2,33 @@
   <div id="actualidad" :class="(reverseArray[0] === undefined || reverseArray[0] === '')?'mih w-100 d-flex align-items-end justify-content-center':''">
     <!-- Seccion de Actualidad -->
     <section id="section1" ref="section1" class="v-act-wrapper justify-content-center align-items-center" v-show="reverseArray[0] !== undefined && showMin">
-        <div class="ext-wrapper w-75 m-auto">
-            <!-- Titulo de seccion -->
-            <div class="row">
-            <!-- Bloque de Notica -->
-                <div class="noti-block col-lg-12 col-sm-12 d-flex align-items-center" ref="anuncios" v-for="(anuncio, index) in reverseArray" :key="anuncio.noti_id" :id="anuncio.noti_seccion" data-transitioned="false" :data-index="index" v-show="index < 5 + showIndex && index >= showIndex">
-                    <div :class="['inner-box w-100 d-flex justify-content-center align-items-center', flexAndCliWidth(index)]" :data-index="index" :data-src="anuncio.noti_fotos['imagen1'].url"  ref="elLazy" >
-                      <div class="image w-100 d-flex align-items-center justify-content-center">
-                        <img  src=" " :ref="`foto${index}`"/>
-                      </div>
-                      <div class="lower-content w-100">
-                          <div class="upper-box">
-                            <h5>{{anuncio.noti_titulo}}</h5>
-                            <div class="text text-left w-100">{{anuncio.noti_prev}}</div>
-                            <div :class="['d-flex justify-content-between align-items-center w-100', (index % 2 === 0)?'flex-row':'flex-row-reverse']">
-                              <div class="d-inline-block">
-                                <div :class="['icon d-inline-block', iconAnun(index)]"></div>
-                                <div class="text ml-2 mr-1 d-inline-block">
-                                  {{calcTime(anuncio.noti_fecha)}}
-                                </div>
-                              </div>
-                              <a class="align-self-end" @click="anunSelected(index)">Leer más...</a>
+      <div class="ext-wrapper w-75 m-auto">
+          <!-- Titulo de seccion -->
+          <div class="row">
+          <!-- Bloque de Notica -->
+            <div class="noti-block col-lg-12 col-sm-12 align-items-center" ref="anuncios" v-for="(anuncio, index) in reverseArray" :key="anuncio.noti_id" :id="anuncio.noti_seccion" data-transitioned="false" :data-index="index" v-show="index < numElements + showIndex && index >= showIndex" style="display: flex">
+                <div :class="['inner-box w-100 d-flex justify-content-center align-items-center', flexAndCliWidth(index)]" :data-index="index" :data-src="anuncio.noti_fotos['imagen1'].url"  ref="elLazy" >
+                  <div class="image w-100 d-flex align-items-center justify-content-center">
+                    <img  src=" " :ref="`foto${index}`"/>
+                  </div>
+                    <div class="lower-content w-100">
+                      <div class="upper-box">
+                        <h5>{{anuncio.noti_titulo}}</h5>
+                        <div class="text text-left w-100">{{anuncio.noti_prev}}</div>
+                        <div :class="['d-flex justify-content-between align-items-center w-100', (index % 2 === 0)?'flex-row':'flex-row-reverse']">
+                          <div class="d-inline-block">
+                            <div :class="['icon d-inline-block', iconAnun(index)]"></div>
+                            <div class="text ml-2 mr-1 d-inline-block">
+                              {{calcTime(anuncio.noti_fecha)}}
                             </div>
+                          </div>
+                          <a class="align-self-end" @click="anunSelected(index)">Leer más...</a>
+                        </div>
                       </div>
                     </div>
                 </div>
             </div>
-        </div>
+          </div>
         <div class="bot-selectors d-flex flex-row align-items-center justify-content-center position-relative align-self-end" v-if="showSelect === true">
           <div class="position-relative" style="width: 25px; height: 25px;">
             <i class="icon left-arrow flaticon-arrowhead-pointing-to-the-right" style="transform: rotate(180deg);" @click="translateLeft()"></i>
@@ -52,11 +52,11 @@
     <section id="section2" ref="section2" class="selected-anun translate" v-show="!showMin">
       <div class="w-100 position-relative" v-if="!showMin">
         <div class="w-100 d-flex flex-row justify-content-between">
-          <img :src="reverseArray[anunSelecIndex].noti_fotos.imagen0.url" width="100%" height="auto" style="min-height: 300px;">
+          <img :src="reverseArray[anunSelecIndex].noti_fotos.imagen0.url" width="100%" height="auto" style="min-height: 300px; max-height: 600px">
         </div>
         <div class="info-container w-95">
           <h5 class="w-100">{{reverseArray[anunSelecIndex].noti_titulo}}</h5>
-          <img class="mr-3" :src="reverseArray[anunSelecIndex].noti_fotos.imagen1.url" align="left">
+          <img class="mr-3" :src="reverseArray[anunSelecIndex].noti_fotos.imagen1.url" align="left" width="360px" height="auto" style="max-height: 260px;">
           <div>
             <div v-if="reverseArray[anunSelecIndex].noti_fotos.imagen2" v-for="(item, index) in reverseArray[anunSelecIndex].noti_info.split(/[\r\n]+/)" :key="index">
               <div class="text" v-if="parrShow(index, '0')">
@@ -67,7 +67,7 @@
               {{reverseArray[anunSelecIndex].noti_info}}
             </div>
           </div>
-          <img v-if="reverseArray[anunSelecIndex].noti_fotos.imagen2" class="ml-3" :src="reverseArray[anunSelecIndex].noti_fotos.imagen2.url" align="right">
+          <img v-if="reverseArray[anunSelecIndex].noti_fotos.imagen2" class="ml-3" :src="reverseArray[anunSelecIndex].noti_fotos.imagen2.url" align="right" width="360px" height="auto" style="max-height: 260px;">
           <div v-for="(item, index) in reverseArray[anunSelecIndex].noti_info.split(/[\r\n]+/)" :key="item">
             <div class="text" v-if="parrShow(index, '1')">
               {{item}}
@@ -108,6 +108,7 @@ export default {
         reverseArray(){
             if(this.dbWeb.Noticias !== undefined){
             let array = Object.values(this.dbWeb.Noticias);
+            console.log(array);
             return array.reverse()
             }else{
             let array = []
@@ -217,6 +218,7 @@ export default {
         this.showIndex = this.numElements*(val-1);
       }, 700);
       setTimeout(() => {
+		    window.scrollTo(0, 0);
         this.$refs.anuncios.forEach(element => {
           element.dataset.transitioned = 'false';
           if(element.dataset.index % 2 === 0){
@@ -247,16 +249,20 @@ export default {
       }, 800);
     },
     regresar(){
-      this.$refs.section2.classList.toggle('translate');
-      setTimeout(() => {
-        this.showMin = true;
-        this.anunSelecIndex = false;
+      if(this.itemSelect !== false){
         this.resetItemSelect();
-      }, 700);
-      setTimeout(() => {
-		  window.scrollTo(0, 0);
-        this.$refs.section1.classList.toggle('translate');
-      }, 800);
+        this.$router.back()
+      }else{
+        this.$refs.section2.classList.toggle('translate');
+        setTimeout(() => {
+          this.showMin = true;
+          this.anunSelecIndex = false;
+        }, 700);
+        setTimeout(() => {
+        window.scrollTo(0, 0);
+          this.$refs.section1.classList.toggle('translate');
+        }, 800);
+      }
     },
     parrShow(index, val){
       if(val === '0'){
@@ -351,8 +357,8 @@ export default {
       })
     })
 
-    if(this.reverseArray.length/5 > 1){
-      this.number = Math.ceil(this.reverseArray.length/5);
+    if(this.reverseArray !== undefined && this.reverseArray.length/numElements > 1){
+      this.number = Math.ceil(this.reverseArray.length/numElements);
       this.showSelect = true;
     }
     
