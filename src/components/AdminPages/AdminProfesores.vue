@@ -167,6 +167,13 @@
                 <div class="important-field" v-show="showCreate && !validEmail(selectProfesor.correo)"></div>
               </div>
               <input class="w-100 position-relative" ref="nacimiento" type="date" v-model="selectProfesor.nacimiento" placeholder="Fecha de nacimiento">
+              <p>Indique a qué área de entrenamiento en el que se especializa el profesor</p>
+              <div class="w-100 d-flex align-items-center justify-content-center">
+                <p class="pr-2" style="font-weight: 400; white-space: nowrap;">
+                  Entrenador de 
+                </p>
+                <input class=" position-relative" ref="tipoent" type="text" v-model="selectProfesor.tipoent" placeholder="Ej. Tenis">
+              </div>
               <div class="select-field">
               <p>Seleccione la opción del comité al que pertenece el profesor</p>
               <select class="custom-select" v-model="selectProfesor.coid">
@@ -292,6 +299,13 @@
                 <div class="important-field" v-show="showCreate && !validEmail(nuevoProfesor.correo)"></div>
               </div>
               <input class="w-100 position-relative" ref="nacimiento" type="date" v-model="nuevoProfesor.nacimiento" placeholder="Fecha de nacimiento">
+              <p>Indique a qué área de entrenamiento en el que se especializa el profesor</p>
+              <div class="w-100 d-flex align-items-center justify-content-start">
+                <p class="pr-2" style="font-weight: 400; white-space: nowrap;">
+                  Entrenador de 
+                </p>
+                <input class=" position-relative" ref="tipoent" type="text" v-model="nuevoProfesor.tipoent" placeholder="Ej. Tenis">
+              </div>
               <div class="select-field">
               <p>Seleccione la opción del comité al que pertenece el profesor</p>
               <select class="custom-select" v-model="nuevoProfesor.coid">
@@ -361,6 +375,7 @@ export default {
           nombre: '',
           telefonos: [],
           cv: '',
+          tipoent: '',
         },
       }
     },
@@ -391,6 +406,7 @@ export default {
             correo: Object.values(this.dbWeb.Profesores).reverse()[index].prof_correo,
             imagen: Object.values(this.dbWeb.Profesores).reverse()[index].prof_foto,
             nombre: Object.values(this.dbWeb.Profesores).reverse()[index].prof_nombre,
+            tipoent: Object.values(this.dbWeb.Profesores).reverse()[index].prof_tipoent,
             telefonos: Object.values(this.dbWeb.Profesores).reverse()[index].prof_telefonos,
             cv: Object.values(this.dbWeb.Profesores).reverse()[index].prof_cv,
           };
@@ -430,6 +446,7 @@ export default {
           this.nuevoProfesor.cv = '';
           this.nuevoProfesor.id = '';
           this.nuevoProfesor.ci = '';
+          this.nuevoProfesor.tipoent = '';
         }else if(value === 'select'){
           this.selectProfesor.correo = '';
           this.selectProfesor.imagen = '';
@@ -440,6 +457,7 @@ export default {
           this.selectProfesor.cv = '';
           this.selectProfesor.id = '';
           this.selectProfesor.ci = '';
+          this.selectProfesor.tipoent = '';
         }
 
         this.files = {};
@@ -540,6 +558,7 @@ export default {
                 ci: this.nuevoProfesor.ci,
                 nacimiento: this.nuevoProfesor.nacimiento,
                 correo: this.nuevoProfesor.correo,
+                tipoent: this.nuevoProfesor.tipoent,
                 archivos:{
                   image: this.nuevoProfesor.imagen,
                   cv: this.nuevoProfesor.cv,
@@ -580,6 +599,7 @@ export default {
                 ci: this.selectProfesor.ci,
                 nacimiento: this.selectProfesor.nacimiento,
                 correo: this.selectProfesor.correo,
+                tipoent: this.selectProfesor.tipoent,
                 archivos:{
                   image: this.selectProfesor.imagen,
                   cv: this.selectProfesor.cv,

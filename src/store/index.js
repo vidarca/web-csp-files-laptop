@@ -957,6 +957,7 @@ export default new Vuex.Store({
                 prof_foto: [],
                 prof_id: pushdbRef.key,
                 prof_nombre: data.profesor.nombre,
+                prof_tipoent: data.profesor.tipoent,
                 prof_telefonos:data.profesor.telefonos,
               }
               
@@ -1003,6 +1004,7 @@ export default new Vuex.Store({
             prof_foto: [],
             prof_id: pushdbRef.key,
             prof_nombre: data.profesor.nombre,
+            prof_tipoent: data.profesor.tipoent,
             prof_telefonos:data.profesor.telefonos,
           }
 
@@ -1847,6 +1849,7 @@ export default new Vuex.Store({
                 prof_foto: [],
                 prof_id: data.profesor.id,
                 prof_nombre: data.profesor.nombre,
+                prof_tipoent: data.profesor.tipoent,
                 prof_telefonos:data.profesor.telefonos,
               }
               
@@ -1894,6 +1897,7 @@ export default new Vuex.Store({
             prof_foto: [],
             prof_id: data.profesor.id,
             prof_nombre: data.profesor.nombre,
+            prof_tipoent: data.profesor.tipoent,
             prof_telefonos:data.profesor.telefonos,
           }
 

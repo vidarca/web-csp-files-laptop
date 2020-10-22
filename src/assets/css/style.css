@@ -2485,7 +2485,7 @@ Menu Responsive
 	align-items: center;
 	padding-left:0;
 	width: 100%;
-	height: 60px;
+	height: auto;
 }
 
 .security-block .inner-box .lower-content .upper-box .icon{
@@ -2535,7 +2535,7 @@ Menu Responsive
 	align-items: center;
 	padding-left:0;
 	width: 100%;
-	height: 100px;
+	height: auto;
 }
 
 .security-block .inner-box .lower-content .lower-box a{
@@ -2551,6 +2551,19 @@ Menu Responsive
 }
 
 .security-block .inner-box .lower-content .lower-box .text{
+	position:relative;
+	color:#000000;
+	font-size:15px;
+	font-weight:300;
+	width: 70%;
+	transition:all 900ms ease;
+	-moz-transition:all 900ms ease;
+	-webkit-transition:all 900ms ease;
+	-ms-transition:all 900ms ease;
+	-o-transition:all 900ms ease;
+}
+
+.security-block .inner-box .lower-content .upper-box .text{
 	position:relative;
 	color:#000000;
 	font-size:15px;
@@ -4844,168 +4857,44 @@ Seccion 2 Pagina de Actualidad
 	background-color:#f0f2f5;
 }
 
-#comites .premium-section{
-	position:relative;
-	padding: 5% 0px;
-	background-color:#f0f2f5;
-}
-
 #comites .premium-section .pattern-layer{
 	display: none;
-}
-
-#comites .security-block{
-	position:relative;
-	margin-bottom:30px;
-}
-
-#comites .security-block .inner-box{
-	position:relative;
-	background-color:#ffffff;
-	border-radius: 15px;
-}
-
-#comites .security-block .inner-box .image{
-	position:relative;
-	overflow:hidden;
 }
 
 #comites .security-block .inner-box .image:before{
     display: none;
 }
 
-#comites .security-block .inner-box .image img{
-	position:relative;
-	width:100%;
-	display:block;
-	min-height: 260px;
-	background-color: grey;
-	border-top-right-radius: 15px;
-	border-top-left-radius: 15px;
-	transition:all 900ms ease;
-	-moz-transition:all 900ms ease;
-	-webkit-transition:all 900ms ease;
-	-ms-transition:all 900ms ease;
-	-o-transition:all 900ms ease;
-}
-
 #comites .security-block .inner-box:hover .image img{
 	transform:none;
 }
 
-#comites .security-block .inner-box .lower-content{
+
+#comites .comi-profesores .security-block .inner-box .lower-content .lower-box{
+	justify-content: center;
+}
+
+#comites .comi-profesores .security-block .inner-box .lower-content .lower-box .icon{
 	position:relative;
-	padding:15px 30px;
-	height: 95px;
+	width: 50px;
+	height: 50px;
 }
 
-#comites .security-block .inner-box .lower-content .hover-bg-color{
-	position:absolute;
-	left:0px;
-	top:0px;
-	right:0px;
-	bottom:0px;
-}
-
-#comites .security-block .inner-box .lower-content .hover-bg-color:before{
-	position:absolute;
-	content:'';
-	left:0%;
-	width:0%;
-	top:0px;
-	height:50%;
-	background-color:#FE5D25;
-	transition:all 900ms ease;
-	-moz-transition:all 900ms ease;
-	-webkit-transition:all 900ms ease;
-	-ms-transition:all 900ms ease;
-	-o-transition:all 900ms ease;
-}
-
-#comites .security-block .inner-box .lower-content .hover-bg-color:after{
-	position:absolute;
-	border-bottom-left-radius: 0px;
-	border-bottom-right-radius: 15px;
-	content:'';
-	right:0%;
-	bottom:0px;
-	width:0%;
-	height:50%;
-	background-color:#FE5D25;
-	transition:all 900ms ease;
-	-moz-transition:all 900ms ease;
-	-webkit-transition:all 900ms ease;
-	-ms-transition:all 900ms ease;
-	-o-transition:all 900ms ease;
-}
-
-#comites .security-block .inner-box:hover .lower-content .hover-bg-color:before,
-#comites .security-block .inner-box:hover .lower-content .hover-bg-color:after{
-	width:100%;
-}
-
-#comites .security-block .inner-box:hover .lower-content .hover-bg-color:after{
-	border-bottom-left-radius: 15px;
-}
-
-#comites .security-block .inner-box .lower-content .upper-box{
-	position:relative;
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	align-items: center;
-	padding-left:0;
+#comites .comi-profesores .security-block .inner-box .lower-content .lower-box .icon::before{
+	position: absolute;
+	top: 0;
+	left: 0;
+	color:#09197d;
 	width: 100%;
 	height: 100%;
-}
-
-#comites .security-block .inner-box .lower-content .upper-box .icon{
-	position:relative;
-	left:none;
-	top:none;
-	color:#09197d;
-	font-size:30px;
-	line-height:1em;
-	transition:all 900ms ease;
-	-moz-transition:all 900ms ease;
-	-webkit-transition:all 900ms ease;
-	-ms-transition:all 900ms ease;
-	-o-transition:all 900ms ease;
-}
-
-#comites .security-block .inner-box .lower-content .upper-box h5{
-	position:relative;
+	line-height: 50px;
 	text-align: center;
-	width: 100%;
-	font-size: 20px;
-	font-weight:500;
-	line-height:1.3em;
-	color:#222222;
+	font-size:50px;
 	transition:all 900ms ease;
 	-moz-transition:all 900ms ease;
 	-webkit-transition:all 900ms ease;
 	-ms-transition:all 900ms ease;
 	-o-transition:all 900ms ease;
-}
-
-#comites .security-block .inner-box .lower-content .text{
-	position:relative;
-	color:#000000;
-	font-size:15px;
-	line-height:1.8em;
-	margin-top:25px;
-	font-weight:300;
-	transition:all 900ms ease;
-	-moz-transition:all 900ms ease;
-	-webkit-transition:all 900ms ease;
-	-ms-transition:all 900ms ease;
-	-o-transition:all 900ms ease;
-}
-
-#comites .security-block .inner-box:hover .lower-content .text,
-#comites .security-block .inner-box:hover .lower-content .upper-box h5,
-#comites .security-block .inner-box:hover .lower-content .upper-box .icon{
-	color:#ffffff;
 }
 
 /*** 

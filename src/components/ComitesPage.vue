@@ -51,7 +51,7 @@
         <section id="section2" ref="section2" class="selected-comi translate" v-show="!showMin">
 
           <!-- Banner con bootstrap -->
-          <section class="banner-section">
+          <section class="banner-section m-0">
             <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
               <div class="carousel-item active">
@@ -78,7 +78,7 @@
         
         
           <!-- Seccion Destacados -->
-          <section class="featured-section">
+          <section class="featured-section m-0">
             <div class="auto-wrapper ">
               <div class="inner-container ">
                 
@@ -121,17 +121,29 @@
 
             <section class="comi-info overflow-hidden" v-if="comiSelecIndex !== false && Object.values(dbWeb.Comites)[comiSelecIndex].comi_info !== undefined && Object.values(dbWeb.Comites)[comiSelecIndex].comi_info !== ''">
 
+              <h3 class="mb-2 w-100 text-center" id="beforeNoti">
+                {{Object.values(dbWeb.Comites)[comiSelecIndex].comi_nombre}}
+              </h3>
+
+              <div class="d-flex flex-row align-items-center justify-content-center w-100">
+                <div class="text text-center col-6 p-0">
+                  {{Object.values(dbWeb.Comites)[comiSelecIndex].comi_info}}
+                </div>
+                <img :src="Object.values(dbWeb.Comites)[comiSelecIndex].comi_foto" class="col-6 p-0">
+              </div>
+
             </section>
 
             <!-- Fin de Seccion de Informacion -->
 
             <!-- Seccion de Noticias -->
             <section class="comi-noticias overflow-hidden" v-if="comiSelecIndex !== false && showNoticias(comiSelecIndex)">
-              <h4 class="mb-2" id="beforeNoti">
-                Noticias del {{Object.values(dbWeb.Comites)[comiSelecIndex]}}
-              </h4>
+              
+              <h3 class="mb-2 w-100 text-center" id="beforeNoti">
+                Noticias del {{Object.values(dbWeb.Comites)[comiSelecIndex].comi_nombre}}
+              </h3>
 
-              <div class="ext-wrapper w-75 m-auto">
+              <div class="ext-wrapper w-100 m-auto">
                 <!-- Bloque de Notica -->
                 <div class="d-flex align-items-center justify-content-center flex-row clearfix">
       
@@ -144,7 +156,7 @@
                     <div class="lower-content d-flex flex-column align-items-center justify-content-center">
                       <div class="hover-bg-color"></div>
                       <div class="upper-box">
-                        <div :class="['icon mr-1', iconSelect(index)]"></div>
+                        <div :class="['icon mr-1', iconSelectNoticia(index)]"></div>
                         <h5 class="ml-1 w-100 text-left">{{noticia.noti_titulo}}</h5>
                       </div>
                       <div class="lower-box">
@@ -184,6 +196,66 @@
 
             <!-- Fin de Seccion de Noticias -->
 
+            <!-- Seccion de profesores -->
+
+            <section class="comi-profesores overflow-hidden" v-if="comiSelecIndex !== false && showProfesores(comiSelecIndex)">
+
+              <h3 class="mb-2 w-100 text-center" id="beforeProfe">
+                Instructores Asociados al {{Object.values(dbWeb.Comites)[comiSelecIndex].comi_nombre}}
+              </h3>
+
+              <div class="ext-wrapper w-100 m-auto">
+                <div class="d-flex align-items-center justify-content-center flex-row clearfix">
+      
+                  <div class="security-block col-md-4 col-6" ref="anuncios" v-for="(profesor, index) in Object.values(dbWeb.Profesores)" :key="profesor.prof_id" :data-index="index" v-show="index < numElements + showIndex && index >= showIndex && profesor.comi_id === Object.values(dbWeb.Comites)[comiSelecIndex].comi_nombre">
+                    <div class="inner-box">
+                    <div class="image">
+                      <img :src="profesor.prof_foto.url" />
+                    </div>
+                    <div class="lower-content d-flex flex-column align-items-center justify-content-center">
+                      <div class="hover-bg-color"></div>
+                      <div class="upper-box">
+                        <div :class="['icon mr-1', iconSelectProfesor(index)]"></div>
+                        <div class="pl-2 d-flex flex-column align-items-center justify-content-center w-100">
+                          <h5 class="ml-1 w-100 text-left">{{profesor.prof_nombre}}</h5>
+                          <div class="text text-left w-100">
+                            Entrenador de {{profesor.prof_tipoent.toLowerCase()}}
+                          </div>
+                        </div>
+                      </div>
+                      <div class="lower-box">
+                        <div class="text text-center" @click="openFile(profesor.prof_cv.url)" style="cursor: pointer">
+                          Clic aquí para descagargar el currículum del profesor
+                        </div>
+                      </div>
+                    </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="bot-selectors w-100 d-flex flex-row align-items-center justify-content-center position-relative align-self-center" v-if="showSelectProfesores === true">
+                  <div class="position-relative" style="width: 25px; height: 25px;">
+                    <i class="icon left-arrow flaticon-arrowhead-pointing-to-the-right" style="transform: rotate(180deg);" @click="translateLeft('profesores')"></i>
+                  </div>
+                  <div class="bot-container">
+                    <div class="inner-container d-flex flex-row justify-content-center align-items-center" ref="innerContainerProfesores">
+                      <div v-for="index in numberProfesores" :key="index">
+                        <div :class="['circle', (index === 1)?'active':'']" :ref="`bot${index}`" :id="index">
+                          <div class="text" @click="changeIndex(index, 'profesores')">{{index}}</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="position-relative" style="width: 25px; height: 25px;">
+                    <i class="icon right-arrow flaticon-arrowhead-pointing-to-the-right" @click="translateRight('profesores')"></i>
+                  </div>
+                </div>
+              </div>
+
+            </section>
+
+            <!-- Fin de Seccion de profesores -->
+
             <div class="w-100 d-flex flex-row justify-content-end align-items-center m-auto">
               <button class="btn btn-dark text-right mb-3 mt-3" @click="regresar()">Regresar <i class="icon flaticon-back-arrow ml-1"></i></button>
             </div>
@@ -213,6 +285,11 @@ export default {
         numberSection1: 0,
         numElementsSection1: 6,
         currentIndexSection1: 1,
+        showIndexProfesores: 0,
+        showSelectProfesores: false,
+        numberProfesores: 0,
+        numElementsProfesores: 6,
+        currentIndexProfesores: 1,
         comiSelecIndex: false,
       }
     },
@@ -278,6 +355,92 @@ export default {
           return ''
         }
       },
+      iconSelectProfesor(index){
+        if(Object.values(this.dbWeb.Profesores)[index].comi_id === 'Comité de Tenis'){
+          return 'flaticon-racket-and-tennis-ball'
+        }else if(Object.values(this.dbWeb.Profesores)[index].comi_id === 'Comité de Alimentos y Bebidas'){
+          return 'flaticon-restaurant'
+        }else if(Object.values(this.dbWeb.Profesores)[index].comi_id === 'Comité de Gimnasio'){
+          return 'flaticon-barbell'
+        }else if(Object.values(this.dbWeb.Profesores)[index].comi_id === 'Comité de Admisión'){
+          return 'flaticon-lista-de-verificacion'
+        }else if(Object.values(this.dbWeb.Profesores)[index].comi_id === 'Comité de Artes Marciales'){
+          return 'flaticon-martial-arts'
+        }else if(Object.values(this.dbWeb.Profesores)[index].comi_id === 'Comité de Comunicaciones'){
+          return 'flaticon-megafono'
+        }else if(Object.values(this.dbWeb.Profesores)[index].comi_id === 'Comité de Cultura'){
+          return 'flaticon-mascaras-felices-y-tristes'
+        }else if(Object.values(this.dbWeb.Profesores)[index].comi_id === 'Comité de Dominó'){
+          return 'flaticon-domino'
+        }else if(Object.values(this.dbWeb.Profesores)[index].comi_id === 'Comité Juvenil'){
+          return 'flaticon-chico'
+        }else if(Object.values(this.dbWeb.Profesores)[index].comi_id === 'Comité de Bailoterapia'){
+          return 'flaticon-baile'
+        }else if(Object.values(this.dbWeb.Profesores)[index].comi_id === 'Comité de Natación'){
+          return 'flaticon-swimming'
+        }else if(Object.values(this.dbWeb.Profesores)[index].comi_id === 'Comité de Squash'){
+          return 'flaticon-squash-rackets'
+        }else if(Object.values(this.dbWeb.Profesores)[index].comi_id === 'Comité de Guardería'){
+          return 'flaticon-chupete'
+        }else if(Object.values(this.dbWeb.Profesores)[index].comi_id === 'Comité Social'){
+          return 'flaticon-asistencia-social'
+        }else if(Object.values(this.dbWeb.Profesores)[index].comi_id === 'Comité de TRX'){
+          return 'flaticon-suspension'
+        }else if(Object.values(this.dbWeb.Profesores)[index].comi_id === 'Comité de Infraestructura'){
+          return 'flaticon-edificio'
+        }else if(Object.values(this.dbWeb.Profesores)[index].comi_id === 'Comité de Finanzas'){
+          return 'flaticon-ahorrar-dinero'
+        }else if(Object.values(this.dbWeb.Profesores)[index].comi_id === 'Comité de Reforma de Estatutos'){
+          return 'flaticon-libro-de-leyes'
+        }else if(Object.values(this.dbWeb.Profesores)[index].comi_id === 'Comité de Tribunal Disciplinario'){
+          return 'flaticon-subasta'
+        }else{
+          return ''
+        }
+      },
+      iconSelectNoticia(index){
+        if(this.reverseArray[index].noti_seccion === 'Comité de Tenis'){
+          return 'flaticon-racket-and-tennis-ball'
+        }else if(this.reverseArray[index].noti_seccion === 'Comité de Alimentos y Bebidas'){
+          return 'flaticon-restaurant'
+        }else if(this.reverseArray[index].noti_seccion === 'Comité de Gimnasio'){
+          return 'flaticon-barbell'
+        }else if(this.reverseArray[index].noti_seccion === 'Comité de Admisión'){
+          return 'flaticon-lista-de-verificacion'
+        }else if(this.reverseArray[index].noti_seccion === 'Comité de Artes Marciales'){
+          return 'flaticon-martial-arts'
+        }else if(this.reverseArray[index].noti_seccion === 'Comité de Comunicaciones'){
+          return 'flaticon-megafono'
+        }else if(this.reverseArray[index].noti_seccion === 'Comité de Cultura'){
+          return 'flaticon-mascaras-felices-y-tristes'
+        }else if(this.reverseArray[index].noti_seccion === 'Comité de Dominó'){
+          return 'flaticon-domino'
+        }else if(this.reverseArray[index].noti_seccion === 'Comité Juvenil'){
+          return 'flaticon-chico'
+        }else if(this.reverseArray[index].noti_seccion === 'Comité de Bailoterapia'){
+          return 'flaticon-baile'
+        }else if(this.reverseArray[index].noti_seccion === 'Comité de Natación'){
+          return 'flaticon-swimming'
+        }else if(this.reverseArray[index].noti_seccion === 'Comité de Squash'){
+          return 'flaticon-squash-rackets'
+        }else if(this.reverseArray[index].noti_seccion === 'Comité de Guardería'){
+          return 'flaticon-chupete'
+        }else if(this.reverseArray[index].noti_seccion === 'Comité Social'){
+          return 'flaticon-asistencia-social'
+        }else if(this.reverseArray[index].noti_seccion === 'Comité de TRX'){
+          return 'flaticon-suspension'
+        }else if(this.reverseArray[index].noti_seccion === 'Comité de Infraestructura'){
+          return 'flaticon-edificio'
+        }else if(this.reverseArray[index].noti_seccion === 'Comité de Finanzas'){
+          return 'flaticon-ahorrar-dinero'
+        }else if(this.reverseArray[index].noti_seccion === 'Comité de Reforma de Estatutos'){
+          return 'flaticon-libro-de-leyes'
+        }else if(this.reverseArray[index].noti_seccion === 'Comité de Tribunal Disciplinario'){
+          return 'flaticon-subasta'
+        }else{
+          return ''
+        }
+      },
       comiSelected(val){
         this.comiSelecIndex = val;
         this.$refs.section1.classList.toggle('translate');
@@ -308,8 +471,38 @@ export default {
       },
       showNoticias(val){
         if(this.dbWeb.Noticias !== undefined){
+          let count = 0;
           for(let i = 0; i < Object.values(this.dbWeb.Noticias).length; i++){
             if(Object.values(this.dbWeb.Noticias)[i].noti_seccion === Object.values(this.dbWeb.Comites)[val].comi_nombre){
+              count ++;
+            }
+          }
+          if(count/this.numElements > 1){
+            this.number = Math.ceil(count/this.numElements);
+            this.showSelect = true;
+          }
+          for(let i = 0; i < Object.values(this.dbWeb.Noticias).length; i++){
+            if(Object.values(this.dbWeb.Noticias)[i].noti_seccion === Object.values(this.dbWeb.Comites)[val].comi_nombre){
+              return true
+            }
+            return false
+          }
+        }
+      },
+      showProfesores(val){
+        if(this.dbWeb.Profesores !== undefined){
+          let count = 0;
+          for(let i = 0; i < Object.values(this.dbWeb.Profesores).length; i++){
+            if(Object.values(this.dbWeb.Profesores)[i].comi_id === Object.values(this.dbWeb.Comites)[val].comi_nombre){
+              count ++;
+            }
+          }
+          if(count/this.numElementsProfesores > 1){
+            this.numberProfesores = Math.ceil(count/this.numElementsProfesores);
+            this.showSelectProfesores = true;
+          }
+          for(let i = 0; i < Object.values(this.dbWeb.Profesores).length; i++){
+            if(Object.values(this.dbWeb.Profesores)[i].comi_id === Object.values(this.dbWeb.Comites)[val].comi_nombre){
               return true
             }
             return false
@@ -358,6 +551,11 @@ export default {
             this.$refs.innerContainerSection1.style.transform = `translateX(${parseFloat(this.$refs.innerContainerSection1.style.transform.split('(')[1].split(')')[0]) - 45}px)`
             this.currentIndexSection1 ++;
           }
+        }else if(val === "profesores"){
+          if(this.currentIndexProfesores <= 5*((this.$refs.innerContainerProfesores.children.length/5)-1)){
+            this.$refs.innerContainerProfesores.style.transform = `translateX(${parseFloat(this.$refs.innerContainerProfesores.style.transform.split('(')[1].split(')')[0]) - 45}px)`
+            this.currentIndexProfesores ++;
+          }
         }else{
           if(this.currentIndex <= 5*((this.$refs.innerContainer.children.length/5)-1)){
             this.$refs.innerContainer.style.transform = `translateX(${parseFloat(this.$refs.innerContainer.style.transform.split('(')[1].split(')')[0]) - 45}px)`
@@ -368,9 +566,14 @@ export default {
       translateLeft(val){
         if(val === "section1"){
           if(this.currentIndexSection1 > 1){
-          this.$refs.innerContainerSection1.style.transform = `translateX(${parseFloat(this.$refs.innerContainerSection1.style.transform.split('(')[1].split(')')[0]) + 45}px)`
-          this.currentIndexSection1 --;
-        }
+            this.$refs.innerContainerSection1.style.transform = `translateX(${parseFloat(this.$refs.innerContainerSection1.style.transform.split('(')[1].split(')')[0]) + 45}px)`
+            this.currentIndexSection1 --;
+          }
+        }else if(val === "profesores"){
+          if(this.currentIndexProfesores > 1){
+            this.$refs.innerContainerProfesores.style.transform = `translateX(${parseFloat(this.$refs.innerContainerProfesores.style.transform.split('(')[1].split(')')[0]) + 45}px)`
+            this.currentIndexProfesores --;
+          }
         }else{
           if(this.currentIndex > 1){
             this.$refs.innerContainer.style.transform = `translateX(${parseFloat(this.$refs.innerContainer.style.transform.split('(')[1].split(')')[0]) + 45}px)`
@@ -401,6 +604,28 @@ export default {
               element.children[0].classList.add('active');
             }
           })
+        }else if(val2 === "profesores"){
+          this.$refs.comites.forEach(element => {
+            element.dataset.transitioned = 'true';
+            element.classList.toggle('translate');
+          })
+          setTimeout(() => {
+            this.showIndexProfesores = this.numElementsProfesores*(val-1);
+          }, 700);
+          setTimeout(() => {
+            window.scrollTo(0,0)
+            this.$refs.comites.forEach(element => {
+              element.dataset.transitioned = 'false';
+              element.classList.toggle('translate');
+            })
+          }, 800);
+          this.$refs.innerContainerProfesores.children.forEach(element => {
+            if(parseInt(element.children[0].id) !== val){
+              element.children[0].classList.remove('active');
+            }else if(parseInt(element.children[0].id) === val){
+              element.children[0].classList.add('active');
+            }
+          })
         }else{
           this.$refs.anuncios.forEach(element => {
             element.dataset.transitioned = 'true';
@@ -425,6 +650,11 @@ export default {
           })
         }
       },
+      openFile(url){
+        if(url !== '' && url !== undefined){
+          window.open(url,'_blank');
+        }
+      }
     },
 
     mounted() {
@@ -433,11 +663,6 @@ export default {
         this.$refs.section2.classList.toggle('translate')
         this.showMin = false;
         this.comiSelecIndex = this.itemSelect;
-      }
-
-      if(this.reverseArray !== undefined && this.reverseArray.length/this.numElements > 1){
-        this.number = Math.ceil(this.reverseArray.length/this.numElements);
-        this.showSelect = true;
       }
 
       if(this.dbWeb.Comites !== undefined && Object.values(this.dbWeb.Comites).length/this.numElementsSection1 > 1){
@@ -458,5 +683,9 @@ export default {
     -moz-transition: all 900ms ease;
     -o-transition: all 900ms ease;
     -webkit-transition: all 900ms ease;
+  }
+
+  #section2 section{
+    margin: 30px 0;
   }
 </style>
