@@ -1515,6 +1515,120 @@ export default new Vuex.Store({
             this.commit('successAdvise', success)
           }
         }
+      }else if(data.target === 'Secciones_Extra'){
+        
+        state.dbImg = [];
+
+        for(let k = 0; k < Object.values(data.seccion.archivos).length; k++){
+          if(Object.values(data.seccion.archivos)[k].id !== undefined){
+            state.dbImg[Object.values(data.seccion.archivos)[k].id] = Object.values(data.seccion.archivos)[k];
+          }else{
+            state.dbImg[k] = '';
+          }
+        }
+        
+        let storageRef = [];
+        let percentage = [];
+        let order = [];
+        let task = {};
+        let i = 0;
+        let n = 0;
+        let j = 0;
+
+        const dbRef = firebase.database().ref(`${data.target}`);
+        const pushdbRef = dbRef.push();
+
+        let dataRef = {
+          sec_id: pushdbRef.key,
+        }
+
+        Object.values(data.archivos).forEach(element => {
+          storageRef= firebase.storage().ref(`/${data.target}/${dataRef.sec_id}/${data.seccion.archivos[`imagen${element.id}`].nombre}`);
+          task[`${element.id}`] = storageRef.put(element);
+          i++;
+        })
+        
+        if(Object.values(task).length !== 0){
+          Object.values(data.archivos).forEach(element => {
+            task[`${element.id}`].on('state_changed', snapshot => {
+              percentage[snapshot.task.blob_.data_.id] = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+              state.dbImg[snapshot.task.blob_.data_.id].uploadPercentage = percentage[snapshot.task.blob_.data_.id];
+              if(state.dbImg[snapshot.task.blob_.data_.id].uploadPercentage === 100 && order.length < Object.values(data.archivos).length){
+                order.push(snapshot.task.blob_.data_.id)
+              }
+            }, error => {
+              console.log(error.message);
+            }, () =>{
+
+              dataRef = {
+                sec_id: pushdbRef.key,
+                sec_pag: data.seccion.secpag,
+                sec_nombre: data.seccion.secnom,
+                sec_contenido: data.seccion.contenido,
+                sec_imagen_seccion: data.seccion.imagenseccion,
+                sec_fotos: [],
+              }
+              
+              let storageRef= firebase.storage().ref(`/${data.target}/${dataRef.sec_id}/${data.seccion.archivos[`imagen${element.id}`].nombre}`);
+              
+              storageRef.getDownloadURL().then(url => {
+                let val = order[n];
+                for(let m = 0; m < Object.values(data.seccion.archivos).length; m++){
+                  if(Object.values(data.seccion.archivos)[m].id !== undefined && val === Object.values(data.seccion.archivos)[m].id){
+                    state.dbImg[val].url = url;
+                    state.dbImg[val].nombre = Object.values(data.seccion.archivos)[m].nombre
+                  }
+                }
+                n ++;
+                if(n >= Object.values(data.archivos).length){
+
+                  for(let i = 0; i < Object.values(state.dbImg).length; i++){
+                    if(state.dbImg[i].nombre !== undefined){
+                      dataRef.sec_fotos[`imagen${state.dbImg[i].id}`] = {
+                        nombre: state.dbImg[i].nombre,
+                        url: state.dbImg[i].url,
+                      }
+                    }else{
+                      dataRef.sec_fotos[`imagen${i}`] = '';
+                    }
+                  }
+
+                  if(n >= Object.values(data.archivos).length){
+                    pushdbRef.set(dataRef);
+                    state.crearDBVals = false;
+                    const success = {
+                      0: 'successUpload',
+                      1: 'Se ha creado exitosamente'
+                    }
+                    this.commit('successAdvise', success)
+                  }
+                }
+              })
+              j++;
+            })
+          })
+        }else{
+
+          dataRef = {
+            sec_id: pushdbRef.key,
+            sec_pag: data.seccion.secpag,
+            sec_nombre: data.seccion.secnom,
+            sec_contenido: data.seccion.contenido,
+            sec_imagen_seccion: data.seccion.imagenseccion,
+            sec_fotos: data.seccion.archivos,
+          }
+
+          n++;
+          if(n >= Object.values(data.archivos).length){
+            pushdbRef.set(dataRef);
+            state.crearDBVals = false;
+            const success = {
+              0: 'successUpload',
+              1: 'Se ha creado exitosamente'
+            }
+            this.commit('successAdvise', success)
+          }
+        }
       }
     },
     updateDB(state, data){
@@ -2522,6 +2636,115 @@ export default new Vuex.Store({
           n++;
           if(n >= Object.values(data.archivos).length){
             const dbRef = firebase.database().ref(`${data.target}/${data.miscellaneous.id}`);
+            dbRef.set(dataRef);
+            state.crearDBVals = false;
+            const success = {
+              0: 'successUpload',
+              1: 'Se ha creado exitosamente'
+            }
+            this.commit('successAdvise', success)
+          }
+        }
+      }else if(data.target === 'Secciones_Extra'){
+        
+        state.dbImg = [];
+
+        for(let k = 0; k < Object.values(data.seccion.archivos).length; k++){
+          if(Object.values(data.seccion.archivos)[k].id !== undefined){
+            state.dbImg[Object.values(data.seccion.archivos)[k].id] = Object.values(data.seccion.archivos)[k];
+          }else{
+            state.dbImg[k] = '';
+          }
+        }
+        
+        let storageRef = [];
+        let percentage = [];
+        let order = [];
+        let task = {};
+        let i = 0;
+        let n = 0;
+        let j = 0;
+
+        Object.values(data.archivos).forEach(element => {
+          storageRef= firebase.storage().ref(`/${data.target}/${data.seccion.id}/${data.seccion.archivos[`imagen${element.id}`].nombre}`);
+          task[`${element.id}`] = storageRef.put(element);
+          i++;
+        })
+        
+        if(Object.values(task).length !== 0){
+          Object.values(data.archivos).forEach(element => {
+            task[`${element.id}`].on('state_changed', snapshot => {
+              percentage[snapshot.task.blob_.data_.id] = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+              state.dbImg[snapshot.task.blob_.data_.id].uploadPercentage = percentage[snapshot.task.blob_.data_.id];
+              if(state.dbImg[snapshot.task.blob_.data_.id].uploadPercentage === 100 && order.length < Object.values(data.archivos).length){
+                order.push(snapshot.task.blob_.data_.id)
+              }
+            }, error => {
+              console.log(error.message);
+            }, () =>{
+              
+              let dataRef = {
+                sec_id: data.seccion.id,
+                sec_pag: data.seccion.secpag,
+                sec_nombre: data.seccion.secnom,
+                sec_contenido: data.seccion.contenido,
+                sec_imagen_seccion: data.seccion.imagenseccion,
+                sec_fotos: [],
+              }
+              
+              let storageRef= firebase.storage().ref(`/${data.target}/${data.seccion.id}/${data.seccion.archivos[`imagen${element.id}`].nombre}`);
+
+              storageRef.getDownloadURL().then(url => {
+                let val = order[n];
+                for(let m = 0; m < Object.values(data.seccion.archivos).length; m++){
+                  if(Object.values(data.seccion.archivos)[m].id !== undefined && val === Object.values(data.seccion.archivos)[m].id){
+                    state.dbImg[val].url = url;
+                    state.dbImg[val].nombre = Object.values(data.seccion.archivos)[m].nombre
+                  }
+                }
+                n ++;
+                if(n >= Object.values(data.archivos).length){
+
+                  for(let i = 0; i < Object.values(state.dbImg).length; i++){
+                    if(state.dbImg[i].nombre !== undefined){
+                      dataRef.sec_fotos[`imagen${state.dbImg[i].id}`] = {
+                        nombre: state.dbImg[i].nombre,
+                        url: state.dbImg[i].url,
+                      }
+                    }else{
+                      dataRef.sec_fotos[`imagen${i}`] = '';
+                    }
+                  }
+
+                  if(n >= Object.values(data.archivos).length){
+                    const dbRef = firebase.database().ref(`${data.target}/${data.seccion.id}`);
+                    dbRef.set(dataRef);
+                    state.crearDBVals = false;
+                    const success = {
+                      0: 'successUpload',
+                      1: 'Se ha creado exitosamente'
+                    }
+                    this.commit('successAdvise', success)
+                  }
+                }
+              })
+              j++;
+            })
+          })
+        }else{
+
+          let dataRef = {
+            sec_id: data.seccion.id,
+            sec_pag: data.seccion.secpag,
+            sec_nombre: data.seccion.secnom,
+            sec_contenido: data.seccion.contenido,
+            sec_imagen_seccion: data.seccion.imagenseccion,
+            sec_fotos: data.seccion.archivos,
+          }
+
+          n++;
+          if(n >= Object.values(data.archivos).length){
+            const dbRef = firebase.database().ref(`${data.target}/${data.seccion.id}`);
             dbRef.set(dataRef);
             state.crearDBVals = false;
             const success = {

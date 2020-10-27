@@ -90,6 +90,12 @@
                       Profesores
                     </a>
                   </li>
+                  <li class="nav-item">
+                    <i class="icon flaticon-website"></i>
+                    <a class="nav-link" :ref="allCompon['12']" @click.prevent="selectComponent('12')">
+                      Secciones extra
+                    </a>
+                  </li>
                 </ul>
                 <div class="border-bottom-white"></div>
               </li>
@@ -174,6 +180,7 @@ import AdminComites from './AdminPages/AdminComites'
 import AdminAnunciantes from './AdminPages/AdminAnunciantes'
 import AdminBanners from './AdminPages/AdminBanners'
 import AdminMiscellaneous from './AdminPages/AdminMiscellaneous'
+import AdminSeccionesExtra from './AdminPages/AdminSeccionesExtra'
 import {mapState, mapMutations, mapGetters, mapActions} from 'vuex'
 
 export default {
@@ -191,6 +198,7 @@ export default {
       'AdminAnunciantes',
       'AdminBanners',
       'AdminMiscellaneous',
+      'AdminSeccionesExtra',
   ],
   components:{
     AdminDashboard,
@@ -205,6 +213,7 @@ export default {
     AdminAnunciantes,
     AdminBanners,
     AdminMiscellaneous,
+    AdminSeccionesExtra,
   },
   data(){
     return {
@@ -222,6 +231,7 @@ export default {
         'AdminAnunciantes',
         'AdminBanners',
         'AdminMiscellaneous',
+        'AdminSeccionesExtra',
       ],
       currentCompon: 'AdminDashboard',
       dataName: [],

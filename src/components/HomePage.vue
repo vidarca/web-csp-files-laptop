@@ -5,16 +5,13 @@
 
       	<!-- Banner con bootstrap -->
 		<section class="banner-section">
-			<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+			<div id="carouselExampleControls" class="carousel slide" data-ride="carousel" v-if="selectBanners">
 			<div class="carousel-inner">
-				<div class="carousel-item active">
-					<img src="@/assets/images/background/BannerSlide01.jpg" alt="...">
-				</div>
-				<div class="carousel-item">
-					<img src="@/assets/images/background/BannerSlide01.jpg" class="d-block w-100" alt="...">
-				</div>
-				<div class="carousel-item">
-					<img src="@/assets/images/background/BannerSlide01.jpg" class="d-block w-100" alt="...">
+				<div :class="['carousel-item', (index === 0)?'active':'']" v-for="(slide, index) in Object.values(bannersList[0].bann_slides)" :key="index" ref="carouselitems">
+					<img :src="slide.url">
+					<div :class="['textcontainer', (index % 2 === 0)?'textcontainerpos1':'textcontainerpos2']">
+						{{slide.info}}
+					</div>
 				</div>
 			</div>
 			<a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
@@ -150,7 +147,7 @@
 							<div class="overlay-box">
 								<div class="overlay-inner">
 									<div class="content">
-										<h4><a href="gallery.html">{{dataAdmis.comi_nombre}}</a></h4>
+										<h4><a @click="selectAdmins()">{{dataAdmis.comi_nombre}}</a></h4>
 									</div>
 								</div>
 							</div>
@@ -159,7 +156,7 @@
 				</div>
 				
 				<!-- Bloque de comite -->
-				<div  v-for="element in this.dbWeb.Comites" :key="element.id" v-show="element.comi_int === true" class="gallery-block col-lg-4 col-md-6 col-sm-6">
+				<div  v-for="(element, index) in Object.values(this.dbWeb.Comites)" :key="element.id" v-show="element.comi_int === true" class="gallery-block col-lg-4 col-md-6 col-sm-6">
 					<div class="inner-box">
 						<div class="image">
 							<div class="gallery-content-box">
@@ -170,7 +167,7 @@
 							<div class="overlay-box">
 								<div class="overlay-inner">
 									<div class="content">
-										<h4><a href="gallery.html">{{element.comi_nombre}}</a></h4>
+										<h4><a @click="selectComi(index)">{{element.comi_nombre}}</a></h4>
 									</div>
 								</div>
 							</div>
@@ -190,7 +187,7 @@
 	<!-- Fin Seccion Autogestion -->
 	
 	<!-- Seccion Distribucion de Cuotas -->
-    <section class="cuot-section">
+    <section class="cuot-section" v-if="selectCuotas">
 		<div class="logo-icon"></div>
 		
 		<!-- Icons Box -->
@@ -203,61 +200,25 @@
 		<!-- Left box -->
 		<div class="cuot-left-container">
 			<div class="cuot-inner-column">
-				<h2>Distribución de las Cuotas Mensuales</h2>
+				<h2>{{distCuotas.sec_nombre}}</h2>
 				<div class="text">¿Quieres saber en qué se ha utilizado las cuotas mensuales? <br> Aquí te lo mostramos</div>
 				<!-- Barras % -->
 				<!-- Barra 1 -->
-				<div class="cuot-porc">
+				<div class="cuot-porc" v-for="(element) in distCuotas.sec_contenido" :key="element.sec_id">
 					<div class="row row-cols-1 m-0">
 						<div class="cuot-porc-text d-flex">
-							<div class="flex-grow-1">Eventos internos</div>
-							<div>50%</div>
+							<div class="flex-grow-1">{{element.texto}}</div>
+							<div>{{element.porcentajeBarra}}%</div>
 						</div>
 						<div class="progress" style="background-color: rgba(255,255,255,0.25); height: 15px;">
-							<div class="progress-bar" role="progressbar" style="width: 50%; background-color: rgba(255,255,255,0.8)" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-						</div>
-					</div>
-				</div>
-				<!-- Barra 2 -->
-				<div class="cuot-porc">
-					<div class="row row-cols-1 m-0">
-						<div class="cuot-porc-text d-flex">
-							<div class="flex-grow-1">Remodelación de los Baños</div>
-							<div>20%</div>
-						</div>
-						<div class="progress" style="background-color: rgba(255,255,255,0.25); height: 15px;">
-							<div class="progress-bar" role="progressbar" style="width: 20%; background-color: rgba(255,255,255,0.8)" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-						</div>
-					</div>
-				</div>
-				<!-- Barra 3 -->
-				<div class="cuot-porc">
-					<div class="row row-cols-1 m-0">
-						<div class="cuot-porc-text d-flex">
-							<div class="flex-grow-1">Arreglo del Parque Infantil</div>
-							<div>20%</div>
-						</div>
-						<div class="progress" style="background-color: rgba(255,255,255,0.25); height: 15px;">
-							<div class="progress-bar" role="progressbar" style="width: 20%; background-color: rgba(255,255,255,0.8)" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-						</div>
-					</div>
-				</div>
-				<!-- Barra 4 -->
-				<div class="cuot-porc">
-					<div class="row row-cols-1 m-0">
-						<div class="cuot-porc-text d-flex">
-							<div class="flex-grow-1">Otros</div>
-							<div>10%</div>
-						</div>
-						<div class="progress" style="background-color: rgba(255,255,255,0.25); height: 15px;">
-							<div class="progress-bar" role="progressbar" style="width: 10%; background-color: rgba(255,255,255,0.8)" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+							<div ref="progressbar" class="progress-bar" role="progressbar" :data-progress="element.porcentajeBarra" style="width: 0%; background-color: rgba(255,255,255,0.8)" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 		<div class="cout-image-container">
-
+			<img :src="distCuotas.sec_fotos.imagen0.url" v-if="distCuotas.sec_imagen_seccion">
 		</div>
 	</section>
 	<!-- Fin Seccion Distribucion de Cuotas -->
@@ -345,7 +306,9 @@ import AutogestionSpan from '@/components/AutogestionSpan.vue'
 			number: 0,
 			numElements: 4,
 			showIndex: 0,
+			bannersList: [],
 			currentIndex: 1,
+			distCuotas: [],
 			responsive:[
 				{breakpoint:{width:0, items:1}},
 				{breakpoint:{width:600, items:2}},
@@ -363,7 +326,32 @@ import AutogestionSpan from '@/components/AutogestionSpan.vue'
             let array = []
             return array
             }
-        },
+		},
+		selectCuotas(){
+			if(this.dbWeb.Secciones_Extra !== undefined){
+				for(let i = 0; i < Object.values(this.dbWeb.Secciones_Extra).length; i++){
+					if(Object.values(this.dbWeb.Secciones_Extra)[i].sec_nombre.toLowerCase() === "distribución de cuotas mensuales"){
+						this.distCuotas = Object.values(this.dbWeb.Secciones_Extra)[i];
+						return true;
+					}
+					return false;
+				}
+				return false;
+			}
+		},
+		selectBanners(){
+			if(this.dbWeb.Banners !== undefined){
+				for(let i = 0; i < Object.values(this.dbWeb.Banners).length; i++){
+					if(Object.values(this.dbWeb.Banners)[i].bann_seccion.toLowerCase() === "inicio"){
+						this.bannersList.push(Object.values(this.dbWeb.Banners)[i]);
+						console.log(this.bannersList);
+						return true;
+					}
+					return false;
+				}
+				return false;
+			}
+		}
 	},
   	methods: {
 		...mapMutations(['selectItemSelect']),
@@ -509,6 +497,18 @@ import AutogestionSpan from '@/components/AutogestionSpan.vue'
 				}
 			})
 		},
+		selectAdmins(){
+			for(let i = 0; i < Object.values(this.dbWeb.Comites).length; i++){
+				if(Object.values(this.dbWeb.Comites)[i].comi_nombre === "Comité de Admisión"){
+					this.selectItemSelect(i)
+					this.$router.push({name:'Comites'})
+				}
+			}
+		},
+		selectComi(val){
+			this.selectItemSelect(val)
+			this.$router.push({name:'Comites'})
+		},
 	},
 	
 	mounted() {
@@ -521,10 +521,67 @@ import AutogestionSpan from '@/components/AutogestionSpan.vue'
 	if(this.reverseArray !== undefined && this.reverseArray.length/this.numElements > 1){
       this.number = Math.ceil(this.reverseArray.length/this.numElements);
       this.showSelect = true;
-    }
+	}
+
+	const carouselitems = setInterval(() => {
+		
+		if(this.$refs.carouselitems !== undefined){
+			
+			/* Textos del banner */
+			clearInterval(carouselitems)
+
+			const carouseli = this.$refs.carouselitems
+			
+			carouseli.forEach(item => {
+				item.addEventListener("transitionend", ()=> {
+					if(item.classList.contains("active")){
+						console.log(item);
+					}
+				})
+			})
+			
+		}
+
+	}, 100);
+
+	const distcuot = setInterval(() => {
+
+		/* Dist Cuotas */
+		if(this.$refs.progressbar !== undefined){
+			const barras = this.$refs.progressbar;
+			
+			const options = { 
+				root: null,
+				threshold: 0,
+				rootMargin: "150px",
+			};
+		
+			const observer = new IntersectionObserver(function(entries,observer) {
+				entries.forEach(entry =>{
+					setTimeout(() => {
+						if(!entry.isIntersecting){
+							return;
+						}
+						entry.target.style.width = `${entry.target.dataset.progress}%`;
+					}, 500);
+				})
+			}, options)
+		
+			barras.forEach(item =>{
+				observer.observe(item)
+			})
+
+			clearInterval(distcuot)
+		}
+		
+	}, 100);
 
 	var waiting = setInterval(() => {
+
 		if(this.$refs.team !== undefined ){
+
+			/* Equipo de trabajo */
+
 			/* Data */
 			this.dataAdmis = this.getIdInfo('Comites', 'comi_nombre', 'Comité de Admisión')
 

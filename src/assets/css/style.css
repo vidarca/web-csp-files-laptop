@@ -2172,19 +2172,62 @@ Menu Responsive
 .banner-section{
 	position: relative;
 	overflow:hidden;
+	min-height: 800px;
 	z-index: 1;
 }
 
 .carousel-item img{
 	display: block;
 	width: 100%;
-	height: auto;
-	max-height: 90vh;
+	height: 800px;
+}
+
+.banner-section .carousel-item .textcontainer{
+	position: absolute;
+	width: 300px;
+	height: 300px !important;
+	max-height: 0 !important;
+	opacity: 1;
+	overflow: hidden;
+	top: 500px;
+	z-index: 5;
+	color: black;
+	font-size: 14px;
+	font-family: 'Rubik', sans-serif;
+	font-weight: bold;
+	text-align: center;
+	background-color: rgba(255,255,255,.5);
+	padding: 10px;
+	transition: opacity .8s ease, max-height .5s ease-in-out;
+}
+
+.toggle-mheight-opacity{
+	max-height: 800px !important;
+	opacity: 0 !important;
+}
+
+.textcontainerpos1{
+	left: 25%;
+}
+
+.textcontainerpos2{
+	right: 25%;
 }
 
 @media screen and (max-width: 650px){
+	.banner-section{
+		min-height: 500px;
+	}
+
 	.carousel-item img{
-		min-height: 360px;
+		height: 500px;
+	}
+
+	.banner-section .carousel-item .textcontainer{
+		width: 200px;
+		max-height: 200px;
+		top: 200px;
+		font-size: 12px;
 	}
 }
 

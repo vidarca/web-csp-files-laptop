@@ -19,6 +19,7 @@
     "net": "^1.0.2",
     "nodemailer": "^6.4.14",
     "path": "^0.12.7",
+    "querystring": "^0.2.0",
     "v-click-outside": "^3.1.2",
     "vue": "^2.6.12",
     "vue-axios": "^3.0.1",

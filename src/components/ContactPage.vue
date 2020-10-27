@@ -92,13 +92,12 @@ export default {
 	  },
     methods:{
       sendMail(){
+        const querystring = require("querystring");
         if(this.response.status === null){
           if(this.validAllFields()){
             this.sending = true;
-            axios.post('https://vidarca.github.io:3000/send-email', {
-              form: this.form
-            }).then(response => {
-              if(response.status === 200){
+            axios.post('http://clubsantapaula.net/beta2020/mail/contacto.php', querystring.stringify(this.form)).then(response => {
+              if(response.data === "Message sent!"){
                 setTimeout(() => {
                   this.sending = false;
                   this.response.status = true;

@@ -22,7 +22,7 @@
           Correo
         </div>
         <div class="text col-3 pl-1 pr-1">
-          Telefonos
+          Teléfonos
         </div>
         <div class="col-3 pl-1 pr-1">
         </div>
