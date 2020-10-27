@@ -167,6 +167,7 @@
                 <option selected>Seleccione una opción</option>
                 <option value="Inicio">Página de Inicio</option>
                 <option value="Nosotros">Página de Nosotros</option>
+                <option value="Juntas">Página de Juntas Directivas</option>
                 <option value="Servicios">Página de Servicios</option>
                 <option value="Comités">Página de Comités</option>
                 <option v-for="(comite) in Object.values(dbWeb.Comites)" :key="comite.comi_id" :value="comite.comi_nombre">{{comite.comi_nombre}}</option>

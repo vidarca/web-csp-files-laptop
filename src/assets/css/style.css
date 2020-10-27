@@ -2174,6 +2174,7 @@ Menu Responsive
 	overflow:hidden;
 	min-height: 800px;
 	z-index: 1;
+	background-color: rgb(148, 148, 148);
 }
 
 .carousel-item img{
@@ -2185,9 +2186,9 @@ Menu Responsive
 .banner-section .carousel-item .textcontainer{
 	position: absolute;
 	width: 300px;
-	height: 300px !important;
-	max-height: 0 !important;
-	opacity: 1;
+	height: auto !important;
+	max-height: 0;
+	opacity: 0;
 	overflow: hidden;
 	top: 500px;
 	z-index: 5;
@@ -2203,7 +2204,7 @@ Menu Responsive
 
 .toggle-mheight-opacity{
 	max-height: 800px !important;
-	opacity: 0 !important;
+	opacity: 1 !important;
 }
 
 .textcontainerpos1{

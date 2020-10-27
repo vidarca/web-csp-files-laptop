@@ -1,29 +1,26 @@
 <template>
   <div id="nosotros">
     <!-- Banner con bootstrap -->
-    <section class="banner-section">
-        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="@/assets/images/background/BannerSlide01.jpg" alt="...">
+        <section class="banner-section">
+            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" v-if="selectBanners">
+            <div class="carousel-inner">
+                <div :class="['carousel-item', (index === 0)?'active':'']" v-for="(slide, index) in Object.values(bannersList[0].bann_slides)" :key="index" ref="carouselitems">
+                    <img :src="slide.url">
+                    <div :class="['textcontainer', (index % 2 === 0)?'textcontainerpos1':'textcontainerpos2']">
+                        {{slide.info}}
+                    </div>
+                </div>
             </div>
-            <div class="carousel-item">
-                <img src="@/assets/images/background/BannerSlide01.jpg" class="d-block w-100" alt="...">
+            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
             </div>
-            <div class="carousel-item">
-                <img src="@/assets/images/background/BannerSlide01.jpg" class="d-block w-100" alt="...">
-            </div>
-        </div>
-        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
-        </div>
-    </section>
+        </section>
     <!-- Fin del banner -->
     <!-- Seccion Destacados -->
     <section class="featured-section">
@@ -203,7 +200,19 @@ export default {
                 }
                 return false
             }
-        }
+        },
+        selectBanners(){
+			if(this.dbWeb.Banners !== undefined){
+				for(let i = 0; i < Object.values(this.dbWeb.Banners).length; i++){
+					if(Object.values(this.dbWeb.Banners)[i].bann_seccion.toLowerCase() === "nosotros"){
+						this.bannersList.push(Object.values(this.dbWeb.Banners)[i]);
+						return true;
+					}
+					return false;
+				}
+				return false;
+			}
+		}
     },
 
     methods:{
@@ -235,5 +244,35 @@ export default {
             }
         })
     },
+
+    mounted(){
+        this.$nextTick(() =>{
+		
+            if(this.$refs.carouselitems !== undefined){
+                
+                /* Textos del banner */
+
+                const carouseli = this.$refs.carouselitems;
+                
+                carouseli.forEach(item => {
+                    if(item.classList.contains('active')){
+                        item.children[1].classList.add('toggle-mheight-opacity');
+                    }
+                })
+
+                
+                carouseli[0].addEventListener("transitionend", ()=> {
+                    carouseli.forEach(item => {
+                        if(item.classList.contains('active')){
+                            item.children[1].classList.add('toggle-mheight-opacity');
+                        }else{
+                            item.children[1].classList.remove('toggle-mheight-opacity');
+                        }
+                    })
+                })
+            }
+            
+        })
+    }
 }
 </script>

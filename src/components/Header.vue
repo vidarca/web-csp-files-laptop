@@ -62,35 +62,10 @@
           <i @click="toggleDrop('us')" ref="usIcon" class="flaticon-sort-down"></i>
           </li>
 
-          <li class="v-nav-item" id="serv" @mouseover="dropDownMenuOn('serv')" @mouseout="dropDownMenuOff('serv')">
-            <router-link class="v-menu-txt" :to="{name:'Servicios'}">Servicios</router-link>
-              <ul class="v-dropdown-menu" ref="serv">
-                <li class="v-dropdown-item">
-                  <router-link :to="{name:'Servicios'}"> Salón de Belleza </router-link>
-                </li>
-                <li class="v-dropdown-item"> 
-                  <router-link :to="{name:'Servicios'}"> Consecionario </router-link>
-                </li>
-                <li class="v-dropdown-item">
-                  <router-link :to="{name:'Servicios'}"> Alquiler de Salones </router-link>
-                </li>
-                <li class="v-dropdown-item">
-                  <router-link :to="{name:'Servicios'}"> Enfermería </router-link>
-                </li>
-                <li class="v-dropdown-item">
-                  <router-link :to="{name:'Servicios'}"> Sauna </router-link>
-                </li>
-                <li class="v-dropdown-item">
-                  <router-link :to="{name:'Servicios'}"> GYM </router-link>
-                </li>
-                <li class="v-dropdown-item">
-                  <router-link :to="{name:'Servicios'}"> Tienda de Conveniencias </router-link>
-                </li>
-                <li class="v-dropdown-item">
-                  <router-link :to="{name:'Servicios'}"> Tienda Deportiva </router-link>
-                </li>                                                   
-              </ul>
-            <i @click="toggleDrop('serv')" ref="servIcon" class="flaticon-sort-down"></i>
+          <li class="v-nav-item" id="home">
+            <div class="v-nav-menu">
+              <router-link  id="home-page"  class="v-menu-txt" :to="{name:'Servicios'}" exact>Servicios</router-link>
+            </div>
           </li>
           
           <li class="v-nav-item" id="com" @mouseover="dropDownMenuOn('com')" @mouseout="dropDownMenuOff('com')">
@@ -98,12 +73,6 @@
               <ul class="v-dropdown-menu" ref="com">
                 <li class="v-dropdown-item">
                   <router-link :to="{name:'Comites'}"> Comités </router-link>
-                </li>
-                <li class="v-dropdown-item"> 
-                  <router-link :to="{name:'Comites'}"> Instructores </router-link>
-                </li>
-                <li class="v-dropdown-item">
-                  <router-link :to="{name:'Comites'}"> Reglamentos </router-link>
                 </li>
                 <li class="v-dropdown-item">
                   <router-link :to="{name:'Comites'}"> Normativas y Costos </router-link>

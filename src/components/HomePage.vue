@@ -4,26 +4,26 @@
     <div class="page-wrapper">
 
       	<!-- Banner con bootstrap -->
-		<section class="banner-section">
-			<div id="carouselExampleControls" class="carousel slide" data-ride="carousel" v-if="selectBanners">
-			<div class="carousel-inner">
-				<div :class="['carousel-item', (index === 0)?'active':'']" v-for="(slide, index) in Object.values(bannersList[0].bann_slides)" :key="index" ref="carouselitems">
-					<img :src="slide.url">
-					<div :class="['textcontainer', (index % 2 === 0)?'textcontainerpos1':'textcontainerpos2']">
-						{{slide.info}}
+			<section class="banner-section">
+				<div id="carouselExampleControls" class="carousel slide" data-ride="carousel" v-if="selectBanners">
+				<div class="carousel-inner">
+					<div :class="['carousel-item', (index === 0)?'active':'']" v-for="(slide, index) in Object.values(bannersList[0].bann_slides)" :key="index" ref="carouselitems">
+						<img :src="slide.url">
+						<div :class="['textcontainer', (index % 2 === 0)?'textcontainerpos1':'textcontainerpos2']">
+							{{slide.info}}
+						</div>
 					</div>
 				</div>
-			</div>
-			<a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-				<span class="sr-only">Previous</span>
-			</a>
-			<a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-				<span class="carousel-control-next-icon" aria-hidden="true"></span>
-				<span class="sr-only">Next</span>
-			</a>
-			</div>
-		</section>
+				<a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+					<span class="sr-only">Previous</span>
+				</a>
+				<a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+					<span class="carousel-control-next-icon" aria-hidden="true"></span>
+					<span class="sr-only">Next</span>
+				</a>
+				</div>
+			</section>
 		<!-- Fin del banner -->
 	
 	
@@ -344,7 +344,6 @@ import AutogestionSpan from '@/components/AutogestionSpan.vue'
 				for(let i = 0; i < Object.values(this.dbWeb.Banners).length; i++){
 					if(Object.values(this.dbWeb.Banners)[i].bann_seccion.toLowerCase() === "inicio"){
 						this.bannersList.push(Object.values(this.dbWeb.Banners)[i]);
-						console.log(this.bannersList);
 						return true;
 					}
 					return false;
@@ -523,26 +522,33 @@ import AutogestionSpan from '@/components/AutogestionSpan.vue'
       this.showSelect = true;
 	}
 
-	const carouselitems = setInterval(() => {
+	this.$nextTick(() =>{
 		
 		if(this.$refs.carouselitems !== undefined){
 			
 			/* Textos del banner */
-			clearInterval(carouselitems)
 
-			const carouseli = this.$refs.carouselitems
+			const carouseli = this.$refs.carouselitems;
 			
 			carouseli.forEach(item => {
-				item.addEventListener("transitionend", ()=> {
-					if(item.classList.contains("active")){
-						console.log(item);
+				if(item.classList.contains('active')){
+					item.children[1].classList.add('toggle-mheight-opacity');
+				}
+			})
+
+			
+			carouseli[0].addEventListener("transitionend", ()=> {
+				carouseli.forEach(item => {
+					if(item.classList.contains('active')){
+						item.children[1].classList.add('toggle-mheight-opacity');
+					}else{
+						item.children[1].classList.remove('toggle-mheight-opacity');
 					}
 				})
 			})
-			
 		}
-
-	}, 100);
+		
+	})
 
 	const distcuot = setInterval(() => {
 
