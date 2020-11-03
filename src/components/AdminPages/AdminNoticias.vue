@@ -76,62 +76,62 @@
     <section class="translate" id="section1" v-show="showPrev" v-if="dbWeb.Noticias !== undefined && selectNoticia !== ''" ref="section1">
       <form class="form-class p-4 d-flex flex-column justify-content-center align-items-center overflow-hidden">
         <div class="file-form">
-            <div class="row align-items-start justify-content-center w-100">
-                <div class="input-files col-md-5 col-12 d-flex flex-column justify-content-center align-items-center ml-3 mr-3" v-for="(imagen, index) in Object.values(selectNoticia.archivos)" :key="index">
-                    <div class="w-100 h-100 d-flex align-items-center position-relative">
-                        <div class="d-flex w-100 flex-column align-items-center justify-content-center">
-                            <div class="text d-flex align-items-center justify-content-center" style="text-align: center;">
-                                {{(index === 0)?'El tamaño de la imagen debe ser 1260x460 px':'El tamaño de la imagen debe ser 360x260 px'}}
-                                <div class="important-field" v-show="!validFields(selectNoticia.archivos[`imagen${index}`]) && index < 2"></div>
-                            </div>
-                            <div class="button-files d-flex flex-row align-items-center justify-content-center bg-success w-100 p-2">
-                                <i class="flaticon-folder mr-3"></i>
-                                <label for="collectionFiles">{{`Imagen ${index + 1}`}}</label>
-                            </div>
-                            <input :ref='`file${index}`' @change="filesVerification($event, index, 'select')" class="collectionFiles"  type="file" accept="image/*">
-                        </div>
-                    </div>
-                    <!-- PREV IMAGENES -->
-                    <div  class="uploadCont flex-row align-items-center w-100 mt-2" v-show="imagen.nombre !== undefined" style="display: flex;">
-                        <div :class="['prev-container d-flex position-relative flex-column align-items-center justify-content-between w-100 bg-success-light']">
-                            <!-- MUESTRA DE IMAGEN -->
-                            <div class="w-100 p-2 d-flex justify-content-end flex-column" style="min-height: 173px">
-                                <div class="d-flex justify-content-center align-items-center" v-if="(dbImg[index] !== undefined || selectNoticia.archivos[`imagen${index}`].url !== '')">
-                                    <img :src="(dbImg[index] !== undefined && dbImg[index].url !== undefined)?dbImg[index].url:(selectNoticia.archivos[`imagen${index}`].url !== '')?selectNoticia.archivos[`imagen${index}`].url:''" width="200" height="auto" style="min-height: 100px; min-width: 200px; ">
-                                </div>
-                                <div v-else class="w-100 h-100 d-flex flex-row align-items-center justify-content-center">
-                                    <p class="align-self-star ml-2" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">{{imagen.nombre}}</p>
-                                </div>
-                                <!-- ICONO DE QUITAR -->
-                                <div class="veri-box w-100 mt-2 d-flex flex-row justify-content-center align-items-center">
-                                    <button @click.prevent="deleteFile(index, 'select')" class="btn btn-danger pt-1 pb-1 pr-2 pl-2">Eliminar</button>
-                                </div>
-                                <!-- FIN ICONO DE QUITAR -->
-                            </div>
-                            <!-- FIN MUESTRA DE IMAGEN -->
-                            <!-- BARRA DE PROGRESO -->
-                            <div class="progress w-85 mb-2" v-if="dbImg[index] !== undefined && dbImg[index] !== ''">
-                                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" :style="`width: ${(dbImg[index] !== undefined)?dbImg[index].uploadPercentage: ' '}%; height: 20px; min-height: 20px} !importan; color: black`"></div>
-                                </div>
-                            <!-- FIN BARRA DE PROGRESO -->
-                            </div>
-                        </div>
-                        <!--  Fin de IMAGENES -->
-                    </div>
+          <div class="row align-items-start justify-content-center w-100">
+            <div class="input-files col-md-5 col-12 d-flex flex-column justify-content-center align-items-center ml-3 mr-3" v-for="(imagen, index) in Object.values(selectNoticia.archivos)" :key="index">
+              <div class="w-100 h-100 d-flex align-items-center position-relative">
+                <div class="d-flex w-100 flex-column align-items-center justify-content-center">
+                  <div class="text d-flex align-items-center justify-content-center" style="text-align: center;">
+                    {{(index === 0)?'El tamaño de la imagen debe ser 1260x460 px':'El tamaño de la imagen debe ser 360x260 px'}}
+                    <div class="important-field" v-show="!validFields(selectNoticia.archivos[`imagen${index}`]) && index < 2"></div>
+                  </div>
+                  <div class="button-files d-flex flex-row align-items-center justify-content-center bg-success w-100 p-2">
+                    <i class="flaticon-folder mr-3"></i>
+                    <label for="collectionFiles">{{`Imagen ${index + 1}`}}</label>
+                  </div>
+                  <input :ref='`file${index}`' @change="filesVerification($event, index, 'select')" class="collectionFiles"  type="file" :accept="['image/*', (index === 0)?'': 'video/*, video/mp4, video/x-m4v']">
                 </div>
+              </div>
+              <!-- PREV IMAGENES -->
+              <div  class="uploadCont flex-row align-items-center w-100 mt-2" v-show="imagen.nombre !== undefined" style="display: flex;">
+                <div :class="['prev-container d-flex position-relative flex-column align-items-center justify-content-between w-100 bg-success-light']">
+                  <!-- MUESTRA DE IMAGEN -->
+                  <div class="w-100 p-2 d-flex justify-content-end flex-column" style="min-height: 173px">
+                      <div class="d-flex justify-content-center align-items-center" v-if="(dbImg[index] !== undefined || selectNoticia.archivos[`imagen${index}`].url !== '')">
+                          <img :src="(dbImg[index] !== undefined && dbImg[index].url !== undefined)?dbImg[index].url:(selectNoticia.archivos[`imagen${index}`].url !== '')?selectNoticia.archivos[`imagen${index}`].url:''" width="200" height="auto" style="min-height: 100px; min-width: 200px; ">
+                      </div>
+                      <div v-else class="w-100 h-100 d-flex flex-row align-items-center justify-content-center">
+                          <p class="align-self-star ml-2" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">{{imagen.nombre}}</p>
+                      </div>
+                      <!-- ICONO DE QUITAR -->
+                      <div class="veri-box w-100 mt-2 d-flex flex-row justify-content-center align-items-center">
+                          <button @click.prevent="deleteFile(index, 'select')" class="btn btn-danger pt-1 pb-1 pr-2 pl-2">Eliminar</button>
+                      </div>
+                      <!-- FIN ICONO DE QUITAR -->
+                  </div>
+                  <!-- FIN MUESTRA DE IMAGEN -->
+                  <!-- BARRA DE PROGRESO -->
+                  <div class="progress w-85 mb-2" v-if="dbImg[index] !== undefined && dbImg[index] !== ''">
+                      <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" :style="`width: ${(dbImg[index] !== undefined)?dbImg[index].uploadPercentage: ' '}%; height: 20px; min-height: 20px} !importan; color: black`"></div>
+                      </div>
+                  <!-- FIN BARRA DE PROGRESO -->
+                </div>
+              </div>
+              <!--  Fin de IMAGENES -->
             </div>
-            <div class="custom-control custom-switch d-flex align-items-center justify-content-center">
-                <input type="checkbox" class="custom-control-input" id="noti_activo" v-model="selectNoticia.activo">
-                <label class="custom-control-label text" for="noti_activo">Marque si desea que la noticia esté publicada</label>
-            </div>
-            <div class="select-field">
-                <p>Seleccione una de las secciones para subir la información</p>
-                <select class="custom-select" v-model="selectNoticia.seccion">
-                <option selected>Seleccione una opción</option>
-                <option value="Actualidad">Actualidad</option>
-                <option v-for="comite in dbWeb.Comites" :value="comite.comi_nombre" :key="comite.comi_id" v-show="comite.comi_comiPage">{{comite.comi_nombre}}</option>
-                </select>
-            </div>
+          </div>
+        </div>
+        <div class="custom-control custom-switch d-flex align-items-center justify-content-center">
+            <input type="checkbox" class="custom-control-input" id="noti_activo" v-model="selectNoticia.activo">
+            <label class="custom-control-label text" for="noti_activo">Marque si desea que la noticia esté publicada</label>
+        </div>
+        <div class="select-field">
+            <p>Seleccione una de las secciones para subir la información</p>
+            <select class="custom-select" v-model="selectNoticia.seccion">
+            <option selected>Seleccione una opción</option>
+            <option value="Actualidad">Actualidad</option>
+            <option v-for="comite in dbWeb.Comites" :value="comite.comi_nombre" :key="comite.comi_id" v-show="comite.comi_comiPage">{{comite.comi_nombre}}</option>
+            </select>
+        </div>
         <input type="text" placeholder="Título" v-model="selectNoticia.titulo">
         <textarea type="text" class="info-form-c" placeholder="Información corta" v-model="selectNoticia.infocort"></textarea>
         <textarea type="text" class="info-form" placeholder="Información" v-model="selectNoticia.info"></textarea>
@@ -153,62 +153,86 @@
     <section id="section2" class="translate" v-if="showCreate" ref="section2">
       <form class="form-class p-4 d-flex flex-column justify-content-center align-items-center overflow-hidden">
         <div class="file-form">
-            <div class="row align-items-start justify-content-center w-100">
-                <div class="input-files col-md-5 col-12 d-flex flex-column justify-content-center align-items-center ml-3 mr-3" v-for="(imagen, index) in Object.values(nuevaNoticia.archivos)" :key="index">
-                    <div class="w-100 h-100 d-flex align-items-center position-relative">
-                        <div class="d-flex w-100 flex-column align-items-center justify-content-center">
-                            <div class="text d-flex align-items-center justify-content-center" style="text-align: center;">
-                                {{(index === 0)?'El tamaño de la imagen debe ser 1260x460 px':'El tamaño de la imagen debe ser 360x260 px'}}
-                                <div class="important-field" v-show="!validFields(nuevaNoticia.archivos[`imagen${index}`]) && index < 2"></div>
-                            </div>
-                            <div class="button-files d-flex flex-row align-items-center justify-content-center bg-success w-100 p-2">
-                                <i class="flaticon-folder mr-3"></i>
-                                <label for="collectionFiles">{{`Imagen ${index + 1}`}}</label>
-                            </div>
-                            <input :ref='`file${index}`' @change="filesVerification($event, index, 'crear')" class="collectionFiles"  type="file" accept="image/*">
-                        </div>
-                    </div>
-                    <!-- PREV IMAGENES -->
-                    <div  class="uploadCont flex-row align-items-center w-100 mt-2" v-show="imagen.id !== undefined" style="display: flex;">
-                        <div :class="['prev-container d-flex position-relative flex-column align-items-center justify-content-between w-100 bg-success-light']">
-                            <!-- MUESTRA DE IMAGEN -->
-                            <div class="w-100 p-2 d-flex justify-content-end flex-column" style="min-height: 173px">
-                                <div class="d-flex justify-content-center align-items-center" v-if="(dbImg[index] !== undefined && dbImg[index].id !== undefined)">
-                                    <img :src="(dbImg[index] === undefined)?'':(dbImg[index].url !== undefined)?dbImg[index].url:''" width="200" height="auto" style="min-height: 100px; min-width: 200px; ">
-                                </div>
-                                <div v-else class="w-100 h-100 d-flex flex-row align-items-center justify-content-center">
-                                    <p class="align-self-star ml-2" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">{{imagen.nombre}}</p>
-                                </div>
-                                <!-- ICONO DE QUITAR -->
-                                <div class="veri-box w-100 mt-2 d-flex flex-row justify-content-center align-items-center">
-                                    <button @click.prevent="deleteFile(index, 'crear')" class="btn btn-danger pt-1 pb-1 pr-2 pl-2">Eliminar</button>
-                                </div>
-                                <!-- FIN ICONO DE QUITAR -->
-                            </div>
-                            <!-- FIN MUESTRA DE IMAGEN -->
-                            <!-- BARRA DE PROGRESO -->
-                            <div class="progress w-85 mb-2" v-if="dbImg[index] !== undefined && dbImg[index].id !== undefined">
-                                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" :style="`width: ${(dbImg[index] !== undefined)?dbImg[index].uploadPercentage: ' '}%; height: 20px; min-height: 20px} !importan; color: black`"></div>
-                                </div>
-                            <!-- FIN BARRA DE PROGRESO -->
-                            </div>
-                        </div>
-                        <!--  Fin de IMAGENES -->
-                    </div>
+          <div class="row align-items-start justify-content-center w-100">
+            <div class="input-files col-md-5 col-12 d-flex flex-column justify-content-center align-items-center ml-3 mr-3" v-for="(imagen, index) in Object.values(nuevaNoticia.archivos)" :key="index">
+              <div class="w-100 h-100 d-flex align-items-center position-relative">
+                <div class="d-flex w-100 flex-column align-items-center justify-content-center">
+                  <div class="text d-flex align-items-center justify-content-center" style="text-align: center;">
+                      {{(index === 0)?'El tamaño de la imagen debe ser 1260x460 px':'El tamaño de la imagen debe ser 360x260 px'}}
+                      <div class="important-field" v-show="!validFields(nuevaNoticia.archivos[`imagen${index}`]) && index < 2"></div>
+                  </div>
+                  <div class="button-files d-flex flex-row align-items-center justify-content-center bg-success w-100 p-2">
+                    <i class="flaticon-folder mr-3"></i>
+                    <label for="collectionFiles">{{`Imagen ${index + 1}`}}</label>
+                  </div>
+                  <input :ref='`file${index}`' @change="filesVerification($event, index, 'crear')" class="collectionFiles"  type="file" :accept="['image/*', (index === 0)?'': 'video/*, video/mp4, video/x-m4v']">
                 </div>
+              </div>
+              <!-- PREV IMAGENES -->
+              <div  class="uploadCont flex-row align-items-center w-100 mt-2" v-show="imagen.id !== undefined" style="display: flex;">
+                <div :class="['prev-container d-flex position-relative flex-column align-items-center justify-content-between w-100 bg-success-light']">
+                  <!-- MUESTRA DE IMAGEN -->
+                  <div class="w-100 p-2 d-flex justify-content-end flex-column" style="min-height: 173px">
+                    <div class="d-flex justify-content-center align-items-center" v-if="(dbImg[index] !== undefined && dbImg[index].id !== undefined)">
+                      <img :src="(dbImg[index] === undefined)?'':(dbImg[index].url !== undefined)?dbImg[index].url:''" width="200" height="auto" style="min-height: 100px; min-width: 200px; ">
+                    </div>
+                    <div v-else class="w-100 h-100 d-flex flex-row align-items-center justify-content-center">
+                      <p class="align-self-star ml-2" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">{{imagen.nombre}}</p>
+                    </div>
+                    <!-- ICONO DE QUITAR -->
+                    <div class="veri-box w-100 mt-2 d-flex flex-row justify-content-center align-items-center">
+                      <button @click.prevent="deleteFile(index, 'crear')" class="btn btn-danger pt-1 pb-1 pr-2 pl-2">Eliminar</button>
+                    </div>
+                    <!-- FIN ICONO DE QUITAR -->
+                  </div>
+                  <!-- FIN MUESTRA DE IMAGEN -->
+                  <!-- BARRA DE PROGRESO -->
+                  <div class="progress w-85 mb-2" v-if="dbImg[index] !== undefined && dbImg[index].id !== undefined">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" :style="`width: ${(dbImg[index] !== undefined)?dbImg[index].uploadPercentage: ' '}%; height: 20px; min-height: 20px} !importan; color: black`"></div>
+                  </div>
+                  <!-- FIN BARRA DE PROGRESO -->
+                </div>
+              </div>
+              <!--  Fin de IMAGENES -->
             </div>
-            <div class="custom-control custom-switch d-flex align-items-center justify-content-center">
-                <input type="checkbox" class="custom-control-input" id="noti_activo" v-model="nuevaNoticia.activo">
-                <label class="custom-control-label text" for="noti_activo">Marque si desea que la noticia esté publicada</label>
+            
+          </div>
+
+          <!-- Galeria de fotos -->
+
+          <div class="input-files col-md-5 col-12 d-flex flex-column justify-content-center align-items-center mt-4 ml-3 mr-3">
+            <div class="w-100 h-100 d-flex flex-row align-items-center position-relative ml-2">
+              <div class="d-flex w-100 flex-column align-items-center justify-content-center">
+                <div class="button-files d-flex flex-row align-items-center justify-content-center bg-success w-100 p-2">
+                  <i class="flaticon-folder mr-3"></i>
+                  <label for="collectionFiles">Galería de fotos</label>
+                </div>
+                <input ref='galeria'  class="collectionFiles"  type="file" accept="image/*" multiple>
+                <p class="text" style="font-weigth: 400;">
+                  {{countFiles('galeria')}}
+                </p>
+              </div>
+              <div class="prev-icon ml-2">
+                <div class="icon flaticon-transparency"></div>
+              </div>
             </div>
-            <div class="select-field">
-                <p>Seleccione una de las secciones para subir la información</p>
-                <select class="custom-select" v-model="nuevaNoticia.seccion">
-                <option selected>Seleccione una opción</option>
-                <option value="Actualidad">Actualidad</option>
-                <option v-for="comite in dbWeb.Comites" :value="comite.comi_nombre" :key="comite.comi_id" v-show="comite.comi_comiPage">{{comite.comi_nombre}}</option>
-                </select>
-            </div>
+          </div>
+
+          <!-- Fin de Galeria de Fotos -->
+            
+        </div>
+        <div class="custom-control custom-switch d-flex align-items-center justify-content-center">
+            <input type="checkbox" class="custom-control-input" id="noti_activo" v-model="nuevaNoticia.activo">
+            <label class="custom-control-label text" for="noti_activo">Marque si desea que la noticia esté publicada</label>
+        </div>
+        <div class="select-field">
+            <p>Seleccione una de las secciones para subir la información</p>
+            <select class="custom-select" v-model="nuevaNoticia.seccion">
+            <option selected>Seleccione una opción</option>
+            <option value="Actualidad">Actualidad</option>
+            <option v-for="comite in dbWeb.Comites" :value="comite.comi_nombre" :key="comite.comi_id" v-show="comite.comi_comiPage">{{comite.comi_nombre}}</option>
+            </select>
+        </div>
         <input type="text" placeholder="Título" v-model="nuevaNoticia.titulo">
         <textarea type="text" class="info-form-c" placeholder="Información corta" v-model="nuevaNoticia.infocort"></textarea>
         <textarea type="text" class="info-form" placeholder="Información" v-model="nuevaNoticia.info"></textarea>
@@ -453,7 +477,6 @@ export default {
                 }
             }
             
-            console.log(dataTransfer);
             this.updateDB(dataTransfer)
 
           }
@@ -644,6 +667,15 @@ export default {
         const dsplitted = d.toString().split(' ');
         const djoin = dsplitted[1] + ' ' + dsplitted[2] + ' ' + dsplitted[3];
         return djoin
+      },
+      countFiles(ref){
+        let count = 0;
+        this.$nextTick(() =>{
+          if(this.$refs[`${ref}`].files !== null){
+            count = Object.values(this.$refs[`${ref}`].files).length;
+          }
+          return count
+        })
       },
     },
 
@@ -1123,5 +1155,46 @@ export default {
 
   .phones-input .icon.add:hover::before{
     background-color: #2dac49;
+  }
+
+  .prev-icon{
+    width: 35px !important;
+    height: 35px !important;
+  }
+
+  .prev-icon .icon{
+    position: relative;
+    width: 35px !important;
+    height: 35px !important;
+    border-radius: 5px;
+    border: .01rem solid black;
+    box-shadow: 0 0 5px rgba(0,0,0,.4);
+    transition: all .2s ease;
+    -moz-transition: all .2s ease;
+    -o-transition: all .2s ease;
+    -webkit-transition: all .2s ease;
+  }
+
+  .prev-icon .icon::before{
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    color: black;
+    font-size: 25px;
+    width: 100%;
+    height: 100%;
+    line-height: 35px;
+    text-align: center;
+    border-radius: 5px;
+    background-color: rgba(255,255,255,0);
+    transition: all .2s ease;
+    -moz-transition: all .2s ease;
+    -o-transition: all .2s ease;
+    -webkit-transition: all .2s ease;
+  }
+
+  .prev-icon .icon:hover::before{
+    background-color: rgba(255,255,255,.9);
   }
 </style>
