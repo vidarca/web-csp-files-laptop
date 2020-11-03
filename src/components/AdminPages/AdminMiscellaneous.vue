@@ -43,7 +43,7 @@
                 Haga clic en cualquiera de los íconos para activar o desactivar el campo correspondiente
               </p>
               <!-- Redes Sociales -->
-              <div class="redes d-flex align-items-center justify-content-between flex-row w-100">
+              <div class="redes d-flex align-items-center justify-content-center justify-content-md-between flex-wrap flex-row w-100">
                 <div class="w-100 d-flex flex-column align-items-center justify-content-center col-6 col-md-4">
                   <i :class="['icon flaticon-instagram', (miscellaneous.redes.instagram.activo === true)?'active':'']" @click="disableRS('instagram')"></i>
                   <input class="w-100" ref="inputinstagram" type="text" v-model="miscellaneous.redes.instagram.link" placeholder="Link del perfil">
@@ -59,96 +59,41 @@
               </div>
               <!-- Fin de Redes Sociales -->
 
-              <!-- Reglamentos y Normaticas -->
-              <div class="reglamentos-normativas d-flex flex-column flex-lg-row align-items-center justify-content-center w-100 mt-3">
-                <!-- Reglamento -->
-                <div class="col-12 col-lg-6">
-                  <div class="text text-center">
-                    Reglamentos del club
-                  </div>
-                  <div class="input-files files d-flex w-auto h-100 flex-column align-items-center justify-content-center position-relative bg-success" v-if="miscellaneous.reglamentos.nombre === undefined || miscellaneous.reglamentos.nombre === ''">
-                    <input :ref='`file0`' @change="filesVerification($event, 1, 'crear')" class="collectionFiles" title="Elija un archivo"  type="file" accept=".pdf, .doc, .docx">
-                    <div class="button-files d-flex flex-row align-items-center justify-content-center">
-                      <div class="icon flaticon-folder m-0 p-0">
-                        <div class="text" style="color: white; padding-left: 5px;">
-                          Reglamentos
-                        </div> 
-                      </div>
-                    </div>
-                  </div>
-                  <!-- PREV IMAGENES -->
-                  <div  class="uploadCont flex-row align-items-center justify-content-start" v-else style="display: flex;">
-                    <div :class="['prev-container files d-flex position-relative flex-column align-items-center justify-content-between bg-success-light']">
-                      <!-- MUESTRA DE IMAGEN -->
-                      <div class="w-100 d-flex position-relative justify-content-end flex-column h-100">
-                        <div class="d-flex h-100 w-100 justify-content-center align-items-center" v-if="(dbImg[1] !== undefined || miscellaneous.reglamentos.url !== '')">
-                          <div v-if="dbImg[1] !== undefined && dbImg[1].url !== undefined && dbImg[1].url !== '' || miscellaneous.reglamentos.url !== ''" class="icon flaticon-file" @click="openFile((dbImg[1].url !== undefined && dbImg[1].url !== '')?dbImg[1].url:miscellaneous.reglamentos.url)">
-                          </div>
-                        </div>
-                        <div v-else class="w-100 h-100 d-flex flex-row align-items-center justify-content-center">
-                          <p class="align-self-star" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">{{miscellaneous.reglamentos.nombre}}</p>
-                        </div>
-                        <!-- ICONO DE QUITAR -->
-                        <div @click.prevent="deleteFile(1, 'crear')" title="Eliminar" class="remove position-absolute flaticon-close" style="top:5px; right:5px;"></div>
-                          <!-- FIN ICONO DE QUITAR -->
-                      </div>
-                        <!-- FIN MUESTRA DE IMAGEN -->
-                    </div>
-                  </div>
-                </div>
-                <!-- Fin Reglamento -->
+              <!-- Horario de atencion -->
+                
+                <div class="w-100 d-flex flex-column align-items-center justify-content-center mt-3">
+                  <p class="text">
+                    Horario de Atención
+                  </p>
 
-                <!-- Normativa -->
-                <div class="col-12 col-lg-6">
-                  <div class="text text-center">
-                    Normativas del club
-                  </div>
-                  <div class="input-files files d-flex w-auto h-100 flex-column align-items-center justify-content-center position-relative bg-success" v-if="miscellaneous.normativas.nombre === undefined || miscellaneous.normativas.nombre === ''">
-                    <input :ref='`file0`' @change="filesVerification($event, 2, 'crear')" class="collectionFiles" title="Elija un archivo"  type="file" accept=".pdf, .doc, .docx">
-                    <div class="button-files d-flex flex-row align-items-center justify-content-center">
-                      <div class="icon flaticon-folder m-0 p-0">
-                        <div class="text" style="color: white; padding-left: 5px;">
-                          Normativas
-                        </div> 
-                      </div>
-                    </div>
-                  </div>
-                  <!-- PREV IMAGENES -->
-                  <div  class="uploadCont flex-row align-items-center justify-content-start" v-else style="display: flex;">
-                    <div :class="['prev-container files d-flex position-relative flex-column align-items-center justify-content-between bg-success-light']">
-                      <!-- MUESTRA DE IMAGEN -->
-                      <div class="w-100 d-flex position-relative justify-content-end flex-column h-100">
-                        <div class="d-flex h-100 w-100 justify-content-center align-items-center" v-if="(dbImg[2] !== undefined || miscellaneous.normativas.url !== '')">
-                          <div v-if="dbImg[2] !== undefined && dbImg[2].url !== undefined && dbImg[2].url !== '' || miscellaneous.normativas.url !== ''" class="icon flaticon-file" @click="openFile((dbImg[2].url !== undefined && dbImg[2].url !== '')?dbImg[2].url:miscellaneous.normativas.url)">
-                          </div>
-                        </div>
-                        <div v-else class="w-100 h-100 d-flex flex-row align-items-center justify-content-center">
-                          <p class="align-self-star" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">{{miscellaneous.normativas.nombre}}</p>
-                        </div>
-                        <!-- ICONO DE QUITAR -->
-                        <div @click.prevent="deleteFile(2, 'crear')" title="Eliminar" class="remove position-absolute flaticon-close" style="top:5px; right:5px;"></div>
-                          <!-- FIN ICONO DE QUITAR -->
-                      </div>
-                        <!-- FIN MUESTRA DE IMAGEN -->
-                    </div>
+                  <div class="w-100 d-flex flex-row align-items-center justify-content-center">
+                    <input type="time" name="inicio" id="inicio" v-model="miscellaneous.inicio">
+                    <div class="ml-2 mr-2">-</div>
+                    <input type="time" name="inicio" id="inicio" v-model="miscellaneous.fin">
                   </div>
                 </div>
-                <!-- Fin Normativa -->
-              </div>
-              <!-- Fin de Reglamentos y Normativas -->
+
+              <!-- Fin de Horario de atencion -->
+
            </div>
            <div class="col-6 p-1 d-flex flex-column align-items-center justify-content-center" style="min-height: 400px">
-               <div class="w-100" style="min-height: 200px;">
-                    <div class=" w-100 phones-input row justify-content-between align-items-center" v-for="index in cantFields.telefonos.numero" :key="`telefono${index}`" style="margin-top: 5px;">
-                        <div class="col-9 p-0 d-flex flex-row align-items-center justify-content-center">
-                            <input :class="['position-relative', validPhone(miscellaneous.telefonos[`telefonos${index}`], (index))?'':'error']" ref="phone" type="text" v-model="miscellaneous.telefonos[`telefonos${index}`]" placeholder="Teléfono (Ej. +581112223333)">
-                            <div class="important-field" v-show="!validPhone(miscellaneous.telefonos[`telefonos${index}`], (index))"></div>
-                        </div>
-                        <span @click="addField('crear', 'telefonos', false)" :class="['icon p-0 add flaticon-add', (index-1 > 0)?'col-1 pl-1 pr-1':'col-3 pl-2']" v-if="index === cantFields.telefonos.numero"></span>
-                        <span @click="deleteField('crear', 'telefonos', false)" class="icon col-1 p-0 pl-2 delete flaticon-minus" v-if="index > 1 && index === cantFields.telefonos.numero"></span>
-                    </div>
-               </div>
                 <div class="w-100" style="min-height: 200px;">
+                  <p class="text">
+                    Teléfonos
+                  </p>
+                  <div class=" w-100 phones-input row justify-content-between align-items-center" v-for="index in cantFields.telefonos.numero" :key="`telefono${index}`" style="margin-top: 5px;">
+                      <div class="col-9 p-0 d-flex flex-row align-items-center justify-content-center">
+                          <input :class="['position-relative', validPhone(miscellaneous.telefonos[`telefonos${index}`], (index))?'':'error']" ref="phone" type="text" v-model="miscellaneous.telefonos[`telefonos${index}`]" placeholder="Teléfono (Ej. +581112223333)">
+                          <div class="important-field" v-show="!validPhone(miscellaneous.telefonos[`telefonos${index}`], (index))"></div>
+                      </div>
+                      <span @click="addField('crear', 'telefonos', false)" :class="['icon p-0 add flaticon-add', (index-1 > 0)?'col-1 pl-1 pr-1':'col-3 pl-2']" v-if="index === cantFields.telefonos.numero"></span>
+                      <span @click="deleteField('crear', 'telefonos', false)" class="icon col-1 p-0 pl-2 delete flaticon-minus" v-if="index > 1 && index === cantFields.telefonos.numero"></span>
+                  </div>
+                </div>
+                <div class="w-100" style="min-height: 200px;">
+                    <p class="text">
+                      Correos
+                    </p>
                     <div class=" w-100 phones-input row justify-content-between align-items-center" v-for="index in cantFields.correos.numero" :key="`correo${index}`" style="margin-top: 5px;">
                         <div class="col-9 p-0 d-flex flex-row align-items-center justify-content-center">
                             <input :class="['position-relative', validEmail(miscellaneous.correos[`correos${index}`], index)?'':'error']" ref="correo" type="text" v-model="miscellaneous.correos[`correos${index}`]" placeholder="Correo (Ej. ejemplo@direccion.com)">
@@ -158,6 +103,54 @@
                         <span @click="deleteField('crear', 'correos', false)" class="icon col-1 p-0 pl-2 delete flaticon-minus" v-if="index > 1 && index === cantFields.correos.numero"></span>
                     </div>
                 </div>
+                <!-- Reglamentos y Normativas -->
+
+                  <div class="reglamentos-normativas d-flex flex-column align-items-center justify-content-center w-100 mt-3" style="min-height: 200px">
+
+                    <p class="text">
+                      Aquí podrás agregar todos los archivos doc, docx y pdf de la página
+                    </p>
+                    
+                    <div class=" w-100 phones-input files row justify-content-between align-items-center" v-for="index in cantFields.archivos.numero" :key="`archivos${index}`" style="margin-top: 5px;">
+                      <div class="col-9 p-0 d-flex flex-row align-items-center justify-content-between" v-if="index > 0" >
+                        <div class="w-35">
+                          <input class="position-relative" :ref="`archivos${index}`" type="text" v-model="miscellaneous.archivos[`archivos${index}`].nombreCampo" placeholder="Nombre del archivo">
+                        </div>
+                        <div class="w-60 h-100">
+                          <div class="input-files style-2 d-flex w-100 h-100 flex-column align-items-center justify-content-center position-relative" v-if="miscellaneous.archivos[`archivos${index}`].nombre === undefined || miscellaneous.archivos[`archivos${index}`].nombre === ''">
+                            <input :ref='`file0`' @change="filesVerification($event, index, 'crear')" class="collectionFiles" title="Elija un archivo"  type="file" accept=".doc, .docx, .pdf">
+                            <div class="button-files d-flex flex-row align-items-center justify-content-center w-100 h-100 p-2">
+                              <i class="icon flaticon-add m-0 p-0"></i>
+                            </div>
+                          </div>
+                          <!-- PREV IMAGENES -->
+                          <div  class="uploadCont flex-row align-items-center justify-content-center w-100 h-100" v-else style="display: flex;">
+                            <div :class="['prev-container files d-flex position-relative flex-column align-items-center justify-content-between w-100 bg-success-light h-100']">
+                              <!-- MUESTRA DE IMAGEN -->
+                              <div class="w-100 d-flex position-relative justify-content-end flex-column h-100">
+                                <div class="d-flex h-100 w-100 justify-content-center align-items-center" v-if="(dbImg[index] !== undefined || miscellaneous.archivos[`archivos${index}`].url !== '')">
+                                  <div v-if="dbImg[index] !== undefined && dbImg[index].url !== undefined && dbImg[index].url !== '' || miscellaneous.archivos[`archivos${index}`].url !== undefined && miscellaneous.archivos[`archivos${index}`].url !== ''" class="icon flaticon-file" @click="openFile((dbImg[index] !== undefined && dbImg[index].url !== undefined && dbImg[index].url !== '')?dbImg[index].url:miscellaneous.archivos[`archivos${index}`].url)">
+                                  </div>
+                                </div>
+                                <div v-else class="w-100 h-100 d-flex flex-row align-items-center justify-content-center">
+                                  <p class="align-self-star" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">{{miscellaneous.archivos[`archivos${index}`].nombre}}</p>
+                                </div>
+                                <!-- ICONO DE QUITAR -->
+                                <div @click.prevent="deleteFile(index, 'crear')" class="remove position-absolute flaticon-close" style="top:2px; right:3px;"></div>
+                                  <!-- FIN ICONO DE QUITAR -->
+                              </div>
+                              <!-- FIN MUESTRA DE IMAGEN -->
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <span @click="addField('crear', 'archivos', false)" :class="['icon p-0 add flaticon-add', (index-1 > 0)?'col-1 pl-1 pr-1':'col-3 pl-2']" v-if="index === cantFields.archivos.numero"></span>
+                      <span @click="deleteField('crear', 'archivos', false)" class="icon col-1 p-0 pl-2 delete flaticon-minus" v-if="index > 1 && index === cantFields.archivos.numero"></span>
+                    </div>
+
+                  </div>
+
+                <!-- Fin de Reglamentos y Normativas -->
            </div>
         </div>
         <div class="d-flex flex-row justify-content-between align-items-center m-3">
@@ -200,12 +193,16 @@ export default {
           correos: {
             numero: 1,
             nombre: 'correos',
+          },
+          archivos: {
+            numero: 0,
+            nombre: 'archivos',
           }
         },
         show: false,
         error: null,
         files: {},
-        valores: ['telefonos', 'correos', 'direccion', 'redes', 'logo', 'id', 'reglamentos', 'normativas'],
+        valores: ['telefonos', 'correos', 'direccion', 'redes', 'logo', 'id', 'archivos', 'inicio', 'fin'],
         redes: ['instagram', 'facebook', 'twitter'],
         miscellaneous: {
           telefonos: {},
@@ -213,8 +210,13 @@ export default {
           correos: {},
           direccion: '',
           logo: '',
-          reglamentos: {},
-          normativas: {},
+          archivos: {
+            archivos1: {
+              nombreCampo: '',
+            },
+          },
+          inicio: '',
+          fin: '',
         },
       }
     },
@@ -228,7 +230,7 @@ export default {
       ...mapActions(['getData']),
       deleteCollection(value){
         for(let i = 0; i < Object.values(this.cantFields).length; i++){
-          Object.values(this.cantFields)[i].numero = 0;
+          Object.values(this.cantFields)[i].numero = 1;
         }
         this.miscellaneous = {
             telefonos: {},
@@ -236,17 +238,24 @@ export default {
             correos: {},
             direccion: '',
             logo: '',
-            reglamentos: '',
-            normativas: '',
+            archivos: {
+              archivos1: {
+                nombreCampo: '',
+              },
+            },
+            inicio: '',
+            fin: '',
         }
       },
       deleteFile(index, val){
         if(index === 0){
           this.miscellaneous.logo = '';
-        }else if(index === 1){
-          this.miscellaneous.reglamentos = '';
         }else{
-          this.miscellaneous.normativas = '';
+          if(this.miscellaneous.archivos[`archivos${index}`] !== undefined){
+            this.miscellaneous.archivos[`archivos${index}`] = {
+              nombreCampo: this.miscellaneous.archivos[`archivos${index}`].nombreCampo,
+            }
+          }
         }
         delete this.files[`archivo${index}`];
         this.resetDBValues(index);
@@ -308,32 +317,29 @@ export default {
               this.miscellaneous.logo.nombre = this.miscellaneous.logo.nombreref;
             }
 
-            if(this.miscellaneous.reglamentos.id !== undefined){
-              this.miscellaneous.reglamentos.nombre = this.miscellaneous.reglamentos.nombreref;
-            }
-
-            if(this.miscellaneous.normativas.id !== undefined){
-              this.miscellaneous.normativas.nombre = this.miscellaneous.normativas.nombreref;
-            }
-
             let dataTransfer = {
               archivos: this.files,
               miscellaneous: {
                 archivos: {
                   archivo0: this.miscellaneous.logo,
-                  archivo1: this.miscellaneous.reglamentos,
-                  archivo2: this.miscellaneous.normativas,
                 },
                 correos: this.miscellaneous.correos,
                 direccion: this.miscellaneous.direccion,
                 redes: this.miscellaneous.redes,
                 telefonos: this.miscellaneous.telefonos,
                 id: this.miscellaneous.id,
+                inicio: this.miscellaneous.inicio,
+                fin: this.miscellaneous.fin
               },
               target: 'Miscellaneous',
             };
 
-            console.log(dataTransfer);
+            for(let i = 0; i < Object.values(this.miscellaneous.archivos).length; i++){
+              if(Object.values(this.miscellaneous.archivos)[i].id !== undefined){
+                Object.values(this.miscellaneous.archivos)[i].nombre = Object.values(this.miscellaneous.archivos)[i].nombreref;
+              }
+              dataTransfer.miscellaneous.archivos[`archivo${i+1}`] = Object.values(this.miscellaneous.archivos)[i];
+            }
             
             this.updateDB(dataTransfer);
         }
@@ -357,23 +363,13 @@ export default {
               show: true,
             },
           }
-        }else if(index === 1){
-          this.miscellaneous.reglamentos = {
-            nombre: files.name,
-            url: '',
-            id: index,
-            nombreref: `reglamentos`,
-            uploadPercentage: 0,
-            progressBar: {
-              show: true,
-            },
-          }
         }else{
-          this.miscellaneous.normativas = {
+          this.miscellaneous.archivos[`archivos${index}`] = {
+            nombreCampo: this.miscellaneous.archivos[`archivos${index}`].nombreCampo,
             nombre: files.name,
             url: '',
             id: index,
-            nombreref: `normativas`,
+            nombreref: this.miscellaneous.archivos[`archivos${index}`].nombreCampo.toLowerCase().split(' ').join('_'),
             uploadPercentage: 0,
             progressBar: {
               show: true,
@@ -420,12 +416,19 @@ export default {
               }
             }
         }
-        this.$set(this.miscellaneous[`${this.cantFields[`${val2}`].nombre}`], `${this.cantFields[`${val2}`].nombre}${this.cantFields[`${val2}`].numero + 1}`, '');
+        if(val2 === 'telefonos' || val2 === 'correos'){
+          this.$set(this.miscellaneous[`${this.cantFields[`${val2}`].nombre}`], `${this.cantFields[`${val2}`].nombre}${this.cantFields[`${val2}`].numero + 1}`, '');
+        }else{
+          this.$set(this.miscellaneous[`${this.cantFields[`${val2}`].nombre}`], `${this.cantFields[`${val2}`].nombre}${this.cantFields[`${val2}`].numero + 1}`, {
+            nombreCampo: '',
+          });
+        }
         this.cantFields[`${val2}`].numero++;
       },
       deleteField(val, val2, val3){
-        this.miscellaneous[`${this.cantFields[`${val2}`].nombre}${this.cantFields[`${val2}`].numero}`] = '';
-        delete this.miscellaneous[`${this.cantFields[`${val2}`].nombre}${this.cantFields[`${val2}`].numero}`];
+        this.miscellaneous[`${this.cantFields[`${val2}`].nombre}`][`${this.cantFields[`${val2}`].nombre}${this.cantFields[`${val2}`].numero}`] = '';
+        delete this.miscellaneous[`${this.cantFields[`${val2}`].nombre}`][`${this.cantFields[`${val2}`].nombre}${this.cantFields[`${val2}`].numero}`];
+        this.deleteFile(this.cantFields[`${val2}`].numero)
         this.cantFields[`${val2}`].numero --;
       },
       toggleInfo(){
@@ -458,20 +461,42 @@ export default {
         if(this.dbWeb.Miscellaneous !== undefined){
           const id = Object.values(this.dbWeb.Miscellaneous)[0].misc_id;
           this.miscellaneous.id = Object.values(this.dbWeb.Miscellaneous)[0].misc_id;
+          if(Object.values(this.dbWeb.Miscellaneous)[0].misc_telefonos !== '' && Object.values(this.dbWeb.Miscellaneous)[0].misc_telefonos !== undefined){
+            this.cantFields.telefonos.numero = Object.values(Object.values(this.dbWeb.Miscellaneous)[0].misc_telefonos).length
+          }else{
+            this.cantFields.telefonos.numero = 1;
+          }
+          if(Object.values(this.dbWeb.Miscellaneous)[0].misc_correos !== '' && Object.values(this.dbWeb.Miscellaneous)[0].misc_correos !== undefined){
+            this.cantFields.correos.numero = Object.values(Object.values(this.dbWeb.Miscellaneous)[0].misc_correos).length
+          }else{
+            this.cantFields.correos.numero = 1;
+          }
+          if(Object.values(this.dbWeb.Miscellaneous)[0].misc_archivos !== '' && Object.values(this.dbWeb.Miscellaneous)[0].misc_archivos !== undefined){
+            this.cantFields.archivos.numero = Object.values(Object.values(this.dbWeb.Miscellaneous)[0].misc_archivos).length
+          }else{
+            this.cantFields.archivos.numero = 1;
+          }
             for(let i = 0; i < this.valores.length; i++){
                 if(this.dbWeb.Miscellaneous[`${id}`][`misc_${this.valores[i]}`] !== undefined){
+                  if(this.valores[i] === 'archivos'){
+                    for(let k = 0; k < Object.values(Object.values(this.dbWeb.Miscellaneous)[0].misc_archivos).length; k++){
+                      this.$set(this.miscellaneous.archivos, `archivos${k+1}`, Object.values(Object.values(this.dbWeb.Miscellaneous)[0].misc_archivos)[k])
+                    }
+                  }else{
                     this.$set(this.miscellaneous, `${this.valores[i]}`,  this.dbWeb.Miscellaneous[`${id}`][`misc_${this.valores[i]}`]);
-                    if(this.valores[i] === 'redes'){
-                        for(let j = 0; j < this.redes.length; j++){
-                            if(this.miscellaneous.redes[this.redes[j]] === undefined){
-                                this.$set(this.miscellaneous[`${this.valores[i]}`], `${this.redes[j]}`,  {});
-                                this.$set(this.miscellaneous[`${this.valores[i]}`][`${this.redes[j]}`], `activo`,  false);
-                                this.$set(this.miscellaneous[`${this.valores[i]}`][`${this.redes[j]}`], `link`,  '');
-                            }
+                  }
+                  
+                  if(this.valores[i] === 'redes'){
+                    for(let j = 0; j < this.redes.length; j++){
+                        if(this.miscellaneous.redes[this.redes[j]] === undefined){
+                            this.$set(this.miscellaneous[`${this.valores[i]}`], `${this.redes[j]}`,  {});
+                            this.$set(this.miscellaneous[`${this.valores[i]}`][`${this.redes[j]}`], `activo`,  false);
+                            this.$set(this.miscellaneous[`${this.valores[i]}`][`${this.redes[j]}`], `link`,  '');
                         }
                     }
+                  }
                 }else{
-                  if(this.valores[i] === 'direccion'){
+                  if(this.valores[i] === 'direccion' || this.valores[i] === 'inicio' || this.valores[i] === 'fin'){
                       this.$set(this.miscellaneous, `${this.valores[i]}`,  '');
                   }else if (this.valores[i] === 'redes'){
                       this.$set(this.miscellaneous, `${this.valores[i]}`,  {});
@@ -480,6 +505,8 @@ export default {
                           this.$set(this.miscellaneous[`${this.valores[i]}`][`${this.redes[j]}`], `activo`,  false);
                           this.$set(this.miscellaneous[`${this.valores[i]}`][`${this.redes[j]}`], `link`,  '');
                       }
+                  }else if(this.valores[i] === 'archivos'){
+                    this.$set(this.miscellaneous.archivos.archivos1, 'nombreCampo', '')
                   }else{
                       this.$set(this.miscellaneous, `${this.valores[i]}`,  {});
                   }
@@ -545,6 +572,8 @@ export default {
         1: null,
         }
         this.deletedEl(n)
+
+        this.files = {}
         
         setTimeout(() => {
           if(this.successUpload !== null){
@@ -826,6 +855,38 @@ export default {
     -webkit-transition: all .2s ease;
   }
 
+  .input-files.style-2 .button-files{
+    border-radius: 5px !important;
+  }
+
+  .input-files.style-2 .button-files .icon{
+    position: relative;
+    line-height: 65px !important;
+    height: 65px !important;
+    width: 65px !important;
+    min-width: 65px !important;
+  }
+
+  .input-files.style-2 .button-files .icon::before{
+    position: absolute;
+    top: 0;
+    left: 0;
+    text-align: center;
+    color: white;
+    background-color: rgba(150, 150, 150);
+    border-radius: 50%;
+    height: 65px !important;
+    line-height: 65px !important;
+    width: 65px !important;
+    min-width: 65px !important;
+    font-size: 20px !important;
+    cursor: pointer;
+    transition: all .2s ease;
+    -moz-transition: all 29s ease;
+    -o-transition: all .2s ease;
+    -webkit-transition: all .2s ease;
+  }
+
   .input-files:hover  .button-files{
     background-color: rgb(170, 170, 170);
   }
@@ -864,15 +925,15 @@ export default {
 
   .prev-container{
     height: auto;
-    width: 100px;
-    height: 100px;
+    width: 100px !important;
+    height: 100px !important;
     border-radius: 50%;
   }
 
   .prev-container.files{
     height: auto;
-    width: 100%;
-    height: 100px;
+    width: 100% !important;
+    height: 100px !important;
     border-radius: 5px;
   }
 
@@ -883,23 +944,24 @@ export default {
   }
 
   .prev-container.files .icon{
-    height: 70px;
-    width: 70px;
-    background-color: transparent;
-    position: relative;
+    height: 70px !important;
+    width: 70px !important;
+    background-color: transparent !important;
+    position: relative !important;
   }
 
   .prev-container.files .icon::before{
-    cursor: pointer;
-    position: absolute;
-    color: rgba(0,0,0);
-    top: 0;
-    left: 0;
-    text-align: center;
-    height: 70px;
-    line-height: 70px;
-    width: 70px;
-    font-size: 60px;
+    cursor: pointer !important;
+    position: absolute !important;
+    color: rgba(0,0,0) !important;
+    top: 0 !important;
+    left: 0 !important;
+    text-align: center !important;
+    height: 70px !important;
+    line-height: 70px !important;
+    width: 70px !important;
+    font-size: 60px !important;
+    border: none !important;
     transition: all .2s ease;
     -moz-transition: all .2s ease;
     -o-transition: all .2s ease;
@@ -1093,6 +1155,19 @@ export default {
     border-radius: 50%;
     color: white;
     max-height: 24px;
+    transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    -o-transition: all 0.2s ease;
+    -webkit-transition: all 0.2s ease;
+  }
+
+  .phones-input.files .icon::before{
+    cursor: pointer;
+    font-size: 12px;
+    border: 0.05em solid black;
+    border-radius: 50%;
+    color: white;
+    max-height: none !important;
     transition: all 0.2s ease;
     -moz-transition: all 0.2s ease;
     -o-transition: all 0.2s ease;

@@ -299,6 +299,7 @@ export default {
         if(user){
           clearTimeout(data)
           if(this.dbWeb.Usuarios[`${user.uid}`]){
+            console.log(this.dbWeb.Usuarios[`${user.uid}`]);
             values = {
               activo: this.dbWeb.Usuarios[`${user.uid}`].user_activo,
               apellido: this.dbWeb.Usuarios[`${user.uid}`].user_apellido,
@@ -306,7 +307,7 @@ export default {
               cargo: this.dbWeb.Usuarios[`${user.uid}`].user_cargo,
               correo: this.dbWeb.Usuarios[`${user.uid}`].user_correo,
               correoVeri: this.dbWeb.Usuarios[`${user.uid}`].user_correoVeri,
-              fotoUrl: this.dbWeb.Usuarios[`${user.uid}`].user_fotoUrl,
+              fotos: this.dbWeb.Usuarios[`${user.uid}`].user_fotos,
               id: this.dbWeb.Usuarios[`${user.uid}`].user_id,
               nombre: this.dbWeb.Usuarios[`${user.uid}`].user_nombre,
               telefono: this.dbWeb.Usuarios[`${user.uid}`].user_telefono,

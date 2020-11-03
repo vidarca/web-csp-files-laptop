@@ -57,8 +57,8 @@
         <div class="info-container w-95">
           <h5 class="w-100">{{reverseArray[anunSelecIndex].noti_titulo}}</h5>
           <img class="mr-3" :src="reverseArray[anunSelecIndex].noti_fotos.imagen1.url" align="left" width="360px" height="auto" style="max-height: 260px;">
-          <div>
-            <div v-if="reverseArray[anunSelecIndex].noti_fotos.imagen2" v-for="(item, index) in reverseArray[anunSelecIndex].noti_info.split(/[\r\n]+/)" :key="index">
+          <div v-if="reverseArray[anunSelecIndex].noti_fotos.imagen2">
+            <div v-for="(item, index) in reverseArray[anunSelecIndex].noti_info.split(/[\r\n]+/)" :key="index">
               <div class="text" v-if="parrShow(index, '0')">
                 {{item}}
               </div>
@@ -357,8 +357,8 @@ export default {
       })
     })
 
-    if(this.reverseArray !== undefined && this.reverseArray.length/numElements > 1){
-      this.number = Math.ceil(this.reverseArray.length/numElements);
+    if(this.reverseArray !== undefined && this.reverseArray.length/this.numElements > 1){
+      this.number = Math.ceil(this.reverseArray.length/this.numElements);
       this.showSelect = true;
     }
     

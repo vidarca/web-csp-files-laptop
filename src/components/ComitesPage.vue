@@ -56,7 +56,7 @@
               <div class="carousel-inner">
                 <div :class="['carousel-item', (index === 0)?'active':'']" v-for="(slide, index) in Object.values(bannersList[0].bann_slides)" :key="index" ref="carouselitems">
                   <img :src="slide.url">
-                  <div :class="['textcontainer', (index % 2 === 0)?'textcontainerpos1':'textcontainerpos2']">
+                  <div v-if="slide.info !== '' && slide.info !== undefined" :class="['textcontainer', (index % 2 === 0)?'textcontainerpos1':'textcontainerpos2']">
                     {{slide.info}}
                   </div>
                 </div>

@@ -7,7 +7,7 @@
             <div class="carousel-inner">
                 <div :class="['carousel-item', (index === 0)?'active':'']" v-for="(slide, index) in Object.values(bannersList[0].bann_slides)" :key="index" ref="carouselitems">
                     <img :src="slide.url">
-                    <div :class="['textcontainer', (index % 2 === 0)?'textcontainerpos1':'textcontainerpos2']">
+                    <div v-if="slide.info !== '' && slide.info !== undefined" :class="['textcontainer', (index % 2 === 0)?'textcontainerpos1':'textcontainerpos2']">
                         {{slide.info}}
                     </div>
                 </div>
@@ -98,7 +98,7 @@
     <section class="junta-directiva w-95 m-auto translate" ref="section1"  v-show="showJunta">
         <h3 class="w-100 text-center border-bottom" style="padding: 40px 0 20px 0;">Junta Directiva {{juntaSelect.junt_periodo}}</h3>
         <div class="d-flex flex-column flex-sm-row align-items-center justify-content-center flex-wrap" style="padding: 40px 0 20px 0;">
-            <div v-for="(integrante, index) in juntaSelect.junt_integrantes" :key="integrante.juin_cargo" v-show="index < maxShowJuin" :class="['juin-container flex-column align-items-center justify-content-start pt-3 pb-3 col-12', (index === 0 || index === 1)?'col-sm-6':(index >= 1 && index < 5)?'col-sm-4':(index >= 5 && index < 9)?'col-sm-3':'col-sm-6']" style="display:  flex;">
+            <div v-for="(integrante, index) in juntaSelect.junt_integrantes" :key="integrante.juin_cargo" v-show="index < maxShowJuin && integrante.juin_activo === true" :class="['juin-container flex-column align-items-center justify-content-start pt-3 pb-3 col-12', (index === 0 || index === 1)?'col-sm-6':(index >= 1 && index < 5)?'col-sm-4':(index >= 5 && index < 9)?'col-sm-3':'col-sm-6']" style="display:  flex;">
                 <div class="imagen">
                     <img :src="(integrante.juin_foto !== '' && integrante.juin_foto !== undefined)?integrante.juin_foto:'https://firebasestorage.googleapis.com/v0/b/web-database-66842.appspot.com/o/transparent.png?alt=media&token=533f3017-de64-49b5-8ee9-cb8950445931'" class="juin-foto">
                     <i :class="[(integrante.juin_foto === '' || integrante.juin_foto === undefined)?'icon flaticon-user':'']"></i>

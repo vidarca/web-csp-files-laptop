@@ -3,7 +3,7 @@
     <div class="alert-box position-fixed" ref="alertBox">
       <i :class="error?'icon-err flaticon-close':successUpload?'icon-succ flaticon-check': errorUpload?'icon-err flaticon-close':''"></i> <p>{{error?error:successUpload?successUpload:errorUpload?errorUpload:''}}</p>
     </div>
-      <form class="p-3" @submit.prevent="isUserDiff(tipo)">
+      <form class="p-3" @submit.prevent="updateUser()">
         <div class="v-admin-username w-100">
           <p class="title-text">NOMBRE DE USUARIO</p>
           <div class="v-admin-namevalues w-100">
@@ -101,7 +101,7 @@ export default {
   },
 
   methods:{
-    ...mapMutations(['isUserDiff', 'setRefUser', 'successAdvise', 'changeSecTitle']),
+    ...mapMutations(['updateUser', 'setRefUser', 'successAdvise', 'changeSecTitle']),
     validPhone(target){
       const exp = /\(?\+[0-9]{1,3}\)? ?-?[0-9]{1,3} ?-?[0-9]{3,5} ?-?[0-9]{4}( ?-?[0-9]{3})? ?(\w{1,10}\s?\d{1,6})?/g;
       if(exp.test(target) || target === ''){

@@ -499,6 +499,7 @@ export default {
       ...mapActions(['getData']),
       itemSelected(index){
         this.resetDBValues();
+        this.deleteCollection();
         this.$refs.section0.classList.toggle('translate');
         setTimeout(() => {
           this.showList = false;

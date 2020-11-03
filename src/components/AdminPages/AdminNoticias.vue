@@ -291,6 +291,7 @@ export default {
       ...mapActions(['getData']),
       itemSelected(index){
         this.resetDBValues();
+        this.deleteCollection();
         this.$refs.section0.classList.toggle('translate');
         setTimeout(() => {
           this.showList = false;
@@ -444,7 +445,7 @@ export default {
             };
 
             for(let i = 0; i < Object.values(this.selectNoticia.archivos).length; i++){
-                if(Object.values(this.selectNoticia.archivos)[i] !== ''){
+                if(Object.values(this.selectNoticia.archivos)[i].id !== undefined){
                     Object.values(this.selectNoticia.archivos)[i].nombre = `imagen${i}`
                     dataTransfer.noticia.archivos[`imagen${i}`] = Object.values(this.selectNoticia.archivos)[i];
                 }else{
@@ -452,6 +453,7 @@ export default {
                 }
             }
             
+            console.log(dataTransfer);
             this.updateDB(dataTransfer)
 
           }

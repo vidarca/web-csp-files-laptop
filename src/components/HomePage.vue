@@ -9,7 +9,7 @@
 				<div class="carousel-inner">
 					<div :class="['carousel-item', (index === 0)?'active':'']" v-for="(slide, index) in Object.values(bannersList[0].bann_slides)" :key="index" ref="carouselitems">
 						<img :src="slide.url">
-						<div :class="['textcontainer', (index % 2 === 0)?'textcontainerpos1':'textcontainerpos2']">
+						<div v-if="slide.info !== '' && slide.info !== undefined" :class="['textcontainer', (index % 2 === 0)?'textcontainerpos1':'textcontainerpos2']">
 							{{slide.info}}
 						</div>
 					</div>
@@ -54,6 +54,18 @@
 									<span class="icon flaticon-key"></span>
 								</div>
 								<h5><a href="http://clubsantapaula.dyndns.org:1081/user/auth/login">Autogestión</a></h5>
+							</div>
+						</div>
+					</div>
+
+					<!-- Featured Block -->
+					<div class="featured-block col-lg-6 col-md-6 col-sm-12" id="second-featured">
+						<div class="inner-box">
+							<div class="content">
+								<div class="icon-box">
+									<span class="icon flaticon-key"></span>
+								</div>
+								<h5><a href="">Protocolos de Seguridad (COV)</a></h5>
 							</div>
 						</div>
 					</div>
@@ -217,7 +229,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="cout-image-container">
+		<div class="cuot-image-container">
 			<img :src="distCuotas.sec_fotos.imagen0.url" v-if="distCuotas.sec_imagen_seccion">
 		</div>
 	</section>

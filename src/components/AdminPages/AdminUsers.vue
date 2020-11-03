@@ -1,43 +1,47 @@
 <template>
   <div id="admin-users" v-if="loader">
+
     <!-- Modal -->
-    <div class="modal fade" id="createUser" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="staticBackdropLabel">Crear Usuario</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body d-flex flex-column align-items-start justify-content-start">
-            <input class="w-75" type="email" :class="!validEmail?'error':' '" placeholder="Correo (Ej. ejemplo@direccion.com)" v-model="users.createUser.formUpload.correo">
-            <div class="w-100 d-flex flex-row align-items-center justify-content-start">
-              <input class="w-75" type="password" :class="!validPass?'error':' '" placeholder="Contraseña" v-model="users.createUser.formUpload.pass">
-              <i ref="info" @mouseenter="toggleInfo()" @mouseleave="toggleInfo()" class="icon info position-relative flaticon-question">
-                <div class="info text position-absolute">
-                  La contraseña debe ser de un máximo de 15 caracteres y debe contener sólamente un(1) caracter especial ('*', '$', '#', '@', '!', '?') y, al menos, una letra mayúscula y un caracter numérico.
-                </div>
-              </i>
+      <div class="modal fade" id="createUser" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel">Crear Usuario</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
             </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-            <button type="button" class="btn btn-primary" @click.prevent="sendForm()">
-              <div v-if="users.userRefer" class="spinner-border text-light" role="status">
-                <span class="sr-only">Loading...</span>
+            <div class="modal-body d-flex flex-column align-items-start justify-content-start">
+              <input class="w-75" type="email" :class="!validEmail?'error':' '" placeholder="Correo (Ej. ejemplo@direccion.com)" v-model="createUser.correo">
+              <div class="w-100 d-flex flex-row align-items-center justify-content-start">
+                <input class="w-75" type="password" :class="!validPass?'error':' '" placeholder="Contraseña" v-model="createUser.pass">
+                <i ref="info" @mouseenter="toggleInfo()" @mouseleave="toggleInfo()" class="icon info position-relative flaticon-question">
+                  <div class="info text position-absolute">
+                    La contraseña debe ser de un máximo de 15 caracteres y debe contener sólamente un(1) caracter especial ('*', '$', '#', '@', '!', '?') y, al menos, una letra mayúscula y un caracter numérico.
+                  </div>
+                </i>
               </div>
-              <div v-else>
-                Crear Usuario
-              </div>
-          </button>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+              <button type="button" class="btn btn-primary" @click.prevent="sendForm()">
+                <div v-if="crearDBVals" class="spinner-border text-light" role="status">
+                  <span class="sr-only">Loading...</span>
+                </div>
+                <div v-else>
+                  Crear Usuario
+                </div>
+            </button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    <!-- Fin Modal -->
+
     <div class="alert-box position-fixed" ref="alertBox">
       <i :class="error?'icon-err flaticon-close':successUpload?'icon-succ flaticon-check': errorUpload?'icon-err flaticon-close':''"></i> <p>{{error?error:successUpload?successUpload:errorUpload?errorUpload:''}}</p>
     </div>
+
     <section id="section1" class="w-100" v-show="Object.values(dbWeb.Usuarios)[0] !== undefined && showPrev === false" ref="section1">
       <div class="list-db w-auto">
         <div class="list-header w-100 d-flex flex-row align-items-center justify-content-between">
@@ -104,26 +108,27 @@
         </div>
       </div>      
     </section>
+
     <section id="section2" class="translate p-3" v-show="showPrev" ref="section2">
       <form v-if="itemSelected !== ''">
         <div class="v-admin-username w-100">
           <p class="title-text">NOMBRE DE USUARIO</p>
           <div class="v-admin-namevalues w-100">
-            <input class="v-input-text" id="name" type="text" v-model="dbWeb.Usuarios[`${itemSelected}`].user_nombre" :placeholder="dbWeb.Usuarios[`${itemSelected}`].user_nombre?dbWeb.Usuarios[`${itemSelected}`].user_nombre:'Nombre'"> 
-            <input class="v-input-text" id="last-name" type="text" v-model="dbWeb.Usuarios[`${itemSelected}`].user_apellido" :placeholder="dbWeb.Usuarios[`${itemSelected}`].user_apellido?dbWeb.Usuarios[`${itemSelected}`].user_apellido:'Apellido'">
+            <input class="v-input-text" id="name" type="text" v-model="selectUser.nombre" :placeholder="(selectUser.nombre !== '')?selectUser.nombre:'Nombre'"> 
+            <input class="v-input-text" id="last-name" type="text" v-model="selectUser.apellido" :placeholder="(selectUser.apellido !== '')?selectUser.apellido:'Apellido'">
           </div>
         </div>
         <div class="v-admin-userrank d-flex flex-row align-items-center justify-content-center">
           <div class="d-flex w-100 flex-column justify-content-center align-items-center" style="margin: 2px;">
             <p class="title-text">CARGO</p>
             <div class="v-admin-rankvalues w-100">
-              <input class="v-input-text w-100" type="text" v-model="dbWeb.Usuarios[`${itemSelected}`].user_cargo" :placeholder="dbWeb.Usuarios[`${itemSelected}`].user_cargo?dbWeb.Usuarios[`${itemSelected}`].user_cargo:'Cargo'">
+              <input class="v-input-text w-100" type="text" v-model="selectUser.cargo" :placeholder="(selectUser.cargo !== '')?selectUser.cargo:'Cargo'">
             </div>
           </div>
           <div class="d-flex w-100 flex-column justify-content-center align-items-center" style="margin: 2px;">
             <p class="title-text">CORREO ELECTRÓNICO</p>
             <div class="v-admin-emailvalues w-100">
-              <input class="v-input-text w-100" type="text" v-model="dbWeb.Usuarios[`${itemSelected}`].user_correo" :placeholder="dbWeb.Usuarios[`${itemSelected}`].user_correo?dbWeb.Usuarios[`${itemSelected}`].user_correo:'Correo'" disabled>
+              <input class="v-input-text w-100" type="text" v-model="selectUser.correo" :placeholder="(selectUser.correo !== '')?selectUser.correo:'Correo'" disabled>
             </div>
           </div>
         </div>
@@ -147,7 +152,7 @@
             <div class="d-flex w-50  flex-column justify-content-center align-items-center" style="margin: 2px;">
               <p class="title-text">ACCIÓN</p>
               <div class="w-100">
-                <input class="v-input-text w-100" type="text" v-model="dbWeb.Usuarios[`${itemSelected}`].user_accion" :placeholder="dbWeb.Usuarios[`${itemSelected}`].user_accion?dbWeb.Usuarios[`${itemSelected}`].user_accion:'Acción'">
+                <input class="v-input-text w-100" type="text" v-model="selectUser.accion" :placeholder="(selectUser.accion !== '')?selectUser.accion:'Acción'">
               </div>
             </div>
           </div>
@@ -155,14 +160,14 @@
             <div class="d-flex flex-column justify-content-center align-items-center" style="margin: 2px;">
               <p class="title-text">TELÉFONO</p>
               <div class="w-100">
-                <input :class="['v-input-text w-100', validPhone(dbWeb.Usuarios[`${itemSelected}`].user_telefono)?'':'error']" v-model="dbWeb.Usuarios[`${itemSelected}`].user_telefono" :placeholder="(dbWeb.Usuarios[`${itemSelected}`].user_telefono === '')?'Teléfono (Ej. +581234567)':dbWeb.Usuarios[`${itemSelected}`].user_telefono">
+                <input :class="['v-input-text w-100', validPhone(selectUser.telefono)?'':'error']" v-model="selectUser.telefono" :placeholder="(selectUser.telefono !== '')?selectUser.telefono:'Teléfono (Ej. +581234567)'">
               </div>
             </div>
           </div>
         </div>
         <div class="submit-button mt-5 w-100 d-flex flex-row align-items-center justify-content-end">
           <button class="btn btn-success mr-3" @click.prevent="actUserFunc()">
-            <div v-if="actUser === true" class="spinner-border text-light" role="status">
+            <div v-if="crearDBVals" class="spinner-border text-light" role="status">
               <span class="sr-only">Loading...</span>
             </div>
             <p v-else>
@@ -197,14 +202,33 @@ export default {
         masterAutori: false,
         adminAutori: false,
         loader: false,
+        files:{},
+        selectUser: {
+          activo: '',
+          apellido: '',
+          autori: '',
+          cargo: '',
+          correo: '',
+          correoVeri: '',
+          foto: '',
+          id: '',
+          nombre: '',
+          telefono: '',
+          accion: '',
+          id: '',
+        },
+        createUser: {
+          correo: '',
+          pass: '',
+        },
       }
     },
 
     computed:{
-      ...mapState(['dbWeb', 'users', 'successUpload', 'secTitle', 'errorUpload', 'actUser', 'deletingIndex', 'deletingVal']),
+      ...mapState(['dbWeb', 'successUpload', 'secTitle', 'errorUpload',  'deletingIndex', 'deletingVal', 'crearDBVals']),
       validEmail(){
         const exp = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
-        if(exp.test(this.users.createUser.formUpload.correo)){
+        if(exp.test(this.createUser.correo)){
           return true
         }else{
           return false
@@ -212,7 +236,7 @@ export default {
       },
       validPass(){
         const exp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&#.$($)$-$_])[A-Za-z\d$@$!%*?&#.$($)$-$_]{8,15}$/;
-        if(exp.test(this.users.createUser.formUpload.pass)){
+        if(exp.test(this.createUser.pass)){
           return true
         }else{
           return false
@@ -221,20 +245,12 @@ export default {
     },
 
     methods:{
-      ...mapMutations(['createUser', 'isUserDiff', 'successAdvise', 'changeSecTitle', 'resetContentValues']),
+      ...mapMutations(['registrarUser', 'successAdvise', 'changeSecTitle', 'resetContentValues', 'updateDB', 'resetDBValues']),
       ...mapActions(['getData']),
-      filterChangeHandler(){
-        if(this.$refs.anuncios !== undefined){
-          const waiting = setInterval(() => {
-            for(let i = 0; i < this.$refs.anuncios.children.length; i++) {
-              if(this.$refs.anuncios.children[i].dataset.transitioned === 'true'){
-                return false
-              }else{
-                this.filterChange()
-                clearInterval(waiting)
-              }
-            }
-          }, 100);
+      sendForm(){
+        if(this.validType()){
+          this.registrarUser(this.createUser)
+        }else{
         }
       },
       translateRight(){
@@ -279,7 +295,21 @@ export default {
           }
         })
       },
+      returnList(){
+        this.deleteCollection();
+
+        this.$refs.section2.classList.toggle('translate');
+        setTimeout(() => {
+          this.showPrev = false;
+          this.itemSelected = '';
+        }, 700);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          this.$refs.section1.classList.toggle('translate');
+        }, 800);
+      },
       itemListSelected(val){
+        this.deleteCollection();
         if(Object.values(this.dbWeb.Usuarios)[val].user_autori === 'Master'){
           this.masterAutori = true;
         }
@@ -287,6 +317,18 @@ export default {
         if(Object.values(this.dbWeb.Usuarios)[val].user_autori === 'Admin'){
           this.adminAutori = true;
         }
+
+        this.selectUser.activo = Object.values(this.dbWeb.Usuarios)[val].user_activo;
+        this.selectUser.autori = Object.values(this.dbWeb.Usuarios)[val].user_autori;
+        this.selectUser.apellido = Object.values(this.dbWeb.Usuarios)[val].user_apellido;
+        this.selectUser.cargo = Object.values(this.dbWeb.Usuarios)[val].user_cargo;
+        this.selectUser.correo = Object.values(this.dbWeb.Usuarios)[val].user_correo;
+        this.selectUser.correoVeri = Object.values(this.dbWeb.Usuarios)[val].user_correoVeri;
+        this.selectUser.fotos = Object.values(this.dbWeb.Usuarios)[val].user_fotos;
+        this.selectUser.id = Object.values(this.dbWeb.Usuarios)[val].user_id;
+        this.selectUser.nombre = Object.values(this.dbWeb.Usuarios)[val].user_nombre;
+        this.selectUser.telefono = Object.values(this.dbWeb.Usuarios)[val].user_telefono;
+        this.selectUser.accion = Object.values(this.dbWeb.Usuarios)[val].user_accion;
 
         this.$refs.section1.classList.toggle('translate');
         setTimeout(() => {
@@ -297,37 +339,6 @@ export default {
           window.scrollTo(0, 0);
           this.$refs.section2.classList.toggle('translate');
         }, 800);
-      },
-      returnList(){
-        this.masterAutori = false;
-        this.adminAutori = false;
-
-        this.$refs.section2.classList.toggle('translate');
-        setTimeout(() => {
-          this.showPrev = false;
-          this.itemSelected = '';
-        }, 700);
-        setTimeout(() => {
-          window.scrollTo(0, 0);
-          this.$refs.section1.classList.toggle('translate');
-        }, 800);
-      },
-      regresar(){
-        this.$refs.section2.classList.toggle('translate');
-        setTimeout(() => {
-          this.showPrev = false;
-          this.itemSelected = '';
-        }, 700);
-        setTimeout(() => {
-        window.scrollTo(0, 0);
-          this.$refs.section1.classList.toggle('translate');
-        }, 800);
-      },
-      sendForm(){
-        if(this.validType()){
-          this.createUser()
-        }else{
-        }
       },
       validType(){
         if(this.validEmail && this.validPass){
@@ -343,53 +354,82 @@ export default {
         }
       },
       actUserFunc(){
-        if(this.validPhone(this.dbWeb.Usuarios[`${this.itemSelected}`].user_telefono) === true){
+        if(this.validPhone(this.selectUser.telefono) === true){
           const values = {
-            id: this.itemSelected,
-            correo: this.dbWeb.Usuarios[`${this.itemSelected}`].user_correo,
-            correoVeri: this.dbWeb.Usuarios[`${this.itemSelected}`].user_correoVeri,
-            accion: this.dbWeb.Usuarios[`${this.itemSelected}`].user_accion,
-            telefono: this.dbWeb.Usuarios[`${this.itemSelected}`].user_telefono,
-            nombre: this.dbWeb.Usuarios[`${this.itemSelected}`].user_nombre,
-            apellido: this.dbWeb.Usuarios[`${this.itemSelected}`].user_apellido,
-            activo: this.dbWeb.Usuarios[`${this.itemSelected}`].user_activo,
-            fotoUrl: this.dbWeb.Usuarios[`${this.itemSelected}`].user_fotoUrl,
-            cargo: this.dbWeb.Usuarios[`${this.itemSelected}`].user_cargo,
-            tipo: '1',
+            archivos: this.files,
+            usuario:{
+              id: this.selectUser.id,
+              activo: this.selectUser.activo,
+              correo: this.selectUser.correo,
+              correoVeri: this.selectUser.correoVeri,
+              cargo: this.selectUser.cargo,
+              telefono: this.selectUser.telefono,
+              accion: this.selectUser.accion,
+              nombre: this.selectUser.nombre,
+              apellido: this.selectUser.apellido,
+              archivos:this.selectUser.fotos,
+            },
+            target: 'Usuarios',
           }
           if(this.masterAutori === true){
-            values.autori = 'Master';
+            values.usuario.autori = 'Master';
           }else if(this.adminAutori === true){
-            values.autori = 'Admin';
+            values.usuario.autori = 'Admin';
           }else{
-            values.autori = 'Normal';
+            values.usuario.autori = 'Normal';
           }
           
-          this.isUserDiff(values)
+          console.log(values);
+          this.updateDB(values)
         }else{
-          this.error = 'Revise los campos'
+          this.error = 'Los campos marcados con * son obligatorios'
         }
       },
       toggleInfo(){
         this.$refs.info.children[0].classList.toggle('show-info')
+      },
+      deleteCollection(value){
+
+        this.masterAutori = false,
+        this.adminAutori = false,
+        
+        this.selectUser.activo = '';
+        this.selectUser.apellido = '';
+        this.selectUser.autori = '';
+        this.selectUser.cargo = '';
+        this.selectUser.correo = '';
+        this.selectUser.correoVeri = '';
+        this.selectUser.foto = '';
+        this.selectUser.id = '';
+        this.selectUser.nombre = '';
+        this.selectUser.telefono = '';
+        this.selectUser.accion = '';
+        this.selectUser.id = '';
+
+        this.files = {};
+        this.resetDBValues();
       },
     },
 
     watch:{
       successUpload(){
         if(this.successUpload !== null){
-          this.$refs.alertBox.classList.add('alert-show')
           setTimeout(() => {
-            try {
-            this.$refs.alertBox.classList.remove('alert-show');}catch{}
-          }, 3000);
-          setTimeout(() => {
-            const data = {
-              0: 'successUpload',
-              1: null
-            }
-            this.successAdvise(data)
-          }, 3600);
+            this.getData().then(() => {
+              this.$refs.alertBox.classList.add('alert-show')
+              setTimeout(() => {
+                try {
+                this.$refs.alertBox.classList.remove('alert-show');}catch{}
+              }, 3000);
+              setTimeout(() => {
+                const data = {
+                  0: 'successUpload',
+                  1: null
+                }
+                this.successAdvise(data)
+              }, 3600);
+            })
+          }, 1000);
         }
       },
       errorUpload(){

@@ -16,21 +16,21 @@
           </div>
         </div>
       <div class="v-social-rightbox">
-          <div class="v-social-right-container">
-            <p>Síguenos en </p>
-            <div style="display: flex; flex-direction: row; justify-content: flex-start">
-              <div class="item">
-                <a title="Facebook" href="https://www.facebook.com/Club-Santa-Paula-298392530588034/?__xts__[0]=68.ARDBzo-RGGkBG2HPpJxccWxgxlyL6km99x7__SBWkgUw8LixjgDI87BzXrBlfzzPwketujNaMOOtnJ_LcI6IsbeBNexdENGbC22NGo_9Ga5Qh46R-LDTetq0ZQ76yXYJL2-Rk5nqGzKbdvsUZCvUYTa79WuvOCBENAGa8yRQrn3RVDM4GLNdYNFzXYW4mYt-nKcvYiijMYcbZ6crFI31Ik_xFwi4ZOinlQ-WEP5Nn9rj33YIFlr3J7SMPomlPCqtnVeLlMGMwSiS65efXlg6vFsszdJG5Ul2m-L5xsSwb7snaCKYkna9_7puGa91icoJW_xgigl55rjRp4kM8CRDRRI" target="blank" class="icon flaticon-facebook"></a>
-              </div>
-              <div class="item">
-                <a title="Twitter" href="https://twitter.com/santapaulaclub?lang=es" target="blank" class="icon flaticon-twitter"></a>
-              </div>
-              <div class="item">
-                <a title="Instagram" href="https://www.instagram.com/clubsantapaulaccs/?hl=es-la" target="blank" class="icon flaticon-instagram"></a>
-              </div>
+        <div class="v-social-right-container">
+          <p>Síguenos en </p>
+          <div style="display: flex; flex-direction: row; justify-content: flex-start">
+            <div class="item">
+              <a title="Facebook" href="https://www.facebook.com/Club-Santa-Paula-298392530588034/?__xts__[0]=68.ARDBzo-RGGkBG2HPpJxccWxgxlyL6km99x7__SBWkgUw8LixjgDI87BzXrBlfzzPwketujNaMOOtnJ_LcI6IsbeBNexdENGbC22NGo_9Ga5Qh46R-LDTetq0ZQ76yXYJL2-Rk5nqGzKbdvsUZCvUYTa79WuvOCBENAGa8yRQrn3RVDM4GLNdYNFzXYW4mYt-nKcvYiijMYcbZ6crFI31Ik_xFwi4ZOinlQ-WEP5Nn9rj33YIFlr3J7SMPomlPCqtnVeLlMGMwSiS65efXlg6vFsszdJG5Ul2m-L5xsSwb7snaCKYkna9_7puGa91icoJW_xgigl55rjRp4kM8CRDRRI" target="blank" class="icon flaticon-facebook"></a>
             </div>
-          </div>          
-        </div>
+            <div class="item">
+              <a title="Twitter" href="https://twitter.com/santapaulaclub?lang=es" target="blank" class="icon flaticon-twitter"></a>
+            </div>
+            <div class="item">
+              <a title="Instagram" href="https://www.instagram.com/clubsantapaulaccs/?hl=es-la" target="blank" class="icon flaticon-instagram"></a>
+            </div>
+          </div>
+        </div>          
+      </div>
     </div>
     
     <nav class="v-navbar" ref="navBar">
@@ -250,7 +250,6 @@ export default {
           this.$refs.toggleMenuIcon.setAttribute('class', "flaticon-menu");
           this.$refs.usIcon.setAttribute('class', "flaticon-sort-down");
           this.$refs.comIcon.setAttribute('class', "flaticon-sort-down");
-          this.$refs.servIcon.setAttribute('class', "flaticon-sort-down");
         }
         for(let i = 0; i < dropDownMenu.length; i++){
           dropDownMenu[i].classList.remove("v-dropdown-menu-on");
