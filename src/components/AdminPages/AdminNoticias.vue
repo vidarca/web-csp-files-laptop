@@ -8,7 +8,7 @@
       <div class="click-background" @click="hide('preview')"></div>
       <div ref="preview" class="dialog-container" data-transitioned="false">
         <div class="close-icon">
-          <div class="icon flaticon-close"></div>
+          <div class="icon flaticon-close" @click="hide('preview')"></div>
         </div>
         <div class="title-sec">
           <div class="d-flex align-items-end justify-content-start w-100 h-100">
@@ -17,8 +17,8 @@
         </div>
         <div class="w-90 m-auto"><div class="border-bottom"></div></div>
         <div class="prewview-items d-flex flex-row flex-wrap align-items-center justify-content-center">
-          <div class="col-12 col-md-6" v-for="(item, index) in refdataval" :key="item">
-            <img :src="(item.url !== undefined && item.url !== '')?item.url:(dbImg[index+3] !== undefined && dbImg[index+3].url !== undefined && dbImg[index+3].url !== '')?dbImg[index+3].url:''">
+          <div class="col-12 col-md-6" v-for="(item, index) in refdataval" v-show="index > 2" :key="item">
+            <img :src="(item.url !== undefined && item.url !== '')?item.url:(dbImg[index] !== undefined && dbImg[index].url !== undefined && dbImg[index].url !== '')?dbImg[index].url:''">
           </div>
         </div>
       </div>
@@ -175,7 +175,7 @@
       <form class="form-class p-4 d-flex flex-column justify-content-center align-items-center overflow-hidden">
         <div class="file-form">
           <div class="row align-items-start justify-content-center w-100">
-            <div class="input-files col-md-5 col-12 d-flex flex-column justify-content-center align-items-center ml-3 mr-3" v-for="(imagen, index) in Object.values(nuevaNoticia.archivos)" :key="index">
+            <div class="input-files col-md-5 col-12 flex-column justify-content-center align-items-center ml-3 mr-3" v-for="(imagen, index) in Object.values(nuevaNoticia.archivos)" v-show="index < 3" :key="index" style="display: flex">
               <div class="w-100 h-100 d-flex align-items-center position-relative">
                 <div class="d-flex w-100 flex-column align-items-center justify-content-center">
                   <div class="text d-flex align-items-center justify-content-center" style="text-align: center;">
@@ -228,7 +228,7 @@
                   <i class="flaticon-folder mr-3"></i>
                   <label for="collectionFiles">Galería de fotos</label>
                 </div>
-                <input ref='galeria'  class="collectionFiles"  type="file" accept="image/*" multiple>
+                <input ref='galeria'  class="collectionFiles"  type="file" accept="image/*" @change="updateGaleria('crear')" multiple>
                 <p class="text" style="font-weigth: 400;">
                   {{countFiles('galeria')}}
                 </p>
@@ -522,6 +522,7 @@ export default {
             nombre: files.name,
             url: '',
             id: index,
+            nombreref: `imagen${index}`,
             uploadPercentage: 0,
             progressBar: {
               show: true,
@@ -704,7 +705,13 @@ export default {
         })
       },
       hide(val){
-        console.log(val);
+        this.$refs.preview.dataset.transitioned = "true";
+        this.$refs.preview.classList.toggle('show-opacity-transY');
+        
+        setTimeout(() => {
+          this.$refs.preview.dataset.transitioned = "false";
+          this.showdatapreview = false;
+        }, 500);
       },
       deleteGaleria(val){
         if(val === 'crear'){
@@ -723,7 +730,61 @@ export default {
         setTimeout(() => {
           this.$refs.preview.dataset.transitioned = "false";
         }, 500);
-        return val.galeria
+
+        if(val === "crear"){
+          return this.nuevaNoticia.archivos
+        }else if (val === "slect"){
+          return this.selectNoticia.archivos
+        }
+      },
+      updateGaleria(val){
+
+        for(let i = 0; i < Object.values(this.files).length; i++) {
+
+          if(this.files[`archivo${i+3}`] !== undefined){
+            this.files[`archivo${i+3}`] = '';
+            delete this.files[`archivo${i+3}`];
+          }
+
+        }
+
+        for(let i = 0; i < event.target.files.length; i++) {
+
+          let files = event.target.files;
+
+          this.files[`archivo${i+3}`] = event.target.files[i+3];
+          this.files[`archivo${i+3}`].id = i+3
+
+          if(val === 'crear'){
+            this.$set(this.nuevaNoticia.archivos, `imagen${i+3}`, {
+              nombre: files[i].name,
+              url: '',
+              id: i+3,
+              nombreref: `imagen${i+3}`,
+              uploadPercentage: 0,
+              progressBar: {
+                show: true,
+              }
+            })
+          }else if(val === 'select'){
+            this.$set(this.selectNoticia.archivos, `imagen${i+3}`, {
+              nombre: files[i].name,
+              url: '',
+              id: i+3,
+              nombreref: `imagen${i+3}`,
+              uploadPercentage: 0,
+              progressBar: {
+                show: true,
+              }
+            })
+          }
+        }
+
+        console.log(this.files);
+        console.log(this.nuevaNoticia);
+        console.log(event.target);
+        event.target.value = ''
+
       }
     },
 
