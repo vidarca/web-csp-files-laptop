@@ -433,8 +433,16 @@
 
 ***/
 
-@media screen and (min-width: 576px){
+@media screen and (max-width: 576px){
 	.w-sm-75{
 		width: 75% !important;
+	}
+
+	.w-sm-95{
+		width: 95% !important;
+	}
+
+	.preview-container .dialog-container{
+		width: 95% !important;
 	}
 }

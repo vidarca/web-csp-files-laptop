@@ -3,6 +3,27 @@
     <div class="alert-box position-fixed" ref="alertBox">
       <i :class="error?'icon-err flaticon-close':successUpload?'icon-succ flaticon-check': ' '"></i> <p>{{error?error:successUpload?successUpload:' '}}</p>
     </div>
+    
+    <div v-show="showdatapreview === true" class="preview-container align-items-center justify-content-center">
+      <div class="click-background" @click="hide('preview')"></div>
+      <div ref="preview" class="dialog-container" data-transitioned="false">
+        <div class="close-icon">
+          <div class="icon flaticon-close"></div>
+        </div>
+        <div class="title-sec">
+          <div class="d-flex align-items-end justify-content-start w-100 h-100">
+            <p class="text">Galería de fotos</p>
+          </div>
+        </div>
+        <div class="w-90 m-auto"><div class="border-bottom"></div></div>
+        <div class="prewview-items d-flex flex-row flex-wrap align-items-center justify-content-center">
+          <div class="col-12 col-md-6" v-for="(item, index) in refdataval" :key="item">
+            <img :src="(item.url !== undefined && item.url !== '')?item.url:(dbImg[index+3] !== undefined && dbImg[index+3].url !== undefined && dbImg[index+3].url !== '')?dbImg[index+3].url:''">
+          </div>
+        </div>
+      </div>
+    </div>
+
     <section class="list-db w-auto" v-show="showList === true" ref="section0">
       <div class="list-header w-100 d-flex flex-row align-items-center justify-content-between">
         <div>
@@ -201,7 +222,7 @@
           <!-- Galeria de fotos -->
 
           <div class="input-files col-md-5 col-12 d-flex flex-column justify-content-center align-items-center mt-4 ml-3 mr-3">
-            <div class="w-100 h-100 d-flex flex-row align-items-center position-relative ml-2">
+            <div class="w-100 h-100 d-flex flex-row align-items-center position-relative">
               <div class="d-flex w-100 flex-column align-items-center justify-content-center">
                 <div class="button-files d-flex flex-row align-items-center justify-content-center bg-success w-100 p-2">
                   <i class="flaticon-folder mr-3"></i>
@@ -212,9 +233,10 @@
                   {{countFiles('galeria')}}
                 </p>
               </div>
-              <div class="prev-icon ml-2">
-                <div class="icon flaticon-transparency"></div>
-              </div>
+            </div>
+            <div class="prev-icon d-flex flex-row align-items-center justify-content-center mt-3">
+              <p class="text mr-1" style="font-weight: 400;">Vista previa de la galería</p>
+              <div class="icon flaticon-preview ml-1" @click="refdataval('crear')"></div>
             </div>
           </div>
 
@@ -275,6 +297,7 @@ export default {
             nombre: 'slides',
           }
         },
+        showdatapreview: false,
         show: false,
         error: null,
         showIndex: 0,
@@ -301,6 +324,7 @@ export default {
           info: '',
           infocort: '',
           titulo: '',
+          galeria: {},
           seccion: 'Seleccione una opción',
         },
       }
@@ -370,6 +394,7 @@ export default {
             info: '',
             infocort: '',
             titulo: '',
+            galeria: {},
             seccion: 'Seleccione una opción',
           }
         }else if(value === 'select'){
@@ -384,6 +409,7 @@ export default {
             info: '',
             infocort: '',
             titulo: '',
+            galeria: {},
             seccion: 'Seleccione una opción',
           }
         }
@@ -677,6 +703,28 @@ export default {
           return count
         })
       },
+      hide(val){
+        console.log(val);
+      },
+      deleteGaleria(val){
+        if(val === 'crear'){
+          this.nuevaNoticia.galeria = {};
+        }else if(val === 'select'){
+          this.selectNoticia.galeria = {};
+        }
+      },
+      refdataval(val){
+        this.showdatapreview = true;
+        setTimeout(() => {
+          this.$refs.preview.dataset.transitioned = "true";
+          this.$refs.preview.classList.toggle('show-opacity-transY');
+        }, 300);
+        
+        setTimeout(() => {
+          this.$refs.preview.dataset.transitioned = "false";
+        }, 500);
+        return val.galeria
+      }
     },
 
     created(){
@@ -1157,18 +1205,13 @@ export default {
     background-color: #2dac49;
   }
 
-  .prev-icon{
-    width: 35px !important;
-    height: 35px !important;
-  }
-
   .prev-icon .icon{
     position: relative;
     width: 35px !important;
     height: 35px !important;
     border-radius: 5px;
     border: .01rem solid black;
-    box-shadow: 0 0 5px rgba(0,0,0,.4);
+    box-shadow: 0 0 8px rgba(0,0,0,.6);
     transition: all .2s ease;
     -moz-transition: all .2s ease;
     -o-transition: all .2s ease;
