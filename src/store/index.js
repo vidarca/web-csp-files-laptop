@@ -1135,6 +1135,8 @@ export default new Vuex.Store({
                 noti_seccion: data.noticia.seccion,
                 noti_fotos: [],
               }
+
+              console.log(order);
               
               let storageRef= firebase.storage().ref(`/${data.target}/${dataRef.noti_id}/${data.noticia.archivos[`${data.name_archivos}${element.id}`].nombre}`);
               
@@ -1148,7 +1150,7 @@ export default new Vuex.Store({
                 }
                 n ++;
                 if(n >= Object.values(data.archivos).length){
-
+                  console.log(state.dbImg);
                   for(let i = 0; i < Object.values(state.dbImg).length; i++){
                     if(state.dbImg[i].nombre !== undefined){
                       dataRef.noti_fotos[`imagen${i}`] = {
@@ -1159,7 +1161,7 @@ export default new Vuex.Store({
                       dataRef.noti_fotos[`imagen${i}`] = '';
                     }
                   }
-
+                  console.log(dataRef);
                   if(n >= Object.values(data.archivos).length){
                     pushdbRef.set(dataRef);
                     state.crearDBVals = false;

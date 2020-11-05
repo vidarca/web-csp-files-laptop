@@ -433,6 +433,8 @@ import AutogestionSpan from '@/components/AutogestionSpan.vue'
 				return 'flaticon-libro-de-leyes'
 			}else if(this.reverseArray[index].noti_seccion === 'Comité de Tribunal Disciplinario'){
 				return 'flaticon-subasta'
+			}else if(this.reverseArray[index].noti_seccion === 'Actualidad'){
+				return 'flaticon-new-product'
 			}else{
 				return ''
 			}

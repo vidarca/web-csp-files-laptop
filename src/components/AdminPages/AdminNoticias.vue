@@ -16,9 +16,11 @@
           </div>
         </div>
         <div class="w-90 m-auto"><div class="border-bottom"></div></div>
-        <div class="prewview-items d-flex flex-row flex-wrap align-items-center justify-content-center">
-          <div class="col-12 col-md-6" v-for="(item, index) in refdataval" v-show="index > 2" :key="item">
-            <img :src="(item.url !== undefined && item.url !== '')?item.url:(dbImg[index] !== undefined && dbImg[index].url !== undefined && dbImg[index].url !== '')?dbImg[index].url:''">
+        <div class="w-100 h-100" v-if="refData(previewVal) !== null && refData(previewVal) !== undefined">
+          <div class="preview-items d-flex flex-row flex-wrap align-items-center justify-content-center">
+            <div v-for="(item, index) in Object.values(refData(previewVal))" :key="item.id" :class="(item.url===undefined || item.url === '')?'display-none':'col-12 col-md-6'" v-show="index > 2">
+              <img :src="(item.url !== undefined && item.url !== '')?item.url:(dbImg[index] !== undefined && dbImg[index].url !== undefined && dbImg[index].url !== '')?dbImg[index].url:''">
+            </div>
           </div>
         </div>
       </div>
@@ -94,11 +96,11 @@
       </div>
     </section>
     
-    <section class="translate" id="section1" v-show="showPrev" v-if="dbWeb.Noticias !== undefined && selectNoticia !== ''" ref="section1">
+    <section class="translate" id="section1" v-if="dbWeb.Noticias !== undefined && showPrev" ref="section1">
       <form class="form-class p-4 d-flex flex-column justify-content-center align-items-center overflow-hidden">
         <div class="file-form">
           <div class="row align-items-start justify-content-center w-100">
-            <div class="input-files col-md-5 col-12 d-flex flex-column justify-content-center align-items-center ml-3 mr-3" v-for="(imagen, index) in Object.values(selectNoticia.archivos)" :key="index">
+            <div class="input-files col-md-5 col-12 flex-column justify-content-center align-items-center ml-3 mr-3" v-for="(imagen, index) in Object.values(selectNoticia.archivos)" v-show="index < 3" :key="index" style="display: flex">
               <div class="w-100 h-100 d-flex align-items-center position-relative">
                 <div class="d-flex w-100 flex-column align-items-center justify-content-center">
                   <div class="text d-flex align-items-center justify-content-center" style="text-align: center;">
@@ -140,6 +142,33 @@
               <!--  Fin de IMAGENES -->
             </div>
           </div>
+
+          <!-- Galeria de fotos -->
+
+          <div class="input-files col-md-5 col-12 d-flex flex-column justify-content-center align-items-center mt-4 ml-3 mr-3">
+            <div class="w-100 h-100 d-flex flex-row align-items-center position-relative">
+              <div class="d-flex w-100 flex-column align-items-center justify-content-center">
+                <div class="button-files d-flex flex-row align-items-center justify-content-center bg-success w-100 p-2">
+                  <i class="flaticon-folder mr-3"></i>
+                  <label for="collectionFiles">Galería de fotos</label>
+                </div>
+                <input ref='galeria'  class="collectionFiles"  type="file" accept="image/*" @change="updateGaleria('select')" multiple>
+                <p class="text" style="font-weigth: 400;">
+                  Se tienen {{countFiles('select')}} archivos en la galería
+                </p>
+              </div>
+            </div>
+            <div class="prev-icon d-flex flex-row align-items-center justify-content-center mt-3">
+              <p class="text mr-1" style="font-weight: 400;">Vista previa de la galería</p>
+              <div class="icon flaticon-preview ml-1" @click="refdataval('select')"></div>
+            </div>
+            <div class="btn btn-danger" @click="deleteGaleria('select')">
+              Eliminar galería
+            </div>
+          </div>
+
+          <!-- Fin de Galeria de Fotos -->
+
         </div>
         <div class="custom-control custom-switch d-flex align-items-center justify-content-center">
             <input type="checkbox" class="custom-control-input" id="noti_activo" v-model="selectNoticia.activo">
@@ -230,13 +259,16 @@
                 </div>
                 <input ref='galeria'  class="collectionFiles"  type="file" accept="image/*" @change="updateGaleria('crear')" multiple>
                 <p class="text" style="font-weigth: 400;">
-                  {{countFiles('galeria')}}
+                  Se tienen {{countFiles('crear')}} archivos en la galería
                 </p>
               </div>
             </div>
             <div class="prev-icon d-flex flex-row align-items-center justify-content-center mt-3">
               <p class="text mr-1" style="font-weight: 400;">Vista previa de la galería</p>
               <div class="icon flaticon-preview ml-1" @click="refdataval('crear')"></div>
+            </div>
+            <div class="btn btn-danger" @click="deleteGaleria('select')">
+              Eliminar galería
             </div>
           </div>
 
@@ -298,6 +330,7 @@ export default {
           }
         },
         showdatapreview: false,
+        previewVal: '',
         show: false,
         error: null,
         showIndex: 0,
@@ -312,7 +345,7 @@ export default {
         changePics: false,
         showPrev: false,
         numElements: 10,
-        selectNoticia: '',
+        selectNoticia: {},
         nuevaNoticia: {
           activo: false,
           archivos:{
@@ -324,7 +357,6 @@ export default {
           info: '',
           infocort: '',
           titulo: '',
-          galeria: {},
           seccion: 'Seleccione una opción',
         },
       }
@@ -344,20 +376,20 @@ export default {
         setTimeout(() => {
           this.showList = false;
           this.showPrev = true;
-          this.selectNoticia = {
-            activo: Object.values(this.dbWeb.Noticias).reverse()[index].noti_publicar,
-            archivos:{
-                imagen0: Object.values(this.dbWeb.Noticias).reverse()[index].noti_fotos.imagen0,
-                imagen1: Object.values(this.dbWeb.Noticias).reverse()[index].noti_fotos.imagen1,
-                imagen2: Object.values(this.dbWeb.Noticias).reverse()[index].noti_fotos.imagen2,
-            },
-            fechaed: Object.values(this.dbWeb.Noticias).reverse()[index].noti_fecha,
-            info: Object.values(this.dbWeb.Noticias).reverse()[index].noti_info,
-            id: Object.values(this.dbWeb.Noticias).reverse()[index].noti_id,
-            infocort: Object.values(this.dbWeb.Noticias).reverse()[index].noti_prev,
-            titulo: Object.values(this.dbWeb.Noticias).reverse()[index].noti_titulo,
-            seccion: Object.values(this.dbWeb.Noticias).reverse()[index].noti_seccion,
+          
+          this.$set(this.selectNoticia, 'activo', Object.values(this.dbWeb.Noticias).reverse()[index].noti_publicar)
+          this.$set(this.selectNoticia, 'fechaed', Object.values(this.dbWeb.Noticias).reverse()[index].noti_fecha)
+          this.$set(this.selectNoticia, 'info', Object.values(this.dbWeb.Noticias).reverse()[index].noti_info)
+          this.$set(this.selectNoticia, 'id', Object.values(this.dbWeb.Noticias).reverse()[index].noti_id)
+          this.$set(this.selectNoticia, 'infocort', Object.values(this.dbWeb.Noticias).reverse()[index].noti_prev)
+          this.$set(this.selectNoticia, 'titulo', Object.values(this.dbWeb.Noticias).reverse()[index].noti_titulo)
+          this.$set(this.selectNoticia, 'seccion', Object.values(this.dbWeb.Noticias).reverse()[index].noti_seccion)
+          this.$set(this.selectNoticia, 'archivos', Object.values(this.dbWeb.Noticias).reverse()[index].noti_fotos)
+
+          if(this.selectNoticia.archivos.imagen2 === undefined){
+            this.$set(this.selectNoticia, 'archivos', '')
           }
+
         }, 900);
         setTimeout(() => {
           this.$refs.section1.classList.toggle('translate')
@@ -394,7 +426,6 @@ export default {
             info: '',
             infocort: '',
             titulo: '',
-            galeria: {},
             seccion: 'Seleccione una opción',
           }
         }else if(value === 'select'){
@@ -409,7 +440,6 @@ export default {
             info: '',
             infocort: '',
             titulo: '',
-            galeria: {},
             seccion: 'Seleccione una opción',
           }
         }
@@ -695,20 +725,30 @@ export default {
         const djoin = dsplitted[1] + ' ' + dsplitted[2] + ' ' + dsplitted[3];
         return djoin
       },
-      countFiles(ref){
+      countFiles(val){
         let count = 0;
-        this.$nextTick(() =>{
-          if(this.$refs[`${ref}`].files !== null){
-            count = Object.values(this.$refs[`${ref}`].files).length;
+        if(val === 'crear'){
+          for(let i = 0; i < Object.values(this.nuevaNoticia.archivos).length; i++){
+            if(i > 2 && Object.values(this.nuevaNoticia.archivos)[i] !== ''){
+              count ++
+            }
           }
           return count
-        })
+        }else if(val === 'select'){
+          for(let i = 0; i < Object.values(this.selectNoticia.archivos).length; i++){
+            if(i > 2 && Object.values(this.selectNoticia.archivos)[i] !== ''){
+              count ++
+            }
+          }
+          return count
+        }
       },
       hide(val){
         this.$refs.preview.dataset.transitioned = "true";
         this.$refs.preview.classList.toggle('show-opacity-transY');
         
         setTimeout(() => {
+          this.previewVal = '';
           this.$refs.preview.dataset.transitioned = "false";
           this.showdatapreview = false;
         }, 500);
@@ -721,6 +761,19 @@ export default {
         }
       },
       refdataval(val){
+        if(val === 'crear'){
+          for(let i = 0; i < Object.values(this.nuevaNoticia.archivos).length; i++){
+            if(i > 2 && Object.values(this.nuevaNoticia.archivos)[i].url === undefined && Object.values(this.nuevaNoticia.archivos)[i].url === ''){
+              return
+            }
+          }
+        }else if(val === 'select'){
+          for(let i = 0; i < Object.values(this.selectNoticia.archivos).length; i++){
+            if(i > 2 && Object.values(this.selectNoticia.archivos)[i].url === undefined && Object.values(this.selectNoticia.archivos)[i].url === ''){
+              return
+            }
+          }
+        }
         this.showdatapreview = true;
         setTimeout(() => {
           this.$refs.preview.dataset.transitioned = "true";
@@ -730,14 +783,19 @@ export default {
         setTimeout(() => {
           this.$refs.preview.dataset.transitioned = "false";
         }, 500);
-
+        
+        this.previewVal = val;
+      },
+      refData(val){
         if(val === "crear"){
           return this.nuevaNoticia.archivos
-        }else if (val === "slect"){
+        }else if (val === "select"){
           return this.selectNoticia.archivos
         }
       },
       updateGaleria(val){
+
+        this.deleteGaleria(val)
 
         for(let i = 0; i < Object.values(this.files).length; i++) {
 
@@ -752,7 +810,7 @@ export default {
 
           let files = event.target.files;
 
-          this.files[`archivo${i+3}`] = event.target.files[i+3];
+          this.files[`archivo${i+3}`] = event.target.files[i];
           this.files[`archivo${i+3}`].id = i+3
 
           if(val === 'crear'){
@@ -784,8 +842,26 @@ export default {
         console.log(this.nuevaNoticia);
         console.log(event.target);
         event.target.value = ''
-
-      }
+      },
+      deleteGaleria(val){
+        if(val === 'crear'){
+          for(let i = 0; i < Object.values(this.nuevaNoticia.archivos).length ; i++){
+            if(i > 2){
+              this.nuevaNoticia.archivos[`imagen${i}`] = '';
+              delete this.nuevaNoticia.archivos[`imagen${i}`];
+            }
+          }
+          console.log(this.nuevaNoticia.archivos);
+        }else if (val === 'select'){
+          for(let i = 0; i < Object.values(this.selectNoticia.archivos).length ; i++){
+            if(i > 2){
+              this.selectNoticia.archivos[`imagen${i}`] = '';
+              delete this.selectNoticia.archivos[`imagen${i}`];
+            }
+          }
+          console.log(this.selectNoticia.archivos);
+        }
+      },
     },
 
     created(){

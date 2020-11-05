@@ -5500,7 +5500,32 @@ Seccion 2 Pagina de Actualidad
 }
 
 .preview-container .dialog-container .preview-items{
-	overflow: scroll;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	margin: 5% auto;
+	padding: 20px;
+	height: 60% !important;
+	width: 90% !important;
+}
+
+.preview-container .dialog-container .preview-items::-webkit-scrollbar {
+	width: 10px;
+}
+.preview-container .dialog-container .preview-items::-webkit-scrollbar-track {
+	background: transparent; 
+}
+.preview-container .dialog-container .preview-items::-webkit-scrollbar-thumb {
+	background: rgb(201, 201, 201);
+	border-radius: 5px;
+}
+.preview-container .dialog-container .preview-items::-webkit-scrollbar-thumb:hover {
+	background: rgb(160, 160, 160); 
+}
+
+.preview-container .dialog-container .preview-items img{
+	border-radius: 5px;
+	box-shadow: 0 0 10px rgba(0,0,0,.7);
+	margin: 20px 0;
 }
 
 .v-wrapper{

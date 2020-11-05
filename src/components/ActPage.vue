@@ -63,15 +63,15 @@
                 {{item}}
               </div>
             </div>
-            <div else class="text">
-              {{reverseArray[anunSelecIndex].noti_info}}
+            <img v-if="reverseArray[anunSelecIndex].noti_fotos.imagen2" class="ml-3" :src="reverseArray[anunSelecIndex].noti_fotos.imagen2.url" align="right" width="360px" height="auto" style="max-height: 260px;">
+            <div v-for="(item, index) in reverseArray[anunSelecIndex].noti_info.split(/[\r\n]+/)" :key="item">
+              <div class="text" v-if="parrShow(index, '1')">
+                {{item}}
+              </div>
             </div>
           </div>
-          <img v-if="reverseArray[anunSelecIndex].noti_fotos.imagen2" class="ml-3" :src="reverseArray[anunSelecIndex].noti_fotos.imagen2.url" align="right" width="360px" height="auto" style="max-height: 260px;">
-          <div v-for="(item, index) in reverseArray[anunSelecIndex].noti_info.split(/[\r\n]+/)" :key="item">
-            <div class="text" v-if="parrShow(index, '1')">
-              {{item}}
-            </div>
+          <div else class="text">
+            {{reverseArray[anunSelecIndex].noti_info}}
           </div>
         </div>
       </div>
@@ -157,6 +157,8 @@ export default {
           return 'flaticon-libro-de-leyes'
         }else if(this.reverseArray[index].noti_seccion === 'Comité de Tribunal Disciplinario'){
           return 'flaticon-subasta'
+        }else if(this.reverseArray[index].noti_seccion === 'Actualidad'){
+          return 'flaticon-new-product'
         }else{
           return ''
         }

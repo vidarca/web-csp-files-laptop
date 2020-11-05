@@ -360,6 +360,8 @@ export default {
           return 'flaticon-libro-de-leyes'
         }else if(Object.values(this.dbWeb.Comites)[index].comi_nombre === 'Comité de Tribunal Disciplinario'){
           return 'flaticon-subasta'
+        }else if(Object.values(this.dbWeb.Comites)[index].comi_nombre === 'Actualidad'){
+          return 'flaticon-new-product'
         }else{
           return ''
         }
@@ -403,6 +405,8 @@ export default {
           return 'flaticon-libro-de-leyes'
         }else if(Object.values(this.dbWeb.Profesores)[index].comi_id === 'Comité de Tribunal Disciplinario'){
           return 'flaticon-subasta'
+        }else if(Object.values(this.dbWeb.Profesores)[index].comi_id === 'Actualidad'){
+          return 'flaticon-new-product'
         }else{
           return ''
         }
@@ -446,6 +450,8 @@ export default {
           return 'flaticon-libro-de-leyes'
         }else if(this.reverseArray[index].noti_seccion === 'Comité de Tribunal Disciplinario'){
           return 'flaticon-subasta'
+        }else if(this.reverseArray[index].noti_seccion === 'Actualidad'){
+          return 'flaticon-new-product'
         }else{
           return ''
         }
