@@ -379,7 +379,6 @@ export default {
             values.usuario.autori = 'Normal';
           }
           
-          console.log(values);
           this.updateDB(values)
         }else{
           this.error = 'Los campos marcados con * son obligatorios'

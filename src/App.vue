@@ -63,8 +63,16 @@ export default {
         let header = document.getElementById('header')
         let footer = document.getElementById('footer')
         
-        header.style.display = "none"
-        footer.style.display = "none"
+        header.style.display = 'none'
+        footer.style.display = 'none'
+
+        return
+      }else{
+        let header = document.getElementById('header')
+        let footer = document.getElementById('footer')
+        
+        header.style.display = "block"
+        footer.style.display = "block"
       }
     }
 

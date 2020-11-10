@@ -837,10 +837,6 @@ export default {
             })
           }
         }
-
-        console.log(this.files);
-        console.log(this.nuevaNoticia);
-        console.log(event.target);
         event.target.value = ''
       },
       deleteGaleria(val){
@@ -851,7 +847,6 @@ export default {
               delete this.nuevaNoticia.archivos[`imagen${i}`];
             }
           }
-          console.log(this.nuevaNoticia.archivos);
         }else if (val === 'select'){
           for(let i = 0; i < Object.values(this.selectNoticia.archivos).length ; i++){
             if(i > 2){
@@ -859,7 +854,6 @@ export default {
               delete this.selectNoticia.archivos[`imagen${i}`];
             }
           }
-          console.log(this.selectNoticia.archivos);
         }
       },
     },

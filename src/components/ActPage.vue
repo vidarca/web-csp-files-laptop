@@ -76,9 +76,24 @@
         </div>
       </div>
       <div class="w-95 d-flex flex-row justify-content-end align-items-center m-auto">
+        <button class="btn btn-success text-right mb-3 mt-3" @click="verGaleria()">Ver galería de fotos</button>
+      </div>
+      <div class="w-95 d-flex flex-row justify-content-end align-items-center m-auto">
         <button class="btn btn-dark text-right mb-3 mt-3" @click="regresar()">Regresar <i class="icon flaticon-back-arrow ml-1"></i></button>
       </div>
     </section>
+
+    <!-- Seccion de Galeria -->
+      <section id="section3" ref="section3" v-show="showGaleria">
+        <div class="seccion-galeria" @click="quitarGaleria()"></div>
+        <div class="w-95 d-flex flex-row justify-content-end align-items-center">
+          <button class="btn btn-dark text-right mb-3 mt-3" @click="quitarGaleria()" style="z-index: 9999999;">Regresar <i class="icon flaticon-back-arrow ml-1"></i></button>
+        </div>
+        <div class="container-galeria w-95 d-flex flex-row flex-wrap align-items-center justify-content-center m-auto" v-if="reverseArray[anunSelecIndex] !== undefined">
+          <img v-for="(imagen, index) in Object.values(reverseArray[anunSelecIndex].noti_fotos)" :key="index" :class="['foto-galeria', randomCol(index)]" v-show="index > 2" :src="imagen.url" data-col="0" data-colResponsive="12" :id="`${index}`">
+        </div>
+      </section>
+    <!-- Fin de Seccion de Galeria -->
     <AutogestionSpan class="w-100"></AutogestionSpan>
   </div>
 </template>
@@ -98,6 +113,10 @@ export default {
         currentIndex: 1,
         anunSelecIndex: false,
         numElements: 5,
+        showGaleria: false,
+        maxCol: 12,
+        minCol: 4,
+        restCol: 8,
       }
     },
     components: {
@@ -108,7 +127,6 @@ export default {
         reverseArray(){
             if(this.dbWeb.Noticias !== undefined){
             let array = Object.values(this.dbWeb.Noticias);
-            console.log(array);
             return array.reverse()
             }else{
             let array = []
@@ -238,6 +256,23 @@ export default {
         }
       })
     },
+    changeDispGallery(){
+      if(window.innerWidth < 576){
+        for(let i = 0; i < this.$refs.section3.children[2].children.length; i++){
+          if(i > 2 && this.$refs.section3.children[2].children[i].dataset.col !== this.$refs.section3.children[2].children[i].dataset.colresponsive && this.$refs.section3.children[2].children[i].classList.contains(`col-${this.$refs.section3.children[2].children[i].dataset.col}`)){
+            this.$refs.section3.children[2].children[i].classList.remove(`col-${this.$refs.section3.children[2].children[i].dataset.col}`)
+            this.$refs.section3.children[2].children[i].classList.add(`col-${this.$refs.section3.children[2].children[i].dataset.colresponsive}`)
+          }
+        }
+      }else{
+        for(let i = 0; i < this.$refs.section3.children[2].children.length; i++){
+          if(i > 2 && this.$refs.section3.children[2].children[i].dataset.col !== this.$refs.section3.children[2].children[i].dataset.colresponsive && this.$refs.section3.children[2].children[i].classList.contains(`col-${this.$refs.section3.children[2].children[i].dataset.colresponsive}`)){
+            this.$refs.section3.children[2].children[i].classList.remove(`col-${this.$refs.section3.children[2].children[i].dataset.colresponsive}`)
+            this.$refs.section3.children[2].children[i].classList.add(`col-${this.$refs.section3.children[2].children[i].dataset.col}`)
+          }
+        }
+      }
+    },
     anunSelected(val){
       this.anunSelecIndex = val;
       this.$refs.section1.classList.toggle('translate');
@@ -248,6 +283,8 @@ export default {
       setTimeout(() => {
         window.scrollTo(0, 0);
         this.$refs.section2.classList.toggle('translate');
+
+        window.addEventListener('resize', this.changeDispGallery)
       }, 800);
     },
     regresar(){
@@ -263,6 +300,7 @@ export default {
         setTimeout(() => {
         window.scrollTo(0, 0);
           this.$refs.section1.classList.toggle('translate');
+          window.removeEventListener('resize', this.changeDispGallery)
         }, 800);
       }
     },
@@ -288,9 +326,103 @@ export default {
         return 'flex-column center'
       }
     },
+    randomCol(index){
+      if(index > 2 && this.$refs.section3.children[2] !== undefined){
+        if(window.innerWidth < 576){
+          if(index === 3){
+            const randomVal = Math.floor(Math.random() * (this.maxCol - this.minCol)) + this.minCol;
+            this.$refs.section3.children[2].children[index].dataset.col = randomVal;
+            return `col-12`
+          }else if(index > 3){
+            const prevCol = this.$refs.section3.children[2].children[index-1].dataset.col;
+            const prevCol2 = this.$refs.section3.children[2].children[index-2].dataset.col;
+
+            if(prevCol === this.restCol || prevCol2 !== undefined && prevCol2 !== 'auto' && prevCol + prevCol2 === this.restCol){
+              const randomVal = 'auto';
+              this.$refs.section3.children[2].children[index].dataset.col = randomVal;
+              return `col-12`;
+            }else if(prevCol < this.restCol && prevCol2 !== undefined && prevCol2 !== 'auto' && prevCol + prevCol2 < this.restCol || prevCol < this.restCol && prevCol2 === undefined || prevCol2 === 'auto'){
+              if(prevCol2 !== undefined && prevCol2 !== 'auto'){
+                this.maxCol = prevCol + prevCol2;
+              }else{
+                this.maxCol = prevCol;
+              }
+              const randomVal = Math.floor(Math.random() * (this.maxCol - this.minCol)) + this.minCol;
+              this.$refs.section3.children[2].children[index].dataset.col = randomVal;
+              return `col-12`;
+            }else if(prevCol > this.restCol || prevCol === 'auto'){
+              this.maxCol = 12;
+              const randomVal = Math.floor(Math.random() * (this.maxCol - this.minCol)) + this.minCol;
+              this.$refs.section3.children[2].children[index].dataset.col = randomVal;
+              return `col-12`;
+            }else if(prevCol2 !== undefined && prevCol2 !== 'auto' && prevCol + prevCol2 > this.restCol){
+              this.maxCol = 12;
+              const randomVal = Math.floor(Math.random() * (this.maxCol - this.minCol)) + this.minCol;
+              this.$refs.section3.children[2].children[index].dataset.col = randomVal;
+              return `col-12`;
+            }
+          }
+        }else{
+          if(index === 3){
+            const randomVal = Math.floor(Math.random() * (this.maxCol - this.minCol)) + this.minCol;
+            this.$refs.section3.children[2].children[index].dataset.col = randomVal;
+            return `col-${randomVal}`
+          }else if(index > 3){
+            const prevCol = this.$refs.section3.children[2].children[index-1].dataset.col;
+            const prevCol2 = this.$refs.section3.children[2].children[index-2].dataset.col;
+
+            if(prevCol === this.restCol || prevCol2 !== undefined && prevCol2 !== 'auto' && prevCol + prevCol2 === this.restCol){
+              const randomVal = 'auto';
+              this.$refs.section3.children[2].children[index].dataset.col = randomVal;
+              return `col-${randomVal}`;
+            }else if(prevCol < this.restCol && prevCol2 !== undefined && prevCol2 !== 'auto' && prevCol + prevCol2 < this.restCol || prevCol < this.restCol && prevCol2 === undefined || prevCol2 === 'auto'){
+              if(prevCol2 !== undefined && prevCol2 !== 'auto'){
+                this.maxCol = prevCol + prevCol2;
+              }else{
+                this.maxCol = prevCol;
+              }
+              const randomVal = Math.floor(Math.random() * (this.maxCol - this.minCol)) + this.minCol;
+              this.$refs.section3.children[2].children[index].dataset.col = randomVal;
+              return `col-${randomVal}`;
+            }else if(prevCol > this.restCol || prevCol === 'auto'){
+              this.maxCol = 12;
+              const randomVal = Math.floor(Math.random() * (this.maxCol - this.minCol)) + this.minCol;
+              this.$refs.section3.children[2].children[index].dataset.col = randomVal;
+              return `col-${randomVal}`;
+            }else if(prevCol2 !== undefined && prevCol2 !== 'auto' && prevCol + prevCol2 > this.restCol){
+              this.maxCol = 12;
+              const randomVal = Math.floor(Math.random() * (this.maxCol - this.minCol)) + this.minCol;
+              this.$refs.section3.children[2].children[index].dataset.col = randomVal;
+              return `col-${randomVal}`;
+            }
+          }
+        }
+      }
+    },
+    verGaleria(){
+      this.showGaleria = true;
+      const body = document.body;
+
+      setTimeout(() => {
+        body.style.overflow = 'hidden';
+        this.$refs.section3.classList.add('show-opacity');
+      }, 100);
+      
+    },
+    quitarGaleria(){
+      const body = document.body;
+      this.$refs.section3.classList.remove('show-opacity');
+
+      setTimeout(() => {
+        body.style.overflow = 'scroll';
+        this.showGaleria = false;
+      }, 300);
+    }
   },
 
   mounted(){
+
+    window.removeEventListener('resize', this.changeDispGallery)
 
     if(this.itemSelect !== false){
       this.$refs.section1.classList.add('translate')
@@ -367,7 +499,6 @@ export default {
     try{
       this.$refs.innerContainer.style.transform = `translateX(${(45/2)*(this.$refs.innerContainer.children.length - 5)}px)`
     }catch{}
-
   },
 }
 </script>

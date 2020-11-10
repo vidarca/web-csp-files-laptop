@@ -39,24 +39,30 @@
         <div class="text col-3 pl-1 pr-1">
           Correo
         </div>
-        <div class="text col-3 pl-1 pr-1">
+        <div class="text col-2 pl-1 pr-1">
           Fecha de vigencia
         </div>
-        <div class="col-3 pl-1 pr-1">
+        <div class="text col-2 pl-1 pr-1">
+          Orden
+        </div>
+        <div class="col-2 pl-1 pr-1">
         </div>
       </div>
       <div v-if="listEmpty">
-        <ul class="list-item w-100 row align-items-center justify-content-start" v-for="(comite, index) in Object.values(dbWeb.Comites).reverse()" :key="comite.comi_id" :id="comite.comi_id" :data-id="`elem${index}`" data-transitioned="false" v-show="index < numElements + showIndex && index >= showIndex" ref="listElements">
+        <ul class="list-item w-100 row align-items-center justify-content-start" v-for="(comite, index) in sortArray" :key="comite.comi_id" :id="comite.comi_id" :data-id="`elem${index}`" data-transitioned="false" v-show="index < numElements + showIndex && index >= showIndex" ref="listElements">
           <li class="item-element text col-3 pl-1 pr-1">
             {{comite.comi_nombre}}
           </li>
           <li class="item-element text col-3 pl-1 pr-1">
             {{comite.comi_correo}}
           </li>
-          <li class="item-element text col-3 pl-1 pr-1">
+          <li class="item-element text col-2 pl-1 pr-1">
             {{comite.comi_fechavigencia}}
           </li>
-          <li class="item-element text col-3 d-flex flex-sm-row flex-column justify-content-end align-items-center pl-sm-1 pr-sm-1">
+          <li class="item-element text col-2 pl-1 pr-1">
+            {{comite.comi_importancia}}
+          </li>
+          <li class="item-element text col-2 d-flex flex-sm-row flex-column justify-content-end align-items-center pl-sm-1 pr-sm-1">
             <i class="icon edit flaticon-edit mt-1 mb-1" title="Editar" :data-id="`elem${index}`" @click="itemSelected(index)"></i>
             <div class="icon delete mt-1 mb-1" title="Eliminar" :data-index="index" @click="deleteElement(index)" v-show="showPrev === false" :ref='`spinner${index}`'>
               <div class="spinner-border text-light" v-if="deletingVal === true && index === deletingIndex" role="status" style="width: 14px; height: 14px; margin-bottom: 2px">
@@ -239,7 +245,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-12 d-flex flex-column flex-md-row align-items-center justify-content-center p-0">
+            <div class="col-12 d-flex flex-column flex-wrap flex-md-row align-items-center justify-content-center p-0">
               <div class="col-9 col-sm-3 align-items-center justify-content-center p-1">
                 <div class="w-100 d-flex align-items-center justify-content-center">
                   <input class="w-100 position-relative" ref="nombre" type="text" v-model="selectComite.nombre" placeholder="Nombre">
@@ -253,6 +259,28 @@
               </div>
               <div class="col-9 col-sm-3 align-items-center justify-content-center p-1">
                 <input class="w-100 position-relative" ref="ci" type="text" v-model="selectComite.costos" placeholder="Costos">
+              </div>
+              <div class="col-7 d-flex flex-column align-items-center justify-content-center p-1">
+                <div class="custom-control custom-switch d-flex align-items-center justify-content-center">
+                  <input type="checkbox" class="custom-control-input" id="comi_redsocial" v-model="selectComite.redsocial.show">
+                  <label class="custom-control-label text" for="comi_redsocial">Marque si el comité posee una red social</label>
+                </div>
+                <div class="col-12 p-0" v-show="selectComite.redsocial.show === true" >
+                  <div class="d-flex flex-row align-items-center justify-content-between w-100">
+                    <select class="w-25 custom-select" v-model="selectComite.redsocial.nombre">
+                      <option value="Instagram" selected>Instagram</option>
+                      <option value="Facebook">Facebook</option>
+                      <option value="Twitter">Twitter</option>
+                    </select>
+                    <input class="w-70 position-relative" ref="redsocial" type="text" v-model="selectComite.redsocial.link" placeholder="Dirección de la red social">
+                  </div>
+                </div>
+              </div>
+              <div class="col-3 d-flex flex-column align-items-center justify-content-center p-1">
+                <p class="text-center">Orden de importancia</p>
+                <select class="w-75 custom-select p-1" v-model="selectComite.importancia.valor" @change="importantComi($event.target.value)">
+                  <option v-for="index in Object.values(dbWeb.Comites).length" :key="index-1" :value="index">{{index}}</option>
+                </select>
               </div>
             </div>
             <textarea type="text" class="info-form-c col-10" placeholder="Descripción" v-model="selectComite.descripcion"></textarea>
@@ -278,7 +306,7 @@
             </div>
           </button>
           <button class="btn btn-danger mr-2 ml-2" @click.prevent="deleteCollection('select')">Borrar campos</button>
-          <button class="btn btn-dark mr-2 ml-2" @click.prevent="regresar('section1')">Regresar</button>
+          <button class="btn btn-dark mr-2 ml-2" @click.prevent="regresar('section1', 'select')">Regresar</button>
         </div>
       </form>
     </section>
@@ -431,7 +459,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-12 d-flex flex-column flex-md-row align-items-center justify-content-center p-0">
+            <div class="col-12 d-flex flex-column flex-md-row  flex-wrap align-items-center justify-content-center p-0">
               <div class="col-9 col-sm-3 align-items-center justify-content-center p-1">
                 <div class="w-100 d-flex align-items-center justify-content-center">
                   <input class="w-100 position-relative" ref="nombre" type="text" v-model="nuevoComite.nombre" placeholder="Nombre">
@@ -445,6 +473,28 @@
               </div>
               <div class="col-9 col-sm-3 align-items-center justify-content-center p-1">
                 <input class="w-100 position-relative" ref="ci" type="text" v-model="nuevoComite.costos" placeholder="Costos">
+              </div>
+              <div class="col-7 d-flex flex-column align-items-center justify-content-center p-1">
+                <div class="custom-control custom-switch d-flex align-items-center justify-content-center">
+                  <input type="checkbox" class="custom-control-input" id="comi_redsocial" v-model="nuevoComite.redsocial.show">
+                  <label class="custom-control-label text" for="comi_redsocial">Marque si el comité posee una red social</label>
+                </div>
+                <div class="col-12 p-0" v-show="nuevoComite.redsocial.show === true" >
+                  <div class="d-flex flex-row align-items-center justify-content-between w-100">
+                    <select class="w-25 custom-select" v-model="nuevoComite.redsocial.nombre">
+                      <option value="Instagram" selected>Instagram</option>
+                      <option value="Facebook">Facebook</option>
+                      <option value="Twitter">Twitter</option>
+                    </select>
+                    <input class="w-70 position-relative" ref="redsocial" type="text" v-model="nuevoComite.redsocial.link" placeholder="Dirección de la red social">
+                  </div>
+                </div>
+              </div>
+              <div class="col-3 d-flex flex-column align-items-center justify-content-center p-1">
+                <p class="text-center">Orden de importancia</p>
+                <select class="w-75 custom-select p-1" v-model="nuevoComite.importancia.valor" @change="importantComi($event.target.value)">
+                  <option v-for="index in Object.values(dbWeb.Comites).length" :key="index-1" :value="index">{{index}}</option>
+                </select>
               </div>
             </div>
             <textarea type="text" class="info-form-c col-10" placeholder="Descripción" v-model="nuevoComite.descripcion"></textarea>
@@ -506,6 +556,7 @@ export default {
         changePics: false,
         showPrev: false,
         numElements: 10,
+        indexSelected: '',
         selectComite: '',
         nuevoComite: {
           activo: false,
@@ -517,17 +568,47 @@ export default {
           inthpage: false,
           integrantes: [],
           nombre: '',
+          importancia: {
+            valor: '',
+            cambiar: {
+              show: false,
+              comiCambio: '',
+              valor: '',
+            },
+            error: '',
+          },
+          redsocial: {
+            show:false,
+            nombre: '',
+            direccion: '',
+          },
           archivos:{
             imagen: '',
             reglamento: '',
             normativa: '',
           },
         },
+        sortArray: {},
       }
     },
 
     computed:{
       ...mapState(['editContent', 'successUpload', 'dbWeb', 'deletingVal', 'deletingIndex', 'cargarDB', 'crearDBVals', 'dbImg']),
+      getFirstAvaImportOrder(){
+        let count = 0;
+        for(let i = 1; i <= Object.values(this.dbWeb.Comites).length; i++){
+          for(let j = 0; j < Object.values(this.dbWeb.Comites).length; j++){
+            if(Object.values(this.dbWeb.Comites)[j].comi_importancia === undefined || Object.values(this.dbWeb.Comites)[j].comi_importancia !== undefined && Object.values(this.dbWeb.Comites)[j].comi_importancia !== i){
+              count++;
+            }
+          }
+          if(count === Object.values(this.dbWeb.Comites).length){
+            return i
+          }else{
+            count = 0;
+          }
+        }
+      },
     },
     
     methods:{
@@ -540,24 +621,64 @@ export default {
         setTimeout(() => {
           this.showList = false;
           this.showPrev = true;
-          this.cantFields.integrantes.numero = Object.values(Object.values(this.dbWeb.Comites).reverse()[index].comi_integrantes).length
-          this.selectComite = {
-            id: Object.values(this.dbWeb.Comites).reverse()[index].comi_id,
-            activo: Object.values(this.dbWeb.Comites).reverse()[index].comi_activo,
-            comipage: Object.values(this.dbWeb.Comites).reverse()[index].comi_comiPage,
-            correo: Object.values(this.dbWeb.Comites).reverse()[index].comi_correo,
-            costos: Object.values(this.dbWeb.Comites).reverse()[index].comi_costos,
-            descripcion: Object.values(this.dbWeb.Comites).reverse()[index].comi_descripcion,
-            fechav: Object.values(this.dbWeb.Comites).reverse()[index].comi_fechavigencia,
-            inthpage: Object.values(this.dbWeb.Comites).reverse()[index].comi_int,
-            integrantes: Object.values(this.dbWeb.Comites).reverse()[index].comi_integrantes,
-            nombre: Object.values(this.dbWeb.Comites).reverse()[index].comi_nombre,
+
+          this.indexSelected = this.sortArray[index].comi_id;
+
+          this.cantFields.integrantes.numero = Object.values(this.sortArray[index].comi_integrantes).length;
+
+          this.$set(this, 'selectComite', {
+            id: this.sortArray[index].comi_id,
+            activo: this.sortArray[index].comi_activo,
+            comipage: this.sortArray[index].comi_comiPage,
+            correo: this.sortArray[index].comi_correo,
+            costos: this.sortArray[index].comi_costos,
+            descripcion: this.sortArray[index].comi_descripcion,
+            fechav: this.sortArray[index].comi_fechavigencia,
+            inthpage: this.sortArray[index].comi_int,
+            integrantes: this.sortArray[index].comi_integrantes,
+            nombre: this.sortArray[index].comi_nombre,
             archivos:{
-              imagen: Object.values(this.dbWeb.Comites).reverse()[index].comi_foto,
-              reglamento: Object.values(this.dbWeb.Comites).reverse()[index].comi_reglamento,
-              normativa: Object.values(this.dbWeb.Comites).reverse()[index].comi_normativa,
+              imagen: this.sortArray[index].comi_foto,
+              reglamento: this.sortArray[index].comi_reglamento,
+              normativa: this.sortArray[index].comi_normativa,
             },
-          };
+          })
+
+          if(this.sortArray[index].comi_importancia === undefined || this.sortArray[index].comi_importancia === ''){
+            this.$set(this.selectComite, 'importancia', {
+              valor: this.getFirstAvaImportOrder,
+              cambiar: {
+                show: false,
+                comiCambio: '',
+                valor: '',
+              },
+              error: '',
+            })
+          }else{
+            this.$set(this.selectComite, 'importancia', {
+              valor: this.sortArray[index].comi_importancia,
+              cambiar: {
+                show: false,
+                comiCambio: '',
+                valor: '',
+              },
+              error: '',
+            })
+          }
+
+          if(this.sortArray[index].comi_redsocial === undefined){
+            this.$set(this.selectComite, 'redsocial', {
+              show: false,
+              nombre: 'Instagram',
+              direccion: '',
+            })
+          }else{
+            this.$set(this.selectComite, 'redsocial', {
+              show: this.sortArray[index].comi_redsocial.show,
+              nombre: this.sortArray[index].comi_redsocial.nombre,
+              direccion: this.sortArray[index].comi_redsocial.direccion,
+            }) 
+          }
         }, 900);
         setTimeout(() => {
           this.$refs.section1.classList.toggle('translate')
@@ -568,6 +689,9 @@ export default {
             }
           })
         }, 950);
+      },
+      sortBy(value){
+        this.sortArray = Object.values(this.dbWeb.Comites).sort((a, b) => parseFloat(a[`comi_${value}`]) - parseFloat(b[`comi_${value}`]));
       },
       deleteFile(index, val){
         if(val === 'crear'){
@@ -607,6 +731,20 @@ export default {
             inthpage: false,
             integrantes: [],
             nombre: '',
+            importancia: {
+              valor: '',
+              cambiar: {
+                show: false,
+                comiCambio: '',
+                valor: '',
+              },
+              error: '',
+            },
+            redsocial: {
+              show: false,
+              nombre: 'Instagram',
+              direccion: '',
+            },
             archivos:{
               imagen: '',
               reglamento: '',
@@ -624,6 +762,20 @@ export default {
             inthpage: false,
             integrantes: [],
             nombre: '',
+            importancia: {
+              valor: '',
+              cambiar: {
+                show: false,
+                comiCambio: '',
+                valor: '',
+              },
+              error: '',
+            },
+            redsocial: {
+              show: false,
+              nombre: 'Instagram',
+              direccion: '',
+            },
             archivos:{
               imagen: '',
               reglamento: '',
@@ -705,6 +857,12 @@ export default {
                 fechav: this.nuevoComite.fechav,
                 inthpage: this.nuevoComite.inthpage,
                 nombre: this.nuevoComite.nombre,
+                importancia: this.nuevoComite.importancia,
+                redsocial: {
+                  show: this.nuevoComite.redsocial.show,
+                  nombre: this.nuevoComite.redsocial.nombre,
+                  direccion: this.nuevoComite.redsocial.direccion,
+                },
                 archivos:{
                   imagen: this.nuevoComite.archivos.imagen,
                   reglamento: this.nuevoComite.archivos.reglamento,
@@ -748,6 +906,12 @@ export default {
                 inthpage: this.selectComite.inthpage,
                 nombre: this.selectComite.nombre,
                 id: this.selectComite.id,
+                importancia: this.selectComite.importancia,
+                redsocial: {
+                  show: this.selectComite.redsocial.show,
+                  nombre: this.selectComite.redsocial.nombre,
+                  direccion: this.selectComite.redsocial.direccion,
+                },
                 archivos:{
                   imagen: this.selectComite.archivos.imagen,
                   reglamento: this.selectComite.archivos.reglamento,
@@ -856,8 +1020,8 @@ export default {
         if(this.deletingVal === null && this.successUpload === null){
           dataTransfer = {
             ref: 'Comites',
-            idSt: Object.values(this.dbWeb.Comites).reverse()[index].comi_id,
-            idDb: Object.values(this.dbWeb.Comites).reverse()[index].comi_id,
+            idSt: this.sortArray[index].comi_id,
+            idDb: this.sortArray[index].comi_id,
             index: index,
             storage: true,
           };
@@ -929,6 +1093,7 @@ export default {
       crearValor(){
         this.deleteCollection('crear')
         this.$refs.section0.classList.toggle('translate');
+        this.nuevoComite.importancia.valor = Object.values(this.dbWeb.Comites).length + 1;  
         setTimeout(() => {
           this.showList = false;
           this.showCreate = true;
@@ -952,6 +1117,7 @@ export default {
             this.showCreate = false;
           }else if(value1 === 'section1'){
             this.showPrev = false;
+            this.indexSelected = '';
           }
         }, 900);
         setTimeout(() => {
@@ -977,6 +1143,67 @@ export default {
       toggleInfo(){
         this.$refs.info.children[0].classList.toggle('show-info')
       },
+      importantComi(index){
+        for(let i = 0; i < Object.values(this.dbWeb.Comites).length; i++){
+          if(Object.values(this.dbWeb.Comites)[i].comi_importancia !== undefined && index === Object.values(this.dbWeb.Comites)[i].comi_importancia.toString()){
+            if(this.selectComite !== ''){
+              if(this.selectComite.id !== Object.values(this.dbWeb.Comites)[i].comi_id){
+                this.selectComite.importancia.error = `El ${Object.values(this.dbWeb.Comites)[i].comi_nombre} ya posee este número. Si desea que el comité que se está editando actualmente tenga el número ${index}, guarde o actualice los cambios y se cambiará el valor del ${Object.values(this.dbWeb.Comites)[i].comi_nombre} automáticamente`;
+                this.selectComite.importancia.cambiar.comiCambio = Object.values(this.dbWeb.Comites)[i].comi_id;
+                if(this.dbWeb.Comites[this.indexSelected].comi_importancia !== undefined){
+                  this.selectComite.importancia.cambiar.valor = this.dbWeb.Comites[this.indexSelected].comi_importancia;
+                }else{
+                  this.selectComite.importancia.cambiar.valor = this.getFirstAvaImportOrder;
+                }
+                this.selectComite.importancia.cambiar.show = true;
+
+                this.message = {
+                  message: `El ${Object.values(this.dbWeb.Comites)[i].comi_nombre} ya posee este número. Si desea que el comité que se está editando actualmente tenga el número ${index}, guarde o actualice los cambios y se cambiará el valor del ${Object.values(this.dbWeb.Comites)[i].comi_nombre} automáticamente`,
+                  title: 'Número de orden ya usado',
+                }
+                $('#exampleModal').modal('show');
+  
+                return
+              }else{
+                this.selectComite.importancia.error = '';
+                this.selectComite.importancia.cambiar.comiCambio = '';
+                this.selectComite.importancia.cambiar.valor = '';
+                this.selectComite.importancia.cambiar.show = false;
+
+                return
+              }
+            }else{
+              this.nuevoComite.importancia.error = `El ${Object.values(this.dbWeb.Comites)[i].comi_nombre} ya posee este número. Si desea que el comité que se está editando actualmente tenga este número,guarde o actualice los cambios y se cambiará el valor del ${Object.values(this.dbWeb.Comites)[i].comi_nombre} automáticamente`;
+              this.nuevoComite.importancia.cambiar.comiCambio = Object.values(this.dbWeb.Comites)[i].comi_id;
+              this.nuevoComite.importancia.cambiar.valor = Object.values(this.dbWeb.Comites).length + 1;
+              this.nuevoComite.importancia.cambiar.show = true;
+
+              this.message = {
+                message: `El ${Object.values(this.dbWeb.Comites)[i].comi_nombre} ya posee este número. Si desea que el comité que se está editando actualmente tenga el número ${index}, guarde o actualice los cambios y se cambiará el valor del ${Object.values(this.dbWeb.Comites)[i].comi_nombre} automáticamente`,
+                title: 'Orden de importancia ya usado',
+              }
+              $('#exampleModal').modal('show');
+              return
+            }
+          }
+        }
+
+        if(this.selectComite !== ''){          
+          this.selectComite.importancia.error = '';
+          this.selectComite.importancia.cambiar.comiCambio = '';
+          this.selectComite.importancia.cambiar.valor = '';
+          this.selectComite.importancia.cambiar.show = false;
+
+          return
+        }else{
+          this.nuevoComite.importancia.error = '';
+          this.nuevoComite.importancia.cambiar.comiCambio = '';
+          this.nuevoComite.importancia.cambiar.valor = '';
+          this.nuevoComite.importancia.cambiar.show = false;
+
+          return
+        }
+      },
     },
 
     created(){
@@ -988,6 +1215,7 @@ export default {
       this.getData().then(()=>{
         this.listDisplay();
         this.show = true;
+        this.sortBy('importancia');
       })
 
       this.deleteCollection('crear');

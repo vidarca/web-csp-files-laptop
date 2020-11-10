@@ -9,7 +9,7 @@
               <div class="d-flex flex-row flex-wrap clearfix justify-content-center">
                 
                 <!-- Bloque de Notica -->
-                <div class="security-block col-lg-4 col-md-6 col-sm-6" ref="comites" v-for="(comite, index) in Object.values(dbWeb.Comites)" :key="comite.comi_nombre" v-show="comite.comi_comiPage && index < numElementsSection1 + showIndexSection1 && index >= showIndexSection1">
+                <div class="security-block col-lg-4 col-md-6 col-sm-6" ref="comites" v-for="(comite, index) in sortArray" :key="comite.comi_nombre" v-show="comite.comi_comiPage && index < numElementsSection1 + showIndexSection1 && index >= showIndexSection1">
                   <div class="inner-box">
                     <div class="image">
                       <img :src="(comite.comi_foto !== undefined && comite.comi_foto !== '')?comite.comi_foto:'_'" />
@@ -116,17 +116,17 @@
 
             <!-- Seccion de Informacion -->
 
-            <section class="comi-info overflow-hidden" v-if="comiSelecIndex !== false && Object.values(dbWeb.Comites)[comiSelecIndex].comi_info !== undefined && Object.values(dbWeb.Comites)[comiSelecIndex].comi_info !== ''">
+            <section class="comi-info overflow-hidden" v-if="comiSelecIndex !== false && sortArray[comiSelecIndex].comi_info !== undefined && sortArray[comiSelecIndex].comi_info !== ''">
 
               <h3 class="mb-2 w-100 text-center" id="beforeNoti">
-                {{Object.values(dbWeb.Comites)[comiSelecIndex].comi_nombre}}
+                {{sortArray[comiSelecIndex].comi_nombre}}
               </h3>
 
               <div class="d-flex flex-row align-items-center justify-content-center w-100">
                 <div class="text text-center col-6 p-0">
-                  {{Object.values(dbWeb.Comites)[comiSelecIndex].comi_info}}
+                  {{sortArray[comiSelecIndex].comi_info}}
                 </div>
-                <img :src="Object.values(dbWeb.Comites)[comiSelecIndex].comi_foto" class="col-6 p-0">
+                <img :src="sortArray[comiSelecIndex].comi_foto" class="col-6 p-0">
               </div>
 
             </section>
@@ -137,7 +137,7 @@
             <section class="comi-noticias overflow-hidden" v-if="comiSelecIndex !== false && showNoticias(comiSelecIndex)">
               
               <h3 class="mb-2 w-100 text-center" id="beforeNoti">
-                Noticias del {{Object.values(dbWeb.Comites)[comiSelecIndex].comi_nombre}}
+                Noticias del {{sortArray[comiSelecIndex].comi_nombre}}
               </h3>
 
               <div class="ext-wrapper w-100 m-auto">
@@ -145,7 +145,7 @@
                 <div class="d-flex align-items-center justify-content-center flex-row clearfix">
       
                   <!-- Bloque de Notica -->
-                  <div class="security-block col-md-3 col-6" ref="anuncios" v-for="(noticia, index) in reverseArray" :key="noticia.noti_id" :data-index="index" v-show="index < numElements + showIndex && index >= showIndex && anuncio.noti_seccion === Object.values(dbWeb.Comites)[comiSelecIndex].comi_nombre">
+                  <div class="security-block col-md-3 col-6" ref="anuncios" v-for="(noticia, index) in reverseArray" :key="noticia.noti_id" :data-index="index" v-show="index < numElements + showIndex && index >= showIndex && anuncio.noti_seccion === sortArray[comiSelecIndex].comi_nombre">
                     <div class="inner-box">
                     <div class="image">
                       <img :src="noticia.noti_fotos.imagen1.url" />
@@ -198,13 +198,13 @@
             <section class="comi-profesores overflow-hidden" v-if="comiSelecIndex !== false && showProfesores(comiSelecIndex)">
 
               <h3 class="mb-2 w-100 text-center" id="beforeProfe">
-                Instructores Asociados al {{Object.values(dbWeb.Comites)[comiSelecIndex].comi_nombre}}
+                Instructores Asociados al {{sortArray[comiSelecIndex].comi_nombre}}
               </h3>
 
               <div class="ext-wrapper w-100 m-auto">
                 <div class="d-flex align-items-center justify-content-center flex-row clearfix">
       
-                  <div class="security-block col-md-4 col-6" ref="anuncios" v-for="(profesor, index) in Object.values(dbWeb.Profesores)" :key="profesor.prof_id" :data-index="index" v-show="index < numElements + showIndex && index >= showIndex && profesor.comi_id === Object.values(dbWeb.Comites)[comiSelecIndex].comi_nombre">
+                  <div class="security-block col-md-4 col-6" ref="anuncios" v-for="(profesor, index) in Object.values(dbWeb.Profesores)" :key="profesor.prof_id" :data-index="index" v-show="index < numElements + showIndex && index >= showIndex && profesor.comi_id === sortArray[comiSelecIndex].comi_nombre">
                     <div class="inner-box">
                     <div class="image">
                       <img :src="profesor.prof_foto.url" />
@@ -288,6 +288,7 @@ export default {
         numElementsProfesores: 6,
         currentIndexProfesores: 1,
         comiSelecIndex: false,
+        sortArray: {},
       }
     },
     components: {
@@ -322,45 +323,45 @@ export default {
     methods:{
       ...mapMutations(['selectItemSelect', 'resetItemSelect']),
       iconSelect(index){
-        if(Object.values(this.dbWeb.Comites)[index].comi_nombre === 'Comité de Tenis'){
+        if(this.sortArray[index].comi_nombre === 'Comité de Tenis'){
           return 'flaticon-racket-and-tennis-ball'
-        }else if(Object.values(this.dbWeb.Comites)[index].comi_nombre === 'Comité de Alimentos y Bebidas'){
+        }else if(this.sortArray[index].comi_nombre === 'Comité de Alimentos y Bebidas'){
           return 'flaticon-restaurant'
-        }else if(Object.values(this.dbWeb.Comites)[index].comi_nombre === 'Comité de Gimnasio'){
+        }else if(this.sortArray[index].comi_nombre === 'Comité de Gimnasio'){
           return 'flaticon-barbell'
-        }else if(Object.values(this.dbWeb.Comites)[index].comi_nombre === 'Comité de Admisión'){
+        }else if(this.sortArray[index].comi_nombre === 'Comité de Admisión'){
           return 'flaticon-lista-de-verificacion'
-        }else if(Object.values(this.dbWeb.Comites)[index].comi_nombre === 'Comité de Artes Marciales'){
+        }else if(this.sortArray[index].comi_nombre === 'Comité de Artes Marciales'){
           return 'flaticon-martial-arts'
-        }else if(Object.values(this.dbWeb.Comites)[index].comi_nombre === 'Comité de Comunicaciones'){
+        }else if(this.sortArray[index].comi_nombre === 'Comité de Comunicaciones'){
           return 'flaticon-megafono'
-        }else if(Object.values(this.dbWeb.Comites)[index].comi_nombre === 'Comité de Cultura'){
+        }else if(this.sortArray[index].comi_nombre === 'Comité de Cultura'){
           return 'flaticon-mascaras-felices-y-tristes'
-        }else if(Object.values(this.dbWeb.Comites)[index].comi_nombre === 'Comité de Dominó'){
+        }else if(this.sortArray[index].comi_nombre === 'Comité de Dominó'){
           return 'flaticon-domino'
-        }else if(Object.values(this.dbWeb.Comites)[index].comi_nombre === 'Comité Juvenil'){
+        }else if(this.sortArray[index].comi_nombre === 'Comité Juvenil'){
           return 'flaticon-chico'
-        }else if(Object.values(this.dbWeb.Comites)[index].comi_nombre === 'Comité de Bailoterapia'){
+        }else if(this.sortArray[index].comi_nombre === 'Comité de Bailoterapia'){
           return 'flaticon-baile'
-        }else if(Object.values(this.dbWeb.Comites)[index].comi_nombre === 'Comité de Natación'){
+        }else if(this.sortArray[index].comi_nombre === 'Comité de Natación'){
           return 'flaticon-swimming'
-        }else if(Object.values(this.dbWeb.Comites)[index].comi_nombre === 'Comité de Squash'){
+        }else if(this.sortArray[index].comi_nombre === 'Comité de Squash'){
           return 'flaticon-squash-rackets'
-        }else if(Object.values(this.dbWeb.Comites)[index].comi_nombre === 'Comité de Guardería'){
+        }else if(this.sortArray[index].comi_nombre === 'Comité de Guardería'){
           return 'flaticon-chupete'
-        }else if(Object.values(this.dbWeb.Comites)[index].comi_nombre === 'Comité Social'){
+        }else if(this.sortArray[index].comi_nombre === 'Comité Social'){
           return 'flaticon-asistencia-social'
-        }else if(Object.values(this.dbWeb.Comites)[index].comi_nombre === 'Comité de TRX'){
+        }else if(this.sortArray[index].comi_nombre === 'Comité de TRX'){
           return 'flaticon-suspension'
-        }else if(Object.values(this.dbWeb.Comites)[index].comi_nombre === 'Comité de Infraestructura'){
+        }else if(this.sortArray[index].comi_nombre === 'Comité de Infraestructura'){
           return 'flaticon-edificio'
-        }else if(Object.values(this.dbWeb.Comites)[index].comi_nombre === 'Comité de Finanzas'){
+        }else if(this.sortArray[index].comi_nombre === 'Comité de Finanzas'){
           return 'flaticon-ahorrar-dinero'
-        }else if(Object.values(this.dbWeb.Comites)[index].comi_nombre === 'Comité de Reforma de Estatutos'){
+        }else if(this.sortArray[index].comi_nombre === 'Comité de Reforma de Estatutos'){
           return 'flaticon-libro-de-leyes'
-        }else if(Object.values(this.dbWeb.Comites)[index].comi_nombre === 'Comité de Tribunal Disciplinario'){
+        }else if(this.sortArray[index].comi_nombre === 'Comité de Tribunal Disciplinario'){
           return 'flaticon-subasta'
-        }else if(Object.values(this.dbWeb.Comites)[index].comi_nombre === 'Actualidad'){
+        }else if(this.sortArray[index].comi_nombre === 'Actualidad'){
           return 'flaticon-new-product'
         }else{
           return ''
@@ -488,7 +489,7 @@ export default {
         if(this.dbWeb.Noticias !== undefined){
           let count = 0;
           for(let i = 0; i < Object.values(this.dbWeb.Noticias).length; i++){
-            if(Object.values(this.dbWeb.Noticias)[i].noti_seccion === Object.values(this.dbWeb.Comites)[val].comi_nombre){
+            if(Object.values(this.dbWeb.Noticias)[i].noti_seccion === this.sortArray[val].comi_nombre){
               count ++;
             }
           }
@@ -497,7 +498,7 @@ export default {
             this.showSelect = true;
           }
           for(let i = 0; i < Object.values(this.dbWeb.Noticias).length; i++){
-            if(Object.values(this.dbWeb.Noticias)[i].noti_seccion === Object.values(this.dbWeb.Comites)[val].comi_nombre){
+            if(Object.values(this.dbWeb.Noticias)[i].noti_seccion === this.sortArray[val].comi_nombre){
               return true
             }
             return false
@@ -508,7 +509,7 @@ export default {
         if(this.dbWeb.Profesores !== undefined){
           let count = 0;
           for(let i = 0; i < Object.values(this.dbWeb.Profesores).length; i++){
-            if(Object.values(this.dbWeb.Profesores)[i].comi_id === Object.values(this.dbWeb.Comites)[val].comi_nombre){
+            if(Object.values(this.dbWeb.Profesores)[i].comi_id === this.sortArray[val].comi_nombre){
               count ++;
             }
           }
@@ -517,7 +518,7 @@ export default {
             this.showSelectProfesores = true;
           }
           for(let i = 0; i < Object.values(this.dbWeb.Profesores).length; i++){
-            if(Object.values(this.dbWeb.Profesores)[i].comi_id === Object.values(this.dbWeb.Comites)[val].comi_nombre){
+            if(Object.values(this.dbWeb.Profesores)[i].comi_id === this.sortArray[val].comi_nombre){
               return true
             }
             return false
@@ -669,10 +670,14 @@ export default {
         if(url !== '' && url !== undefined){
           window.open(url,'_blank');
         }
-      }
+      },
+      sortBy(value){
+        this.sortArray = Object.values(this.dbWeb.Comites).sort((a, b) => parseFloat(a[`comi_${value}`]) - parseFloat(b[`comi_${value}`]));
+      },
     },
 
     mounted() {
+      this.sortBy('importancia');
       if(this.itemSelect !== false){
         this.$refs.section1.classList.add('translate')
         this.$refs.section2.classList.toggle('translate')

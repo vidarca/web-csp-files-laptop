@@ -81,7 +81,6 @@ export default new Vuex.Store({
       state.secTitle = value
     },
     setUser(state, user){
-      console.log(user);
       
       state.user = {
         activo: user.activo,
@@ -756,6 +755,8 @@ export default new Vuex.Store({
                 comi_fechavigencia: data.comite.fechav,
                 comi_foto: [],
                 comi_int: data.comite.inthpage,
+                comi_redsocial: data.comite.redsocial,
+                comi_importancia: data.comite.importancia.valor,
                 comi_integrantes: data.comite.integrantes,
                 comi_nombre: data.comite.nombre,
                 comi_normativa: [],
@@ -803,6 +804,10 @@ export default new Vuex.Store({
 
                   if(n >= Object.values(data.archivos).length){
                     pushdbRef.set(dataRef);
+                    if(data.comite.importancia.cambiar.show === true){
+                      const chImp = firebase.database().ref(`${data.target}/${data.comite.importancia.cambiar.comiCambio}/comi_importancia`);
+                      chImp.set(data.comite.importancia.cambiar.valor);
+                    }
                     state.crearDBVals = false;
                     const success = {
                       0: 'successUpload',
@@ -827,6 +832,8 @@ export default new Vuex.Store({
             comi_fechavigencia: data.comite.fechav,
             comi_foto: data.comite.archivos.imagen,
             comi_int: data.comite.inthpage,
+            comi_redsocial: data.comite.redsocial,
+            comi_importancia: data.comite.importancia.valor,
             comi_integrantes: data.comite.integrantes,
             comi_nombre: data.comite.nombre,
             comi_normativa: data.comite.archivos.normativa,
@@ -836,6 +843,10 @@ export default new Vuex.Store({
           n++;
           if(n >= Object.values(data.archivos).length){
             pushdbRef.set(dataRef);
+            if(data.comite.importancia.cambiar.show === true){
+              const chImp = firebase.database().ref(`${data.target}/${data.comite.importancia.cambiar.comiCambio}/comi_importancia`);
+              chImp.set(data.comite.importancia.cambiar.valor);
+            }
             state.crearDBVals = false;
             const success = {
               0: 'successUpload',
@@ -1031,7 +1042,6 @@ export default new Vuex.Store({
                   if(Object.values(data.banner.archivos)[m].id !== undefined && val === Object.values(data.banner.archivos)[m].id){
                     state.dbImg[val].url = url;
                     state.dbImg[val].nombre = Object.values(data.banner.archivos)[m].nombre
-                    console.log(url);
                   }
                 }
                 n ++;
@@ -1135,8 +1145,6 @@ export default new Vuex.Store({
                 noti_seccion: data.noticia.seccion,
                 noti_fotos: [],
               }
-
-              console.log(order);
               
               let storageRef= firebase.storage().ref(`/${data.target}/${dataRef.noti_id}/${data.noticia.archivos[`${data.name_archivos}${element.id}`].nombre}`);
               
@@ -1150,7 +1158,6 @@ export default new Vuex.Store({
                 }
                 n ++;
                 if(n >= Object.values(data.archivos).length){
-                  console.log(state.dbImg);
                   for(let i = 0; i < Object.values(state.dbImg).length; i++){
                     if(state.dbImg[i].nombre !== undefined){
                       dataRef.noti_fotos[`imagen${i}`] = {
@@ -1161,7 +1168,6 @@ export default new Vuex.Store({
                       dataRef.noti_fotos[`imagen${i}`] = '';
                     }
                   }
-                  console.log(dataRef);
                   if(n >= Object.values(data.archivos).length){
                     pushdbRef.set(dataRef);
                     state.crearDBVals = false;
@@ -1785,6 +1791,8 @@ export default new Vuex.Store({
                 comi_fechavigencia: data.comite.fechav,
                 comi_foto: [],
                 comi_int: data.comite.inthpage,
+                comi_redsocial: data.comite.redsocial,
+                comi_importancia: data.comite.importancia.valor,
                 comi_integrantes: data.comite.integrantes,
                 comi_nombre: data.comite.nombre,
                 comi_normativa: [],
@@ -1833,6 +1841,10 @@ export default new Vuex.Store({
                   if(n >= Object.values(data.archivos).length){
                     const dbRef = firebase.database().ref(`${data.target}/${data.comite.id}`);
                     dbRef.set(dataRef);
+                    if(data.comite.importancia.cambiar.show === true){
+                      const chImp = firebase.database().ref(`${data.target}/${data.comite.importancia.cambiar.comiCambio}/comi_importancia`);
+                      chImp.set(data.comite.importancia.cambiar.valor)
+                    }
                     state.crearDBVals = false;
                     const success = {
                       0: 'successUpload',
@@ -1855,6 +1867,8 @@ export default new Vuex.Store({
             comi_costos: data.comite.costos,
             comi_descripcion: data.comite.descripcion,
             comi_fechavigencia: data.comite.fechav,
+            comi_redsocial: data.comite.redsocial,
+            comi_importancia: data.comite.importancia.valor,
             comi_foto: data.comite.archivos.imagen,
             comi_int: data.comite.inthpage,
             comi_integrantes: data.comite.integrantes,
@@ -1867,6 +1881,10 @@ export default new Vuex.Store({
           if(n >= Object.values(data.archivos).length){
             const dbRef = firebase.database().ref(`${data.target}/${data.comite.id}`);
             dbRef.set(dataRef);
+            if(data.comite.importancia.cambiar.show === true){
+              const chImp = firebase.database().ref(`${data.target}/${data.comite.importancia.cambiar.comiCambio}/comi_importancia`);
+              chImp.set(data.comite.importancia.cambiar.valor);
+            }
             state.crearDBVals = false;
             const success = {
               0: 'successUpload',

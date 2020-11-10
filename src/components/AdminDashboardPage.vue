@@ -299,7 +299,6 @@ export default {
         if(user){
           clearTimeout(data)
           if(this.dbWeb.Usuarios[`${user.uid}`]){
-            console.log(this.dbWeb.Usuarios[`${user.uid}`]);
             values = {
               activo: this.dbWeb.Usuarios[`${user.uid}`].user_activo,
               apellido: this.dbWeb.Usuarios[`${user.uid}`].user_apellido,
