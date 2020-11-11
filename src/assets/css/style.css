@@ -97,6 +97,7 @@ body {
 	background:#ffffff;
 	-webkit-font-smoothing: antialiased;
 	-moz-font-smoothing: antialiased;
+	overflow-x: hidden;
 }
 
 .bordered-layout .page-wrapper{
@@ -181,8 +182,7 @@ h6{
 .page-wrapper{
 	position:relative;
 	margin:0 auto;
-	width:100%;
-	min-width:300px;
+	width:100vw;
 }
 
 ul,li{
@@ -2297,10 +2297,10 @@ Menu Responsive
 
 .featured-block .inner-box{
 	position:relative;
-	padding:40px;
+	padding:20px 15px;
 	background-color: rgba(255,255,255);
-	height: 100%;
-	max-height: 158px;
+	height: 145px;
+	max-height: 145px;
 }
 
 .featured-block .inner-box:before{
@@ -2336,8 +2336,7 @@ Menu Responsive
 .featured-block .inner-box .content:before{
 	position:absolute;
 	content: "\f115";
-	right:-20px;
-	top:20px;
+	right:0;
 	color:#FE5D25;
 	font-size:16px;
 	line-height:1em;
@@ -2348,21 +2347,26 @@ Menu Responsive
 	position:relative;
 	padding-right: 10px;
 	color:#09197d;
-	font-size:60px;
+	font-size:50px;
 	line-height:1em;
 }
 
 .featured-block .inner-box .content h5{
 	position:relative;
-	white-space: nowrap;
-	text-align: left;
-	line-height:1.4em;
+	text-align: center;
+	max-width: 200px;
+	height: 100%;
 	font-weight:500;
-	font-size:18px;
+	font-size:17px;
+	display: flex;
+	align-items: center;
+	justify-content: start;
 }
 
 .featured-block .inner-box .content h5 a{
+	text-align: center;
 	position:relative;
+	width: 80%;
 	color:#222222;
 	transition:all 500ms ease;
 	-moz-transition:all 500ms ease;

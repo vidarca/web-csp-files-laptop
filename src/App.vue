@@ -4,6 +4,9 @@
     <transition name="fade-down" mode="out-in">
       <router-view/>
     </transition>
+    <div class="back-btn">
+      <button @click="goToTop()" class="icon"><i class="flaticon-up-chevron"></i></button>
+    </div>
 	  <Footer></Footer>
   </div>
 </template>
@@ -27,6 +30,13 @@ export default {
   },
   methods:{
     ...mapActions(['getData']),
+    goToTop(){
+			window.scrollTo({
+				top: 0,
+				left: 0,
+				behavior: 'smooth',
+			});
+		},
   },
 
   created(){

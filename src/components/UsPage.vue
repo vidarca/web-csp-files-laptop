@@ -147,17 +147,12 @@
     </section>
 
     <section class="reglamento-normativas w-95 m-auto">
-        <h3 class="w-100 text-center border-bottom" style="padding: 40px 0 20px 0;">Reglamentos y Normativas</h3>
+        <h3 class="w-100 text-center border-bottom" style="padding: 40px 0 20px 0;">Estatutos y Normativas</h3>
         <div class="file-download-container radial-circle d-flex align-items-center justify-content-center">
             <div class="w-60 d-flex flex-column flex-md-row align-items-center justify-content-md-between justify-content-center m-auto">
-                <div class="btn-download" @click="openFile($event, Object.values(dbWeb.Miscellaneous)[0].misc_reglamentos.url)" data-animated="false">
+                <div class="btn-download m-2" @click="openFile($event, Object.values(dbWeb.Miscellaneous)[0].misc_archivos.archivo1.url)" data-animated="false">
                     <div class="text noselect">
-                        Reglamentos
-                    </div>
-                </div>
-                <div class="btn-download" @click="openFile($event, Object.values(dbWeb.Miscellaneous)[0].misc_normativas.url)" data-animated="false">
-                    <div class="text noselect">
-                        Normativas
+                        Estatutos
                     </div>
                 </div>
             </div>

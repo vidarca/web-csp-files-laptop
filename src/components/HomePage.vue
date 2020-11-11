@@ -32,10 +32,10 @@
 		<div class="auto-wrapper ">
 			<div class="inner-container ">
 				
-				<div class="clearfix row m-auto align-items-center justify-content-center" style="width:100%">
+				<div class="d-flex flex-row flex-wrap m-auto align-items-center justify-content-center" style="width:100%">
 					
 					<!-- Featured Block -->
-					<div class="featured-block col-lg-6	col-md-6 col-sm-12">
+					<div class="featured-block col-12 col-sm-4">
 						<div class="inner-box">
 							<div class="content">
 								<div class="icon-box">
@@ -47,7 +47,7 @@
 					</div>
 					
 					<!-- Featured Block -->
-					<div class="featured-block col-lg-6 col-md-6 col-sm-12" id="second-featured">
+					<div class="featured-block col-12 col-sm-4" id="second-featured">
 						<div class="inner-box">
 							<div class="content">
 								<div class="icon-box">
@@ -59,7 +59,7 @@
 					</div>
 
 					<!-- Featured Block -->
-					<div class="featured-block col-lg-6 col-md-6 col-sm-12" id="second-featured">
+					<div class="featured-block col-12 col-sm-4" id="second-featured">
 						<div class="inner-box">
 							<div class="content">
 								<div class="icon-box">
@@ -244,7 +244,7 @@
 					<img src="assets/images/icons/separater.png" alt="" />
 				</div>
 				<h2>Nuestro Equipo</h2>
-				<div class="text">Ipsum dolor sit amet consect asetur adipisicing elit sedunas eiusmod <br> temporas incididunt ut labore dolore magna aliqua. </div>
+				<div class="text">Conoce a nuestro equipo de trabajo del Club Santa Paula</div>
 			</div>
 			
 			<div class="row clearfix">
@@ -294,9 +294,7 @@
 		</div>
     </section>
     <!-- End Clients Section -->
-	<div class="back-btn">
-		<button @click="goToTop()" class="icon"><i class="flaticon-up-chevron"></i></button>
-	</div>
+	
 	</div>
 <!--End pagewrapper-->
 </div>
@@ -366,9 +364,7 @@ import AutogestionSpan from '@/components/AutogestionSpan.vue'
 	},
   	methods: {
 		...mapMutations(['selectItemSelect']),
-		goToTop(){
-			window.scrollTo(0, 0);
-		},
+		
 	    clientSliderItems(responsive, items){
 	  	    for(let i=0; i < responsive.length; i++){
 	  		    if(window.innerWidth>responsive[i].breakpoint.width){
