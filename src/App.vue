@@ -1,5 +1,10 @@
 <template>
   <div id="app" class="main w-100" v-if="loaded" style="background-color: rgb(240, 242, 245);">
+    <div class="preloaderini" ref="loaderSpinner" v-if="showSpinner">
+      <div class="spinner-grow text-primary" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
     <Header></Header>
     <transition name="fade-down" mode="out-in">
       <router-view/>
@@ -25,6 +30,7 @@ export default {
   data(){
     return {
       loaded: false,
+      showSpinner: true,
       transitionName: '',
     } 
   },
@@ -39,9 +45,15 @@ export default {
 		},
   },
 
-  created(){
+  mounted(){
     this.getData().then(() => {
-      this.loaded = true
+      this.loaded = true;
+      setTimeout(() => {
+        this.$refs.loaderSpinner.classList.add('hide-opacity');
+      }, 1000);
+      setTimeout(() => {
+        this.showSpinner = false;
+      }, 2000);
     })
   },
 
@@ -94,10 +106,23 @@ export default {
   @import './assets/css/style.css';
   @import './assets/css/animate.css';
 
-  /**
-  ==============================================
-  Vue Transitions
-  ==============================================
-  **/
+  .preloaderini{
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    z-index: 99999999999;
+    top: 0;
+    left: 0;
+    opacity: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    -webkit-transition: opacity 1s ease-out;
+    -ms-transition: opacity 1s ease-out;
+    -o-transition: opacity 1s ease-out;
+    -moz-transition: opacity 1s ease-out;
+    transition: opacity 1s ease-out;
+  }
 
 </style>
