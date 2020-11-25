@@ -36,18 +36,18 @@
       <div class="col-md-6 p-1 d-flex flex-column align-items-center justify-content-center overflow-hidden">
         <div class="p-1 ml-sm-5 mt-2 mb-2 d-flex flex-sm-row align-items-center justify-content-center justify-content-sm-between flex-column w-100" style="min-height: 60px;">
           <i class="icon flaticon-location-pin" style="min-width: 50px !important; max-width: 50px !important"></i>
-          <div class="text-center w-100 pl-3">{{Object.values(dbWeb.Miscellaneous)[0].misc_direccion}}</div>
+          <div class="text-left w-100 pl-3">{{Object.values(dbWeb.Miscellaneous)[0].misc_direccion}}</div>
         </div>
         <div class="p-1 ml-sm-5 mt-2 mb-2 d-flex flex-sm-row align-items-center justify-content-center justify-content-sm-between flex-column w-100" style="min-height: 60px;">
           <i class="icon flaticon-phone-call" style="min-width: 50px !important; max-width: 50px !important"></i>
           <div class="d-flex align-items-center justify-content-center flex-column w-100">
-            <a class="text col-12 pl-3 pr-0 text-center" :href="`tel: ${telf}`" v-for="telf in Object.values(dbWeb.Miscellaneous)[0].misc_telefonos" :key="telf">{{telf}}</a>
+            <a class="text col-12 pl-3 pr-0 text-left" :href="`tel: ${telf}`" v-for="telf in Object.values(dbWeb.Miscellaneous)[0].misc_telefonos" :key="telf">{{telf}}</a>
           </div>
         </div>
         <div class="p-1 ml-sm-5 mt-2 mb-2 d-flex flex-sm-row align-items-center justify-content-center justify-content-sm-between flex-column w-100" style="min-height: 60px;">
           <i class="icon flaticon-email" style="min-width: 50px !important; max-width: 50px !important"></i>
           <div class="d-flex align-items-center justify-content-center flex-column w-100">
-            <a class="text col-12 pl-3 pr-0 text-center" :href="`mailto: ${mail}`" v-for="mail in Object.values(dbWeb.Miscellaneous)[0].misc_correos" :key="mail">{{mail}}</a>
+            <a class="text col-12 pl-3 pr-0 text-left" :href="`mailto: ${mail}`" v-for="mail in Object.values(dbWeb.Miscellaneous)[0].misc_correos" :key="mail">{{mail}}</a>
           </div>
         </div>
         <div class="w-75">

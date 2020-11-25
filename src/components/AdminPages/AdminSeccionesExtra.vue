@@ -129,8 +129,8 @@
                         <div :class="['prev-container d-flex position-relative flex-column align-items-center justify-content-between w-100 bg-success-light h-100']">
                           <!-- MUESTRA DE IMAGEN -->
                           <div class="w-100 d-flex position-relative justify-content-end flex-column h-100">
-                            <div class="d-flex justify-content-center align-items-center" v-if="(dbImg[index] !== undefined || selecSeccion.imagenes[`imagen${index}`].url !== '')" style="min-height: 80px;">
-                              <img :src="(dbImg[index] !== undefined && dbImg[index].url !== undefined)?dbImg[index].url:(selecSeccion.imagenes[`imagen${index}`].url !== '')?selecSeccion.imagenes[`imagen${index}`].url:''" width="100%" height="79.5" style="height: 79.5px; width: 100%; ">
+                            <div class="d-flex justify-content-center align-items-center" v-if="(dbImg[index] !== undefined || selectSeccion.imagenes[`imagen${index}`].url !== '')" style="min-height: 80px;">
+                              <img :src="(dbImg[index] !== undefined && dbImg[index].url !== undefined)?dbImg[index].url:(selectSeccion.imagenes[`imagen${index}`].url !== '')?selectSeccion.imagenes[`imagen${index}`].url:''" width="100%" height="79.5" style="height: 79.5px; width: 100%; ">
                             </div>
                             <div v-else class="w-100 h-100 d-flex flex-row align-items-center justify-content-center" style="min-height: 80px;">
                               <p class="align-self-star" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">{{selectSeccion.imagenes[`imagen${index}`].nombre}}</p>
@@ -187,8 +187,8 @@
                     <div :class="['prev-container d-flex position-relative flex-column align-items-center justify-content-between w-100 bg-success-light h-100']">
                       <!-- MUESTRA DE IMAGEN -->
                       <div class="w-100 d-flex position-relative justify-content-end flex-column h-100">
-                        <div class="d-flex justify-content-center align-items-center" v-if="(dbImg[index] !== undefined || selecSeccion.imagenes[`imagen0`].url !== '')" style="min-height: 80px;">
-                          <img :src="(dbImg[index] !== undefined && dbImg[index].url !== undefined)?dbImg[index].url:(selecSeccion.imagenes[`imagen0`].url !== '')?selecSeccion.imagenes[`imagen0`].url:''" width="100%" height="79.5" style="height: 79.5px; width: 100%; ">
+                        <div class="d-flex justify-content-center align-items-center" v-if="(dbImg[0] !== undefined || selectSeccion.imagenes[`imagen0`].url !== '')" style="min-height: 80px;">
+                          <img :src="(dbImg[0] !== undefined && dbImg[0].url !== undefined)?dbImg[0].url:(selectSeccion.imagenes[`imagen0`].url !== '')?selectSeccion.imagenes[`imagen0`].url:''" width="100%" height="79.5" style="height: 79.5px; width: 100%; ">
                         </div>
                         <div v-else class="w-100 h-100 d-flex flex-row align-items-center justify-content-center" style="min-height: 80px;">
                           <p class="align-self-star" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">{{selectSeccion.imagenes["imagen0"].nombre}}</p>

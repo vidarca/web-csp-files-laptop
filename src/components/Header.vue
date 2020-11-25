@@ -78,7 +78,7 @@
                   <router-link :to="{name:'Comites'}"> Normativas y Costos </router-link>
                 </li>
                 <li class="v-dropdown-item">
-                  <router-link :to="{name:'Comites'}"> Gelería </router-link>
+                  <router-link :to="{name:'Comites'}"> Galería </router-link>
                 </li>                                                   
               </ul>
             <i @click="toggleDrop('com')" ref="comIcon" class="flaticon-sort-down"></i>

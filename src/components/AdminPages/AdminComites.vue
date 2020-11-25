@@ -979,7 +979,7 @@ export default {
         }else if(val2 === 'select'){
           if(val === 0){
             this.selectComite.imagen = [];
-            this.selectComite.imagen = {
+            this.$set(this.selectComite.archivos, `imagen`, {
               nombre: files.name,
               url: '',
               id: val,
@@ -987,10 +987,11 @@ export default {
               progressBar: {
                 show: true,
               },
-            }
+            });
+            console.log(this.selectComite);
           }else if(val === 1){
-            this.selectComite.reglamento = [];
-            this.selectComite.reglamento = {
+            this.selectComite.archivos.reglamento = [];
+            this.selectComite.archivos.reglamento = {
               nombre: files.name,
               url: '',
               id: val,
@@ -1000,8 +1001,8 @@ export default {
               },
             }
           }else if(val === 2){
-            this.selectComite.normativa = [];
-            this.selectComite.normativa = {
+            this.selectComite.archivos.normativa = [];
+            this.selectComite.archivos.normativa = {
               nombre: files.name,
               url: '',
               id: val,
