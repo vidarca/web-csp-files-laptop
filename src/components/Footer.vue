@@ -48,8 +48,9 @@
                 	
                     <div class="col-12 col-sm-12 col-md-4 d-flex flex-column align-items-center justify-content-center h-100">
 
-						<div class="logo pt-2 pb-2">
-							<a href="index.html"><img src="https://via.placeholder.com/215x60" alt="" /></a>
+						<div class="logo pt-2 pb-2 d-flex align-items-center justify-content-center flex-nowrap flex-column">
+							<img src="../assets/AVLogo.png" class="logo-creator-img" />
+							<p style="color: white; font-size: 15px; padding: 2px 0">Por Andrés Vidaurre &copy;</p>
 						</div>
 
 						<div class="v-social-rightbox pt-2 pb-2">

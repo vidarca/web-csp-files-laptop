@@ -209,7 +209,6 @@
                 <!--  Fin de IMAGENES -->
               </div>
             </div>
-
           <!-- Fin de Imagen de la seccion -->
 
           <div class="col-12 col-sm-6 d-flex align-items-center justify-content-center flex-column">
@@ -217,8 +216,11 @@
               <input class="w-100 position-relative" ref="nombre" type="text" v-model="selectSeccion.secnom" placeholder="Nombre de la sección">
             </div>
             <div class="w-100 d-flex align-items-center justify-content-center">
+              <input class="m-auto position-relative" ref="secval" type="text" v-model="selectSeccion.secval" placeholder="Identificación de la sección" disabled>
+            </div>
+            <div class="w-100 d-flex align-items-center justify-content-center">
               <div class="select-field">
-                <p>Seleccione la opción del comité al que pertenece el profesor</p>
+                <p>Seleccione la opción de la página donde aparecerá esta sección</p>
                 <select class="custom-select" v-model="selectSeccion.secpag">
                   <option selected>Seleccione una opción</option>
                   <option value="Inicio">Página de Inicio</option>
@@ -392,6 +394,9 @@
               <input class="w-100 position-relative" ref="nombre" type="text" v-model="nuevaSeccion.secnom" placeholder="Nombre de la sección">
             </div>
             <div class="w-100 d-flex align-items-center justify-content-center">
+              <input class="m-auto position-relative" ref="secval" type="text" v-model="nuevaSeccion.secval" placeholder="Identificación de la sección">
+            </div>
+            <div class="w-100 d-flex align-items-center justify-content-center">
               <div class="select-field">
                 <p>Seleccione la opción del comité al que pertenece el profesor</p>
                 <select class="custom-select" v-model="nuevaSeccion.secpag">
@@ -472,6 +477,7 @@ export default {
         selectSeccion: {
           secpag: 'Seleccione una opción',
           secnom: '',
+          secval: '',
           contenido:{},
           showImagenSeccion: false,
           imagenes:{
@@ -481,6 +487,7 @@ export default {
         nuevaSeccion: {
           secpag: 'Seleccione una opción',
           secnom: '',
+          secval: '',
           contenido:{},
           showImagenSeccion: false,
           imagenes:{
@@ -510,6 +517,7 @@ export default {
           this.selectSeccion.secpag = Object.values(this.dbWeb.Secciones_Extra)[index].sec_pag;
           this.selectSeccion.secnom = Object.values(this.dbWeb.Secciones_Extra)[index].sec_nombre;
           this.selectSeccion.secid = Object.values(this.dbWeb.Secciones_Extra)[index].sec_id;
+          this.selectSeccion.secval = Object.values(this.dbWeb.Secciones_Extra)[index].sec_value;
           this.selectSeccion.showImagenSeccion = Object.values(this.dbWeb.Secciones_Extra)[index].sec_imagen_seccion;
 
           if(Object.values(this.dbWeb.Secciones_Extra)[index].sec_contenido !== undefined && Object.values(this.dbWeb.Secciones_Extra)[index].sec_contenido !== ""){
@@ -526,8 +534,10 @@ export default {
             }
           }
 
-          for(let i = 0; i < Object.values(Object.values(this.dbWeb.Secciones_Extra)[index].sec_fotos).length; i++){
-            this.selectSeccion.imagenes[`imagen${i}`] = Object.values(this.dbWeb.Secciones_Extra)[index].sec_fotos[`imagen${i}`]
+          if(Object.values(this.dbWeb.Secciones_Extra)[index].sec_imagen_seccion){
+            for(let i = 0; i < Object.values(Object.values(this.dbWeb.Secciones_Extra)[index].sec_fotos).length; i++){
+              this.selectSeccion.imagenes[`imagen${i}`] = Object.values(this.dbWeb.Secciones_Extra)[index].sec_fotos[`imagen${i}`]
+            }
           }
           
         }, 900);
@@ -629,6 +639,7 @@ export default {
               contenido: this.nuevaSeccion.contenido,
               imagenseccion: this.nuevaSeccion.showImagenSeccion,
               archivos: this.nuevaSeccion.imagenes,
+              secval: this.nuevaSeccion.secval,
             },
             target: 'Secciones_Extra',
           };
@@ -638,10 +649,10 @@ export default {
         }else if(value ==='select'){
           
           for(let i = 0; i < Object.values(this.selectSeccion.imagenes).length; i++){
-            if(Object.values(this.selectSeccion.imagenes)[i].nombre !== undefined){
+            if(Object.values(this.selectSeccion.imagenes)[i].nombreref !== undefined){
               Object.values(this.selectSeccion.imagenes)[i].nombre = Object.values(this.selectSeccion.imagenes)[i].nombreref;
             }
-          } 
+          }
 
           let dataTransfer = {
             archivos: this.files,
@@ -651,6 +662,7 @@ export default {
               id: this.selectSeccion.secid,
               contenido: this.selectSeccion.contenido,
               imagenseccion: this.selectSeccion.showImagenSeccion,
+              secval: this.selectSeccion.secval,
               archivos: this.selectSeccion.imagenes,
             },
             target: 'Secciones_Extra',
@@ -669,6 +681,17 @@ export default {
 
         if(val2 === 'crear'){
           this.nuevaSeccion.imagenes[`imagen${index}`] = {
+            nombre: files.name,
+            url: '',
+            id: index,
+            nombreref: `imagen${index}`,
+            uploadPercentage: 0,
+            progressBar: {
+              show: true,
+            },
+          }
+        }else if(val2 === 'select'){
+          this.selectSeccion.imagenes[`imagen${index}`] = {
             nombre: files.name,
             url: '',
             id: index,

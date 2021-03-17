@@ -66,9 +66,9 @@
         <div class="file-form">
           <div class="d-flex w-100 flex-row align-items-center justify-content-center position-relative m-2">
             <h6 class="pr-2">Período de la Junta: Desde </h6>
-            <input class= "col-1 position-relative" ref="inputYear0" type="text" v-model="selectJunta.inicio" placeholder="Año">
+            <input class= "col-1 position-relative" ref="inputYear2" type="text" v-model="selectJunta.inicio" placeholder="Año">
             <h6 class="pr-2 pl-2"> hasta </h6>
-            <input class="col-1 position-relative" ref="inputYear1" type="text" v-model="selectJunta.fin" placeholder="Año">
+            <input class="col-1 position-relative" ref="inputYear3" type="text" v-model="selectJunta.fin" placeholder="Año" :disabled="selectJunta.junta_actual">
           </div>
           <div class="custom-control custom-switch">
             <input type="checkbox" @change="disableYearCrear('selectJunta')" class="custom-control-input" id="junta_activa" v-model="selectJunta.junta_actual">
@@ -156,7 +156,7 @@
             <h6 class="pr-2">Período de la Junta: Desde </h6>
             <input class="col-1 position-relative" ref="inputYear0" type="text" v-model="nuevaJunta.inicio" placeholder="Año">
             <h6 class="pr-2 pl-2"> hasta </h6>
-            <input class="col-1 position-relative" ref="inputYear1" type="text" v-model="nuevaJunta.fin" placeholder="Año">
+            <input class="col-1 position-relative" ref="inputYear1" type="text" v-model="nuevaJunta.fin" placeholder="Año" :disabled="nuevaJunta.junta_actual">
           </div>
           <div class="custom-control custom-switch">
             <input type="checkbox" @change="disableYearCrear('nuevaJunta')" class="custom-control-input" id="junta_activa" v-model="nuevaJunta.junta_actual">
@@ -449,11 +449,8 @@ export default {
         const dsplit = d.toString().split(' ');
         if(this[`${value}`].junta_actual === true){
           this[`${value}`].fin = dsplit[3];
-          this.$refs.inputYear1.disabled = true;
-          this.$refs.inputYear1.classList.remove('error');
         }else{
           this[`${value}`].fin = '';
-          this.$refs.inputYear1.disabled = false;
         }
       },
       submitCollection(value){

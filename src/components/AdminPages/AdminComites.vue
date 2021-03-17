@@ -278,9 +278,7 @@
               </div>
               <div class="col-3 d-flex flex-column align-items-center justify-content-center p-1">
                 <p class="text-center">Orden de importancia</p>
-                <select class="w-75 custom-select p-1" v-model="selectComite.importancia.valor" @change="importantComi($event.target.value)">
-                  <option v-for="index in Object.values(dbWeb.Comites).length" :key="index-1" :value="index">{{index}}</option>
-                </select>
+                <input type="number" class="w-75 custom-select p-1" v-model="nuevoComite.importancia.valor" @blur="importantComi(nuevoComite.importancia.valor)">
               </div>
             </div>
             <textarea type="text" class="info-form-c col-10" placeholder="Descripción" v-model="selectComite.descripcion"></textarea>
@@ -492,9 +490,7 @@
               </div>
               <div class="col-3 d-flex flex-column align-items-center justify-content-center p-1">
                 <p class="text-center">Orden de importancia</p>
-                <select class="w-75 custom-select p-1" v-model="nuevoComite.importancia.valor" @change="importantComi($event.target.value)">
-                  <option v-for="index in Object.values(dbWeb.Comites).length" :key="index-1" :value="index">{{index}}</option>
-                </select>
+                <input type="number" class="w-75 custom-select p-1" v-model="nuevoComite.importancia.valor" @blur="importantComi(nuevoComite.importancia.valor)">
               </div>
             </div>
             <textarea type="text" class="info-form-c col-10" placeholder="Descripción" v-model="nuevoComite.descripcion"></textarea>
@@ -877,7 +873,7 @@ export default {
             }else{
               dataTransfer.comite.integrantes = this.nuevoComite.integrantes;
             }
-            
+
             this.crearDB(dataTransfer)
 
           }else if(value ==='select'){
@@ -1094,7 +1090,7 @@ export default {
       crearValor(){
         this.deleteCollection('crear')
         this.$refs.section0.classList.toggle('translate');
-        this.nuevoComite.importancia.valor = Object.values(this.dbWeb.Comites).length + 1;  
+        this.nuevoComite.importancia.valor = Object.values(this.dbWeb.Comites).length+1;  
         setTimeout(() => {
           this.showList = false;
           this.showCreate = true;
@@ -1164,7 +1160,6 @@ export default {
                 }
                 $('#exampleModal').modal('show');
   
-                return
               }else{
                 this.selectComite.importancia.error = '';
                 this.selectComite.importancia.cambiar.comiCambio = '';
@@ -1259,6 +1254,7 @@ export default {
           if(this.successUpload !== null){
             this.getData().then(()=>{
               this.listDisplay();
+              this.sortBy('importancia');
               try{
               if(this.dbWeb.Comites !== undefined){
                 if(Object.values(this.dbWeb.Comites).length/this.numElements > 1){

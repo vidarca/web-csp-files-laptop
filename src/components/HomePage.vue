@@ -174,7 +174,7 @@
 							<div class="gallery-content-box">
 								<p class="gallery-content-title"> {{element.comi_nombre}} </p>								
 							</div>
-							<img src="https://via.placeholder.com/360x285" alt="" />
+							<img :src="element.comi_foto !== '' ? element.comi_foto: 'https://via.placeholder.com/360x285'" alt="" />
 							<!-- Overlay Box -->
 							<div class="overlay-box">
 								<div class="overlay-inner">
@@ -340,7 +340,7 @@ import AutogestionSpan from '@/components/AutogestionSpan.vue'
 		selectCuotas(){
 			if(this.dbWeb.Secciones_Extra !== undefined){
 				for(let i = 0; i < Object.values(this.dbWeb.Secciones_Extra).length; i++){
-					if(Object.values(this.dbWeb.Secciones_Extra)[i].sec_nombre.toLowerCase() === "distribución de cuotas mensuales"){
+					if(Object.values(this.dbWeb.Secciones_Extra)[i].sec_value.toLowerCase() === "dist_cuot"){
 						this.distCuotas = Object.values(this.dbWeb.Secciones_Extra)[i];
 						return true;
 					}

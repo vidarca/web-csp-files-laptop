@@ -648,10 +648,10 @@ export default new Vuex.Store({
                 let val = order[n];
                 if(val === 0){
                   state.dbImg[val].url = url;
-                  state.dbImg[val].nombre = `${data.profesor.id}`;
+                  state.dbImg[val].nombre = `${data.profesor.archivos.image.nombre}`;
                 }else{
                   state.dbImg[val].url = url;
-                  state.dbImg[val].nombre = `c_v_${data.profesor.id}`;
+                  state.dbImg[val].nombre = `c_v_${data.profesor.archivos.cv.nombre}`;
                 }
                 n ++;
                 if(n >= Object.values(data.archivos).length){
@@ -1258,6 +1258,7 @@ export default new Vuex.Store({
                 sec_contenido: data.seccion.contenido,
                 sec_imagen_seccion: data.seccion.imagenseccion,
                 sec_fotos: [],
+                sec_value: data.seccion.secval
               }
               
               let storageRef= firebase.storage().ref(`/${data.target}/${dataRef.sec_id}/${data.seccion.archivos[`imagen${element.id}`].nombre}`);
@@ -1307,6 +1308,7 @@ export default new Vuex.Store({
             sec_contenido: data.seccion.contenido,
             sec_imagen_seccion: data.seccion.imagenseccion,
             sec_fotos: data.seccion.archivos,
+            sec_value: data.seccion.secval
           }
 
           n++;
@@ -1587,7 +1589,7 @@ export default new Vuex.Store({
                 gr_foto: [],
               }
 
-              let storageRef= firebase.storage().ref(`/imagenes/${data.target}/${data.integrante.id}/${data.integrante.cargo.split(' ').join('_')}`);
+              let storageRef= firebase.storage().ref(`/${data.target}/${data.integrante.id}/${data.integrante.cargo.split(' ').join('_')}`);
               
               storageRef.getDownloadURL().then(url => {
                 let val = order[n];
@@ -1689,10 +1691,10 @@ export default new Vuex.Store({
                 let val = order[n];
                 if(val === 0){
                   state.dbImg[val].url = url;
-                  state.dbImg[val].nombre = `${data.profesor.id}`;
+                  state.dbImg[val].nombre = `${data.profesor.archivos.image.nombre}`;
                 }else{
                   state.dbImg[val].url = url;
-                  state.dbImg[val].nombre = `c_v_${data.profesor.id}`;
+                  state.dbImg[val].nombre = `c_v_${data.profesor.archivos.cv.nombre}`;
                 }
                 n ++;
                 if(n >= Object.values(data.archivos).length){
@@ -1720,11 +1722,11 @@ export default new Vuex.Store({
 
           let dataRef = {
             comi_id: data.profesor.coid,
-            prof_cv: [],
+            prof_cv: data.profesor.archivos.cv,
             prof_ci: data.profesor.ci,
             prof_correo: data.profesor.correo,
             prof_fechadenacimiento: data.profesor.nacimiento,
-            prof_foto: [],
+            prof_foto: data.profesor.archivos.image,
             prof_id: data.profesor.id,
             prof_nombre: data.profesor.nombre,
             prof_tipoent: data.profesor.tipoent,
@@ -1948,7 +1950,7 @@ export default new Vuex.Store({
               }
               
               let storageRef= firebase.storage().ref(`/${data.target}/${data.anunciante.id}/${Object.values(data.anunciante.archivos)[`${order[j]}`].nombre}`);
-              _
+              
               storageRef.getDownloadURL().then(url => {
                 let val = order[n];
                 for(let m = 0; m < Object.values(data.anunciante.archivos).length; m++){
@@ -2378,11 +2380,13 @@ export default new Vuex.Store({
         
         state.dbImg = [];
 
-        for(let k = 0; k < Object.values(data.seccion.archivos).length; k++){
-          if(Object.values(data.seccion.archivos)[k].id !== undefined){
-            state.dbImg[Object.values(data.seccion.archivos)[k].id] = Object.values(data.seccion.archivos)[k];
-          }else{
-            state.dbImg[k] = '';
+        if(Object.values(data.archivos).length !== 0){
+          for(let k = 0; k < Object.values(data.seccion.archivos).length; k++){
+            if(Object.values(data.seccion.archivos)[k].id !== undefined){
+              state.dbImg[Object.values(data.seccion.archivos)[k].id] = Object.values(data.seccion.archivos)[k];
+            }else{
+              state.dbImg[k] = '';
+            }
           }
         }
         
@@ -2419,6 +2423,7 @@ export default new Vuex.Store({
                 sec_contenido: data.seccion.contenido,
                 sec_imagen_seccion: data.seccion.imagenseccion,
                 sec_fotos: [],
+                sec_value: data.seccion.secval
               }
               
               let storageRef= firebase.storage().ref(`/${data.target}/${data.seccion.id}/${data.seccion.archivos[`imagen${element.id}`].nombre}`);
@@ -2469,6 +2474,7 @@ export default new Vuex.Store({
             sec_contenido: data.seccion.contenido,
             sec_imagen_seccion: data.seccion.imagenseccion,
             sec_fotos: data.seccion.archivos,
+            sec_value: data.seccion.secval
           }
 
           n++;

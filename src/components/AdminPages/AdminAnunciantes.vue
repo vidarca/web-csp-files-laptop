@@ -618,8 +618,8 @@ export default {
           }
         }else if(val2 === 'select'){
           if(val === 0){
-            this.selectAnunciante.imagen = [];
-            this.selectAnunciante.imagen = {
+            this.selectAnunciante.archivos.imagen = [];
+            this.selectAnunciante.archivos.imagen = {
               nombre: files.name,
               url: '',
               id: val,

@@ -393,7 +393,6 @@ export default {
         this.$refs.section0.classList.toggle('translate');
         setTimeout(() => {
           this.showList = false;
-          this.showPrev = true;
 
           if(Object.values(Object.values(this.dbWeb.Profesores).reverse()[index].prof_telefonos).length !== 0){
             this.cantTelf = Object.values(Object.values(this.dbWeb.Profesores).reverse()[index].prof_telefonos).length
@@ -411,6 +410,9 @@ export default {
             telefonos: Object.values(this.dbWeb.Profesores).reverse()[index].prof_telefonos,
             cv: Object.values(this.dbWeb.Profesores).reverse()[index].prof_cv,
           };
+
+          
+          this.showPrev = true;
         }, 900);
         setTimeout(() => {
           this.$refs.section1.classList.toggle('translate')
@@ -544,6 +546,7 @@ export default {
         if(this.validAllFields(value)){
           
           if(value === 'crear'){
+            console.log(this.nuevoProfesor.cv.nombre);
             if(this.nuevoProfesor.cv.nombre !== undefined){
               this.nuevoProfesor.cv.nombre = `c_v_${this.nuevoProfesor.nombre.split(' ').join('_')}`;
             }
@@ -584,7 +587,7 @@ export default {
             this.crearDB(dataTransfer)
 
           }else if(value ==='select'){
-            if(this.selectProfesor.cv.nombre !== undefined){
+            if(this.selectProfesor.cv.nombre !== undefined && this.selectProfesor.cv.nombre !== `c_v_${this.selectProfesor.nombre.split(' ').join('_')}`){
               this.selectProfesor.cv.nombre = `c_v_${this.selectProfesor.nombre.split(' ').join('_')}`;
             }
 

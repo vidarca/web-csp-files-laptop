@@ -2394,10 +2394,10 @@ Menu Responsive
 .premium-section .pattern-layer{
 	position:absolute;
 	left:0px;
-	background-image:url("../images/background/pattern-1.png");
 	bottom:0px;
 	width:100%;
 	height:915px;
+	background: url('../images/background/pattern-1.5aa7eb47.png');
 	background-repeat:repeat-x;
 	background-position:left bottom;
 	animation: 10s linear 0s infinite normal none running slide;
@@ -2698,7 +2698,7 @@ Menu Responsive
 .call-to-action-section .title-column .text{
 	position:relative;
 	color:#ffffff;
-	font-size:28px;
+	font-size:27px;
 	font-weight:400;
 	line-height:1.3em;
 }
@@ -2955,7 +2955,7 @@ Menu Responsive
 
 .cuot-section{
 	position: relative;
-	height: 600px;
+	min-height: 600px;
 }
 
 .cuot-section .logo-icon{
@@ -5990,4 +5990,9 @@ textarea{
 
 .show-opacity{
 	opacity: 1 !important;
+}
+
+.logo-creator-img{
+	width: 80px;
+	height: 80px;
 }

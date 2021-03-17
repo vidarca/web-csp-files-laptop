@@ -8,7 +8,7 @@
                     <div class="title-column col-lg-8 col-md-12 col-sm-12">
                         <div class="inner-column">
                             <div class="phone flaticon-user"></div>
-                            <div class="text"><span>Visita ya nuestra</span> <br> Área de Autogestión Administrativa </div>
+                            <div class="text">Visita ya nuestra <br> Área de Autogestión Administrativa </div>
                         </div>
                     </div>
                     <!-- Columna de boton -->
