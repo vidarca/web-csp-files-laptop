@@ -1402,7 +1402,7 @@ export default new Vuex.Store({
                 dataRef.junt_integrantes[i].juin_crear = Object.values(data.junta.integrantes)[i].crear
               }
   
-              let storageRef= firebase.storage().ref(`/${data.target}/${data.junta.inicio}/${data.junta.integrantes[`${order[j]}`].cargo.split(' ').join('_')}`);
+              let storageRef= firebase.storage().ref(`/${data.target}/${data.junta.id}/${data.junta.integrantes[`${order[j]}`].cargo.split(' ').join('_')}`);
               
               storageRef.getDownloadURL().then(url => {
                 let val = order[n];
@@ -1802,7 +1802,7 @@ export default new Vuex.Store({
               }
               
               let storageRef= firebase.storage().ref(`/${data.target}/${data.comite.id}/${Object.values(data.comite.archivos)[`${order[j]}`].nombre}`);
-              _
+              
               storageRef.getDownloadURL().then(url => {
                 let val = order[n];
                 for(let m = 0; m < Object.values(data.comite.archivos).length; m++){

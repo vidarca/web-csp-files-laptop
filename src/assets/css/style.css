@@ -2415,6 +2415,8 @@ Menu Responsive
 
 .security-block{
 	position:relative;
+	height: 572px;
+	max-height: 572px;
 	margin-bottom:30px;
 	transition: all 900ms ease;
 	-moz-transition: all 900ms ease;
@@ -2505,6 +2507,8 @@ Menu Responsive
 	position:relative;
 	padding:15px 30px;
 	height: auto;
+	height: 172px;
+	max-height: 172px;
 }
 
 .security-block .inner-box .lower-content .hover-bg-color{
@@ -5383,6 +5387,10 @@ Seccion 2 Pagina de Actualidad
 	height: 310px;
 }
 
+.juntas-todas .outer-container{
+	transition: 500ms opacity ease;
+}
+
 .juntas-todas .junta-container{
 	width: 150px;
 	height: 200px !important;
@@ -5464,6 +5472,10 @@ Seccion 2 Pagina de Actualidad
 
 .juntas-todas .cada-junta .junta-container .imagen:hover .icon::before{
 	transform: scale(1.03);
+}
+
+.juntas-todas .text{
+	white-space: nowrap;
 }
 
 /*** 

@@ -63,15 +63,15 @@
 
     <h4 class="w-100 text-center text pt-4">Aquí podrás ver todas las juntas directivas que han formado parte de nuestro Club Santa Paula. <br> Puedes verlas a más detalle haciendo clic sobre cualquiera de ellas</h4>
     <section class="juntas-todas w-85 m-auto pb-4" ref="section0" v-show="showList">
-        <div class="cada-junta d-flex align-items-center justify-content-center flex-column flex-sm-row pb-4 pt-4">
-            <div v-for="(junta, index) in dbWeb.Juntas" :key="junta.junt_id">
-                <div class="junta-container d-flex flex-column align-items-center justify-content-center col-12 col-sm-4 col-md-3 p-0">
+        <div class="cada-junta d-flex align-items-center justify-content-between flex-row pb-4 pt-4">
+            <div class="col-12 col-sm-4 col-md-3 outer-container" v-for="(junta, index) in Object.values(dbWeb.Juntas)" :key="junta.junt_id" ref="juntaList" v-show="index < numElements + showIndex && index >= showIndex">
+                <div class="junta-container m-auto d-block p-0">
                     <div class="imagen" @click="selecJunta(index)">
                         <img class="junta-foto" :src="(junta.junt_integrantes[0].juin_foto !== '' && junta.junt_integrantes[0].juin_foto !== undefined)?junta.junt_integrantes[0].juin_foto:'https://firebasestorage.googleapis.com/v0/b/web-database-66842.appspot.com/o/transparent.png?alt=media&token=533f3017-de64-49b5-8ee9-cb8950445931'">
-                        <i :class="[(junta.junt_integrantes[0].juin_foto === '' || junta.junt_integrantes[0].juin_foto === undefined)?'icon':'']"></i>
+                        <i class="icon"></i>
                     </div>
                 </div>
-                <div class="text text-center pt-2">
+                <div class="text text-center d-block pt-2">
                     Período: {{junta.junt_periodo}}
                 </div>
             </div>
@@ -128,6 +128,9 @@ export default {
             showSelect: false,
             showList: true,
             number: 0,
+			numElements: 4,
+			showIndex: 0,
+            currentIndex: 1
         }
     },
 
@@ -159,27 +162,19 @@ export default {
             }
         },
         changeIndex(val){
-            this.$refs.anuncios.forEach(element => {
+            this.$refs.juntaList.forEach(element => {
                 element.dataset.transitioned = 'true';
-                if(element.dataset.index % 2 === 0){
-                element.classList.toggle('translate');
-                }else{
-                element.classList.toggle('translate-left');
-                }
+                element.classList.toggle('hide-opacity');
             })
             setTimeout(() => {
-                this.showIndex = this.numElements*(val-1);
-            }, 700);
+                this.showIndex = this.numElements*(val);
+            }, 400);
             setTimeout(() => {
-                this.$refs.anuncios.forEach(element => {
+                this.$refs.juntaList.forEach(element => {
                 element.dataset.transitioned = 'false';
-                if(element.dataset.index % 2 === 0){
-                    element.classList.toggle('translate');
-                }else{
-                    element.classList.toggle('translate-left');
-                }
+                element.classList.toggle('hide-opacity');
                 })
-            }, 800);
+            }, 550);
             this.$refs.innerContainer.children.forEach(element => {
                 if(parseInt(element.children[0].id) !== val){
                 element.children[0].classList.remove('active');
@@ -192,6 +187,21 @@ export default {
             if(this.currentIndex <= 5*((this.$refs.innerContainer.children.length/5)-1)){
                 this.$refs.innerContainer.style.transform = `translateX(${parseFloat(this.$refs.innerContainer.style.transform.split('(')[1].split(')')[0]) - 45}px)`
                 this.currentIndex ++;
+            }
+        },
+        changeListNumElem(){
+            let innerW = window.innerWidth;
+
+            if(innerW >= 768 && this.numElements !== 4){
+                this.numElements = 4;
+            }
+
+            if(768 > innerW && innerW >= 576 && this.numElements !== 3){
+                this.numElements = 3;
+            }
+
+            if(576 > innerW && this.numElements !== 1){
+                this.numElements = 1;
             }
         },
         selecJunta(index){
@@ -241,43 +251,61 @@ export default {
     },
 
     mounted(){
-        if(window.innerWidth >= 576 && window.innerWidth < 768){
-            if(Object.values(this.dbWeb.Juntas).length/6 > 1){
-                this.number = Math.ceil(Object.values(this.dbWeb.Juntas).length/6);
+        this.changeListNumElem();
+
+        let innerW = window.innerWidth;
+        
+        if(innerW >= 768){
+            if(Object.values(this.dbWeb.Juntas).length/4 > 1){
+                this.number = Math.ceil(Object.values(this.dbWeb.Juntas).length/4);
                 this.showSelect = true;
             }
-        }else if(window.innerWidth >= 768){
-            if(Object.values(this.dbWeb.Juntas).length/8 > 1){
-                this.number = Math.ceil(Object.values(this.dbWeb.Juntas).length/8);
+        }
+        
+        if(768 > innerW && innerW >= 576){
+            if(Object.values(this.dbWeb.Juntas).length/3 > 1){
+                this.number = Math.ceil(Object.values(this.dbWeb.Juntas).length/3);
                 this.showSelect = true;
             }
-        }else{
-            if(Object.values(this.dbWeb.Juntas).length/5 > 1){
-                this.number = Math.ceil(Object.values(this.dbWeb.Juntas).length/5);
+        }
+
+        if(576 > innerW){
+            if(Object.values(this.dbWeb.Juntas).length > 1){
+                this.number = Math.ceil(Object.values(this.dbWeb.Juntas).length);
                 this.showSelect = true;
             }
         }
 
         window.addEventListener('resize', ()=>{
-            if(window.innerWidth >= 576 && window.innerWidth < 768){
-                if(Object.values(this.dbWeb.Juntas).length/6 > 1){
-                    this.number = Math.ceil(Object.values(this.dbWeb.Juntas).length/6);
-                    this.showSelect = true;
-                }
-            }else if(window.innerWidth >= 768){
-                if(Object.values(this.dbWeb.Juntas).length/8 > 1){
-                    this.number = Math.ceil(Object.values(this.dbWeb.Juntas).length/8);
-                    this.showSelect = true;
-                }
-            }else{
-                if(Object.values(this.dbWeb.Juntas).length/5 > 1){
-                    this.number = Math.ceil(Object.values(this.dbWeb.Juntas).length/5);
+            let innerW = window.innerWidth;
+
+            if(innerW >= 768){
+                if(Object.values(this.dbWeb.Juntas).length/4 > 1){
+                    this.number = Math.ceil(Object.values(this.dbWeb.Juntas).length/4);
                     this.showSelect = true;
                 }
             }
+                
+            if(768 > innerW && innerW >= 576){
+                if(Object.values(this.dbWeb.Juntas).length/3 > 1){
+                    this.number = Math.ceil(Object.values(this.dbWeb.Juntas).length/3);
+                    this.showSelect = true;
+                }
+            }
+
+            if(576 > innerW){
+                if(Object.values(this.dbWeb.Juntas).length > 1){
+                    this.number = Math.ceil(Object.values(this.dbWeb.Juntas).length);
+                    this.showSelect = true;
+                }
+            }
+
         });
 
         this.$nextTick(() =>{
+            if(this.number >= 7){
+                this.$refs.innerContainer.style.transform = `translateX(${45*((this.number-5)/2)}px)`;
+            }
 		
             if(this.$refs.carouselitems !== undefined){
                 
@@ -303,6 +331,10 @@ export default {
                 })
             }
             
+        })
+
+        window.addEventListener('resize', () => {
+            this.changeListNumElem();
         })
     },
 }
