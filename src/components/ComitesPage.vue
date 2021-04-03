@@ -9,10 +9,10 @@
               <div class="d-flex flex-row flex-wrap clearfix justify-content-center">
                 
                 <!-- Bloque de Notica -->
-                <div class="security-block col-lg-4 col-md-6 col-sm-6" ref="comites" v-for="(comite, index) in sortArray" :key="comite.comi_nombre" v-show="comite.comi_comiPage && index < numElementsSection1 + showIndexSection1 && index >= showIndexSection1">
+                <div class="security-block col-lg-6 col-md-6 col-sm-6" ref="comites" v-for="(comite, index) in sortArray" :key="comite.comi_nombre" v-show="comite.comi_comiPage && index < numElementsSection1 + showIndexSection1 && index >= showIndexSection1">
                   <div class="inner-box">
                     <div class="image">
-                      <img :src="(comite.comi_foto !== undefined && comite.comi_foto !== '')?comite.comi_foto:'_'" />
+                      <img :src="(comite.comi_foto !== undefined && comite.comi_foto.url !== '')?comite.comi_foto.url:'_'" />
                     </div>
                     <div class="lower-content">
                       <div class="hover-bg-color"></div>
@@ -204,7 +204,7 @@
               <div class="ext-wrapper w-100 m-auto">
                 <div class="d-flex align-items-center justify-content-center flex-row clearfix">
       
-                  <div class="security-block col-md-4 col-6" ref="anuncios" v-for="(profesor, index) in Object.values(dbWeb.Profesores)" :key="profesor.prof_id" :data-index="index" v-show="index < numElements + showIndex && index >= showIndex && profesor.comi_id === sortArray[comiSelecIndex].comi_nombre">
+                  <div class="security-block col-md-5 col-6" ref="anuncios" v-for="(profesor, index) in Object.values(dbWeb.Profesores)" :key="profesor.prof_id" :data-index="index" v-show="index < numElements + showIndex && index >= showIndex && profesor.comi_id === sortArray[comiSelecIndex].comi_nombre">
                     <div class="inner-box">
                     <div class="image">
                       <img :src="profesor.prof_foto.url" />

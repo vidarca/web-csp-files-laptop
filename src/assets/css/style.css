@@ -2506,7 +2506,6 @@ Menu Responsive
 .security-block .inner-box .lower-content{
 	position:relative;
 	padding:15px 30px;
-	height: auto;
 	height: 172px;
 	max-height: 172px;
 }
@@ -2565,6 +2564,10 @@ Menu Responsive
 	padding-left:0;
 	width: 100%;
 	height: auto;
+}
+
+.security-block .inner-box .lower-content .upper-box h5{
+	font-size: 20px !important;
 }
 
 .security-block .inner-box .lower-content .upper-box .icon{
@@ -3015,7 +3018,7 @@ Menu Responsive
 	min-height: 300px;
 	height: 100%;
 	background-color: #FB9334;
-	padding: 7% 12% 15% 3%;
+	padding: 50px 12% 50px 3%;
 }
 
 .cuot-section .cuot-left-container h2{
@@ -5012,6 +5015,15 @@ Seccion 2 Pagina de Actualidad
 	transform:none;
 }
 
+#comites .security-block .inner-box .lower-content{
+	height: auto !important;
+	max-height: unset !important;
+}
+
+#comites .comi-profesores .security-block .inner-box .lower-content{
+	height: auto !important;
+	max-height: unset !important;
+}
 
 #comites .comi-profesores .security-block .inner-box .lower-content .lower-box{
 	justify-content: center;

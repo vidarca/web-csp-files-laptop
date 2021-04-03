@@ -3,7 +3,10 @@
     <div class="w-95 m-auto">
       <h1 class="w-100 text-center border-bottom" style="padding: 40px 0 20px 0;">Contacto</h1>
     </div>
-    <h4 class="w-75 text-center m-auto" style="padding: 20px 0 60px 0;">No dudes en escribirnos a cualquiera de nuestras redes, correos o teléfonos, responderemos a la brevedad</h4>
+    <h4 class="w-75 text-center m-auto" style="padding: 20px 0 60px 0;">
+      No dudes en escribirnos a cualquiera de nuestras redes, correos o teléfonos. <br>
+      Responderemos a la brevedad
+    </h4>
     <div class="d-flex flex-column flex-md-row justify-content-center align-items-center w-75 m-auto" style="padding-bottom: 60px;">
       <form class="col-md-6 p-1 d-flex flex-column align-items-center justify-content-center">
         <div class="form-group w-100 d-flex flex-row align-items-center justify-content-center">

@@ -13,7 +13,7 @@
               <div class="security-block col-lg-6 col-md-6 col-sm-6" v-for="(servicio, index) in dbWeb.Servicios" :key="index">
                 <div class="inner-box">
                   <div class="image">
-                    <img :src="servicio.serv_fotoUrl" />
+                    <img :src="(servicio.serv_foto !== undefined && servicio.serv_foto.url !== '') ? servicio.serv_foto.url : ''" />
                   </div>
                   <div class="lower-content">
                     <div class="hover-bg-color"></div>

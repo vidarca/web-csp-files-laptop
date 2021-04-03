@@ -101,11 +101,11 @@
                     <div :class="['prev-container','d-flex', 'flex-column', 'align-items-center', 'justify-content-between', 'w-100', 'bg-success-light']">
                       <!-- MUESTRA DE IMAGEN -->
                       <div class="w-100 h-100 m-2">
-                        <div class="d-flex justify-content-center align-items-center" v-if="(integrante.juin_foto.url !== '' || dbImg[index] !== undefined)">
+                        <div class="d-flex justify-content-center align-items-center" v-if="(integrante.juin_foto !== undefined && integrante.juin_foto.url !== '' || dbImg[index] !== undefined)">
                           <img :src="(dbImg[index] !== undefined && dbImg[index].url !== undefined)?dbImg[index].url:(integrante.juin_foto.url !== undefined)?integrante.juin_foto.url:''" width="100" height="100" style="min-height: 100px; min-width: 100px; ">
                         </div>
                         <div v-else class="w-100 h-100 d-flex flex-row align-items-center justify-content-center">
-                          <p class="align-self-star ml-2" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">{{integrante.juin_foto.nombre}}</p>
+                          <p class="align-self-star ml-2" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">{{integrante.juin_foto !== undefined ? integrante.juin_foto.nombre : ''}}</p>
                         </div>
                         <!-- ICONO DE QUITAR -->
                         <div class="veri-box w-100 mt-2 d-flex flex-row justify-content-center align-items-center">

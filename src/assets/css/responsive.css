@@ -138,7 +138,7 @@
 	/* Seccion de Cuotas */
 
 	.cuot-section{
-		height: 600px!important;
+		height: auto!important;
 		width: 100%;
 		display: flex;
 		flex-direction: column;
@@ -153,7 +153,8 @@
 	.cuot-section .cuot-icon-box{
 		flex-direction: row !important;
 		left: 0 !important;
-		top: 50% !important;
+		top: unset !important;
+		bottom: 300px;
 		min-height: 0 !important;
 		height: 0!important;
 		width: 100% !important;
@@ -177,20 +178,13 @@
 	}
 
 	.cuot-section .cuot-left-container{
-		height: 300px!important;
 		min-height: 0px!important;
 		width: 100% !important;
-		padding: 15px!important;
 		display: flex;
 		align-items: center;
 	}
-
-	.cuot-section .cuot-left-container h2{
-		font-size:20px!important;
-	}
 	
 	.cuot-section .cuot-left-container .text{
-		font-size:12px!important;
 		margin-bottom:10px!important;
 		margin-top: 5px!important;
 	}

@@ -12,6 +12,7 @@
 						<div v-if="slide.info !== '' && slide.info !== undefined" :class="['textcontainer', (index % 2 === 0)?'textcontainerpos1':'textcontainerpos2']">
 							{{slide.info}}
 						</div>
+						<div v-else></div>
 					</div>
 				</div>
 				<a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
@@ -111,7 +112,7 @@
 							<div class="text text-center">
 								{{noticia.noti_prev}}
 							</div>
-							<a class="align-self-end" @click="selectAnun(index)" style=" font-size: 13px">Leer más ...</a>
+							<a class="align-self-end" @click="selectAnun(index)" style=" font-size: 13px">Leer más</a>
 						</div>
 					</div>
 					</div>
@@ -154,7 +155,7 @@
 							<div class="gallery-content-box">
 								<p class="gallery-content-title"> {{dataAdmis.comi_nombre}} </p>									
 							</div>
-							<img src="https://via.placeholder.com/750x285" style="min-height: 285px" alt="" />
+							<img :src="(dataAdmis.comi_foto !== undefined && dataAdmis.comi_foto.url !== '') ? dataAdmis.comi_foto.url : ''" style="min-height: 285px" alt="" />
 							<!-- Overlay Box -->
 							<div class="overlay-box">
 								<div class="overlay-inner">
@@ -168,13 +169,13 @@
 				</div>
 				
 				<!-- Bloque de comite -->
-				<div  v-for="(element, index) in Object.values(this.dbWeb.Comites)" :key="element.id" v-show="element.comi_int === true" class="gallery-block col-lg-4 col-md-6 col-sm-6">
+				<div  v-for="(element, index) in Object.values(this.dbWeb.Comites)" :key="element.id" v-show="element.comi_int" class="gallery-block col-lg-4 col-md-6 col-sm-6">
 					<div class="inner-box">
 						<div class="image">
 							<div class="gallery-content-box">
 								<p class="gallery-content-title"> {{element.comi_nombre}} </p>								
 							</div>
-							<img :src="element.comi_foto !== '' ? element.comi_foto: 'https://via.placeholder.com/360x285'" alt="" />
+							<img :src="(element.comi_foto !== undefined && element.comi_foto.url !== '') ? element.comi_foto.url: 'https://via.placeholder.com/360x285'" alt="" />
 							<!-- Overlay Box -->
 							<div class="overlay-box">
 								<div class="overlay-inner">
@@ -213,7 +214,7 @@
 		<div class="cuot-left-container">
 			<div class="cuot-inner-column">
 				<h2>{{distCuotas.sec_nombre}}</h2>
-				<div class="text">¿Quieres saber en qué se ha utilizado las cuotas mensuales? <br> Aquí te lo mostramos</div>
+				<div class="text">Conoce la distribución de la cuota mes a mes</div>
 				<!-- Barras % -->
 				<!-- Barra 1 -->
 				<div class="cuot-porc" v-for="(element) in distCuotas.sec_contenido" :key="element.sec_id">
@@ -356,7 +357,6 @@ import AutogestionSpan from '@/components/AutogestionSpan.vue'
 						this.bannersList.push(Object.values(this.dbWeb.Banners)[i]);
 						return true;
 					}
-					return false;
 				}
 				return false;
 			}
@@ -601,7 +601,7 @@ import AutogestionSpan from '@/components/AutogestionSpan.vue'
 			/* Data */
 			this.dataAdmis = this.getIdInfo('Comites', 'comi_nombre', 'Comité de Admisión')
 
-
+			console.log(this.dataAdmis);
 			/* Observers */
 			const teamMembers = this.$refs.team
 			

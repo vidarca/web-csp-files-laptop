@@ -9,6 +9,7 @@
                     <div v-if="slide.info !== '' && slide.info !== undefined" :class="['textcontainer', (index % 2 === 0)?'textcontainerpos1':'textcontainerpos2']">
                         {{slide.info}}
                     </div>
+                    <div v-else></div>
                 </div>
             </div>
             <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
@@ -178,6 +179,7 @@ export default {
             juntaActual: [],
             maxShowJuin: 11,
             smScreen: false,
+            bannersList: []
         }
     },
     components:{
@@ -208,7 +210,6 @@ export default {
 						this.bannersList.push(Object.values(this.dbWeb.Banners)[i]);
 						return true;
 					}
-					return false;
 				}
 				return false;
 			}
@@ -253,7 +254,6 @@ export default {
                 /* Textos del banner */
 
                 const carouseli = this.$refs.carouselitems;
-                
                 carouseli.forEach(item => {
                     if(item.classList.contains('active')){
                         item.children[1].classList.add('toggle-mheight-opacity');

@@ -10,6 +10,7 @@
                     <div v-if="slide.info !== '' && slide.info !== undefined" :class="['textcontainer', (index % 2 === 0)?'textcontainerpos1':'textcontainerpos2']">
                         {{slide.info}}
                     </div>
+                    <div v-else></div>
                 </div>
             </div>
             <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
@@ -67,7 +68,7 @@
             <div class="col-12 col-sm-4 col-md-3 outer-container" v-for="(junta, index) in Object.values(dbWeb.Juntas)" :key="junta.junt_id" ref="juntaList" v-show="index < numElements + showIndex && index >= showIndex">
                 <div class="junta-container m-auto d-block p-0">
                     <div class="imagen" @click="selecJunta(index)">
-                        <img class="junta-foto" :src="(junta.junt_integrantes[0].juin_foto !== '' && junta.junt_integrantes[0].juin_foto !== undefined)?junta.junt_integrantes[0].juin_foto:'https://firebasestorage.googleapis.com/v0/b/web-database-66842.appspot.com/o/transparent.png?alt=media&token=533f3017-de64-49b5-8ee9-cb8950445931'">
+                        <img class="junta-foto" src="https://firebasestorage.googleapis.com/v0/b/web-database-66842.appspot.com/o/transparent.png?alt=media&token=533f3017-de64-49b5-8ee9-cb8950445931">
                         <i class="icon"></i>
                     </div>
                 </div>
@@ -100,8 +101,8 @@
         <div class="d-flex flex-column flex-sm-row align-items-center justify-content-center flex-wrap" style="padding: 40px 0 20px 0;">
             <div v-for="(integrante, index) in juntaSelect.junt_integrantes" :key="integrante.juin_cargo" v-show="index < maxShowJuin && integrante.juin_activo === true" :class="['juin-container flex-column align-items-center justify-content-start pt-3 pb-3 col-12', (index === 0 || index === 1)?'col-sm-6':(index >= 1 && index < 5)?'col-sm-4':(index >= 5 && index < 9)?'col-sm-3':'col-sm-6']" style="display:  flex;">
                 <div class="imagen">
-                    <img :src="(integrante.juin_foto !== '' && integrante.juin_foto !== undefined)?integrante.juin_foto:'https://firebasestorage.googleapis.com/v0/b/web-database-66842.appspot.com/o/transparent.png?alt=media&token=533f3017-de64-49b5-8ee9-cb8950445931'" class="juin-foto">
-                    <i :class="[(integrante.juin_foto === '' || integrante.juin_foto === undefined)?'icon flaticon-user':'']"></i>
+                    <img :src="(integrante.juin_foto !== undefined && integrante.juin_foto.url !== '')?integrante.juin_foto.url:'https://firebasestorage.googleapis.com/v0/b/web-database-66842.appspot.com/o/transparent.png?alt=media&token=533f3017-de64-49b5-8ee9-cb8950445931'" class="juin-foto">
+                    <i :class="[(integrante.juin_foto.url === '' || integrante.juin_foto     === undefined)?'icon flaticon-user':'']"></i>
                 </div>
                 <div class="text">{{integrante.juin_cargo}}</div>
                 <div class="text">{{integrante.juin_nombre}} {{integrante.juin_apellido}}</div>
@@ -127,6 +128,7 @@ export default {
             showJunta: false,
             showSelect: false,
             showList: true,
+            bannersList: [],
             number: 0,
 			numElements: 4,
 			showIndex: 0,
@@ -152,7 +154,7 @@ export default {
 
     methods:{
         getJuntaSelect(index){
-            this.juntaSelect = this.dbWeb.Juntas[index];
+            this.juntaSelect = Object.values(this.dbWeb.Juntas)[index];
             this.showJunta = true;
         },
         translateLeft(){
@@ -207,9 +209,10 @@ export default {
         selecJunta(index){
             this.$refs.section0.classList.toggle('translate');
             setTimeout(() => {
+                
                 this.showList = false;
                 this.showJunta = true;
-                this.juntaSelect = this.dbWeb.Juntas[index];
+                this.juntaSelect = Object.values(this.dbWeb.Juntas)[index];
             }, 900);
             setTimeout(() => {
                 this.$refs.section1.classList.toggle('translate')
