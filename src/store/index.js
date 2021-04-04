@@ -1819,7 +1819,14 @@ export default new Vuex.Store({
                       url: state.dbImg[0].url,
                     } 
                   }else{
-                    dataRef.comi_foto = '';
+                    if(data.comite.archivos.imagen.url !== undefined){
+                      dataRef.comi_foto = {
+                        nombre: data.comite.archivos.imagen.nombre,
+                        url: data.comite.archivos.imagen.url,
+                      } 
+                    }else{
+                      dataRef.comi_foto = '';
+                    }
                   }
 
                   if(state.dbImg[1].nombre !== undefined){
@@ -1828,7 +1835,14 @@ export default new Vuex.Store({
                       url: state.dbImg[1].url,
                     }
                   }else{
-                    dataRef.comi_reglamento = '';
+                    if(data.comite.archivos.reglamento.url !== undefined){
+                      dataRef.comi_reglamento = {
+                        nombre: data.comite.archivos.reglamento.nombre,
+                        url: data.comite.archivos.reglamento.url,
+                      } 
+                    }else{
+                      dataRef.comi_reglamento = '';
+                    }
                   }
 
                   if(state.dbImg[2].nombre !== undefined){
@@ -1837,7 +1851,14 @@ export default new Vuex.Store({
                       url: state.dbImg[2].url,
                     }
                   }else{
-                    dataRef.comi_normativa = '';
+                    if(data.comite.archivos.normativa.url !== undefined){
+                      dataRef.comi_normativa = {
+                        nombre: data.comite.archivos.normativa.nombre,
+                        url: data.comite.archivos.normativa.url,
+                      } 
+                    }else{
+                      dataRef.comi_normativa = '';
+                    }
                   }
 
                   if(n >= Object.values(data.archivos).length){

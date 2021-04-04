@@ -600,8 +600,7 @@ import AutogestionSpan from '@/components/AutogestionSpan.vue'
 
 			/* Data */
 			this.dataAdmis = this.getIdInfo('Comites', 'comi_nombre', 'Comité de Admisión')
-
-			console.log(this.dataAdmis);
+			
 			/* Observers */
 			const teamMembers = this.$refs.team
 			

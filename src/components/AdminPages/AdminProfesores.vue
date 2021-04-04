@@ -546,7 +546,6 @@ export default {
         if(this.validAllFields(value)){
           
           if(value === 'crear'){
-            console.log(this.nuevoProfesor.cv.nombre);
             if(this.nuevoProfesor.cv.nombre !== undefined){
               this.nuevoProfesor.cv.nombre = `c_v_${this.nuevoProfesor.nombre.split(' ').join('_')}`;
             }

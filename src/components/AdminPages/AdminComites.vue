@@ -984,7 +984,6 @@ export default {
                 show: true,
               },
             });
-            console.log(this.selectComite);
           }else if(val === 1){
             this.selectComite.archivos.reglamento = [];
             this.selectComite.archivos.reglamento = {

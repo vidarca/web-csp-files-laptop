@@ -9,16 +9,18 @@
               <div class="d-flex flex-row flex-wrap clearfix justify-content-center">
                 
                 <!-- Bloque de Notica -->
-                <div class="security-block col-lg-6 col-md-6 col-sm-6" ref="comites" v-for="(comite, index) in sortArray" :key="comite.comi_nombre" v-show="comite.comi_comiPage && index < numElementsSection1 + showIndexSection1 && index >= showIndexSection1">
-                  <div class="inner-box">
-                    <div class="image">
-                      <img :src="(comite.comi_foto !== undefined && comite.comi_foto.url !== '')?comite.comi_foto.url:'_'" />
-                    </div>
-                    <div class="lower-content">
-                      <div class="hover-bg-color"></div>
-                      <div class="upper-box">
-                        <div :class="['icon mr-1', iconSelect(index)] " @click="comiSelected(index)"></div>
-                        <h5 class="ml-1" @click="comiSelected(index)">{{comite.comi_nombre}}</h5>
+                <div class="col-lg-6 col-md-6 col-sm-6" v-for="(comite, index) in sortArray" :key="comite.comi_nombre" v-show="comite.comi_comiPage && index < numElementsSection1 + showIndexSection1 && index >= showIndexSection1">
+                  <div class="security-block m-auto" ref="comites" >
+                    <div class="inner-box">
+                      <div class="image">
+                        <img :src="(comite.comi_foto !== undefined && comite.comi_foto.url !== '')?comite.comi_foto.url:'_'" />
+                      </div>
+                      <div class="lower-content">
+                        <div class="hover-bg-color"></div>
+                        <div class="upper-box">
+                          <div :class="['icon mr-1', iconSelect(index)] " @click="comiSelected(index)"></div>
+                          <h5 class="ml-1" @click="comiSelected(index)">{{comite.comi_nombre}}</h5>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -115,18 +117,17 @@
           <div class="w-95 m-auto">
 
             <!-- Seccion de Informacion -->
+            <section class="comi-info overflow-hidden mt-4" v-if="comiSelecIndex !== false && sortArray[comiSelecIndex].comi_descripcion !== undefined && sortArray[comiSelecIndex].comi_descripcion !== ''">
 
-            <section class="comi-info overflow-hidden" v-if="comiSelecIndex !== false && sortArray[comiSelecIndex].comi_info !== undefined && sortArray[comiSelecIndex].comi_info !== ''">
-
-              <h3 class="mb-2 w-100 text-center" id="beforeNoti">
+              <h2 class="mb-2 w-100 text-center mb-3" id="beforeNoti">
                 {{sortArray[comiSelecIndex].comi_nombre}}
-              </h3>
+              </h2>
 
-              <div class="d-flex flex-row align-items-center justify-content-center w-100">
-                <div class="text text-center col-6 p-0">
-                  {{sortArray[comiSelecIndex].comi_info}}
+              <div class="d-flex flex-column align-items-center justify-content-center w-100 mb-5" v-if="sortArray[comiSelecIndex].comi_foto !== undefined && sortArray[comiSelecIndex].comi_foto.url !== undefined && sortArray[comiSelecIndex].comi_foto.url !== ''">
+                <img class="mb-5" width="450" :src="sortArray[comiSelecIndex].comi_foto.url">
+                <div class="text text-justify w-70 ml-auto mr-auto">
+                  {{sortArray[comiSelecIndex].comi_descripcion}}
                 </div>
-                <img :src="sortArray[comiSelecIndex].comi_foto" class="col-6 p-0">
               </div>
 
             </section>
@@ -203,29 +204,31 @@
 
               <div class="ext-wrapper w-100 m-auto">
                 <div class="d-flex align-items-center justify-content-center flex-row clearfix">
-      
-                  <div class="security-block col-md-5 col-6" ref="anuncios" v-for="(profesor, index) in Object.values(dbWeb.Profesores)" :key="profesor.prof_id" :data-index="index" v-show="index < numElements + showIndex && index >= showIndex && profesor.comi_id === sortArray[comiSelecIndex].comi_nombre">
-                    <div class="inner-box">
-                    <div class="image">
-                      <img :src="profesor.prof_foto.url" />
-                    </div>
-                    <div class="lower-content d-flex flex-column align-items-center justify-content-center">
-                      <div class="hover-bg-color"></div>
-                      <div class="upper-box">
-                        <div :class="['icon mr-1', iconSelectProfesor(index)]"></div>
-                        <div class="pl-2 d-flex flex-column align-items-center justify-content-center w-100">
-                          <h5 class="ml-1 w-100 text-left">{{profesor.prof_nombre}}</h5>
-                          <div class="text text-left w-100">
-                            Entrenador de {{profesor.prof_tipoent.toLowerCase()}}
+                  
+                  <div class="col-md-5 col-6">
+                    <div class="security-block m-auto" ref="anuncios" v-for="(profesor, index) in Object.values(dbWeb.Profesores)" :key="profesor.prof_id" :data-index="index" v-show="index < numElements + showIndex && index >= showIndex && profesor.comi_id === sortArray[comiSelecIndex].comi_nombre">
+                      <div class="inner-box">
+                      <div class="image">
+                        <img :src="profesor.prof_foto.url" />
+                      </div>
+                      <div class="lower-content d-flex flex-column align-items-center justify-content-center">
+                        <div class="hover-bg-color"></div>
+                        <div class="upper-box">
+                          <div :class="['icon mr-1', iconSelectProfesor(index)]"></div>
+                          <div class="pl-2 d-flex flex-column align-items-center justify-content-center w-100">
+                            <h5 class="ml-1 w-100 text-left">{{profesor.prof_nombre}}</h5>
+                            <div class="text text-left w-100">
+                              Entrenador de {{profesor.prof_tipoent.toLowerCase()}}
+                            </div>
+                          </div>
+                        </div>
+                        <div class="lower-box">
+                          <div class="text text-center" @click="openFile(profesor.prof_cv.url)" style="cursor: pointer">
+                            Clic aquí para descagargar el currículum del profesor
                           </div>
                         </div>
                       </div>
-                      <div class="lower-box">
-                        <div class="text text-center" @click="openFile(profesor.prof_cv.url)" style="cursor: pointer">
-                          Clic aquí para descagargar el currículum del profesor
-                        </div>
                       </div>
-                    </div>
                     </div>
                   </div>
                 </div>
@@ -731,9 +734,5 @@ export default {
     -moz-transition: all 900ms ease;
     -o-transition: all 900ms ease;
     -webkit-transition: all 900ms ease;
-  }
-
-  #section2 section{
-    margin: 30px 0;
   }
 </style>

@@ -63,6 +63,7 @@
     </section>
 
     <h4 class="w-100 text-center text pt-4">Aquí podrás ver todas las juntas directivas que han formado parte de nuestro Club Santa Paula. <br> Puedes verlas a más detalle haciendo clic sobre cualquiera de ellas</h4>
+
     <section class="juntas-todas w-85 m-auto pb-4" ref="section0" v-show="showList">
         <div class="cada-junta d-flex align-items-center justify-content-between flex-row pb-4 pt-4">
             <div class="col-12 col-sm-4 col-md-3 outer-container" v-for="(junta, index) in Object.values(dbWeb.Juntas)" :key="junta.junt_id" ref="juntaList" v-show="index < numElements + showIndex && index >= showIndex">
@@ -99,15 +100,71 @@
     <section class="junta-directiva w-95 m-auto translate" ref="section1"  v-show="showJunta">
         <h3 class="w-100 text-center border-bottom" style="padding: 40px 0 20px 0;">Junta Directiva {{juntaSelect.junt_periodo}}</h3>
         <div class="d-flex flex-column flex-sm-row align-items-center justify-content-center flex-wrap" style="padding: 40px 0 20px 0;">
-            <div v-for="(integrante, index) in juntaSelect.junt_integrantes" :key="integrante.juin_cargo" v-show="index < maxShowJuin && integrante.juin_activo === true" :class="['juin-container flex-column align-items-center justify-content-start pt-3 pb-3 col-12', (index === 0 || index === 1)?'col-sm-6':(index >= 1 && index < 5)?'col-sm-4':(index >= 5 && index < 9)?'col-sm-3':'col-sm-6']" style="display:  flex;">
+            <!-- <div v-for="(integrante, index) in juntaSelect.junt_integrantes" :key="integrante.juin_cargo" v-show="index < maxShowJuin && integrante.juin_activo === true" :class="['juin-container flex-column align-items-center justify-content-start pt-3 pb-3 pl-0 pr-0 col-12', (index === 0 || index === 1)?'col-sm-6':(index >= 1 && index < 5)?'col-sm-4':(index >= 5 && index < 9)?'col-sm-3':'col-sm-6']" style="display:  flex;">
                 <div class="imagen">
                     <img :src="(integrante.juin_foto !== undefined && integrante.juin_foto.url !== '')?integrante.juin_foto.url:'https://firebasestorage.googleapis.com/v0/b/web-database-66842.appspot.com/o/transparent.png?alt=media&token=533f3017-de64-49b5-8ee9-cb8950445931'" class="juin-foto">
-                    <i :class="[(integrante.juin_foto.url === '' || integrante.juin_foto     === undefined)?'icon flaticon-user':'']"></i>
+                    <i :class="[(integrante.juin_foto === undefined || integrante.juin_foto.url === '')?'icon flaticon-user':'']"></i>
                 </div>
                 <div class="text">{{integrante.juin_cargo}}</div>
                 <div class="text">{{integrante.juin_nombre}} {{integrante.juin_apellido}}</div>
                 <div class="text">{{integrante.juin_correo}}</div>
+            </div> -->
+            <div class="col-12">
+                <div class="d-flex flex-column flex-sm-row align-items-center justify-content-center">
+                    <div v-for="(integrante, index) in juntaSelect.junt_integrantes" :key="integrante.juin_cargo" v-show="index < 2 && integrante.juin_activo === true" class="juin-container flex-column align-items-center justify-content-start pt-3 pb-3 pl-0 pr-0 col-12 col-sm-6" style="display:  flex;">
+                        <div class="imagen">
+                            <img :src="(integrante.juin_foto !== undefined && integrante.juin_foto.url !== '')?integrante.juin_foto.url:'https://firebasestorage.googleapis.com/v0/b/web-database-66842.appspot.com/o/transparent.png?alt=media&token=533f3017-de64-49b5-8ee9-cb8950445931'" class="juin-foto">
+                            <i :class="[(integrante.juin_foto === undefined || integrante.juin_foto.url === '')?'icon flaticon-user':'']"></i>
+                        </div>
+                        <div class="text">{{integrante.juin_cargo}}</div>
+                        <div class="text">{{integrante.juin_nombre}} {{integrante.juin_apellido}}</div>
+                        <div class="text">{{integrante.juin_correo}}</div>
+                    </div>
+                </div>
             </div>
+
+            <div class="col-12">
+                <div class="d-flex flex-column flex-sm-row align-items-center justify-content-center">
+                    <div v-for="(integrante, index) in juntaSelect.junt_integrantes" :key="integrante.juin_cargo" v-show="index >= 2 && index < 5 && integrante.juin_activo === true" class="juin-container flex-column align-items-center justify-content-start pt-3 pb-3 pl-0 pr-0 col-12 col-sm-4" style="display:  flex;">
+                        <div class="imagen">
+                            <img :src="(integrante.juin_foto !== undefined && integrante.juin_foto.url !== '')?integrante.juin_foto.url:'https://firebasestorage.googleapis.com/v0/b/web-database-66842.appspot.com/o/transparent.png?alt=media&token=533f3017-de64-49b5-8ee9-cb8950445931'" class="juin-foto">
+                            <i :class="[(integrante.juin_foto === undefined || integrante.juin_foto.url === '')?'icon flaticon-user':'']"></i>
+                        </div>
+                        <div class="text">{{integrante.juin_cargo}}</div>
+                        <div class="text">{{integrante.juin_nombre}} {{integrante.juin_apellido}}</div>
+                        <div class="text">{{integrante.juin_correo}}</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-12">
+                <div class="d-flex flex-column flex-sm-row align-items-center justify-content-center">
+                    <div v-for="(integrante, index) in juntaSelect.junt_integrantes" :key="integrante.juin_cargo" v-show="index >= 5 && index < 9 && integrante.juin_activo === true" class="juin-container flex-column align-items-center justify-content-start pt-3 pb-3 pl-0 pr-0 col-12 col-sm-3" style="display:  flex;">
+                        <div class="imagen">
+                            <img :src="(integrante.juin_foto !== undefined && integrante.juin_foto.url !== '')?integrante.juin_foto.url:'https://firebasestorage.googleapis.com/v0/b/web-database-66842.appspot.com/o/transparent.png?alt=media&token=533f3017-de64-49b5-8ee9-cb8950445931'" class="juin-foto">
+                            <i :class="[(integrante.juin_foto === undefined || integrante.juin_foto.url === '')?'icon flaticon-user':'']"></i>
+                        </div>
+                        <div class="text">{{integrante.juin_cargo}}</div>
+                        <div class="text">{{integrante.juin_nombre}} {{integrante.juin_apellido}}</div>
+                        <div class="text">{{integrante.juin_correo}}</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12">
+                <div class="d-flex flex-column flex-sm-row align-items-center justify-content-center">
+                    <div v-for="(integrante, index) in juntaSelect.junt_integrantes" :key="integrante.juin_cargo" v-show="index >= 9 && integrante.juin_activo === true" class="juin-container flex-column align-items-center justify-content-start pt-3 pb-3 pl-0 pr-0 col-12 col-sm-6" style="display:  flex;">
+                        <div class="imagen">
+                            <img :src="(integrante.juin_foto !== undefined && integrante.juin_foto.url !== '')?integrante.juin_foto.url:'https://firebasestorage.googleapis.com/v0/b/web-database-66842.appspot.com/o/transparent.png?alt=media&token=533f3017-de64-49b5-8ee9-cb8950445931'" class="juin-foto">
+                            <i :class="[(integrante.juin_foto === undefined || integrante.juin_foto.url === '')?'icon flaticon-user':'']"></i>
+                        </div>
+                        <div class="text">{{integrante.juin_cargo}}</div>
+                        <div class="text">{{integrante.juin_nombre}} {{integrante.juin_apellido}}</div>
+                        <div class="text">{{integrante.juin_correo}}</div>
+                    </div>
+                </div>
+            </div>
+
             <button class="btn btn-dark" @click="regresar()">Regresar</button>
         </div>
     </section>
@@ -260,21 +317,21 @@ export default {
         
         if(innerW >= 768){
             if(Object.values(this.dbWeb.Juntas).length/4 > 1){
-                this.number = Math.ceil(Object.values(this.dbWeb.Juntas).length/4);
+                this.number = Math.ceil((Object.values(this.dbWeb.Juntas).length/4)-1);
                 this.showSelect = true;
             }
         }
         
         if(768 > innerW && innerW >= 576){
             if(Object.values(this.dbWeb.Juntas).length/3 > 1){
-                this.number = Math.ceil(Object.values(this.dbWeb.Juntas).length/3);
+                this.number = Math.ceil((Object.values(this.dbWeb.Juntas).length/3)-1);
                 this.showSelect = true;
             }
         }
 
         if(576 > innerW){
             if(Object.values(this.dbWeb.Juntas).length > 1){
-                this.number = Math.ceil(Object.values(this.dbWeb.Juntas).length);
+                this.number = Object.values(this.dbWeb.Juntas).length;
                 this.showSelect = true;
             }
         }
@@ -284,21 +341,21 @@ export default {
 
             if(innerW >= 768){
                 if(Object.values(this.dbWeb.Juntas).length/4 > 1){
-                    this.number = Math.ceil(Object.values(this.dbWeb.Juntas).length/4);
+                    this.number = Math.ceil((Object.values(this.dbWeb.Juntas).length/4)-1);
                     this.showSelect = true;
                 }
             }
                 
             if(768 > innerW && innerW >= 576){
                 if(Object.values(this.dbWeb.Juntas).length/3 > 1){
-                    this.number = Math.ceil(Object.values(this.dbWeb.Juntas).length/3);
+                    this.number = Math.ceil((Object.values(this.dbWeb.Juntas).length/3)-1);
                     this.showSelect = true;
                 }
             }
 
             if(576 > innerW){
                 if(Object.values(this.dbWeb.Juntas).length > 1){
-                    this.number = Math.ceil(Object.values(this.dbWeb.Juntas).length);
+                    this.number = Object.values(this.dbWeb.Juntas).length;
                     this.showSelect = true;
                 }
             }

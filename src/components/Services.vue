@@ -10,28 +10,33 @@
             <div class="row clearfix">
               
               <!-- Bloque de Notica -->
-              <div class="security-block col-lg-6 col-md-6 col-sm-6" v-for="(servicio, index) in dbWeb.Servicios" :key="index">
-                <div class="inner-box">
-                  <div class="image">
-                    <img :src="(servicio.serv_foto !== undefined && servicio.serv_foto.url !== '') ? servicio.serv_foto.url : ''" />
-                  </div>
-                  <div class="lower-content">
-                    <div class="hover-bg-color"></div>
-                    <div class="upper-box">
-                      <div :class="['icon', iconSelect(index)]"></div>
-                      <h5>{{servicio.serv_nombre}}</h5>
+              <div class="col-lg-6 col-md-6 col-sm-6 m-auto" v-for="(servicio, index) in dbWeb.Servicios" :key="index">
+                <div class="security-block m-auto">
+                  <div class="inner-box">
+                    <div class="image">
+                      <img :src="(servicio.serv_foto !== undefined && servicio.serv_foto.url !== '') ? servicio.serv_foto.url : ''" />
                     </div>
-                    <div class="text">
-                      Horario de atención: {{servicio.serv_inicio}}am - {{servicio.serv_cierre}}pm
-                    </div>
-                      <div class="open-box">
-                        <div v-if="calcTime(servicio.serv_inicio, servicio.serv_cierre)" class="icon icon-open flaticon-dry-clean">
-                          <div class="text">Abierto</div>
-                        </div>
-                        <div v-else class="icon icon-close flaticon-dry-clean"> 
-                          <div class="text">Cerrado</div>
-                        </div>
+                    <div class="lower-content">
+                      <div class="hover-bg-color"></div>
+                      <div class="upper-box">
+                        <div :class="['icon', iconSelect(index)]"></div>
+                        <h5>{{servicio.serv_nombre}}</h5>
                       </div>
+                      <div class="text">
+                        Horario de atención:
+                        <span v-if="servicio.serv_inicio.length !== 0">{{servicio.serv_inicio}}am - </span>
+                        <span v-if="servicio.serv_cierre.length !== 0">{{servicio.serv_cierre}}pm</span>
+                        <span v-if="servicio.serv_inicio.length === 0 && servicio.serv_cierre.length === 0">todo el día</span>
+                      </div>
+                        <div class="open-box">
+                          <div v-if="calcTime(servicio.serv_inicio, servicio.serv_cierre)" class="icon icon-open flaticon-dry-clean">
+                            <div class="text">Abierto</div>
+                          </div>
+                          <div v-else class="icon icon-close flaticon-dry-clean"> 
+                            <div class="text">Cerrado</div>
+                          </div>
+                        </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -47,6 +52,7 @@
 <script>
 import AutogestionSpan from '@/components/AutogestionSpan.vue'
 import {mapState} from 'vuex'
+import * as moment from 'moment'
 
 export default {
     name: 'Services',
@@ -58,35 +64,20 @@ export default {
 	  },
     methods:{
       calcTime(start,end){
-
-        let d = new Date();
-        let dString = d.toString()
-        const splittedDate = dString.split(' ');
-        let splittedToStart = splittedDate;
-        let splittedToEnd = splittedDate;
-
-        let timeStartString = `${start}:00`;
-        splittedToStart[4] = timeStartString;
-        let joinedStartDate = splittedToStart.join(' ')
-        
-        let endTime = end.split(':')
-        endTime[0] = parseInt(endTime[0]) + 12
-        endTime[0] = endTime[0].toString()
-        let joinedEndTime = endTime.join(':')
-        let timeEndString =  `${joinedEndTime}:00`;
-        splittedToEnd[4] = timeEndString;
-        let joinedEndDate = splittedToEnd.join(' ')
-
-        let miliEnd = Date.parse(joinedEndDate);
-        let miliStart = Date.parse(joinedStartDate);
-        let miliCurrent = Date.parse(dString);
-        let miliDif = miliEnd-miliStart
-
-        if (miliCurrent >= miliEnd && miliCurrent <= miliStart){
+        if(start.length === 0){
           return true
-        }else {
-          return false
-        }
+        };
+        
+        const startTime = moment(start, 'h:mm').fromNow().indexOf('ago');
+        const endTime = moment(end, 'h:mm').fromNow().indexOf('ago');
+
+        if(startTime >= 0 && endTime < 0){ 
+          return true
+        };
+
+        if(endTime >= 0){
+          false
+        };
         
       },
       iconSelect(index){
