@@ -64,7 +64,7 @@
 						<div class="inner-box">
 							<div class="content">
 								<div class="icon-box">
-									<span class="icon flaticon-key"></span>
+									<span class="icon flaticon-mask"></span>
 								</div>
 								<h5><a :href="securityProtocols.url" target="_blank">Protocolos de Seguridad (COV)</a></h5>
 							</div>
@@ -539,7 +539,6 @@ import AutogestionSpan from '@/components/AutogestionSpan.vue'
 	},
 	
 	mounted() {
-		console.log(this.getIfSecurityProtocolsExists);
 	/** 
 	========================================
 	Data y Observers

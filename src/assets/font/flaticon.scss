@@ -2,11 +2,11 @@ $flaticon-font: "flaticon";
 
 @font-face {
     font-family: $flaticon-font;
-    src: url("./flaticon.ttf?9524496433947a375fe211cde3f2ad3e") format("truetype"),
-url("./flaticon.woff?9524496433947a375fe211cde3f2ad3e") format("woff"),
-url("./flaticon.woff2?9524496433947a375fe211cde3f2ad3e") format("woff2"),
-url("./flaticon.eot?9524496433947a375fe211cde3f2ad3e#iefix") format("embedded-opentype"),
-url("./flaticon.svg?9524496433947a375fe211cde3f2ad3e#flaticon") format("svg");
+    src: url("./flaticon.ttf?e74965556d1a31aa13a957dd8b981561") format("truetype"),
+url("./flaticon.woff?e74965556d1a31aa13a957dd8b981561") format("woff"),
+url("./flaticon.woff2?e74965556d1a31aa13a957dd8b981561") format("woff2"),
+url("./flaticon.eot?e74965556d1a31aa13a957dd8b981561#iefix") format("embedded-opentype"),
+url("./flaticon.svg?e74965556d1a31aa13a957dd8b981561#flaticon") format("svg");
 }
 
 i[class^="flaticon-"]:before, i[class*=" flaticon-"]:before {
@@ -66,41 +66,42 @@ $flaticon-map: (
     "marketing": "\f12b",
     "martial-arts": "\f12c",
     "mascaras-felices-y-tristes": "\f12d",
-    "megafono": "\f12e",
-    "menu": "\f12f",
-    "minus": "\f130",
-    "new-product": "\f131",
-    "newspaper": "\f132",
-    "nurse": "\f133",
-    "objetivo-1": "\f134",
-    "objetivo": "\f135",
-    "padlock": "\f136",
-    "person-silhouette-in-sauna": "\f137",
-    "phone-call": "\f138",
-    "preview": "\f139",
-    "question": "\f13a",
-    "racket-and-tennis-ball": "\f13b",
-    "restaurant": "\f13c",
-    "salary": "\f13d",
-    "seguro-de-hogar": "\f13e",
-    "seleccionar": "\f13f",
-    "settings": "\f140",
-    "shield": "\f141",
-    "shop": "\f142",
-    "social": "\f143",
-    "sort-down": "\f144",
-    "squash-rackets": "\f145",
-    "store": "\f146",
-    "subasta": "\f147",
-    "suspension": "\f148",
-    "swimming": "\f149",
-    "twitter": "\f14a",
-    "up-chevron": "\f14b",
-    "user-1": "\f14c",
-    "user-2": "\f14d",
-    "user": "\f14e",
-    "vision": "\f14f",
-    "website": "\f150",
+    "mask": "\f12e",
+    "megafono": "\f12f",
+    "menu": "\f130",
+    "minus": "\f131",
+    "new-product": "\f132",
+    "newspaper": "\f133",
+    "nurse": "\f134",
+    "objetivo-1": "\f135",
+    "objetivo": "\f136",
+    "padlock": "\f137",
+    "person-silhouette-in-sauna": "\f138",
+    "phone-call": "\f139",
+    "preview": "\f13a",
+    "question": "\f13b",
+    "racket-and-tennis-ball": "\f13c",
+    "restaurant": "\f13d",
+    "salary": "\f13e",
+    "seguro-de-hogar": "\f13f",
+    "seleccionar": "\f140",
+    "settings": "\f141",
+    "shield": "\f142",
+    "shop": "\f143",
+    "social": "\f144",
+    "sort-down": "\f145",
+    "squash-rackets": "\f146",
+    "store": "\f147",
+    "subasta": "\f148",
+    "suspension": "\f149",
+    "swimming": "\f14a",
+    "twitter": "\f14b",
+    "up-chevron": "\f14c",
+    "user-1": "\f14d",
+    "user-2": "\f14e",
+    "user": "\f14f",
+    "vision": "\f150",
+    "website": "\f151",
 );
 
 .flaticon-add:before {
@@ -237,6 +238,9 @@ $flaticon-map: (
 }
 .flaticon-mascaras-felices-y-tristes:before {
     content: map-get($flaticon-map, "mascaras-felices-y-tristes");
+}
+.flaticon-mask:before {
+    content: map-get($flaticon-map, "mask");
 }
 .flaticon-megafono:before {
     content: map-get($flaticon-map, "megafono");
