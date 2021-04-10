@@ -278,10 +278,10 @@
               </div>
               <div class="col-3 d-flex flex-column align-items-center justify-content-center p-1">
                 <p class="text-center">Orden de importancia</p>
-                <input type="number" class="w-75 custom-select p-1" v-model="nuevoComite.importancia.valor" @blur="importantComi(nuevoComite.importancia.valor)">
+                <input type="number" class="w-75 custom-select p-1" v-model="selectComite.importancia.valor" @blur="importantComi(nuevoComite.importancia.valor)">
               </div>
             </div>
-            <textarea type="text" class="info-form-c col-10" placeholder="Descripción" v-model="selectComite.descripcion"></textarea>
+            <textarea type="text" class="info-form-c col-10" placeholder="Descripción" v-model="selectComite.descripcion" style="white-space: pre-wrap"></textarea>
             <input class="w-100 col-3 position-relative align-self-start" ref="vigencia" type="date" v-model="selectComite.fechav" placeholder="Fecha de vigencia">
             <div class="col-4">
               <div class="phones-input row justify-content-between align-items-center" v-for="index in cantFields.integrantes.numero" :key="index">

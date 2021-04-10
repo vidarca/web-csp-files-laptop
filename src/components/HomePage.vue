@@ -94,28 +94,33 @@
 			<div class="d-flex align-items-center justify-content-center flex-row flex-wrap clearfix">
 				
 				<!-- Bloque de Notica -->
-				<div class="security-block col-md-6 col-12" ref="anuncios" v-for="(noticia, index) in reverseArray" :key="noticia.noti_id" v-show="index < numElements + showIndex && index >= showIndex">
-					<div class="inner-box">
-					<div class="image">
-						<img :src="noticia.noti_fotos.imagen1.url" />
-					</div>
-					<div class="lower-content d-flex flex-column align-items-center justify-content-center">
-						<div class="hover-bg-color"></div>
-						<div class="upper-box">
-							<div :class="['icon mr-1', iconSelect(index)]"></div>
-							<h5 class="ml-1 w-100 text-left">{{noticia.noti_titulo}}</h5>
+				<div class="col-md-6 col-12" v-for="(noticia, index) in reverseArray" :key="noticia.noti_id" >
+					<div class="security-block" ref="anuncios" v-show="index < numElements + showIndex && index >= showIndex">
+						<div class="inner-box">
+						<div class="image">
+							<img :src="noticia.noti_fotos.imagen1.url" />
 						</div>
-						<div class="lower-box">
-							<div class="align-self-end text" style="width: auto; font-size: 13px">
-								{{calcTime(noticia.noti_fecha)}}
+						<div class="lower-content d-flex flex-row align-items-center justify-content-center flex-wrap">
+							<div class="hover-bg-color"></div>
+							<div class="upper-box col-12 p-0">
+								<div :class="['icon mr-1', iconSelect(index)]"></div>
+								<p class="ml-4 w-100 text-left">{{noticia.noti_titulo}}</p>
 							</div>
-							<div class="text text-center">
-								{{noticia.noti_prev}}
+							<div class="lower-box col-12 p-0">
+								<div class="text text-center col-12 p-0">
+									{{noticia.noti_prev}}
+								</div>
+								<div class="col-12 p-0 d-flex align-items-center justify-content-between">
+									<div class="text" style="width: auto; font-size: 13px">
+										{{calcTime(noticia.noti_fecha)}}
+									</div>
+									<a @click="selectAnun(index)" style=" font-size: 13px">Leer más</a>
+								</div>
 							</div>
-							<a class="align-self-end" @click="selectAnun(index)" style=" font-size: 13px">Leer más</a>
+						</div>
 						</div>
 					</div>
-					</div>
+					
 				</div>
 				
 			</div>
@@ -200,16 +205,20 @@
 	<!-- Fin Seccion Autogestion -->
 	
 	<!-- Seccion Distribucion de Cuotas -->
-    <section class="cuot-section" v-if="selectCuotas">
+    <section class="cuot-section" v-if="selectCuotas" :style="distCuotas.sec_imagen_seccion ? `background: url(${distCuotas.sec_fotos.imagen0.url})` : ''">
 		<div class="logo-icon"></div>
 		
 		<!-- Icons Box -->
 		<div class="cuot-icon-box">
-			<div class="icon flaticon-balance"></div>
-			<div class="icon flaticon-coin-stack"></div>
-			<div class="icon flaticon-padlock"></div>
+			<div class="icon flaticon-maintenance"></div>
+			<div class="icon flaticon-salary"></div>
+			<div class="icon flaticon-event"></div>
+			<div class="icon flaticon-desk"></div>
+			<div class="icon flaticon-budget"></div>
+			<div class="icon flaticon-social"></div>
+			<div class="icon flaticon-settings"></div>
 		</div>
-
+  
 		<!-- Left box -->
 		<div class="cuot-left-container">
 			<div class="cuot-inner-column">
@@ -231,7 +240,6 @@
 			</div>
 		</div>
 		<div class="cuot-image-container">
-			<img :src="distCuotas.sec_fotos.imagen0.url" v-if="distCuotas.sec_imagen_seccion">
 		</div>
 	</section>
 	<!-- Fin Seccion Distribucion de Cuotas -->

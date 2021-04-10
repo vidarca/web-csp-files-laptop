@@ -11,7 +11,7 @@
               
               <!-- Bloque de Notica -->
               <div class="col-lg-6 col-md-6 col-sm-6 m-auto" v-for="(servicio, index) in dbWeb.Servicios" :key="index">
-                <div class="security-block m-auto">
+                <div class="security-block">
                   <div class="inner-box">
                     <div class="image">
                       <img :src="(servicio.serv_foto !== undefined && servicio.serv_foto.url !== '') ? servicio.serv_foto.url : ''" />
@@ -19,7 +19,6 @@
                     <div class="lower-content">
                       <div class="hover-bg-color"></div>
                       <div class="upper-box">
-                        <div :class="['icon', iconSelect(index)]"></div>
                         <h5>{{servicio.serv_nombre}}</h5>
                       </div>
                       <div class="text">

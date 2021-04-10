@@ -2,7 +2,7 @@
   <div id="autogestionspan">
     <!-- Seccion de Autogestion -->
         <section class="call-to-action-section pr-3 pl-3">
-            <div class="auto-container">
+            <div class="auto-container" style="width: 95%; margin: auto">
                 <div class="row clearfix">
                     <!-- Columna de titulo -->
                     <div class="title-column col-lg-8 col-md-12 col-sm-12">

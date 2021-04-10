@@ -2333,7 +2333,7 @@ Menu Responsive
 
 .featured-block .inner-box .content:before{
 	position:absolute;
-	content: "\f115";
+	content: "\f12f";
 	right:0;
 	color:#FE5D25;
 	font-size:16px;
@@ -2415,9 +2415,9 @@ Menu Responsive
 
 .security-block{
 	position:relative;
-	height: 572px;
-	max-height: 572px;
+	height: auto;
 	width: 360px;
+	margin: auto;
 	margin-bottom:30px;
 	transition: all 900ms ease;
 	-moz-transition: all 900ms ease;
@@ -2507,8 +2507,7 @@ Menu Responsive
 .security-block .inner-box .lower-content{
 	position:relative;
 	padding:15px 30px;
-	height: 172px;
-	max-height: 172px;
+	height: 200px;
 }
 
 .security-block .inner-box .lower-content .hover-bg-color{
@@ -2567,8 +2566,11 @@ Menu Responsive
 	height: auto;
 }
 
-.security-block .inner-box .lower-content .upper-box h5{
-	font-size: 20px !important;
+.security-block .inner-box .lower-content .upper-box p{
+	font-size: 18px !important;
+	font-weight: 600;
+	line-height: unset;
+	text-align: center !important;
 }
 
 .security-block .inner-box .lower-content .upper-box .icon{
@@ -2616,6 +2618,7 @@ Menu Responsive
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
+	flex-wrap: wrap;
 	padding-left:0;
 	width: 100%;
 	height: auto;
@@ -2990,17 +2993,17 @@ Menu Responsive
 	height: 100%;
 }
 
-.cuot-section .cuot-icon-box .icon{
-	position: relative;
-	width:80px;
-	height:80px;
-	color:#222222;
-	font-size:44px;
-	line-height:82px;
-	text-align:center;
-	border-radius:50%;
-	margin: 35px 0 35px -40px;
-	background-color:#ffffff;
+.cuot-section .cuot-icon-box .icon {
+    position: relative;
+    width: 70px;
+    height: 70px;
+    color: #222222;
+    font-size: 43px;
+    line-height: 70px;
+    text-align: center;
+    border-radius: 50%;
+    margin: 15px 0 15px -40px;
+    background-color: #ffffff;
 }
 
 .cuot-section .cuot-icon-box .icon:after{

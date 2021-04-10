@@ -10,7 +10,7 @@
                 
                 <!-- Bloque de Notica -->
                 <div class="col-lg-6 col-md-6 col-sm-6" v-for="(comite, index) in sortArray" :key="comite.comi_nombre" v-show="comite.comi_comiPage && index < numElementsSection1 + showIndexSection1 && index >= showIndexSection1">
-                  <div class="security-block m-auto" ref="comites" >
+                  <div class="security-block" ref="comites" >
                     <div class="inner-box">
                       <div class="image">
                         <img :src="(comite.comi_foto !== undefined && comite.comi_foto.url !== '')?comite.comi_foto.url:'_'" />
@@ -125,7 +125,7 @@
 
               <div class="d-flex flex-column align-items-center justify-content-center w-100 mb-5" v-if="sortArray[comiSelecIndex].comi_foto !== undefined && sortArray[comiSelecIndex].comi_foto.url !== undefined && sortArray[comiSelecIndex].comi_foto.url !== ''">
                 <img class="mb-5" width="450" :src="sortArray[comiSelecIndex].comi_foto.url">
-                <div class="text text-justify w-70 ml-auto mr-auto">
+                <div class="text text-justify w-70 ml-auto mr-auto" style="white-space: pre-wrap; font-size: 16px; line-height: 31px">
                   {{sortArray[comiSelecIndex].comi_descripcion}}
                 </div>
               </div>
@@ -155,16 +155,18 @@
                       <div class="hover-bg-color"></div>
                       <div class="upper-box">
                         <div :class="['icon mr-1', iconSelectNoticia(index)]"></div>
-                        <h5 class="ml-1 w-100 text-left">{{noticia.noti_titulo}}</h5>
+                        <h5 class="ml-4 w-100 text-left">{{noticia.noti_titulo}}</h5>
                       </div>
                       <div class="lower-box">
-                        <div class="align-self-end text" style="width: auto; font-size: 13px">
-                          {{calcTime(noticia.noti_fecha)}}
-                        </div>
-                        <div class="text text-center">
+                        <div class="text text-center col-12 p-0">
                           {{noticia.noti_prev}}
                         </div>
-                        <a class="align-self-end" @click="selectAnun(index)" style=" font-size: 13px">Leer más ...</a>
+                        <div class="col-12 p-0 d-flex align-items-center justify-content-between">
+                          <div class="text" style="width: auto; font-size: 13px">
+                            {{calcTime(noticia.noti_fecha)}}
+                          </div>
+                          <a @click="selectAnun(index)" style=" font-size: 13px">Leer más</a>
+                        </div>
                       </div>
                     </div>
                     </div>
@@ -206,7 +208,7 @@
                 <div class="d-flex align-items-center justify-content-center flex-row clearfix">
                   
                   <div class="col-md-5 col-6">
-                    <div class="security-block m-auto" ref="anuncios" v-for="(profesor, index) in Object.values(dbWeb.Profesores)" :key="profesor.prof_id" :data-index="index" v-show="index < numElements + showIndex && index >= showIndex && profesor.comi_id === sortArray[comiSelecIndex].comi_nombre">
+                    <div class="security-block" ref="anuncios" v-for="(profesor, index) in Object.values(dbWeb.Profesores)" :key="profesor.prof_id" :data-index="index" v-show="index < numElements + showIndex && index >= showIndex && profesor.comi_id === sortArray[comiSelecIndex].comi_nombre">
                       <div class="inner-box">
                       <div class="image">
                         <img :src="profesor.prof_foto.url" />
@@ -216,8 +218,8 @@
                         <div class="upper-box">
                           <div :class="['icon mr-1', iconSelectProfesor(index)]"></div>
                           <div class="pl-2 d-flex flex-column align-items-center justify-content-center w-100">
-                            <h5 class="ml-1 w-100 text-left">{{profesor.prof_nombre}}</h5>
-                            <div class="text text-left w-100">
+                            <h5 class="ml-4 w-100 text-left">{{profesor.prof_nombre}}</h5>
+                            <div class="ml-4 text text-left w-100">
                               Entrenador de {{profesor.prof_tipoent.toLowerCase()}}
                             </div>
                           </div>
