@@ -36,7 +36,7 @@
 				<div class="d-flex flex-row flex-wrap m-auto align-items-center justify-content-center" style="width:100%">
 					
 					<!-- Featured Block -->
-					<div class="featured-block col-12 col-sm-4">
+					<div :class="['featured-block col-12', getIfSecurityProtocolsExists === true ? 'col-sm-4' : 'col-sm-6']">
 						<div class="inner-box">
 							<div class="content">
 								<div class="icon-box">
@@ -48,7 +48,7 @@
 					</div>
 					
 					<!-- Featured Block -->
-					<div class="featured-block col-12 col-sm-4" id="second-featured">
+					<div :class="['featured-block col-12', getIfSecurityProtocolsExists === true ? 'col-sm-4' : 'col-sm-6']" id="second-featured">
 						<div class="inner-box">
 							<div class="content">
 								<div class="icon-box">
@@ -60,13 +60,13 @@
 					</div>
 
 					<!-- Featured Block -->
-					<div class="featured-block col-12 col-sm-4" id="second-featured">
+					<div class="featured-block col-12 col-sm-4" id="second-featured" v-if="getIfSecurityProtocolsExists === true">
 						<div class="inner-box">
 							<div class="content">
 								<div class="icon-box">
 									<span class="icon flaticon-key"></span>
 								</div>
-								<h5><a href="">Protocolos de Seguridad (COV)</a></h5>
+								<h5><a :href="securityProtocols.url" target="_blank">Protocolos de Seguridad (COV)</a></h5>
 							</div>
 						</div>
 					</div>
@@ -94,7 +94,7 @@
 			<div class="d-flex align-items-center justify-content-center flex-row flex-wrap clearfix">
 				
 				<!-- Bloque de Notica -->
-				<div class="col-md-6 col-12" v-for="(noticia, index) in reverseArray" :key="noticia.noti_id" >
+				<div class="col-xl-4 col-md-6 col-12" v-for="(noticia, index) in reverseArray" :key="noticia.noti_id" >
 					<div class="security-block" ref="anuncios" v-show="index < numElements + showIndex && index >= showIndex">
 						<div class="inner-box">
 						<div class="image">
@@ -104,7 +104,7 @@
 							<div class="hover-bg-color"></div>
 							<div class="upper-box col-12 p-0">
 								<div :class="['icon mr-1', iconSelect(index)]"></div>
-								<p class="ml-4 w-100 text-left">{{noticia.noti_titulo}}</p>
+								<p class="ml-2 text-left">{{noticia.noti_titulo}}</p>
 							</div>
 							<div class="lower-box col-12 p-0">
 								<div class="text text-center col-12 p-0">
@@ -328,6 +328,7 @@ import AutogestionSpan from '@/components/AutogestionSpan.vue'
 			bannersList: [],
 			currentIndex: 1,
 			distCuotas: [],
+			securityProtocols: '',
 			responsive:[
 				{breakpoint:{width:0, items:1}},
 				{breakpoint:{width:600, items:2}},
@@ -368,7 +369,16 @@ import AutogestionSpan from '@/components/AutogestionSpan.vue'
 				}
 				return false;
 			}
-		}
+		},
+		getIfSecurityProtocolsExists(){
+			for(let i = 0; i < Object.values(Object.values(this.dbWeb.Miscellaneous)[0].misc_archivos).length; i++){
+				if(Object.values(Object.values(this.dbWeb.Miscellaneous)[0].misc_archivos)[i].nombre.indexOf('protocolos_de_seguridad') >= 0){
+					this.securityProtocols = Object.values(Object.values(this.dbWeb.Miscellaneous)[0].misc_archivos)[i];
+					return true
+				}
+			}
+			return false
+		},
 	},
   	methods: {
 		...mapMutations(['selectItemSelect']),
@@ -529,6 +539,7 @@ import AutogestionSpan from '@/components/AutogestionSpan.vue'
 	},
 	
 	mounted() {
+		console.log(this.getIfSecurityProtocolsExists);
 	/** 
 	========================================
 	Data y Observers

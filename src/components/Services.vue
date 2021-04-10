@@ -10,7 +10,7 @@
             <div class="row clearfix">
               
               <!-- Bloque de Notica -->
-              <div class="col-lg-6 col-md-6 col-sm-6 m-auto" v-for="(servicio, index) in dbWeb.Servicios" :key="index">
+              <div class="col-xl-4 col-md-6 col-sm-6 m-auto" v-for="(servicio, index) in dbWeb.Servicios" :key="index">
                 <div class="security-block">
                   <div class="inner-box">
                     <div class="image">
@@ -21,20 +21,26 @@
                       <div class="upper-box">
                         <h5>{{servicio.serv_nombre}}</h5>
                       </div>
-                      <div class="text">
-                        Horario de atención:
-                        <span v-if="servicio.serv_inicio.length !== 0">{{servicio.serv_inicio}}am - </span>
-                        <span v-if="servicio.serv_cierre.length !== 0">{{servicio.serv_cierre}}pm</span>
-                        <span v-if="servicio.serv_inicio.length === 0 && servicio.serv_cierre.length === 0">todo el día</span>
-                      </div>
-                        <div class="open-box">
-                          <div v-if="calcTime(servicio.serv_inicio, servicio.serv_cierre)" class="icon icon-open flaticon-dry-clean">
-                            <div class="text">Abierto</div>
-                          </div>
-                          <div v-else class="icon icon-close flaticon-dry-clean"> 
-                            <div class="text">Cerrado</div>
-                          </div>
+                      <div class="d-flex align-items-center justify-content-center flex-row flex-wrap" style="height: 70%">
+                        <div class="text col-12 p-0">
+                          Horario de atención:
+                          <span v-if="servicio.serv_inicio.length !== 0">{{servicio.serv_inicio}}am - </span>
+                          <span v-if="servicio.serv_cierre.length !== 0">{{servicio.serv_cierre}}pm</span>
+                          <span v-if="servicio.serv_inicio.length === 0 && servicio.serv_cierre.length === 0">todo el día</span>
                         </div>
+                        <div class="text col-12 p-0">
+                          {{servicio.serv_descripcion}}
+                        </div>
+                      </div>
+                      
+                      <div class="open-box">
+                        <div v-if="!calcTime(servicio.serv_inicio, servicio.serv_cierre) || !servicio.serv_activo" class="icon icon-close flaticon-dry-clean"> 
+                          <div class="text">Cerrado</div>
+                        </div>
+                        <div v-else class="icon icon-open flaticon-dry-clean">
+                          <div class="text">Abierto</div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>

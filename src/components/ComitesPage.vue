@@ -9,7 +9,7 @@
               <div class="d-flex flex-row flex-wrap clearfix justify-content-center">
                 
                 <!-- Bloque de Notica -->
-                <div class="col-lg-6 col-md-6 col-sm-6" v-for="(comite, index) in sortArray" :key="comite.comi_nombre" v-show="comite.comi_comiPage && index < numElementsSection1 + showIndexSection1 && index >= showIndexSection1">
+                <div class="col-xl-4 col-md-6 col-sm-6" v-for="(comite, index) in sortArray" :key="comite.comi_nombre" v-show="comite.comi_comiPage && index < numElementsSection1 + showIndexSection1 && index >= showIndexSection1">
                   <div class="security-block" ref="comites" >
                     <div class="inner-box">
                       <div class="image">
@@ -146,31 +146,34 @@
                 <div class="d-flex align-items-center justify-content-center flex-row clearfix">
       
                   <!-- Bloque de Notica -->
-                  <div class="security-block col-md-3 col-6" ref="anuncios" v-for="(noticia, index) in reverseArray" :key="noticia.noti_id" :data-index="index" v-show="index < numElements + showIndex && index >= showIndex && anuncio.noti_seccion === sortArray[comiSelecIndex].comi_nombre">
-                    <div class="inner-box">
-                    <div class="image">
-                      <img :src="noticia.noti_fotos.imagen1.url" />
-                    </div>
-                    <div class="lower-content d-flex flex-column align-items-center justify-content-center">
-                      <div class="hover-bg-color"></div>
-                      <div class="upper-box">
-                        <div :class="['icon mr-1', iconSelectNoticia(index)]"></div>
-                        <h5 class="ml-4 w-100 text-left">{{noticia.noti_titulo}}</h5>
+                  <div class="col-xl-4 col-md-6 col-12" v-for="(noticia, index) in reverseArray" :key="noticia.noti_id" :data-index="index">
+                    <div class="security-block" ref="anuncios" v-show="index < numElements + showIndex && index >= showIndex && anuncio.noti_seccion === sortArray[comiSelecIndex].comi_nombre">
+                      <div class="inner-box">
+                      <div class="image">
+                        <img :src="noticia.noti_fotos.imagen1.url" />
                       </div>
-                      <div class="lower-box">
-                        <div class="text text-center col-12 p-0">
-                          {{noticia.noti_prev}}
+                      <div class="lower-content d-flex flex-column align-items-center justify-content-center">
+                        <div class="hover-bg-color"></div>
+                        <div class="upper-box">
+                          <div :class="['icon mr-1', iconSelectNoticia(index)]"></div>
+                          <h5 class="ml-4 w-100 text-left">{{noticia.noti_titulo}}</h5>
                         </div>
-                        <div class="col-12 p-0 d-flex align-items-center justify-content-between">
-                          <div class="text" style="width: auto; font-size: 13px">
-                            {{calcTime(noticia.noti_fecha)}}
+                        <div class="lower-box">
+                          <div class="text text-center col-12 p-0">
+                            {{noticia.noti_prev}}
                           </div>
-                          <a @click="selectAnun(index)" style=" font-size: 13px">Leer más</a>
+                          <div class="col-12 p-0 d-flex align-items-center justify-content-between">
+                            <div class="text" style="width: auto; font-size: 13px">
+                              {{calcTime(noticia.noti_fecha)}}
+                            </div>
+                            <a @click="selectAnun(index)" style=" font-size: 13px">Leer más</a>
+                          </div>
                         </div>
                       </div>
-                    </div>
+                      </div>
                     </div>
                   </div>
+                  
                 </div>
 
                 <div class="bot-selectors d-flex flex-row align-items-center justify-content-center position-relative align-self-end" v-if="showSelect === true">
@@ -207,7 +210,7 @@
               <div class="ext-wrapper w-100 m-auto">
                 <div class="d-flex align-items-center justify-content-center flex-row clearfix">
                   
-                  <div class="col-md-5 col-6">
+                  <div class="col-xl-4 col-6">
                     <div class="security-block" ref="anuncios" v-for="(profesor, index) in Object.values(dbWeb.Profesores)" :key="profesor.prof_id" :data-index="index" v-show="index < numElements + showIndex && index >= showIndex && profesor.comi_id === sortArray[comiSelecIndex].comi_nombre">
                       <div class="inner-box">
                       <div class="image">

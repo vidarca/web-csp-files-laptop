@@ -23,6 +23,7 @@
             </div>
         </section>
     <!-- Fin del banner -->
+    
     <!-- Seccion Destacados -->
     <section class="featured-section">
         <div class="auto-wrapper ">
@@ -128,22 +129,70 @@
 	<!-- Seccion de Autogestion -->
 		<AutogestionSpan></AutogestionSpan>
 	<!-- Fin Seccion Autogestion -->
-
-    <section class="junta-directiva w-95 m-auto"  v-if="getJuntaActual">
+    
+    <section class="junta-directiva w-95 m-auto"   v-if="getJuntaActual" >
         <h3 class="w-100 text-center border-bottom" style="padding: 40px 0 20px 0;">Junta Directiva Actual</h3>
         <div class="d-flex flex-column flex-sm-row align-items-center justify-content-center flex-wrap" style="padding: 40px 0 20px 0;">
-            <div v-for="(integrante, index) in juntaActual.junt_integrantes" :key="integrante.juin_cargo" v-show="index < maxShowJuin" :class="['juin-container flex-column align-items-center justify-content-start pt-3 pb-3 col-12', (index === 0 || index === 1)?'col-sm-6':(index >= 1 && index < 5)?'col-sm-4':(index >= 5 && index < 9)?'col-sm-3':'col-sm-6']" style="display:  flex;">
-                <div class="imagen">
-                    <img :src="(integrante.juin_foto !== '' && integrante.juin_foto !== undefined)?integrante.juin_foto:'https://firebasestorage.googleapis.com/v0/b/web-database-66842.appspot.com/o/transparent.png?alt=media&token=533f3017-de64-49b5-8ee9-cb8950445931'" class="juin-foto">
-                    <i :class="[(integrante.juin_foto === '' || integrante.juin_foto === undefined)?'icon flaticon-user':'']"></i>
+            <div class="col-12">
+                <div class="d-flex flex-column flex-sm-row align-items-center justify-content-center">
+                    <div v-for="(integrante, index) in juntaActual.junt_integrantes" :key="integrante.juin_cargo" v-show="index < 2 && integrante.juin_activo === true" class="juin-container flex-column align-items-center justify-content-start pt-3 pb-3 pl-0 pr-0 col-12 col-sm-6" style="display:  flex;">
+                        <div class="imagen">
+                            <img :src="(integrante.juin_foto !== undefined && integrante.juin_foto.url !== '')?integrante.juin_foto.url:'https://firebasestorage.googleapis.com/v0/b/web-database-66842.appspot.com/o/transparent.png?alt=media&token=533f3017-de64-49b5-8ee9-cb8950445931'" class="juin-foto">
+                            <i :class="[(integrante.juin_foto === undefined || integrante.juin_foto.url === '')?'icon flaticon-user':'']"></i>
+                        </div>
+                        <div class="text">{{integrante.juin_cargo}}</div>
+                        <div class="text">{{integrante.juin_nombre}} {{integrante.juin_apellido}}</div>
+                        <div class="text">{{integrante.juin_correo}}</div>
+                    </div>
                 </div>
-                <div class="text">{{integrante.juin_cargo}}</div>
-                <div class="text">{{integrante.juin_nombre}} {{integrante.juin_apellido}}</div>
-                <div class="text">{{integrante.juin_correo}}</div>
             </div>
+
+            <div class="col-12">
+                <div class="d-flex flex-column flex-sm-row align-items-center justify-content-center">
+                    <div v-for="(integrante, index) in juntaActual.junt_integrantes" :key="integrante.juin_cargo" v-show="index >= 2 && index < 5 && integrante.juin_activo === true" class="juin-container flex-column align-items-center justify-content-start pt-3 pb-3 pl-0 pr-0 col-12 col-sm-4" style="display:  flex;">
+                        <div class="imagen">
+                            <img :src="(integrante.juin_foto !== undefined && integrante.juin_foto.url !== '')?integrante.juin_foto.url:'https://firebasestorage.googleapis.com/v0/b/web-database-66842.appspot.com/o/transparent.png?alt=media&token=533f3017-de64-49b5-8ee9-cb8950445931'" class="juin-foto">
+                            <i :class="[(integrante.juin_foto === undefined || integrante.juin_foto.url === '')?'icon flaticon-user':'']"></i>
+                        </div>
+                        <div class="text">{{integrante.juin_cargo}}</div>
+                        <div class="text">{{integrante.juin_nombre}} {{integrante.juin_apellido}}</div>
+                        <div class="text">{{integrante.juin_correo}}</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-12">
+                <div class="d-flex flex-column flex-sm-row align-items-center justify-content-center">
+                    <div v-for="(integrante, index) in juntaActual.junt_integrantes" :key="integrante.juin_cargo" v-show="index >= 5 && index < 9 && integrante.juin_activo === true" class="juin-container flex-column align-items-center justify-content-start pt-3 pb-3 pl-0 pr-0 col-12 col-sm-3" style="display:  flex;">
+                        <div class="imagen">
+                            <img :src="(integrante.juin_foto !== undefined && integrante.juin_foto.url !== '')?integrante.juin_foto.url:'https://firebasestorage.googleapis.com/v0/b/web-database-66842.appspot.com/o/transparent.png?alt=media&token=533f3017-de64-49b5-8ee9-cb8950445931'" class="juin-foto">
+                            <i :class="[(integrante.juin_foto === undefined || integrante.juin_foto.url === '')?'icon flaticon-user':'']"></i>
+                        </div>
+                        <div class="text">{{integrante.juin_cargo}}</div>
+                        <div class="text">{{integrante.juin_nombre}} {{integrante.juin_apellido}}</div>
+                        <div class="text">{{integrante.juin_correo}}</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12">
+                <div class="d-flex flex-column flex-sm-row align-items-center justify-content-center">
+                    <div v-for="(integrante, index) in juntaActual.junt_integrantes" :key="integrante.juin_cargo" v-show="index >= 9 && integrante.juin_activo === true" class="juin-container flex-column align-items-center justify-content-start pt-3 pb-3 pl-0 pr-0 col-12 col-sm-6" style="display:  flex;">
+                        <div class="imagen">
+                            <img :src="(integrante.juin_foto !== undefined && integrante.juin_foto.url !== '')?integrante.juin_foto.url:'https://firebasestorage.googleapis.com/v0/b/web-database-66842.appspot.com/o/transparent.png?alt=media&token=533f3017-de64-49b5-8ee9-cb8950445931'" class="juin-foto">
+                            <i :class="[(integrante.juin_foto === undefined || integrante.juin_foto.url === '')?'icon flaticon-user':'']"></i>
+                        </div>
+                        <div class="text">{{integrante.juin_cargo}}</div>
+                        <div class="text">{{integrante.juin_nombre}} {{integrante.juin_apellido}}</div>
+                        <div class="text">{{integrante.juin_correo}}</div>
+                    </div>
+                </div>
+            </div>
+
             <h5 class="w-100 text text-center pb-3">
                 <router-link :to="{name:'HistorialDeJuntas'}"> Ver todas las juntas directivas </router-link>
             </h5>
+
         </div>
     </section>
 
