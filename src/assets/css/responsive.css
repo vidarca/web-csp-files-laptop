@@ -76,6 +76,32 @@
 	}
 }
 
+@media screen and (max-width: 850px){
+	.security-block{
+		width: 320px !important;
+	}
+
+	.security-block img{
+		min-height: 231.11px !important;
+	}
+
+	#comites .security-block h5{
+		font-size: 20px;
+	}
+
+	#comites .security-block#comites-list img{
+		min-height: 253.33px !important;
+	}
+
+	#comites #comi-profesores .security-block img{
+		min-height: 378.17px !important;
+	}
+
+	#services .security-block h5{
+		font-size: 20px;
+	}
+}
+
 @media screen and (max-width: 767px){
 	.back-btn{
 		display: initial;
@@ -446,7 +472,7 @@
 	}
 
 	.security-block img{
-		min-height: unset !important;
+		min-height: 202.22px !important;
 	}
 
 	.security-block p{
@@ -481,11 +507,11 @@
 	}
 
 	#comites .security-block#comites-list img{
-		min-height: 200px !important;
+		min-height: 221.66px !important;
 	}
 
 	#comites #comi-profesores .security-block img{
-		min-height: 200px !important;
+		min-height: 330.91px !important;
 	}
 
 	#comites .comi-profesores .security-block .inner-box .lower-content .upper-box .icon{

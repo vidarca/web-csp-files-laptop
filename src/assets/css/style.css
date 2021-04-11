@@ -2624,7 +2624,7 @@ Menu Responsive
 	position:relative;
 	text-align: center;
 	width: 100%;
-	font-size: 25px;
+	font-size: 22px;
 	font-weight:500;
 	line-height:1.3em;
 	color:#222222;
@@ -5053,14 +5053,22 @@ Seccion 2 Pagina de Actualidad
 	transform:none;
 }
 
-#comites .security-block .inner-box .lower-content{
-	height: auto !important;
+#comites .security-block#comites-list .inner-box .lower-content{
+	height: 110px !important;
 	max-height: unset !important;
 }
 
 #comites .comi-profesores .security-block .inner-box .lower-content{
 	height: auto !important;
 	max-height: unset !important;
+}
+
+#comites .security-block#comites-list .inner-box .lower-content .upper-box{
+	height: 100% !important;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	flex-wrap: nowrap;
 }
 
 #comites .comi-profesores .security-block .inner-box .lower-content .lower-box{

@@ -9,7 +9,7 @@
               <div class="d-flex flex-row flex-wrap clearfix justify-content-center">
                 
                 <!-- Bloque de Notica -->
-                <div class="col-xl-4 col-md-6 col-sm-6" v-for="(comite, index) in sortArray" :key="comite.comi_nombre" v-show="comite.comi_comiPage && index < numElementsSection1 + showIndexSection1 && index >= showIndexSection1">
+                <div class="col-xl-4 col-md-6 col-12" v-for="(comite, index) in sortArray" :key="comite.comi_nombre" v-show="comite.comi_comiPage && index < numElementsSection1 + showIndexSection1 && index >= showIndexSection1">
                   <div class="security-block" ref="comites" id="comites-list">
                     <div class="inner-box">
                       <div class="image" @click="comiSelected(index)">

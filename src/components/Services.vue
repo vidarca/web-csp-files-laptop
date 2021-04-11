@@ -10,7 +10,7 @@
             <div class="row clearfix">
               
               <!-- Bloque de Notica -->
-              <div class="col-xl-4 col-md-6 col-sm-6 m-auto" v-for="(servicio, index) in dbWeb.Servicios" :key="index">
+              <div class="col-xl-4 col-md-6 col-12 m-auto" v-for="(servicio, index) in dbWeb.Servicios" :key="index">
                 <div class="security-block">
                   <div class="inner-box">
                     <div class="image">
@@ -21,7 +21,7 @@
                       <div class="upper-box">
                         <h5>{{servicio.serv_nombre}}</h5>
                       </div>
-                      <div class="d-flex align-items-center justify-content-center flex-row flex-wrap" style="height: 70%">
+                      <div class="lower-box d-flex align-items-center justify-content-center flex-row flex-wrap">
                         <div class="text col-12 p-0">
                           Horario de atención:
                           <span v-if="servicio.serv_inicio.length !== 0">{{servicio.serv_inicio}}am - </span>
