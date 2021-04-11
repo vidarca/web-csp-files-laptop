@@ -1052,6 +1052,7 @@ export default new Vuex.Store({
                       nombre: state.dbImg[i].nombre,
                       url: state.dbImg[i].url,
                       info: data.banner.archivos[`slides${i}`].info,
+                      urlText: data.banner.archivos[`slides${i}`].urlText
                     }
                   }
 
@@ -2102,6 +2103,7 @@ export default new Vuex.Store({
                         nombre: state.dbImg[i].nombre,
                         url: state.dbImg[i].url,
                         info: data.banner.archivos[`slides${i}`].info,
+                        urlText: data.banner.archivos[`slides${i}`].urlText
                       } 
                     }else{
                       dataRef.bann_slides[`slides${i}`] = data.banner.archivos[`slides${i}`];

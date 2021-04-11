@@ -10,9 +10,9 @@
                 
                 <!-- Bloque de Notica -->
                 <div class="col-xl-4 col-md-6 col-sm-6" v-for="(comite, index) in sortArray" :key="comite.comi_nombre" v-show="comite.comi_comiPage && index < numElementsSection1 + showIndexSection1 && index >= showIndexSection1">
-                  <div class="security-block" ref="comites" >
+                  <div class="security-block" ref="comites" id="comites-list">
                     <div class="inner-box">
-                      <div class="image">
+                      <div class="image" @click="comiSelected(index)">
                         <img :src="(comite.comi_foto !== undefined && comite.comi_foto.url !== '')?comite.comi_foto.url:'_'" />
                       </div>
                       <div class="lower-content">
@@ -150,7 +150,7 @@
                     <div class="security-block" ref="anuncios" v-show="index < numElements + showIndex && index >= showIndex && anuncio.noti_seccion === sortArray[comiSelecIndex].comi_nombre">
                       <div class="inner-box">
                       <div class="image">
-                        <img :src="noticia.noti_fotos.imagen1.url" />
+                        <img :src="noticia.noti_fotos.imagen1.url"/>
                       </div>
                       <div class="lower-content d-flex flex-column align-items-center justify-content-center">
                         <div class="hover-bg-color"></div>
@@ -210,7 +210,7 @@
               <div class="ext-wrapper w-100 m-auto">
                 <div class="d-flex align-items-center justify-content-center flex-row clearfix">
                   
-                  <div class="col-xl-4 col-6">
+                  <div class="col-xl-4 col-md-6 col-12">
                     <div class="security-block" ref="anuncios" v-for="(profesor, index) in Object.values(dbWeb.Profesores)" :key="profesor.prof_id" :data-index="index" v-show="index < numElements + showIndex && index >= showIndex && profesor.comi_id === sortArray[comiSelecIndex].comi_nombre">
                       <div class="inner-box">
                       <div class="image">

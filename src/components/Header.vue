@@ -112,7 +112,7 @@ export default {
   name: 'Header',
   data(){
     return {
-      toggleValues: ['com', 'serv', 'us']
+      toggleValues: ['com', 'us']
     }
   },
   computed:{

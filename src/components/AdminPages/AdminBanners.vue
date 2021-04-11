@@ -100,15 +100,16 @@
               </div>
             </div>
             <div v-if="cantFields.slides.numero > 0">
-              <ul class="list-item w-100 row align-items-center justify-content-start" v-for="index in cantFields.slides.numero" :key="index" :id="index" :data-id="`elem${index}`" data-transitioned="false" style="height: 110px; overflow:hidden;">
+              <ul class="list-item w-100 row align-items-center justify-content-start" v-for="index in cantFields.slides.numero" :key="index" :id="index" :data-id="`elem${index}`" data-transitioned="false" style="overflow:hidden;">
                 <li class="item-element text col-5 pl-1 pr-1 h-100">
                   <textarea type="text" class="info-form-c w-75 h-100 m-0" placeholder="Información" v-model="selectBanner.info[`info${index}`]"></textarea>
+                  <input type="text" class="info-form-c w-75 h-100 m-0" placeholder="Url del texto" v-model="selectBanner.url[`url${index}`]" />
                 </li>
                 <li class="item-element text col-2 pl-1 pr-1">
                   {{`Slide${index}`}}
                 </li>
                 <li class="item-element text col-5 pl-1 pr-1 h-100">
-                  <div class="w-100 h-100 d-flex flex-column align-items-center justify-content-center p-1">
+                  <div class="w-100 d-flex flex-column align-items-center justify-content-center p-1" style="height: 110px; line-height: 110px">
                     <div class="input-files d-flex w-100 h-100 flex-column align-items-center justify-content-center position-relative" v-if="selectBanner.archivos[`slides${index}`].nombre === undefined || selectBanner.archivos[`slides${index}`].nombre === ''">
                       <input :ref='`file0`' @change="filesVerification($event, index, 'select')" class="collectionFiles" title="Elija un archivo"  type="file" accept="image/*">
                       <div class="button-files d-flex flex-row align-items-center justify-content-center w-100 h-100 p-2">
@@ -121,13 +122,13 @@
                         <!-- MUESTRA DE IMAGEN -->
                         <div class="w-100 d-flex position-relative justify-content-end flex-column h-100">
                           <div class="d-flex justify-content-center align-items-center" v-if="(dbImg[index] !== undefined || selectBanner.archivos[`slides${index}`].url !== '')">
-                            <img :src="(dbImg[index] !== undefined && dbImg[index].url !== undefined)?dbImg[index].url:(selectBanner.archivos[`slides${index}`].url !== '')?selectBanner.archivos[`slides${index}`].url:''" width="100%" height="79.5" style="height: 79.5px; width: 100%; ">
+                            <img :src="(dbImg[index] !== undefined && dbImg[index].url !== undefined)?dbImg[index].url:(selectBanner.archivos[`slides${index}`].url !== '')?selectBanner.archivos[`slides${index}`].url:''" width="100%" height="79.5" style="height: 100px; width: 100%; ">
                           </div>
                           <div v-else class="w-100 h-100 d-flex flex-row align-items-center justify-content-center">
                             <p class="align-self-star" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">{{selectBanner.archivos[`slides${index}`].nombre}}</p>
                           </div>
                           <!-- ICONO DE QUITAR -->
-                          <div @click.prevent="deleteFile(index, 'select')" class="remove position-absolute flaticon-close" style="top:2px; right:3px;"></div>
+                          <div @click.prevent="deleteFile(index, 'select')" class="remove flaticon-close"></div>
                             <!-- FIN ICONO DE QUITAR -->
                         </div>
                           <!-- FIN MUESTRA DE IMAGEN -->
@@ -216,15 +217,16 @@
               </div>
             </div>
             <div v-if="cantFields.slides.numero > 0">
-              <ul class="list-item w-100 row align-items-center justify-content-start" v-for="index in cantFields.slides.numero" :key="index" :id="index" :data-id="`elem${index}`" data-transitioned="false" style="height: 110px; overflow:hidden;">
+              <ul class="list-item w-100 row align-items-center justify-content-start" v-for="index in cantFields.slides.numero" :key="index" :id="index" :data-id="`elem${index}`" data-transitioned="false" style="overflow:hidden;">
                 <li class="item-element text col-5 pl-1 pr-1 h-100">
-                  <textarea type="text" class="info-form-c w-75 h-100 m-0" placeholder="Información" v-model="nuevoBanner.info[`info${index}`]"></textarea>
+                  <textarea type="text" class="info-form-c w-75 h-100 m-0 d-block mb-3" placeholder="Información" v-model="nuevoBanner.info[`info${index}`]" style="pre-wrap"></textarea>
+                  <input type="text" class="info-form-c w-75 h-100 m-0 d-block" placeholder="Url del texto" v-model="nuevoBanner.url[`url${index}`]" />
                 </li>
                 <li class="item-element text col-2 pl-1 pr-1">
                   {{`Slide${index}`}}
                 </li>
                 <li class="item-element text col-5 pl-1 pr-1 h-100">
-                  <div class="w-100 h-100 d-flex flex-column align-items-center justify-content-center p-1">
+                  <div class="w-100 d-flex flex-column align-items-center justify-content-center p-1" style="height: 110px; line-height: 110px">
                     <div class="input-files d-flex w-100 h-100 flex-column align-items-center justify-content-center position-relative" v-if="nuevoBanner.archivos[`slides${index}`].nombre === undefined || nuevoBanner.archivos[`slides${index}`].nombre === ''">
                       <input :ref='`file0`' @change="filesVerification($event, index, 'crear')" class="collectionFiles" title="Elija un archivo"  type="file" accept="image/*">
                       <div class="button-files d-flex flex-row align-items-center justify-content-center w-100 h-100 p-2">
@@ -237,13 +239,13 @@
                         <!-- MUESTRA DE IMAGEN -->
                         <div class="w-100 d-flex position-relative justify-content-end flex-column h-100">
                           <div class="d-flex justify-content-center align-items-center" v-if="(dbImg[index] !== undefined)">
-                            <img :src="(dbImg[index] === undefined)?'':(dbImg[index].url !== undefined)?dbImg[index].url:''" width="100%" height="79.5" style="height: 79.5px; width: 100%; ">
+                            <img :src="(dbImg[index] === undefined)?'':(dbImg[index].url !== undefined)?dbImg[index].url:''" width="100%" height="100" style="height: 100px; width: 100%; ">
                           </div>
                           <div v-else class="w-100 h-100 d-flex flex-row align-items-center justify-content-center">
                             <p class="align-self-star" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">{{nuevoBanner.archivos[`slides${index}`].nombre}}</p>
                           </div>
                           <!-- ICONO DE QUITAR -->
-                          <div @click.prevent="deleteFile(index, 'crear')" class="remove position-absolute flaticon-close" style="top:2px; right:3px;"></div>
+                          <div @click.prevent="deleteFile(index, 'crear')" class="remove flaticon-close"></div>
                             <!-- FIN ICONO DE QUITAR -->
                         </div>
                           <!-- FIN MUESTRA DE IMAGEN -->
@@ -346,6 +348,7 @@ export default {
         nuevoBanner: {
           activo: false,
           info: {},
+          url: {},
           archivos:{},
           fechaed: '',
           seccion: 'Seleccione una opción',
@@ -377,11 +380,13 @@ export default {
             id: Object.values(this.dbWeb.Banners).reverse()[index].bann_id,
             archivos:{},
             info:{},
+            url: {}
           })
           if(Object.values(this.dbWeb.Banners).reverse()[index].bann_slides !== undefined){
             for(let i = 0; i < Object.values(Object.values(this.dbWeb.Banners).reverse()[index].bann_slides).length; i++){
               this.$set(this.selectBanner.info, `info${i+1}`, Object.values(Object.values(this.dbWeb.Banners).reverse()[index].bann_slides)[i].info); 
-              this.$set(this.selectBanner.archivos, `slides${i+1}`, Object.values(this.dbWeb.Banners).reverse()[index].bann_slides[`slides${i+1}`]); 
+              this.$set(this.selectBanner.archivos, `slides${i+1}`, Object.values(this.dbWeb.Banners).reverse()[index].bann_slides[`slides${i+1}`]);
+              this.$set(this.selectBanner.url, `url${i+1}`, Object.values(Object.values(this.dbWeb.Banners).reverse()[index].bann_slides)[i].urlText);
             }
           }
         }, 900);
@@ -412,8 +417,8 @@ export default {
           this.nuevoBanner = {
             activo: false,
             info: {},
-            archivos:{
-            },
+            archivos:{},
+            url:{},
             fechaed: '',
             seccion: 'Seleccione una opción',
           }
@@ -421,8 +426,8 @@ export default {
           this.selectBanner = {
             activo: false,
             info: {},
-            archivos:{
-            },
+            archivos:{},
+            url: {},
             fechaed: '',
             seccion: 'Seleccione una opción',
           }
@@ -501,6 +506,7 @@ export default {
               for(let i = 0; i < Object.values(this.nuevoBanner.archivos).length; i++){
                 dataTransfer.banner.archivos[`slides${i+1}`] = Object.values(this.nuevoBanner.archivos)[i];
                 dataTransfer.banner.archivos[`slides${i+1}`].info = Object.values(this.nuevoBanner.info)[i];
+                dataTransfer.banner.archivos[`slides${i+1}`].urlText = Object.values(this.nuevoBanner.url)[i] !== undefined ? Object.values(this.nuevoBanner.url)[i] : null;
               }
             }
             
@@ -537,6 +543,7 @@ export default {
             if(this.selectBanner.archivos[`slides1`] !== undefined){
               for(let i = 1; i <= Object.values(this.selectBanner.archivos).length; i++){
                 dataTransfer.banner.archivos[`slides${i}`].info = this.selectBanner.info[`info${i}`];
+                dataTransfer.banner.archivos[`slides${i}`].urlText = this.selectBanner.url[`url${i}`] !== undefined ? this.selectBanner.url[`url${i}`] : null;
               }
             }
             
@@ -1003,12 +1010,27 @@ export default {
     border: 1px transparent;
   }
 
+  .prev-container .remove{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 20px;
+    height: 20px;
+  }
+
   .prev-container .remove::before{
+    position: absolute;
+    top: 0;
+    right: 0;
+    line-height: 20px;
+    text-align: center;
+    width: 100%;
+    height: 100%;
     cursor: pointer;
     border-radius: 50%;
-    font-size: 13px !important;
-    color: rgb(136, 136, 136);
-    padding: 5px 5px 6px 5px;
+    font-size: 11px !important;
+    color: rgb(53, 53, 53);
+    background-color: rgba(255,255,255,.5);
     transition: all 0.2s ease;
     -moz-transition: all 0.2s ease;
     -o-transition: all 0.2s ease;
@@ -1016,7 +1038,7 @@ export default {
   }
 
   .prev-container .remove:hover::before{
-    color: rgb(115, 115, 115);
+    color: rgb(87, 87, 87);
   }
 
   .uploadCont .prev-container .image .icon{

@@ -154,7 +154,7 @@
 		flex-direction: row !important;
 		left: 0 !important;
 		top: unset !important;
-		bottom: 300px;
+		bottom: 300px !important;
 		min-height: 0 !important;
 		height: 0!important;
 		width: 100% !important;
@@ -439,5 +439,63 @@
 
 	.preview-container .dialog-container{
 		width: 95% !important;
+	}
+
+	.security-block{
+		width: 280px !important;
+	}
+
+	.security-block img{
+		min-height: unset !important;
+	}
+
+	.security-block p{
+		font-size: 13px !important;
+	}
+
+	.security-block h5{
+		font-size: 20px !important;
+	}
+
+	.security-block .upper-box{
+		height: 50% !important;
+	}
+
+	.security-block .lower-box{
+		height: 50% !important;
+	}
+
+	.security-block .text{
+		font-size: 13px !important;
+	}
+
+	.security-block .inner-box .lower-content .upper-box .icon{
+		flex: 0 0 30px !important;
+		width: 30px !important;
+		height: 30px !important;
+	}
+	
+	.security-block .inner-box .lower-content .upper-box .icon::before{
+		line-height: 30px !important;
+		font-size:23px !important;
+	}
+
+	#comites .security-block#comites-list img{
+		min-height: 200px !important;
+	}
+
+	#comites #comi-profesores .security-block img{
+		min-height: 200px !important;
+	}
+
+	#comites .comi-profesores .security-block .inner-box .lower-content .upper-box .icon{
+		flex: 0 0 40px !important;
+		width: 40px !important;
+		height: 40px !important;
+	}
+	
+	#comites .comi-profesores .security-block .inner-box .lower-content .upper-box .icon::before{
+		line-height: 40px !important;
+		font-size: 33px !important;
 	}
 }

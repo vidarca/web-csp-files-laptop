@@ -72,7 +72,7 @@
 
                     <div class="icons-container">
                         <!-- Featured Block Three -->
-                        <div class="featured-block-three style-two right-corner">
+                        <div class="featured-block-three color-three style-two right-corner">
                             <div class="inner-box wow fadeInLeft">
                                 <div class="icon-box">
                                     <span class="icon flaticon-objetivo"></span>
@@ -98,7 +98,7 @@
                         </div>
 
                         <!-- Featured Block Three -->
-                        <div class="featured-block-three  top-corner">
+                        <div class="featured-block-three top-corner">
                             <div class="inner-box wow fadeInRight">
                                 <div class="icon-box flaticon-objetivo-1"></div>
                                 <div>

@@ -97,7 +97,7 @@
                     </div>
                   </div>
                   <!-- PREV IMAGENES -->
-                  <div  class="uploadCont flex-row align-items-center w-100 mt-2" v-show="integrante.juin_foto !== '' && integrante.juin_crear" style="display: flex;">
+                  <div  class="uploadCont flex-row align-items-center w-100 mt-2" v-show="integrante.juin_foto !== '' && integrante.juin_foto !== undefined && integrante.juin_crear" style="display: flex;">
                     <div :class="['prev-container','d-flex', 'flex-column', 'align-items-center', 'justify-content-between', 'w-100', 'bg-success-light']">
                       <!-- MUESTRA DE IMAGEN -->
                       <div class="w-100 h-100 m-2">
@@ -507,7 +507,7 @@ export default {
           dataTransfer.junta.integrantes[i].nombre = Object.values(Object.values(this.dbWeb.Juntas).reverse()[this.indexSelected].junt_integrantes)[i].juin_nombre
           dataTransfer.junta.integrantes[i].apellido = Object.values(Object.values(this.dbWeb.Juntas).reverse()[this.indexSelected].junt_integrantes)[i].juin_apellido
           dataTransfer.junta.integrantes[i].correo = Object.values(Object.values(this.dbWeb.Juntas).reverse()[this.indexSelected].junt_integrantes)[i].juin_correo
-          dataTransfer.junta.integrantes[i].image = Object.values(Object.values(this.dbWeb.Juntas).reverse()[this.indexSelected].junt_integrantes)[i].juin_foto
+          dataTransfer.junta.integrantes[i].image = Object.values(Object.values(this.dbWeb.Juntas).reverse()[this.indexSelected].junt_integrantes)[i].juin_foto !== undefined ? Object.values(Object.values(this.dbWeb.Juntas).reverse()[this.indexSelected].junt_integrantes)[i].juin_foto : null
           dataTransfer.junta.integrantes[i].activo = Object.values(Object.values(this.dbWeb.Juntas).reverse()[this.indexSelected].junt_integrantes)[i].juin_activo
           dataTransfer.junta.integrantes[i].crear = Object.values(Object.values(this.dbWeb.Juntas).reverse()[this.indexSelected].junt_integrantes)[i].juin_crear
         }
